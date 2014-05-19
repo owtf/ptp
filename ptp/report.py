@@ -7,7 +7,6 @@
 
 
 from ptp.constants import INFO, RANKING_SCALE
-from ptp.info import Info
 
 
 class AbstractReport(object):
@@ -48,3 +47,19 @@ class AbstractReport(object):
             if self.ranking_scale[highest_ranking] == highest_possible_ranking:
                 break
         return highest_ranking
+
+    def from_file(self, pathname):
+        """Read the content of a report from its file and parse it."""
+        with open(pathname, 'r') as f:
+            raw_data = f.read()
+        self.raw_data = raw_data
+        self.parser(self.raw_data)
+
+    def from_stream(self, data):
+        """Read the content of a report for its data and parse it."""
+        self.raw_data = data
+        self.parser(self.raw_data)
+
+    def parser(self, data):
+        """Abstract parser that will parse the report of a tool."""
+        raise NotImplementedError('The parser MUST be define for each tool.')
