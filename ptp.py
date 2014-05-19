@@ -33,8 +33,8 @@ class PTP(object):
         return tool_name in self.supported.keys()
 
     def parse(self, path_to_report):
-        self.report = self.suported[self.tool_name](path_to_report)
-        return self.report.parse()
+        self.report = self.supported[self.tool_name]()
+        return self.report.parse(path_to_report)
 
     def get_highest_ranking(self):
         return self.report.get_highest_ranking()

@@ -28,26 +28,26 @@ class SkipfishReport(AbstractReport):
         WARNINGS: constants.INFO,
         INFO: constants.INFO}
 
-    def __init__(self, directory=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.re_metadata = re.compile(
-            r'var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);')
+            r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
         self.re_report = re.compile(
-            r'var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);')
-        self.directory = directory
-        Report.__init__(self, *args, **kwargs)
+            r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
+        AbstractReport.__init__(self, *args, **kwargs)
 
-    def parse(self):
+    def parse(self, path_to_report):
         """Parse a skipfish resport."""
-        if (self.directory is None or not os.path.isdir(self.directory)):
+        if (path_to_report is None or not os.path.isdir(path_to_report)):
             print('A directory to the report must be specified.')
             return
+        self.directory = path_to_report
         self.parse_metadata()
         self.parse_report()
         # TODO: Return somethin like an unified version of the report.
 
     def _check_version(self, metadata):
         """Checks the version from the metadata to the supported one."""
-        if metadata['sf_version'] in self.__metadata__:
+        if metadata['sf_version'] in self.__version__:
             return True
         return False
 
@@ -61,7 +61,7 @@ class SkipfishReport(AbstractReport):
             var scan_ms    = elapsed time in ms<integer>;
 
         """
-        with open(os.path.join(directory, self.__metadatafile__), 'r') as f:
+        with open(os.path.join(self.directory, self.__metadatafile__), 'r') as f:
             re_result = self.re_metadata.findall(f.read())
             metadata = dict({el[0]: el[1] for el in re_result})
             # Check if the version if the good one
@@ -84,7 +84,7 @@ class SkipfishReport(AbstractReport):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        with open(os.path.join(directory, self.__reportfile__), 'r') as f:
+        with open(os.path.join(self.directory, self.__reportfile__), 'r') as f:
             re_result = self.re_report.findall(f.read())
             report = dict({el[0]: el[1] for el in re_result})
             if not REPORT_VAR_NAME in report:
