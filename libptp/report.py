@@ -6,7 +6,7 @@
 """
 
 
-from ptp.constants import INFO, RANKING_SCALE
+from libptp import constants
 
 
 class AbstractReport(object):
@@ -19,7 +19,7 @@ class AbstractReport(object):
 
     """
 
-    RANKING_SCALE = RANKING_SCALE
+    RANKING_SCALE = constants.RANKING_SCALE
 
     def __init__(self, vulns=None):
         """Self-explanatory."""

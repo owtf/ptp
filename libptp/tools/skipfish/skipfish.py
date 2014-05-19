@@ -4,11 +4,11 @@ import os
 import re
 import ast
 
-from ptp import constants
-from ptp.ptp import Report
+from libptp import constants
+from libptp.report import AbstractReport
 
 
-class SkipfishReport(Report):
+class SkipfishReport(AbstractReport):
     """Retrieve the information of a skipfish report."""
 
     __version__ = ['2.10b']
@@ -32,7 +32,7 @@ class SkipfishReport(Report):
         self.re_metadata = re.compile(
             r'var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);')
         self.re_report = re.compile(
-            r'var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);'
+            r'var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);')
         self.directory = directory
         Report.__init__(self, *args, **kwargs)
 
@@ -42,6 +42,8 @@ class SkipfishReport(Report):
             print('A directory to the report must be specified.')
             return
         self.parse_metadata()
+        self.parse_report()
+        # TODO: Return somethin like an unified version of the report.
 
     def _check_version(self, metadata):
         """Checks the version from the metadata to the supported one."""
