@@ -28,3 +28,4 @@ if __name__ == '__main__':
 
 + skipfish (2.10b)
 + arachni (0.4.6) (XML report)
++ w3af (1.6.0.2) (XML report)

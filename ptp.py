@@ -7,6 +7,7 @@
 
 from libptp.tools.skipfish.skipfish import SkipfishReport
 from libptp.tools.arachni.arachni import ArachniReport
+from libptp.tools.w3af.w3af import W3AFReport
 import libptp.tools.skipfish.skipfish
 
 
@@ -22,6 +23,7 @@ class PTP(object):
     supported = {
         'skipfish': SkipfishReport,
         'arachni': ArachniReport,
+        'w3af': W3AFReport,
         }
 
     def __init__(self, tool_name):
