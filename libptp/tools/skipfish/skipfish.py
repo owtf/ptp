@@ -5,6 +5,7 @@ import re
 import ast
 
 from libptp import constants
+from libptp.info import Info
 from libptp.report import AbstractReport
 
 
@@ -34,6 +35,7 @@ class SkipfishReport(AbstractReport):
         self.re_report = re.compile(
             r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
         AbstractReport.__init__(self, *args, **kwargs)
+        self.vulns = []
 
     def parse(self, path_to_report):
         """Parse a skipfish resport."""
@@ -95,3 +97,19 @@ class SkipfishReport(AbstractReport):
             # We now have a raw version of the Skipfish report as a list of
             # dict.
             self.raw_report = ast.literal_eval(report[REPORT_VAR_NAME])
+        self._convert_report()
+
+    def _convert_report(self):
+        """Convert a Skipfsih report to a list of Info.
+
+        Retrieve the following attributes:
+            + severity
+
+        """
+        for vuln in self.raw_report:
+            info = Info(
+                # Convert the severity of the issue thanks to an unified
+                # ranking scale.
+                ranking=self.RANKING_SCALE[vuln['severity']]
+                )
+            self.vulns.append(info)

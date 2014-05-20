@@ -34,8 +34,13 @@ class AbstractReport(object):
         """From the ranking scale, retrieve the lowest ranking id possible."""
         return max([value for value in self.ranking_scale.values()])
 
-    def get_highest_ranking(self):
+    def get_highest_ranking(self, path_to_report=None):
         """Return the highest ranking of the report."""
+        # Be sure that the parsing already happened.
+        if self.vulns is None:
+            if path_to_report is None:
+                raise ValueError('A path to the report SHOULD be specified.')
+            self.parser(path_to_report)
         highest_possible_ranking = self._highest_ranking()
         # Default highest ranking set to the lowest possible value.
         highest_ranking = self._lowest_ranking()
