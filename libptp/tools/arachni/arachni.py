@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import os
 from lxml import etree
 
 from libptp import constants
@@ -8,7 +9,7 @@ from libptp.report import AbstractReport
 
 
 class ArachniReport(AbstractReport):
-    """Retrieve the information of a skipfish report."""
+    """Retrieve the information of an arachni report."""
 
     __version__ = ['0.4.6']
 
