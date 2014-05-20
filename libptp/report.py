@@ -6,7 +6,7 @@
 """
 
 
-from libptp import constants
+from libptp.constants import RANKING_SCALE
 
 
 class AbstractReport(object):
@@ -19,20 +19,17 @@ class AbstractReport(object):
 
     """
 
-    RANKING_SCALE = constants.RANKING_SCALE
-
     def __init__(self, vulns=None):
         """Self-explanatory."""
-        self.ranking_scale = self.RANKING_SCALE
         self.vulns = vulns
 
     def _lowest_ranking(self):
         """From the ranking scale, retrieve the lowest ranking id possible."""
-        return min([value for value in self.ranking_scale.values()])
+        return min([value for value in RANKING_SCALE.values()])
 
     def _highest_ranking(self):
         """From the ranking scale, retrieve the lowest ranking id possible."""
-        return max([value for value in self.ranking_scale.values()])
+        return max([value for value in RANKING_SCALE.values()])
 
     def get_highest_ranking(self, path_to_report=None):
         """Return the highest ranking of the report."""
@@ -45,11 +42,11 @@ class AbstractReport(object):
         # Default highest ranking set to the lowest possible value.
         highest_ranking = self._lowest_ranking()
         for vuln in self.vulns:
-            if self.ranking_scale[vuln.ranking] < self.ranking_scale[highest_ranking]:
+            if RANKING_SCALE[vuln.ranking] < RANKING_SCALE[highest_ranking]:
                 highest_ranking = vuln.ranking
             # If the current highest_ranking is already the highest possible
             # one, we can stop the loop.
-            if self.ranking_scale[highest_ranking] == highest_possible_ranking:
+            if RANKING_SCALE[highest_ranking] == highest_possible_ranking:
                 break
         return highest_ranking
 
