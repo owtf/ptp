@@ -38,9 +38,6 @@ class SkipfishReport(AbstractReport):
         AbstractReport.__init__(self, *args, **kwargs)
         self.vulns = []
 
-    def __str__(self):
-        return ', '.join([info.__str__() for info in self.vulns])
-
     def parse(self, path_to_report=None, filename=None):
         """Parse a skipfish resport."""
         if (path_to_report is None or not os.path.isdir(path_to_report)):

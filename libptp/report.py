@@ -23,6 +23,9 @@ class AbstractReport(object):
         """Self-explanatory."""
         self.vulns = vulns
 
+    def __str__(self):
+        return ', '.join([info.__str__() for info in self.vulns])
+
     def _lowest_ranking(self):
         """From the ranking scale, retrieve the lowest ranking id possible."""
         return min([value for value in RANKING_SCALE.values()])
