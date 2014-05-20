@@ -9,6 +9,22 @@ This standalone library is created in order to be used by
 [OWTF](https://github.com/owtf) when it will try to retrieve the automated
 rankings already provided by some pentesting tools.
 
+# Usage
+
+```python
+from __future__ import print_function
+from ptp import PTP
+
+
+if __name__ == '__main__':
+    ptp = PTP('arachni')
+    ptp.parse(
+        path_to_report='path/to/arachni/report/directory',
+        filename='report_name.xml')
+    print('Highest severity:', ptp.get_highest_ranking())
+```
+
 # Current support
 
-None.
++ skipfish (2.10b)
++ arachni (0.4.6) (XML report)

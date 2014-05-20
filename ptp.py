@@ -15,7 +15,7 @@ class PTP(object):
 
     Usage:
         ptp = PTP(tool_name)
-        ptp.parse(path_to_report)
+        ptp.parse(path_to_report, filename)
 
     """
 
