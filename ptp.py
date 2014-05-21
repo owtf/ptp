@@ -15,28 +15,35 @@ class PTP(object):
     """PTP class definition.
 
     Usage:
-        ptp = PTP(tool_name)
+        ptp = PTP()
         ptp.parse(path_to_report, filename)
 
     """
 
     # Reports for supported tools.
-    supported = (
-        ArachniReport,
-        SkipfishReport,
-        W3AFReport,
-        WapitiReport
-        )
+    supported = {
+        'arachni': ArachniReport,
+        'skipfish': SkipfishReport,
+        'w3af': W3AFReport,
+        'wapiti': WapitiReport
+        }
 
-    def __init__(self):
+    def __init__(self, tool_name=None):
+        self.tool_name = tool_name
         self.report = None
 
     def parse(self, pathname=None, filename=None):
-        for tool in self.supported:
-            if tool.is_mine(pathname, filename=filename):
-                print('Report matched for: ' + tool.__name__)
-                self.report = tool()
-                break
+        if self.tool_name is None:
+            for tool in self.supported.values():
+                if tool.is_mine(pathname, filename=filename):
+                    print('Report matched for: ' + tool.__name__)
+                    self.report = tool()
+                    break
+        else:
+            try:
+                self.report = self.supported[self.tool_name]()
+            except KeyError:
+                pass
         if self.report is None:
             # TODO: Implement custom exception
             raise ValueError('Unsupported tool.')
