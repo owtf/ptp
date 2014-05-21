@@ -17,7 +17,7 @@ from ptp import PTP
 
 
 if __name__ == '__main__':
-    ptp = PTP('arachni')
+    ptp = PTP()
     ptp.parse(
         path_to_report='path/to/arachni/report/directory',
         filename='report_name.xml')

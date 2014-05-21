@@ -1,7 +1,9 @@
 from __future__ import print_function
 
 import os
+
 from lxml import etree
+from lxml.etree import LxmlError
 
 from libptp import constants
 from libptp.info import Info
@@ -11,6 +13,7 @@ from libptp.report import AbstractReport
 class ArachniReport(AbstractReport):
     """Retrieve the information of an arachni report."""
 
+    __tool__ = 'arachni'
     __version__ = ['0.4.6']
 
     HIGH = 'High'
@@ -29,12 +32,41 @@ class ArachniReport(AbstractReport):
         AbstractReport.__init__(self, *args, **kwargs)
         self.vulns = []
 
-    def parse(self, path_to_report=None, filename=None):
+    @classmethod
+    def is_mine(cls, pathname, filename=None):
+        """Check if it is a Arachni report and if I can handle it.
+
+        Return True if it is mine, False otherwise.
+
+        """
+        fullpath = cls._get_fullpath(pathname, filename=filename)
+        if not fullpath:
+            return False
+        if not fullpath.endswith('.xml'):
+            return False
+        try:
+            root = etree.parse(fullpath).getroot()
+        except LxmlError:  # Not a valid XML file.
+            return False
+        return cls._is_arachni(root)
+
+    @classmethod
+    def _is_arachni(cls, xml_report):
+        """Check if the xml_report comes from Arachni.
+
+        Returns True if it is from Arachni, False otherwise.
+
+        """
+        if not cls.__tool__ in xml_report.tag:
+            return False
+        return True
+
+    def parse(self, pathname=None, filename=None):
         """Parse an arachni resport."""
         # Reconstruct the path to the report if any.
         self.directory = ''
-        if not path_to_report is None:
-            self.directory = path_to_report
+        if not pathname is None:
+            self.directory = pathname
         if not filename is None:
             self.directory = os.path.join(self.directory, filename)
 

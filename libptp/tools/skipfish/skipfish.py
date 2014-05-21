@@ -12,9 +12,10 @@ from libptp.report import AbstractReport
 class SkipfishReport(AbstractReport):
     """Retrieve the information of a skipfish report."""
 
+    __tool__ = 'skipfish'
     __version__ = ['2.10b']
-    __reportfile__ = 'samples.js'
-    __metadatafile__ = 'summary.js'
+    _reportfile = 'samples.js'
+    _metadatafile = 'summary.js'
 
     HIGH = 4
     MEDIUM = 3
@@ -38,12 +39,29 @@ class SkipfishReport(AbstractReport):
         AbstractReport.__init__(self, *args, **kwargs)
         self.vulns = []
 
-    def parse(self, path_to_report=None, filename=None):
+    @classmethod
+    def is_mine(cls, pathname, filename=None):
+        """Check if it is a Skipfish report and if I can handle it.
+
+        Return True if it is mine, False otherwise.
+
+        """
+        fullpath = cls._get_fullpath(pathname)
+        path_metadata = os.path.join(fullpath, cls._metadatafile)
+        if not os.path.isfile(path_metadata):
+            return False
+        path_report = os.path.join(fullpath, cls._reportfile)
+        if not os.path.isfile(path_report):
+            return False
+        # TODO: Maybe check further?
+        return True
+
+    def parse(self, pathname=None, filename=None):
         """Parse a skipfish resport."""
-        if (path_to_report is None or not os.path.isdir(path_to_report)):
+        if (pathname is None or not os.path.isdir(pathname)):
             print('A directory to the report must be specified.')
             return
-        self.directory = path_to_report
+        self.directory = pathname
         self.parse_metadata()
         self.parse_report()
         # TODO: Return something like an unified version of the report.
@@ -59,7 +77,7 @@ class SkipfishReport(AbstractReport):
             var scan_ms    = elapsed time in ms<integer>;
 
         """
-        with open(os.path.join(self.directory, self.__metadatafile__), 'r') as f:
+        with open(os.path.join(self.directory, self._metadatafile), 'r') as f:
             re_result = self.re_metadata.findall(f.read())
             metadata = dict({el[0]: el[1] for el in re_result})
             # Check if the version if the good one
@@ -82,7 +100,7 @@ class SkipfishReport(AbstractReport):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        with open(os.path.join(self.directory, self.__reportfile__), 'r') as f:
+        with open(os.path.join(self.directory, self._reportfile), 'r') as f:
             re_result = self.re_report.findall(f.read())
             report = dict({el[0]: el[1] for el in re_result})
             if not REPORT_VAR_NAME in report:

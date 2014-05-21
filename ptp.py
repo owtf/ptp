@@ -20,26 +20,27 @@ class PTP(object):
 
     """
 
-    supported = {
-        'arachni': ArachniReport,
-        'skipfish': SkipfishReport,
-        'w3af': W3AFReport,
-        'wapiti': WapitiReport
-        }
+    # Reports for supported tools.
+    supported = (
+        ArachniReport,
+        SkipfishReport,
+        W3AFReport,
+        WapitiReport
+        )
 
-    def __init__(self, tool_name):
-        if self._check_supported_tool(tool_name):
-            self.tool_name = tool_name
-        else:
+    def __init__(self):
+        self.report = None
+
+    def parse(self, pathname=None, filename=None):
+        for tool in self.supported:
+            if tool.is_mine(pathname, filename=filename):
+                print('Report matched for: ' + tool.__name__)
+                self.report = tool()
+                break
+        if self.report is None:
             # TODO: Implement custom exception
             raise ValueError('Unsupported tool.')
-
-    def _check_supported_tool(self, tool_name):
-        return tool_name in self.supported.keys()
-
-    def parse(self, path_to_report=None, filename=None):
-        self.report = self.supported[self.tool_name]()
-        return self.report.parse(path_to_report, filename)
+        return self.report.parse(pathname, filename)
 
     def get_highest_ranking(self):
         return self.report.get_highest_ranking()

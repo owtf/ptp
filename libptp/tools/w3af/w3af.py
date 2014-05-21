@@ -2,7 +2,9 @@ from __future__ import print_function
 
 import os
 import re
+
 from lxml import etree
+from lxml.etree import LxmlError
 
 from libptp import constants
 from libptp.info import Info
@@ -12,6 +14,7 @@ from libptp.report import AbstractReport
 class W3AFReport(AbstractReport):
     """Retrieve the information of a w3af report."""
 
+    __tool__ = 'w3af'
     __version__ = ['1.6.0.2']
 
     HIGH = 'High'
@@ -31,12 +34,42 @@ class W3AFReport(AbstractReport):
         self.re_version = re.compile(r'Version: (\S*)\s')
         self.vulns = []
 
-    def parse(self, path_to_report=None, filename=None):
+    @classmethod
+    def is_mine(cls, pathname, filename=None):
+        """Check if it is a W3af report and if I can handle it.
+
+        Return True if it is mine, False otherwise.
+
+        """
+        fullpath = cls._get_fullpath(pathname, filename=filename)
+        if not fullpath:
+            return False
+        if not fullpath.endswith('.xml'):
+            return False
+        try:
+            root = etree.parse(fullpath).getroot()
+        except LxmlError:  # Not a valid XML file.
+            return False
+        return cls._is_w3af(root)
+
+    @classmethod
+    def _is_w3af(cls, xml_report):
+        """Check if the xml_report comes from W3AF.
+
+        Returns True if it is from W3AF, False otherwise.
+
+        """
+        raw_metadata = xml_report.find('.//w3af-version')
+        if raw_metadata is None:
+            return False
+        return True
+
+    def parse(self, pathname=None, filename=None):
         """Parse a w3af resport."""
         # Reconstruct the path to the report if any.
         self.directory = ''
-        if not path_to_report is None:
-            self.directory = path_to_report
+        if not pathname is None:
+            self.directory = pathname
         if not filename is None:
             self.directory = os.path.join(self.directory, filename)
 

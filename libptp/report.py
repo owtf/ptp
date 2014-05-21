@@ -6,6 +6,7 @@
 """
 
 
+import os
 from libptp.constants import RANKING_SCALE
 
 
@@ -34,6 +35,32 @@ class AbstractReport(object):
         """From the ranking scale, retrieve the lowest ranking id possible."""
         return max([value for value in RANKING_SCALE.values()])
 
+    @staticmethod
+    def _get_fullpath(pathname, filename=None):
+        """Try to build the full path to the report.
+
+        If it can reach the report, returns its full path.
+        Otherwise it returns ''.
+
+        """
+        if not os.path.isdir(pathname):
+            return ''
+        fullpath = pathname
+        if filename is not None:
+            fullpath = os.path.join(pathname, filename)
+            if not os.path.isfile(fullpath):
+                return ''
+        return fullpath
+
+    @classmethod
+    def is_mine(cls, pathname, filename=None):
+        """Check if it it a report from my tool.
+
+        Return True if it is mine, False otherwise.
+
+        """
+        return False
+
     @classmethod
     def check_version(cls, metadata, key='version'):
         """Checks the version from the metadata against the supported one.
@@ -45,13 +72,13 @@ class AbstractReport(object):
             return True
         return False
 
-    def get_highest_ranking(self, path_to_report=None):
+    def get_highest_ranking(self, pathname=None):
         """Return the highest ranking of the report."""
         # Be sure that the parsing already happened.
         if self.vulns is None:
-            if path_to_report is None:
+            if pathname is None:
                 raise ValueError('A path to the report SHOULD be specified.')
-            self.parser(path_to_report)
+            self.parser(pathname)
         highest_possible_ranking = self._highest_ranking()
         # Default highest ranking set to the lowest possible value.
         highest_ranking = self._lowest_ranking()
@@ -76,6 +103,6 @@ class AbstractReport(object):
         self.raw_data = data
         self.parser(self.raw_data)
 
-    def parser(self, data):
+    def parse(self, data):
         """Abstract parser that will parse the report of a tool."""
         raise NotImplementedError('The parser MUST be define for each tool.')
