@@ -26,6 +26,14 @@ if __name__ == '__main__':
 
 # Current support
 
-+ skipfish (2.10b)
 + arachni (0.4.6) (XML report)
+    + Metadata
+    + Rankings
++ skipfish (2.10b)
+    + Metadata
+    + Rankings
 + w3af (1.6.0.2) (XML report)
+    + Metadata
+    + Rankings
++ wapiti (2.3.0) (XML report)
+    + Metadata
