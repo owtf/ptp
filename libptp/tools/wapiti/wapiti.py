@@ -34,12 +34,6 @@ class WapitiReport(AbstractReport):
         # TODO: Return something like an unified version of the report.
         return self.vulns
 
-    def _check_version(self, metadata):
-        """Checks the version from the metadata to the supported one."""
-        if metadata['generatorVersion'] in self.__version__:
-            return True
-        return False
-
     def parse_xml_metadata(self):
         """Retrieve the metadata of the report.
 
@@ -53,7 +47,7 @@ class WapitiReport(AbstractReport):
         # Only keep the version number
         metadata['generatorVersion'] = metadata['generatorVersion'].lstrip(
             'Wapiti ')
-        if self._check_version(metadata):
+        if self.check_version(metadata, key='generatorVersion'):
             self.metadata = metadata
         else:
             # TODO: Implement custom exception

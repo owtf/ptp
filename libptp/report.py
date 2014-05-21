@@ -34,6 +34,17 @@ class AbstractReport(object):
         """From the ranking scale, retrieve the lowest ranking id possible."""
         return max([value for value in RANKING_SCALE.values()])
 
+    @classmethod
+    def check_version(cls, metadata, key='version'):
+        """Checks the version from the metadata against the supported one.
+
+        The version to test is the value of metadata[key].
+
+        """
+        if metadata[key] in cls.__version__:
+            return True
+        return False
+
     def get_highest_ranking(self, path_to_report=None):
         """Return the highest ranking of the report."""
         # Be sure that the parsing already happened.

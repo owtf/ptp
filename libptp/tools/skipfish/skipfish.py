@@ -49,12 +49,6 @@ class SkipfishReport(AbstractReport):
         # TODO: Return something like an unified version of the report.
         return self.vulns
 
-    def _check_version(self, metadata):
-        """Checks the version from the metadata to the supported one."""
-        if metadata['sf_version'] in self.__version__:
-            return True
-        return False
-
     def parse_metadata(self):
         """Retrieve the metadata of the report.
 
@@ -69,7 +63,7 @@ class SkipfishReport(AbstractReport):
             re_result = self.re_metadata.findall(f.read())
             metadata = dict({el[0]: el[1] for el in re_result})
             # Check if the version if the good one
-            if self._check_version(metadata):
+            if self.check_version(metadata, key='sf_version'):
                 self.metadata = metadata
             else:
                 # TODO: Implement custom exception

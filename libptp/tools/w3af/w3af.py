@@ -48,12 +48,6 @@ class W3AFReport(AbstractReport):
         # TODO: Return something like an unified version of the report.
         return self.vulns
 
-    def _check_version(self, metadata):
-        """Checks the version from the metadata to the supported one."""
-        if metadata['version'] in self.__version__:
-            return True
-        return False
-
     def parse_xml_metadata(self):
         """Retrieve the metadata of the report.
 
@@ -69,7 +63,7 @@ class W3AFReport(AbstractReport):
         # TODO: Retrieve the other metadata likes the date, etc.
         metadata = {
             'version': version,}
-        if self._check_version(metadata):
+        if self.check_version(metadata):
             self.metadata = metadata
         else:
             # TODO: Implement custom exception
