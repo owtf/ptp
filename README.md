@@ -41,3 +41,4 @@ if __name__ == '__main__':
     + Rankings
 + wapiti (2.3.0) (XML report)
     + Metadata
+    + Rankings (database needs to be completed though)

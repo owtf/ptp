@@ -8,6 +8,7 @@ from lxml.etree import LxmlError
 from libptp import constants
 from libptp.info import Info
 from libptp.report import AbstractReport
+from libptp.tools.wapiti.signatures import SIGNATURES
 
 
 class WapitiReport(AbstractReport):
@@ -103,10 +104,9 @@ class WapitiReport(AbstractReport):
         """
         vulns = self.root.find('.//vulnerabilities')
         for vuln in vulns.findall('.//vulnerability'):
-            #info = Info(
-            #    # Convert the severity of the issue thanks to an unified
-            #    # ranking scale.
-            #    ranking=self.RANKING_SCALE[vuln.find('.//severity').text]
-            #    )
-            #self.vulns.append(info)
-            pass
+            vuln_name = vuln.get('name')
+            if vuln_name in SIGNATURES:
+                info = Info(
+                    ranking=SIGNATURES[vuln_name]
+                    )
+                self.vulns.append(info)
