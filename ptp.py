@@ -32,6 +32,9 @@ class PTP(object):
         self.tool_name = tool_name
         self.report = None
 
+    def __str__(self):
+        return self.report.__str__()
+
     def parse(self, pathname=None, filename=None):
         if self.tool_name is None:
             for tool in self.supported.values():
