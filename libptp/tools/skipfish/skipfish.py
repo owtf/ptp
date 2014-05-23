@@ -57,7 +57,7 @@ class SkipfishReport(AbstractReport):
         return True
 
     def parse(self, pathname=None, filename=None):
-        """Parse a skipfish resport."""
+        """Parse a skipfish report."""
         if (pathname is None or not os.path.isdir(pathname)):
             print('A directory to the report must be specified.')
             return
@@ -91,7 +91,12 @@ class SkipfishReport(AbstractReport):
     def parse_report(self):
         """Retrieve the results from the report.
 
-        Example of the structure:
+        First retrieve the content of the samples file.
+        Second match it against the regex that extract the value of
+        `issue_samples`.
+        Then convert it to a python list of dictionaries thanks to `ast`.
+
+        Example of retrieved data after conversion (i.e. `raw_report`):
         [{ 'severity': 3, 'type': 40402, 'samples': [
             { 'url': 'http://demo.testfire.net/bank/login.aspx', 'extra': 'SQL syntax string', 'sid': '21010', 'dir': '_i2/0' },
             { 'url': 'http://demo.testfire.net/bank/login.aspx', 'extra': 'SQL syntax string', 'sid': '21010', 'dir': '_i2/1' },
