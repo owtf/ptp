@@ -104,9 +104,12 @@ class WapitiReport(AbstractReport):
         """
         vulns = self.root.find('.//vulnerabilities')
         for vuln in vulns.findall('.//vulnerability'):
-            vuln_name = vuln.get('name')
-            if vuln_name in SIGNATURES:
+            vuln_signature = vuln.get('name')
+            vuln_description = vuln.find('.//description')
+            if vuln_signature in SIGNATURES:
                 info = Info(
-                    ranking=SIGNATURES[vuln_name]
+                    name=vuln_signature,
+                    ranking=SIGNATURES[vuln_signature],
+                    description=vuln_description.text.strip(' \n'),
                     )
                 self.vulns.append(info)
