@@ -9,15 +9,19 @@
 class Info(object):
     """Representation of a result from a report provided by a pentesting tool.
 
+        + name: the name of the vulnerability
         + ranking: the ranking of the vulnerability.
         + description: the description of the vulnerability.
+        + kwargs: any key/value attributes the vuln might contain
 
     """
 
-    def __init__(self, ranking=None, description=None):
+    def __init__(self, name=None, ranking=None, description=None, **kwargs):
         """Self-explanatory."""
         self.ranking = ranking
         self.description = description
+        for key, value in kwargs:
+            self.key = value
 
     def __str__(self):
         """String representation of the Info class.
@@ -25,4 +29,4 @@ class Info(object):
         Can be used to be encoded into a json string and saved into a database.
 
         """
-        return str({'ranking': self.ranking, 'description': self.description})
+        return str(self.__dict__)
