@@ -32,7 +32,6 @@ class W3AFReport(AbstractReport):
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)
         self.re_version = re.compile(r'Version: (\S*)\s')
-        self.vulns = []
 
     @classmethod
     def is_mine(cls, pathname, filename=None):

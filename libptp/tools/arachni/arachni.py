@@ -30,7 +30,6 @@ class ArachniReport(AbstractReport):
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)
-        self.vulns = []
 
     @classmethod
     def is_mine(cls, pathname, filename=None):

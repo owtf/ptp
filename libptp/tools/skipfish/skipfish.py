@@ -32,12 +32,11 @@ class SkipfishReport(AbstractReport):
         INFO: constants.INFO}
 
     def __init__(self, *args, **kwargs):
+        AbstractReport.__init__(self, *args, **kwargs)
         self.re_metadata = re.compile(
             r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
         self.re_report = re.compile(
             r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
-        AbstractReport.__init__(self, *args, **kwargs)
-        self.vulns = []
 
     @classmethod
     def is_mine(cls, pathname, filename=None):

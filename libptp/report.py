@@ -23,6 +23,8 @@ class AbstractReport(object):
     def __init__(self, vulns=None):
         """Self-explanatory."""
         self.vulns = vulns
+        if self.vulns is None:
+            self.vulns = []
 
     def __str__(self):
         return ', '.join([info.__str__() for info in self.vulns])
