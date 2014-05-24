@@ -1,6 +1,6 @@
 """
 
-    The Info class will be the summarize of a result form the output report
+    The Info class will be the summary of a result form the output report
     provided by pentesting tools.
 
 """
@@ -18,6 +18,7 @@ class Info(object):
 
     def __init__(self, name=None, ranking=None, description=None, **kwargs):
         """Self-explanatory."""
+        self.name = name
         self.ranking = ranking
         self.description = description
         for key, value in kwargs:
