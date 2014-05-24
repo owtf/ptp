@@ -32,7 +32,7 @@ class AbstractReport(object):
         return min([value for value in RANKING_SCALE.values()])
 
     def _highest_ranking(self):
-        """From the ranking scale, retrieve the lowest ranking id possible."""
+        """From the ranking scale, retrieve the highest ranking id possible."""
         return max([value for value in RANKING_SCALE.values()])
 
     @staticmethod
@@ -73,7 +73,14 @@ class AbstractReport(object):
         return False
 
     def get_highest_ranking(self, pathname=None):
-        """Return the highest ranking of the report."""
+        """Return the highest ranking of the report.
+
+        Iterates over the list of vulnerabilities.
+        If the current ranking is higher (in risk) than the current highest
+        then switch them.
+        If it finds the highest (in risk) ranking possible, stops.
+
+        """
         # Be sure that the parsing already happened.
         if self.vulns is None:
             if pathname is None:
@@ -90,18 +97,6 @@ class AbstractReport(object):
             if RANKING_SCALE[highest_ranking] == highest_possible_ranking:
                 break
         return highest_ranking
-
-    def from_file(self, pathname):
-        """Read the content of a report from its file and parse it."""
-        with open(pathname, 'r') as f:
-            raw_data = f.read()
-        self.raw_data = raw_data
-        self.parser(self.raw_data)
-
-    def from_stream(self, data):
-        """Read the content of a report for its data and parse it."""
-        self.raw_data = data
-        self.parser(self.raw_data)
 
     def parse(self, data):
         """Abstract parser that will parse the report of a tool."""
