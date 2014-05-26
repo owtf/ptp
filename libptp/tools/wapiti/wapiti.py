@@ -22,7 +22,7 @@ class WapitiReport(AbstractReport):
         AbstractReport.__init__(self, *args, **kwargs)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, pathname, filename='*.xml'):
         """Check if it is a Wapiti report and if I can handle it.
 
         Return True if it is mine, False otherwise.
