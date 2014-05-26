@@ -46,9 +46,9 @@ class SkipfishReport(AbstractReport):
         Return True if it is mine, False otherwise.
 
         """
-        if not self._recursive_find(pathname, self._metadatafile):
+        if not cls._recursive_find(pathname, cls._metadatafile):
             return False
-        if not self._recursive_find(pathname, self._reportfile):
+        if not cls._recursive_find(pathname, cls._reportfile):
             return False
         # TODO: Maybe check further?
         return True

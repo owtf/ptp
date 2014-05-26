@@ -66,10 +66,10 @@ class AbstractReport(object):
 
         """
         founds = []
-        for base, dirs, files in os.walk(pathname):
+        for base, _, files in os.walk(pathname):
             matched_files = fnmatch.filter(files, file_regex)
             founds.extend(
-                os.path.join(pathname, matched_file)
+                os.path.join(base, matched_file)
                 for matched_file in matched_files)
             if founds and early_break:
                 break
