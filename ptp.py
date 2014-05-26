@@ -48,7 +48,7 @@ class PTP(object):
             except KeyError:
                 pass
         if self.report is None:
-            raise NotSupportedTool('This tool is not supported by PTP.')
+            raise NotSupportedToolError('This tool is not supported by PTP.')
         return self.report.parse(pathname)
 
     def get_highest_ranking(self):
