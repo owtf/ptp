@@ -10,7 +10,17 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'))
-    except ValueError:
+    except:
+        res = 'ko'
+    print(res)
+    ptp = PTP()
+    print('\ttest is_mine():', end=' ')
+    res = 'ok'
+    try:
+        ptp.parse(
+            pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'))
+        assert ptp.report.__tool__ == 'wapiti'
+    except:
         res = 'ko'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')

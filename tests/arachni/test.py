@@ -9,7 +9,16 @@ def run():
     res = 'ok'
     try:
         ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
-    except ValueError:
+    except:
+        res = 'ko'
+    print(res)
+    ptp = PTP()
+    print('\ttest is_mine():', end=' ')
+    res = 'ok'
+    try:
+        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
+        assert ptp.report.__tool__ == 'arachni'
+    except:
         res = 'ko'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
