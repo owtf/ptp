@@ -5,6 +5,7 @@ import os
 from lxml import etree
 from lxml.etree import LxmlError
 
+from libptp.exceptions import NotSupportedVersionError
 from libptp import constants
 from libptp.info import Info
 from libptp.report import AbstractReport
@@ -88,9 +89,8 @@ class WapitiReport(AbstractReport):
         if self.check_version(metadata, key='generatorVersion'):
             self.metadata = metadata
         else:
-            # TODO: Implement custom exception
-            raise ValueError(
-                'PTP does NOT support this version of Wapiti.')
+            raise NotSupportedVersionError(
+                'PTP does NOT support this version of ' + self.__tool__ + '.')
 
     def parse_xml_report(self):
         """Retrieve the results from the report.

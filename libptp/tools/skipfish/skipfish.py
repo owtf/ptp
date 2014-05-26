@@ -4,6 +4,7 @@ import os
 import re
 import ast
 
+from libptp.exceptions import ReportNotFoundError, NotSupportedVersionError
 from libptp import constants
 from libptp.info import Info
 from libptp.report import AbstractReport
@@ -83,9 +84,9 @@ class SkipfishReport(AbstractReport):
             if self.check_version(metadata, key='sf_version'):
                 self.metadata = metadata
             else:
-                # TODO: Implement custom exception
-                raise ValueError(
-                    'PTP does NOT support this version of Skipfish.')
+                raise NotSupportedVersionError(
+                    'PTP does NOT support this version of ' +
+                    self.__tool__ + '.')
 
     def parse_report(self):
         """Retrieve the results from the report.
@@ -108,8 +109,7 @@ class SkipfishReport(AbstractReport):
             re_result = self.re_report.findall(f.read())
             report = dict({el[0]: el[1] for el in re_result})
             if not REPORT_VAR_NAME in report:
-                # TODO: Implement custom exception
-                raise ValueError(
+                raise ReportNotFoundError(
                     'PTP did NOT find issue_samples variable. Is this the '
                     'right file?')
             # We now have a raw version of the Skipfish report as a list of

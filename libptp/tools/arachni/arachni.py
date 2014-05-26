@@ -5,6 +5,7 @@ import os
 from lxml import etree
 from lxml.etree import LxmlError
 
+from libptp.exceptions import NotSupportedVersionError
 from libptp import constants
 from libptp.info import Info
 from libptp.report import AbstractReport
@@ -92,8 +93,7 @@ class ArachniReport(AbstractReport):
         if self.check_version(metadata):
             self.metadata = metadata
         else:
-            # TODO: Implement custom exception
-            raise ValueError(
+            raise NotSupportedVersionError(
                 'PTP does NOT support this version of Arachni.')
 
     def parse_xml_report(self):

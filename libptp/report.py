@@ -7,6 +7,7 @@
 
 
 import os
+from libptp.exceptions import ReportNotFoundError
 from libptp.constants import RANKING_SCALE
 
 
@@ -86,7 +87,8 @@ class AbstractReport(object):
         # Be sure that the parsing already happened.
         if self.vulns is None:
             if pathname is None:
-                raise ValueError('A path to the report SHOULD be specified.')
+                raise ReportNotFoundError(
+                    'A path to the report SHOULD be specified.')
             self.parser(pathname)
         highest_possible_ranking = self._highest_ranking()
         # Default highest ranking set to the lowest possible value.

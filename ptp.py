@@ -5,6 +5,7 @@
 """
 
 
+from libptp.exceptions import NotSupportedToolError
 from libptp.tools.arachni.arachni import ArachniReport
 from libptp.tools.skipfish.skipfish import SkipfishReport
 from libptp.tools.w3af.w3af import W3AFReport
@@ -39,7 +40,6 @@ class PTP(object):
         if self.tool_name is None:
             for tool in self.supported.values():
                 if tool.is_mine(pathname, filename=filename):
-                    print('Report matched for: ' + tool.__name__)
                     self.report = tool()
                     break
         else:
@@ -48,8 +48,7 @@ class PTP(object):
             except KeyError:
                 pass
         if self.report is None:
-            # TODO: Implement custom exception
-            raise ValueError('Unsupported tool.')
+            raise NotSupportedTool('This tool is not supported by PTP.')
         return self.report.parse(pathname, filename)
 
     def get_highest_ranking(self):

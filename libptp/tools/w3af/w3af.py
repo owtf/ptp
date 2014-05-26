@@ -6,6 +6,7 @@ import re
 from lxml import etree
 from lxml.etree import LxmlError
 
+from libptp.exceptions import NotSupportedVersionError
 from libptp import constants
 from libptp.info import Info
 from libptp.report import AbstractReport
@@ -98,9 +99,8 @@ class W3AFReport(AbstractReport):
         if self.check_version(metadata):
             self.metadata = metadata
         else:
-            # TODO: Implement custom exception
-            raise ValueError(
-                'PTP does NOT support this version of W3AF.')
+            raise NotSupportedVersionError(
+                'PTP does NOT support this version of ' + self.__tool__ + '.')
 
     def parse_xml_report(self):
         """Retrieve the results from the report.
