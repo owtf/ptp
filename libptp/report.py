@@ -7,7 +7,6 @@
 
 
 import os
-from libptp.exceptions import ReportNotFoundError
 from libptp.constants import RANKING_SCALE
 
 
@@ -75,7 +74,7 @@ class AbstractReport(object):
             return True
         return False
 
-    def get_highest_ranking(self, pathname=None):
+    def get_highest_ranking(self, *args, **kwargs):
         """Return the highest ranking of the report.
 
         Iterates over the list of vulnerabilities.
@@ -86,10 +85,7 @@ class AbstractReport(object):
         """
         # Be sure that the parsing already happened.
         if self.vulns is None:
-            if pathname is None:
-                raise ReportNotFoundError(
-                    'A path to the report SHOULD be specified.')
-            self.parser(pathname)
+            self.parser(*args, **kwargs)
         highest_possible_ranking = self._highest_ranking()
         # Default highest ranking set to the lowest possible value.
         highest_ranking = self._lowest_ranking()
@@ -102,6 +98,6 @@ class AbstractReport(object):
                 break
         return highest_ranking
 
-    def parse(self, data):
+    def parse(self):
         """Abstract parser that will parse the report of a tool."""
         raise NotImplementedError('The parser MUST be define for each tool.')
