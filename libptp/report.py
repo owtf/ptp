@@ -7,6 +7,7 @@
 
 
 import os
+import fnmatch
 from libptp.constants import RANKING_SCALE
 
 
@@ -37,23 +38,6 @@ class AbstractReport(object):
         """From the ranking scale, retrieve the highest ranking id possible."""
         return max([value for value in RANKING_SCALE.values()])
 
-    @staticmethod
-    def _get_fullpath(pathname, filename=None):
-        """Try to build the full path to the report.
-
-        If it can reach the report, returns its full path.
-        Otherwise it returns ''.
-
-        """
-        if not os.path.isdir(pathname):
-            return ''
-        fullpath = pathname
-        if filename is not None:
-            fullpath = os.path.join(pathname, filename)
-            if not os.path.isfile(fullpath):
-                return ''
-        return fullpath
-
     @classmethod
     def is_mine(cls, pathname, filename=None):
         """Check if it it a report from my tool.
@@ -73,6 +57,23 @@ class AbstractReport(object):
         if metadata[key] in cls.__version__:
             return True
         return False
+
+    @staticmethod
+    def _recursive_find(pathname='./', file_regex='*', early_break=True):
+        """Find the files corresponding to `file_regex`.
+
+        The search occurs in the directory `pathname`.
+
+        """
+        founds = []
+        for base, dirs, files in os.walk(pathname):
+            matched_files = fnmatch.filter(files, file_regex)
+            founds.extend(
+                os.path.join(pathname, matched_file)
+                for matched_file in matched_files)
+            if founds and early_break:
+                break
+        return founds
 
     def get_highest_ranking(self, *args, **kwargs):
         """Return the highest ranking of the report.

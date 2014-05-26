@@ -22,15 +22,16 @@ class WapitiReport(AbstractReport):
         AbstractReport.__init__(self, *args, **kwargs)
 
     @classmethod
-    def is_mine(cls, pathname, filename=None):
+    def is_mine(cls, pathname):
         """Check if it is a Wapiti report and if I can handle it.
 
         Return True if it is mine, False otherwise.
 
         """
-        fullpath = cls._get_fullpath(pathname, filename=filename)
+        fullpath = cls._recursive_find(pathname, filename)
         if not fullpath:
             return False
+        fullpath = fullpath[0]  # Only keep the first file.
         if not fullpath.endswith('.xml'):
             return False
         try:
@@ -56,17 +57,12 @@ class WapitiReport(AbstractReport):
             return False
         return True
 
-    def parse(self, pathname=None, filename=None):
+    def parse(self, pathname=None, filename='*.xml'):
         """Parse an Wapiti resport."""
         # Reconstruct the path to the report if any.
-        self.directory = ''
-        if not pathname is None:
-            self.directory = pathname
-        if not filename is None:
-            self.directory = os.path.join(self.directory, filename)
-
+        self.fullpath = self._recursive_find(pathname, filename)[0]
         # Parse the XML report thanks to lxml.
-        self.root = etree.parse(self.directory).getroot()
+        self.root = etree.parse(self.fullpath).getroot()
         # Parse specific stuff.
         self.parse_xml_metadata()
         self.parse_xml_report()

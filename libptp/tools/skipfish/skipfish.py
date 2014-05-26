@@ -40,27 +40,24 @@ class SkipfishReport(AbstractReport):
             r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
     @classmethod
-    def is_mine(cls, pathname, filename=None):
+    def is_mine(cls, pathname):
         """Check if it is a Skipfish report and if I can handle it.
 
         Return True if it is mine, False otherwise.
 
         """
-        fullpath = cls._get_fullpath(pathname)
-        path_metadata = os.path.join(fullpath, cls._metadatafile)
-        if not os.path.isfile(path_metadata):
+        if not self._recursive_find(pathname, self._metadatafile):
             return False
-        path_report = os.path.join(fullpath, cls._reportfile)
-        if not os.path.isfile(path_report):
+        if not self._recursive_find(pathname, self._reportfile):
             return False
         # TODO: Maybe check further?
         return True
 
-    def parse(self, pathname=None, filename=None):
+    def parse(self, pathname=None):
         """Parse a skipfish report."""
         if (pathname is None or not os.path.isdir(pathname)):
-            print('A directory to the report must be specified.')
-            return
+            raise ReportNotFoundError(
+                'A directory to the report MUST be specified.')
         self.directory = pathname
         self.parse_metadata()
         self.parse_report()
@@ -77,7 +74,12 @@ class SkipfishReport(AbstractReport):
             var scan_ms    = elapsed time in ms<integer>;
 
         """
-        with open(os.path.join(self.directory, self._metadatafile), 'r') as f:
+        fullpath = self._recursive_find(self.directory, self._metadatafile)
+        if not fullpath:
+            raise ReportNotFoundError(
+                'The metadata file is not found.')
+        fullpath = fullpath[0]
+        with open(fullpath, 'r') as f:
             re_result = self.re_metadata.findall(f.read())
             metadata = dict({el[0]: el[1] for el in re_result})
             # Check if the version if the good one
@@ -104,8 +106,13 @@ class SkipfishReport(AbstractReport):
         },]
 
         """
+        fullpath = self._recursive_find(self.directory, self._reportfile)
+        if not fullpath:
+            raise ReportNotFoundError(
+                'The report file is not found.')
+        fullpath = fullpath[0]
         REPORT_VAR_NAME = 'issue_samples'
-        with open(os.path.join(self.directory, self._reportfile), 'r') as f:
+        with open(fullpath, 'r') as f:
             re_result = self.re_report.findall(f.read())
             report = dict({el[0]: el[1] for el in re_result})
             if not REPORT_VAR_NAME in report:

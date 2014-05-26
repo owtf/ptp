@@ -9,8 +9,7 @@ def run():
     res = 'ok'
     try:
         ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'),
-            filename='demo.testfire.net.xml')
+            pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'))
     except ValueError:
         res = 'ko'
     print(res)

@@ -17,7 +17,7 @@ class PTP(object):
 
     Usage:
         ptp = PTP()
-        ptp.parse(path_to_report, filename)
+        ptp.parse(path_to_report)
 
     """
 
@@ -36,10 +36,10 @@ class PTP(object):
     def __str__(self):
         return self.report.__str__()
 
-    def parse(self, pathname=None, filename=None):
+    def parse(self, pathname=None):
         if self.tool_name is None:
             for tool in self.supported.values():
-                if tool.is_mine(pathname, filename=filename):
+                if tool.is_mine(pathname):
                     self.report = tool()
                     break
         else:
@@ -49,7 +49,7 @@ class PTP(object):
                 pass
         if self.report is None:
             raise NotSupportedTool('This tool is not supported by PTP.')
-        return self.report.parse(pathname, filename)
+        return self.report.parse(pathname)
 
     def get_highest_ranking(self):
         return self.report.get_highest_ranking()

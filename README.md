@@ -22,9 +22,7 @@ from ptp import PTP
 
 if __name__ == '__main__':
     ptp = PTP()
-    ptp.parse(
-        path_to_report='path/to/the/report/directory',
-        filename='report_name.xml')
+    ptp.parse(path_to_report='path/to/the/report/directory')
     print('Highest severity:', ptp.get_highest_ranking())
 ```
 

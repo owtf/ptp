@@ -8,9 +8,7 @@ def run():
     print('\ttest parse():', end=' ')
     res = 'ok'
     try:
-        ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'),
-            filename='demo.testfire.net.xml')
+        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
     except ValueError:
         res = 'ko'
     print(res)
