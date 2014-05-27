@@ -26,11 +26,3 @@ class Info(dict):
         self.description = description
         for key, value in kwargs.items():
             self[key] = value
-
-    def __str__(self):
-        """String representation of the Info class.
-
-        Can be used to be encoded into a json string and saved into a database.
-
-        """
-        return self.__str__()
