@@ -21,6 +21,8 @@ class AbstractReport(object):
 
     """
 
+    __version__ = None
+
     def __init__(self, vulns=None):
         """Self-explanatory."""
         self.vulns = vulns
@@ -94,7 +96,7 @@ class AbstractReport(object):
         """
         # Be sure that the parsing already happened.
         if self.vulns is None:
-            self.parser(*args, **kwargs)
+            self.parse(*args, **kwargs)
         highest_possible_ranking = self._highest_risk()
         # Default highest ranking set to the lowest possible value.
         highest_ranking = self._lowest_risk()

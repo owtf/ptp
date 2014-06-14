@@ -52,4 +52,6 @@ class PTP(object):
         return self.report.parse(pathname)
 
     def get_highest_ranking(self):
-        return self.report.get_highest_ranking()
+        if self.report:
+            return self.report.get_highest_ranking()
+        return None
