@@ -13,6 +13,7 @@ from libptp.tools.wapiti.wapiti import WapitiReport
 
 
 class PTP(object):
+
     """PTP class definition.
 
     Usage:

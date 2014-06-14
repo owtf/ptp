@@ -8,10 +8,12 @@
 
 import os
 import fnmatch
+
 from libptp.constants import RANKING_SCALE
 
 
 class AbstractReport(object):
+
     """Abstract representation of a report provided by a pentesting tool.
 
         + vulns: List of Info instances

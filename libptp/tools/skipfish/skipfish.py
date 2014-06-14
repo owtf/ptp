@@ -76,8 +76,7 @@ class SkipfishReport(AbstractReport):
         """
         fullpath = self._recursive_find(self.directory, self._metadatafile)
         if not fullpath:
-            raise ReportNotFoundError(
-                'The metadata file is not found.')
+            raise ReportNotFoundError('The metadata file is not found.')
         fullpath = fullpath[0]
         with open(fullpath, 'r') as f:
             re_result = self.re_metadata.findall(f.read())
@@ -108,8 +107,7 @@ class SkipfishReport(AbstractReport):
         """
         fullpath = self._recursive_find(self.directory, self._reportfile)
         if not fullpath:
-            raise ReportNotFoundError(
-                'The report file is not found.')
+            raise ReportNotFoundError('The report file is not found.')
         fullpath = fullpath[0]
         REPORT_VAR_NAME = 'issue_samples'
         with open(fullpath, 'r') as f:
@@ -135,6 +133,5 @@ class SkipfishReport(AbstractReport):
             info = Info(
                 # Convert the severity of the issue thanks to an unified
                 # ranking scale.
-                ranking=self.RANKING_SCALE[vuln['severity']]
-                )
+                ranking=self.RANKING_SCALE[vuln['severity']],)
             self.vulns.append(info)

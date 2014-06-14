@@ -105,6 +105,5 @@ class WapitiReport(AbstractReport):
                 info = Info(
                     name=vuln_signature,
                     ranking=SIGNATURES[vuln_signature],
-                    description=vuln_description.text.strip(' \n'),
-                    )
+                    description=vuln_description.text.strip(' \n'),)
                 self.vulns.append(info)

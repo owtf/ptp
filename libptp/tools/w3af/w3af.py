@@ -90,8 +90,7 @@ class W3AFReport(AbstractReport):
             version = version[0]
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        metadata = {
-            'version': version,}
+        metadata = {'version': version,}
         if self.check_version(metadata):
             self.metadata = metadata
         else:
@@ -111,6 +110,5 @@ class W3AFReport(AbstractReport):
             info = Info(
                 # Convert the severity of the issue thanks to an unified
                 # ranking scale.
-                ranking=self.RANKING_SCALE[vuln.get('severity')]
-                )
+                ranking=self.RANKING_SCALE[vuln.get('severity')],)
             self.vulns.append(info)

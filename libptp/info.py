@@ -7,6 +7,7 @@
 
 
 class Info(dict):
+
     """Representation of a result from a report provided by a pentesting tool.
 
         + name: the name of the vulnerability
@@ -15,6 +16,7 @@ class Info(dict):
         + kwargs: any key/value attributes the vuln might contain
 
     """
+
     __getattr__= dict.__getitem__
     __setattr__= dict.__setitem__
     __delattr__= dict.__delitem__

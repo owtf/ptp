@@ -84,8 +84,7 @@ class ArachniReport(AbstractReport):
         version = self.root.find('.//version')
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        metadata = {
-            version.tag: version.text,}
+        metadata = {version.tag: version.text,}
         if self.check_version(metadata):
             self.metadata = metadata
         else:
@@ -106,6 +105,5 @@ class ArachniReport(AbstractReport):
             info = Info(
                 # Convert the severity of the issue thanks to an unified
                 # ranking scale.
-                ranking=self.RANKING_SCALE[vuln.find('.//severity').text]
-                )
+                ranking=self.RANKING_SCALE[vuln.find('.//severity').text],)
             self.vulns.append(info)
