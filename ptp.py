@@ -27,8 +27,7 @@ class PTP(object):
         'arachni': ArachniReport,
         'skipfish': SkipfishReport,
         'w3af': W3AFReport,
-        'wapiti': WapitiReport
-        }
+        'wapiti': WapitiReport,}
 
     def __init__(self, tool_name=None):
         self.tool_name = tool_name
