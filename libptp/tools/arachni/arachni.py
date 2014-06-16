@@ -7,15 +7,15 @@ from lxml.etree import LxmlError
 
 from libptp.exceptions import NotSupportedVersionError
 from libptp import constants
-from libptp.info import Info
 from libptp.report import AbstractReport
+from libptp.tools.arachni.parser import ArachniXMLParser
 
 
 class ArachniReport(AbstractReport):
     """Retrieve the information of an arachni report."""
 
     __tool__ = 'arachni'
-    __version__ = ['0.4.6']
+    __parsers__ = {ArachniXMLParser: '0.4.6'}
 
     HIGH = 'High'
     MEDIUM = 'Medium'
@@ -49,18 +49,7 @@ class ArachniReport(AbstractReport):
             root = etree.parse(fullpath).getroot()
         except LxmlError:  # Not a valid XML file.
             return False
-        return cls._is_arachni(root)
-
-    @classmethod
-    def _is_arachni(cls, xml_report):
-        """Check if the xml_report comes from Arachni.
-
-        Returns True if it is from Arachni, False otherwise.
-
-        """
-        if not cls.__tool__ in xml_report.tag:
-            return False
-        return True
+        return AbstractReport._is_parser(root, cls.__parsers__)
 
     def parse(self, pathname=None, filename='*.xml'):
         """Parse an arachni resport."""
@@ -68,42 +57,10 @@ class ArachniReport(AbstractReport):
         self.fullpath = self._recursive_find(pathname, filename)[0]
         # Parse the XML report thanks to lxml.
         self.root = etree.parse(self.fullpath).getroot()
+        # Find the corresponding parser.
+        self._init_parser(self.root)
         # Parse specific stuff.
-        self.parse_xml_metadata()
-        self.parse_xml_report()
+        self.metadata = self.parser.parse_metadata(self.root)
+        self.vulns = self.parser.parse_report(self.root, self.RANKING_SCALE)
         # TODO: Return something like an unified version of the report.
         return self.vulns
-
-    def parse_xml_metadata(self):
-        """Retrieve the metadata of the report.
-
-        #TODO: Complete the docstring.
-
-        """
-        # Find the version of Arachni.
-        version = self.root.find('.//version')
-        # Reconstruct the metadata
-        # TODO: Retrieve the other metadata likes the date, etc.
-        metadata = {version.tag: version.text,}
-        if self.check_version(metadata):
-            self.metadata = metadata
-        else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of Arachni.')
-
-    def parse_xml_report(self):
-        """Retrieve the results from the report.
-
-        Retrieve the following attributes:
-            + severity
-
-        #TODO: Complete the docstring.
-
-        """
-        vulns = self.root.find('.//issues')
-        for vuln in vulns.findall('.//issue'):
-            info = Info(
-                # Convert the severity of the issue thanks to an unified
-                # ranking scale.
-                ranking=self.RANKING_SCALE[vuln.find('.//severity').text],)
-            self.vulns.append(info)
