@@ -9,6 +9,7 @@
 import os
 import fnmatch
 
+from libptp.exceptions import NotSupportedVersionError
 from libptp.constants import RANKING_SCALE
 
 
@@ -24,9 +25,11 @@ class AbstractReport(object):
     """
 
     __version__ = None
+    __parsers__ = None
 
     def __init__(self, vulns=None):
         """Self-explanatory."""
+        self.parser = None
         self.vulns = vulns
         if self.vulns is None:
             self.vulns = []
@@ -60,13 +63,26 @@ class AbstractReport(object):
         return False
 
     @classmethod
+    def _is_parser(cls, stream, parsers):
+        """Check if a parser exists for that report."""
+        if parsers is not None:
+            for parser in parsers.keys():
+                try:
+                    if parser.is_mine(stream):
+                        cls.parser = parser()
+                        return True
+                except NotSupportedVersionError:
+                    pass
+        return False
+
+    @classmethod
     def check_version(cls, metadata, key='version'):
         """Checks the version from the metadata against the supported one.
 
         The version to test is the value of metadata[key].
 
         """
-        if metadata[key] in cls.__version__:
+        if metadata[key] in cls.__parsers__.values():
             return True
         return False
 
@@ -86,6 +102,17 @@ class AbstractReport(object):
             if founds and early_break:
                 break
         return founds
+
+    def _init_parser(self, stream):
+        """Instantiate the correct parser for the report."""
+        for parser in self.__parsers__.keys():
+            try:
+                if parser.is_mine(stream):
+                    self.parser = parser()
+            except NotSupportedVersionError:
+                pass
+        if self.parser is None:
+            raise NotSupportedVersionError
 
     def get_highest_ranking(self, *args, **kwargs):
         """Return the highest ranking of the report.
