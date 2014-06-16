@@ -52,7 +52,7 @@ class AbstractReport(object):
 
     @classmethod
     def is_mine(cls, pathname, filename=None):
-        """Check if it it a report from my tool.
+        """Check if it is a report from my tool.
 
         Return True if it is mine, False otherwise.
 
