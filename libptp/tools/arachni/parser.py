@@ -1,5 +1,4 @@
 from libptp.exceptions import NotSupportedVersionError
-from libptp.info import Info
 from libptp.parser import AbstractParser
 
 
@@ -34,12 +33,6 @@ class ArachniXMLParser(AbstractParser):
 
     def parse_report(self, stream, scale):
         """Parse the report."""
-        res = []
-        vulns = stream.find('.//issues')
-        for vuln in vulns.findall('.//issue'):
-            info = Info(
-                # Convert the severity of the issue thanks to an unified
-                # ranking scale.
-                ranking=scale[vuln.find('.//severity').text],)
-            res.append(info)
-        return res
+        return [
+            {'ranking': scale[vuln.find('.//severity').text]}
+            for vuln in stream.find('.//issues')]

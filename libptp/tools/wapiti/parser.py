@@ -43,15 +43,9 @@ class WapitiXMLParser(AbstractParser):
 
     def parse_report(self, stream):
         """Parse the report."""
-        res = []
         vulns = stream.find('.//vulnerabilities')
-        for vuln in vulns.findall('.//vulnerability'):
-            vuln_signature = vuln.get('name')
-            vuln_description = vuln.find('.//description')
-            if vuln_signature in SIGNATURES:
-                info = Info(
-                    name=vuln_signature,
-                    ranking=SIGNATURES[vuln_signature],
-                    description=vuln_description.text.strip(' \n'),)
-                res.append(info)
-        return res
+        return [{
+            'name': vuln.get('name'),
+            'ranking': SIGNATURES.get(vuln.get('name')),
+            'description':vuln.find('.//description')}
+            for vuln in vulns.findall('.//vulnerability')]

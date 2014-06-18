@@ -61,7 +61,6 @@ class SkipfishJSONParser(AbstractParser):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        res = []
         re_result = self.re_report.findall(stream)
         report = dict({el[0]: el[1] for el in re_result})
         if not REPORT_VAR_NAME in report:
@@ -70,10 +69,6 @@ class SkipfishJSONParser(AbstractParser):
                 'right file?')
         # We now have a raw version of the Skipfish report as a list of
         # dict.
-        for vuln in ast.literal_eval(report[REPORT_VAR_NAME]):
-            info = Info(
-                # Convert the severity of the issue thanks to an unified
-                # ranking scale.
-                ranking=scale[vuln['severity']],)
-            res.append(info)
-        return res
+        return [
+            {'ranking': scale[vuln['severity']]}
+            for vuln in ast.literal_eval(report[REPORT_VAR_NAME])]

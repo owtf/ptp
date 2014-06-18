@@ -41,11 +41,6 @@ class W3AFXMLParser(AbstractParser):
 
     def parse_report(self, stream, scale):
         """Parse the report."""
-        res = []
-        for vuln in stream.findall('.//vulnerability'):
-            info = Info(
-                # Convert the severity of the issue thanks to an unified
-                # ranking scale.
-                ranking=scale[vuln.get('severity')],)
-            res.append(info)
-        return res
+        return [
+            {'ranking': scale[vuln.get('severity')],}
+            for vuln in stream.findall('.//vulnerability')]

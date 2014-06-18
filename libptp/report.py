@@ -130,8 +130,8 @@ class AbstractReport(object):
         # Default highest ranking set to the lowest possible value.
         highest_ranking = self._lowest_risk()
         for vuln in self.vulns:
-            if RANKING_SCALE[vuln.ranking] < RANKING_SCALE[highest_ranking]:
-                highest_ranking = vuln.ranking
+            if RANKING_SCALE[vuln['ranking']] < RANKING_SCALE[highest_ranking]:
+                highest_ranking = vuln['ranking']
             # If the current highest_ranking is already the highest possible
             # one, we can stop the loop.
             if RANKING_SCALE[highest_ranking] == highest_possible_ranking:
