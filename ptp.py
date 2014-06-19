@@ -1,6 +1,8 @@
 """
 
-    PTP library.
+.. module:: ptp
+    :synopsis: PTP library.
+.. moduleauthor:: Tao Sauvage
 
 """
 
@@ -16,7 +18,8 @@ class PTP(object):
 
     """PTP class definition.
 
-    Usage:
+    Usage::
+
         ptp = PTP()
         ptp.parse(path_to_report)
 
