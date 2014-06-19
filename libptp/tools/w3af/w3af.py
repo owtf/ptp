@@ -43,24 +43,16 @@ class W3AFReport(AbstractReport):
         if not fullpath:
             return False
         fullpath = fullpath[0]  # Only keep the first file.
-        if not fullpath.endswith('.xml'):
-            return False
-        try:
-            root = etree.parse(fullpath).getroot()
-        except LxmlError:  # Not a valid XML file.
-            return False
-        return AbstractReport._is_parser(root, cls.__parsers__)
+        return AbstractReport._is_parser(fullpath, cls.__parsers__)
 
     def parse(self, pathname=None, filename='*.xml'):
         """Parse a w3af resport."""
         # Reconstruct the path to the report if any.
         self.fullpath = self._recursive_find(pathname, filename)[0]
-        # Parse the XML report thanks to lxml.
-        self.root = etree.parse(self.fullpath).getroot()
         # Find the corresponding parser.
-        self._init_parser(self.root)
+        self._init_parser(self.fullpath)
         # Parse specific stuff.
-        self.metadata = self.parser.parse_metadata(self.root)
-        self.vulns = self.parser.parse_report(self.root, self.RANKING_SCALE)
+        self.metadata = self.parser.parse_metadata()
+        self.vulns = self.parser.parse_report(self.RANKING_SCALE)
         # TODO: Return something like an unified version of the report.
         return self.vulns

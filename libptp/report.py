@@ -78,11 +78,11 @@ class AbstractReport(object):
         return False
 
     @classmethod
-    def _is_parser(cls, stream, parsers):
+    def _is_parser(cls, pathname, parsers):
         """Check if a parser exists for that report.
 
-        :param stream: An open stream of the report.
-        :type stream: i/o stream.
+        :param pathname: Path to the report file.
+        :type pathname: str.
         :param parsers: The available parsers of this class.
         :type parsers: AbstractParser.
 
@@ -92,7 +92,7 @@ class AbstractReport(object):
         """
         if parsers is not None:
             for parser in iter(parsers):
-                if parser.is_mine(stream):
+                if parser.is_mine(pathname):
                     return True
         return False
 
@@ -139,18 +139,18 @@ class AbstractReport(object):
                 break
         return founds
 
-    def _init_parser(self, stream):
+    def _init_parser(self, pathname):
         """Instantiate the correct parser for the report.
 
-        :param stream: i/o stream containing the content of the report.
-        :type stream: io stream.
+        :param pathname: path to the report.
+        :type pathname: str.
         :raises: NotSupportedVersionError
 
         """
         for parser in iter(self.__parsers__):
             try:
-                if parser.is_mine(stream):
-                    self.parser = parser()
+                if parser.is_mine(pathname):
+                    self.parser = parser(pathname)
             except NotSupportedVersionError:
                 pass
         if self.parser is None:

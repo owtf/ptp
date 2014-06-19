@@ -9,6 +9,10 @@
 """
 
 
+from lxml import etree
+from lxml.etree import LxmlError
+
+
 class AbstractParser(object):
     """Abstract representation of a parser."""
 
@@ -19,13 +23,35 @@ class AbstractParser(object):
     #: list -- Versions it can supports.
     __version__ = None
 
-    @classmethod
-    def is_mine(cls, stream):
-        """Check if the parser supports the tool.
+    def __init__(self, pathname):
+        """Initialize AbstractParser.
 
+        :param pathname: path to the report file.
+        :type pathname: str.
+
+        """
+        #: i/o stream -- i/o stream of the report.
+        self.stream = self.handle_file(pathname)
+
+    @classmethod
+    def handle_file(cls, pathname):
+        """Process the report file(s) in order to create an i/o stream.
+
+        :param pathname: Path to the report file.
+        :type pathname: str.
         :raises: NotImplementedError
 
-        :returns: bool -- `True` if it supports this tool, `False` otherwise.
+        """
+        raise NotImplementedError(
+            "A parser MUST define the `handle_file` method.")
+
+    @classmethod
+    def is_mine(cls, pathname):
+        """Check if the parser supports the tool.
+
+        :param pathname: Path to the report file.
+        :type pathname: str.
+        :raises: NotImplementedError
 
         """
         raise NotImplementedError("A parser MUST define the `is_mine` method.")
@@ -46,24 +72,50 @@ class AbstractParser(object):
             return True
         return False
 
-    def parse_metadata(self, stream):
+    def parse_metadata(self):
         """Parse the metadata of a report.
 
-        :param stream: i/o stream of the content of the report.
-        :type stream: i/o stream.
         :raises: NotImplementedError
 
         """
         raise NotImplementedError(
             "A parser MUST define the `parse_metadata` method.")
 
-    def parse_report(self, stream):
+    def parse_report(self):
         """Parse the discoveries of a report.
 
-        :param stream: i/o stream of the content of the report.
-        :type stream: i/o stream.
         :raises: NotImplementedError
 
         """
         raise NotImplementedError(
             "A parser MUST define the `parse_report` method.")
+
+
+class XMLParser(AbstractParser):
+    """Specialized parser for XML formatted report."""
+
+    #: str -- XMLParser only supports XML files.
+    __format__ = 'xml'
+
+    def __init__(self, pathname):
+        """Initialize XMLParser.
+
+        :param pathname: path to the report file.
+        :type pathname: str.
+
+        """
+        AbstractParser.__init__(self, pathname)
+
+    @classmethod
+    def handle_file(cls, pathname):
+        """Specialized file handler for XML files.
+
+        :param pathname: path to the report file.
+        :type pathname: str.
+        :raises: ValueError, LmxlError
+
+        """
+        if not pathname.endswith(cls.__format__):
+            raise ValueError(
+                "This parser only supports '%s' files" % self.__format__)
+        return etree.parse(pathname).getroot()

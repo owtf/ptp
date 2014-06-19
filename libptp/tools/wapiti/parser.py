@@ -1,21 +1,21 @@
 from libptp.exceptions import NotSupportedVersionError
-from libptp.info import Info
-from libptp.parser import AbstractParser
+from libptp.parser import XMLParser
 from libptp.tools.wapiti.signatures import SIGNATURES
 
 
-class WapitiXMLParser(AbstractParser):
+class WapitiXMLParser(XMLParser):
 
     __tool__ = 'wapiti'
     __format__ = 'xml'
     __version__ = ['2.3.0']
 
-    def __init__(self, *args, **kwargs):
-        AbstractParser.__init__(self, *args, **kwargs)
+    def __init__(self, pathname):
+        XMLParser.__init__(self, pathname)
 
     @classmethod
-    def is_mine(cls, stream):
+    def is_mine(cls, pathname):
         """Check if it is a supported report."""
+        stream = cls.handle_file(pathname)
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
             return False
@@ -26,10 +26,10 @@ class WapitiXMLParser(AbstractParser):
             return False
         return True
 
-    def parse_metadata(self, stream):
+    def parse_metadata(self):
         """Parse the metadatas of the report."""
         # Find the metadata of Wapiti.
-        raw_metadata = stream.find('.//report_infos')
+        raw_metadata = self.stream.find('.//report_infos')
         # Reconstruct the metadata
         metadata = {el.get('name'): el.text for el in raw_metadata}
         # Only keep the version number
@@ -41,9 +41,9 @@ class WapitiXMLParser(AbstractParser):
             raise NotSupportedVersionError(
                 'PTP does NOT support this version of ' + self.__tool__ + '.')
 
-    def parse_report(self, stream):
+    def parse_report(self):
         """Parse the report."""
-        vulns = stream.find('.//vulnerabilities')
+        vulns = self.stream.find('.//vulnerabilities')
         return [{
             'name': vuln.get('name'),
             'ranking': SIGNATURES.get(vuln.get('name')),
