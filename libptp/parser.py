@@ -55,7 +55,7 @@ class AbstractParser(object):
 
         """
         raise NotImplementedError(
-            "A parser MUST define the `parse_metada` method.")
+            "A parser MUST define the `parse_metadata` method.")
 
     def parse_report(self, stream):
         """Parse the discoveries of a report.
