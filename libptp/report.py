@@ -67,12 +67,8 @@ class AbstractReport(object):
         """Check if a parser exists for that report."""
         if parsers is not None:
             for parser in iter(parsers):
-                try:
-                    if parser.is_mine(stream):
-                        cls.parser = parser()
-                        return True
-                except NotSupportedVersionError:
-                    pass
+                if parser.is_mine(stream):
+                    return True
         return False
 
     @classmethod
