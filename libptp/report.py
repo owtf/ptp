@@ -136,7 +136,7 @@ class AbstractReport(object):
         if self.parser is None:
             raise NotSupportedVersionError
 
-    def get_highest_ranking(self, *args, **kwargs):
+    def get_highest_ranking(self):
         """Return the highest ranking id of the report.
 
         :returns: int -- the risk id of the highest ranked vulnerability
@@ -148,9 +148,6 @@ class AbstractReport(object):
             risk).
 
         """
-        # Be sure that the parsing already happened.
-        if self.vulns is None:
-            self.parse(*args, **kwargs)
         return min(
             RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
 
