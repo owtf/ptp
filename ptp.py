@@ -9,10 +9,10 @@
 
 
 from libptp.exceptions import NotSupportedToolError
-from libptp.tools.arachni.arachni import ArachniReport
-from libptp.tools.skipfish.skipfish import SkipfishReport
-from libptp.tools.w3af.w3af import W3AFReport
-from libptp.tools.wapiti.wapiti import WapitiReport
+from libptp.tools.arachni.report import ArachniReport
+from libptp.tools.skipfish.report import SkipfishReport
+from libptp.tools.w3af.report import W3AFReport
+from libptp.tools.wapiti.report import WapitiReport
 
 
 class PTP(object):
