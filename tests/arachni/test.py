@@ -1,5 +1,8 @@
 from __future__ import print_function
+
 import os
+import traceback
+
 from ptp import PTP
 
 
@@ -9,7 +12,8 @@ def run():
     res = 'ok'
     try:
         ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     ptp = PTP()
@@ -18,13 +22,15 @@ def run():
     try:
         ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
         assert ptp.report.__tool__ == 'arachni'
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
     res = 'ok'
     try:
         assert ptp.get_highest_ranking() == 0
-    except AssertionError:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)

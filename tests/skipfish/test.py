@@ -1,7 +1,9 @@
 from __future__ import print_function
+
 import os
+import traceback
+
 from ptp import PTP
-from libptp.tools.wapiti.wapiti import WapitiReport
 
 
 def run():
@@ -14,7 +16,8 @@ def run():
                 os.getcwd(),
                 'tests/skipfish/2.10b/demo.testfire.net')
             )
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     ptp = PTP()
@@ -27,14 +30,16 @@ def run():
                 'tests/skipfish/2.10b/demo.testfire.net')
             )
         assert ptp.report.__tool__ == 'skipfish'
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
     res = 'ok'
     try:
         assert ptp.get_highest_ranking() == 0  # Hight
-    except AssertionError:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     ptp = PTP('skipfish')
@@ -46,7 +51,8 @@ def run():
                 os.getcwd(),
                 'tests/skipfish/2.10b/local.xss')
             )
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     ptp = PTP()
@@ -59,13 +65,15 @@ def run():
                 'tests/skipfish/2.10b/local.xss')
             )
         assert ptp.report.__tool__ == 'skipfish'
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
     res = 'ok'
     try:
         assert ptp.get_highest_ranking() == 1  # Medium
-    except AssertionError:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)

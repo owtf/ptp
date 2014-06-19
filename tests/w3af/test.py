@@ -1,7 +1,9 @@
 from __future__ import print_function
+
 import os
+import traceback
+
 from ptp import PTP
-from libptp.tools.wapiti.wapiti import WapitiReport
 
 
 def run():
@@ -11,7 +13,8 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
-    except ValueError:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     ptp = PTP()
@@ -21,13 +24,15 @@ def run():
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
         assert ptp.report.__tool__ == 'w3af'
-    except:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
     res = 'ok'
     try:
         assert ptp.get_highest_ranking() == 0
-    except AssertionError:
+    except Exception:
+        print(traceback.format_exc())
         res = 'ko'
     print(res)
