@@ -66,7 +66,7 @@ class AbstractReport(object):
     def _is_parser(cls, stream, parsers):
         """Check if a parser exists for that report."""
         if parsers is not None:
-            for parser in parsers.keys():
+            for parser in iter(parsers):
                 try:
                     if parser.is_mine(stream):
                         cls.parser = parser()
@@ -105,7 +105,7 @@ class AbstractReport(object):
 
     def _init_parser(self, stream):
         """Instantiate the correct parser for the report."""
-        for parser in self.__parsers__.keys():
+        for parser in iter(self.__parsers__):
             try:
                 if parser.is_mine(stream):
                     self.parser = parser()
