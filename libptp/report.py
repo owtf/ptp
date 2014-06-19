@@ -144,11 +144,12 @@ class AbstractReport(object):
 
         .. note::
 
-            The risk id varies from `0` (highest risk) to `n` (the lowest
-            risk).
+            The risk id varies from `0` (not ranked/unknown) to `n` (the
+            highest risk).
 
         """
-        return min(
+
+        return max(
             RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
 
     def parse(self):

@@ -4,6 +4,7 @@ import os
 import traceback
 
 from ptp import PTP
+from libptp.constants import HIGH
 
 
 def run():
@@ -31,7 +32,7 @@ def run():
     print('\ttest get_highest_ranking():', end=' ')
     res = 'ok'
     try:
-        assert ptp.get_highest_ranking() == 0
+        assert ptp.get_highest_ranking() == HIGH
     except Exception:
         print(traceback.format_exc())
         res = 'ko'
