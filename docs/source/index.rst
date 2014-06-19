@@ -12,8 +12,8 @@ Contents:
    :maxdepth: 2
 
    ptp
-   libptp/abstract_report
-   libptp/abstract_parser
+   libptp/report
+   libptp/parser
    libptp/exceptions
 
 
