@@ -2,7 +2,6 @@ import re
 import ast
 
 from libptp.exceptions import NotSupportedVersionError
-from libptp.info import Info
 from libptp.parser import AbstractParser
 
 

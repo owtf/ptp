@@ -1,8 +1,6 @@
-from __future__ import print_function
-
 import os
 
-from libptp.exceptions import ReportNotFoundError, NotSupportedVersionError
+from libptp.exceptions import ReportNotFoundError
 from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.skipfish.parser import SkipfishJSONParser

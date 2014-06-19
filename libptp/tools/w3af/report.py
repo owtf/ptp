@@ -1,11 +1,3 @@
-from __future__ import print_function
-
-import os
-
-from lxml import etree
-from lxml.etree import LxmlError
-
-from libptp.exceptions import NotSupportedVersionError
 from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.w3af.parser import W3AFXMLParser
