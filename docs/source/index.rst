@@ -12,7 +12,9 @@ Contents:
    :maxdepth: 2
 
    ptp
-   libptp/parser
+   libptp/abstract_report
+   libptp/abstract_parser
+   libptp/exceptions
 
 
 Indices and tables

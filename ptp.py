@@ -2,6 +2,7 @@
 
 .. module:: ptp
     :synopsis: PTP library.
+
 .. moduleauthor:: Tao Sauvage
 
 """
@@ -16,16 +17,16 @@ from libptp.tools.wapiti.wapiti import WapitiReport
 
 class PTP(object):
 
-    """PTP class definition.
+    """PTP class definition aiming to help users to use `libptp`.
 
-    Usage::
+    Example::
 
         ptp = PTP()
         ptp.parse(path_to_report)
 
     """
 
-    # Reports for supported tools.
+    #: Dictionary linking the tools to their report classes.
     supported = {
         'arachni': ArachniReport,
         'skipfish': SkipfishReport,
@@ -40,6 +41,16 @@ class PTP(object):
         return self.report.__str__()
 
     def parse(self, pathname=None):
+        """Parse a tool report.
+
+        :param pathname: The path to the report.
+        :type pathname: str.
+        :raises: NotSupportedToolError
+
+        :returns: list -- The list of dictionaries of the results found in the
+                  report.
+
+        """
         if self.tool_name is None:
             for tool in self.supported.values():
                 if tool.is_mine(pathname):
@@ -55,6 +66,16 @@ class PTP(object):
         return self.report.parse(pathname)
 
     def get_highest_ranking(self):
+        """Retrieve the highest ranked vulnerability level from the report.
+
+        :returns: int -- The highest ranked vulnerability level.
+
+        .. note::
+
+            The `level` starts from `0` to `n` where `0` represents the highest
+            risk.
+
+        """
         if self.report:
             return self.report.get_highest_ranking()
         return None

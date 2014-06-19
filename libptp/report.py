@@ -1,7 +1,10 @@
 """
 
-    The Report class will be the summarize of the complete report provided by
-    pentesting tools.
+.. module:: report
+    :synopsis: The Report class will be the summary of a complete report
+               provided by a pentesting tool.
+
+.. moduleauthor:: Tao Sauvage
 
 """
 
@@ -17,22 +20,24 @@ class AbstractReport(object):
 
     """Abstract representation of a report provided by a pentesting tool.
 
-        + vulns: List of Info instances
+    .. note::
 
-    This class will be extended for each pentesting tool. That way, each tool
-    will add its own parser.
+        This class will be extended for each pentesting tool. That way, each
+        tool will add its own report/parsing specificities.
 
     """
 
+    #: Supported versions of the tool.
     __version__ = None
+    #: Available parsers for the tool.
     __parsers__ = None
 
     def __init__(self, vulns=None):
         """Self-explanatory."""
+        #: The current parser the report is using.
         self.parser = None
-        self.vulns = vulns
-        if self.vulns is None:
-            self.vulns = []
+        #: List of dictionaries of the results found in the report.
+        self.vulns = [] or vulns
 
     def __str__(self):
         return ', '.join([info.__str__() for info in self.vulns])
@@ -40,7 +45,9 @@ class AbstractReport(object):
     def _lowest_risk(self):
         """Retrieve the ranking id of the lowest risk possible.
 
-        According the the ranking scale, 3 represents the lowest.
+        .. note::
+
+            The lowest risk has the highest id `n`.
 
         """
         return max([value for value in RANKING_SCALE.values()])
@@ -48,23 +55,41 @@ class AbstractReport(object):
     def _highest_risk(self):
         """Retrieve the ranking id of the highest risk possible.
 
-        According the the ranking scale, 0 represents the lowest.
+        .. note::
+
+            The highest risk has the lowest id `0`.
 
         """
         return min([value for value in RANKING_SCALE.values()])
 
     @classmethod
     def is_mine(cls, pathname, filename=None):
-        """Check if it is a report from my tool.
+        """Check if it is a report from the tool this class supports.
 
-        Return True if it is mine, False otherwise.
+        :param pathname: The path to the report.
+        :type pathname: str.
+        :param filename: The name of the report file.
+        :type filename: str.
+
+        :returns: bool -- `True` if this class supports this tool, `False`
+                  otherwise
 
         """
         return False
 
     @classmethod
     def _is_parser(cls, stream, parsers):
-        """Check if a parser exists for that report."""
+        """Check if a parser exists for that report.
+
+        :param stream: An open stream of the report.
+        :type stream: i/o stream.
+        :param parsers: The available parsers of this class.
+        :type parsers: AbstractParser.
+
+        :returns: bool -- `True` if this class has a parser for this tool,
+                  `False` otherwise
+
+        """
         if parsers is not None:
             for parser in iter(parsers):
                 if parser.is_mine(stream):
@@ -73,9 +98,14 @@ class AbstractReport(object):
 
     @classmethod
     def check_version(cls, metadata, key='version'):
-        """Checks the version from the metadata against the supported one.
+        """Checks the version from the metadata against the supported ones.
 
-        The version to test is the value of metadata[key].
+        :param metadata: The metadata in which to find the version.
+        :type metadata: dict.
+        :param key: The :attr:`metadata` key containing the version value.
+        :type key: str.
+
+        :returns: bool -- `True` if it support that version, `False` otherwise.
 
         """
         if metadata[key] in cls.__parsers__.values():
@@ -84,9 +114,19 @@ class AbstractReport(object):
 
     @staticmethod
     def _recursive_find(pathname='./', file_regex='*', early_break=True):
-        """Find the files corresponding to `file_regex`.
+        """Retrieve the full path to the report.
 
         The search occurs in the directory `pathname`.
+        :param pathname: The root directory where to start the search.
+        :type pathname: str.
+        :param file_regex: The regex that will be matched against all files
+                           from within `pathname`.
+        :type file_regex: re.
+        :param early_break: Stop the search as soon as a file has been matched.
+        :type early_break: bool.
+
+        :returns: list -- A list of paths to matched files starting from
+                  `pathname`.
 
         """
         founds = []
@@ -100,7 +140,13 @@ class AbstractReport(object):
         return founds
 
     def _init_parser(self, stream):
-        """Instantiate the correct parser for the report."""
+        """Instantiate the correct parser for the report.
+
+        :param stream: i/o stream containing the content of the report.
+        :type stream: io stream.
+        :raises: NotSupportedVersionError
+
+        """
         for parser in iter(self.__parsers__):
             try:
                 if parser.is_mine(stream):
@@ -111,12 +157,14 @@ class AbstractReport(object):
             raise NotSupportedVersionError
 
     def get_highest_ranking(self, *args, **kwargs):
-        """Return the highest ranking of the report.
+        """Return the highest ranking id of the report.
 
-        Iterates over the list of vulnerabilities.
-        If the current ranking is higher (in risk) than the current highest
-        then switch them.
-        If it finds the highest (in risk) ranking possible, stops.
+        :returns: int -- the id of the highest ranked vulnerability referenced
+                  in the report.
+
+        .. note::
+
+            The id varies from `0` (highest risk) to `n` (the lowest risk).
 
         """
         # Be sure that the parsing already happened.
@@ -135,5 +183,9 @@ class AbstractReport(object):
         return highest_ranking
 
     def parse(self):
-        """Abstract parser that will parse the report of a tool."""
+        """Abstract parser that will parse the report of a tool.
+
+        :raises: NotImplementedError
+
+        """
         raise NotImplementedError('The parser MUST be define for each tool.')

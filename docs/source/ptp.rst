@@ -1,6 +1,7 @@
 PTP
 ***
 
-.. automodule:: ptp
+.. currentmodule:: ptp
+
+.. autoclass:: PTP
     :members:
-    :noindex:
