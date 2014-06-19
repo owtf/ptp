@@ -54,15 +54,13 @@ class PTP(object):
         if self.tool_name is None:
             for tool in self.supported.itervalues():
                 if tool.is_mine(pathname):
-                    self.report = tool()
+                    self.report = tool
                     break
         else:
-            try:
-                self.report = self.supported[self.tool_name]()
-            except KeyError:
-                pass
+            self.report = self.supported.get(self.tool_name)
         if self.report is None:
             raise NotSupportedToolError('This tool is not supported by PTP.')
+        self.report = self.report()  # Instantiate the report class.
         return self.report.parse(pathname)
 
     def get_highest_ranking(self):
