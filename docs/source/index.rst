@@ -15,6 +15,7 @@ Contents:
    libptp/report
    libptp/parser
    libptp/exceptions
+   libptp/constants
 
 
 Indices and tables
