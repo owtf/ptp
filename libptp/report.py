@@ -42,26 +42,6 @@ class AbstractReport(object):
     def __str__(self):
         return ', '.join([info.__str__() for info in self.vulns])
 
-    def _lowest_risk(self):
-        """Retrieve the ranking id of the lowest risk possible.
-
-        .. note::
-
-            The lowest risk has the highest id `n`.
-
-        """
-        return max([value for value in RANKING_SCALE.itervalues()])
-
-    def _highest_risk(self):
-        """Retrieve the ranking id of the highest risk possible.
-
-        .. note::
-
-            The highest risk has the lowest id `0`.
-
-        """
-        return min([value for value in RANKING_SCALE.itervalues()])
-
     @classmethod
     def is_mine(cls, pathname, filename=None):
         """Check if it is a report from the tool this class supports.
@@ -170,17 +150,8 @@ class AbstractReport(object):
         # Be sure that the parsing already happened.
         if self.vulns is None:
             self.parse(*args, **kwargs)
-        highest_possible_ranking = self._highest_risk()
-        # Default highest ranking set to the lowest possible value.
-        highest_ranking = self._lowest_risk()
-        for vuln in self.vulns:
-            if RANKING_SCALE[vuln['ranking']] < RANKING_SCALE[highest_ranking]:
-                highest_ranking = vuln['ranking']
-            # If the current highest_ranking is already the highest possible
-            # one, we can stop the loop.
-            if RANKING_SCALE[highest_ranking] == highest_possible_ranking:
-                break
-        return highest_ranking
+        return min(
+            RANKING_SCALE.get(vuln.get('ranking'), '') for vuln in self.vulns)
 
     def parse(self):
         """Abstract parser that will parse the report of a tool.
