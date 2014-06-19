@@ -52,7 +52,7 @@ class PTP(object):
 
         """
         if self.tool_name is None:
-            for tool in self.supported.values():
+            for tool in self.supported.itervalues():
                 if tool.is_mine(pathname):
                     self.report = tool()
                     break

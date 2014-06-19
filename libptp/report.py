@@ -50,7 +50,7 @@ class AbstractReport(object):
             The lowest risk has the highest id `n`.
 
         """
-        return max([value for value in RANKING_SCALE.values()])
+        return max([value for value in RANKING_SCALE.itervalues()])
 
     def _highest_risk(self):
         """Retrieve the ranking id of the highest risk possible.
@@ -60,7 +60,7 @@ class AbstractReport(object):
             The highest risk has the lowest id `0`.
 
         """
-        return min([value for value in RANKING_SCALE.values()])
+        return min([value for value in RANKING_SCALE.itervalues()])
 
     @classmethod
     def is_mine(cls, pathname, filename=None):
@@ -108,7 +108,7 @@ class AbstractReport(object):
         :returns: bool -- `True` if it support that version, `False` otherwise.
 
         """
-        if metadata[key] in cls.__parsers__.values():
+        if metadata[key] in cls.__parsers__.itervalues():
             return True
         return False
 
