@@ -139,12 +139,13 @@ class AbstractReport(object):
     def get_highest_ranking(self, *args, **kwargs):
         """Return the highest ranking id of the report.
 
-        :returns: int -- the id of the highest ranked vulnerability referenced
-                  in the report.
+        :returns: int -- the risk id of the highest ranked vulnerability
+                  referenced in the report.
 
         .. note::
 
-            The id varies from `0` (highest risk) to `n` (the lowest risk).
+            The risk id varies from `0` (highest risk) to `n` (the lowest
+            risk).
 
         """
         # Be sure that the parsing already happened.
