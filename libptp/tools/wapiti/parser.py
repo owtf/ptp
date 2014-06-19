@@ -48,4 +48,5 @@ class WapitiXMLParser(XMLParser):
             'name': vuln.get('name'),
             'ranking': SIGNATURES.get(vuln.get('name')),
             'description':vuln.find('.//description')}
-            for vuln in vulns.findall('.//vulnerability')]
+            for vuln in vulns.findall('.//vulnerability')
+            if vuln.get('name') in SIGNATURES]

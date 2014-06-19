@@ -151,7 +151,7 @@ class AbstractReport(object):
         if self.vulns is None:
             self.parse(*args, **kwargs)
         return min(
-            RANKING_SCALE.get(vuln.get('ranking'), '') for vuln in self.vulns)
+            RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
 
     def parse(self):
         """Abstract parser that will parse the report of a tool.
