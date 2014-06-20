@@ -3,14 +3,14 @@ import os
 from libptp.exceptions import ReportNotFoundError
 from libptp import constants
 from libptp.report import AbstractReport
-from libptp.tools.skipfish.parser import SkipfishJSONParser
+from libptp.tools.skipfish.parser import SkipfishJSParser
 
 
 class SkipfishReport(AbstractReport):
     """Retrieve the information of a skipfish report."""
 
     __tool__ = 'skipfish'
-    __parsers__ = {SkipfishJSONParser: '2.10b'}
+    __parsers__ = {SkipfishJSParser: '2.10b'}
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
 
@@ -38,33 +38,38 @@ class SkipfishReport(AbstractReport):
         Return True if it is mine, False otherwise.
 
         """
-        if not cls._recursive_find(pathname, cls._metadatafile):
+        metadatafile = cls._recursive_find(pathname, cls._metadatafile)
+        if not metadatafile:
             return False
-        if not cls._recursive_find(pathname, cls._reportfile):
+        metadatafile = metadatafile[0]
+        reportfile = cls._recursive_find(pathname, cls._reportfile)
+        if not reportfile:
             return False
-        # FIXME: Find a nice way to check for a correct parser.
-        return AbstractReport._is_parser(None, cls.__parsers__)
+        reportfile = reportfile[0]
+        return AbstractReport._is_parser(
+            cls.__parsers__,
+            metadatafile,
+            reportfile)
 
     def parse(self, pathname=None):
         """Parse a skipfish report."""
         if (pathname is None or not os.path.isdir(pathname)):
             raise ReportNotFoundError(
                 'A directory to the report MUST be specified.')
+        # Find metadata file.
+        metadatafile = self._recursive_find(pathname, self._metadatafile)
+        if not metadatafile:
+            raise ReportNotFoundError('The metadata file is not found.')
+        self.metadatafile = metadatafile[0]
+        # Find report file.
+        reportfile = self._recursive_find(pathname, self._reportfile)
+        if not reportfile:
+            raise ReportNotFoundError('The report file is not found.')
+        self.reportfile = reportfile[0]
         # Find the corresponding parser.
         # FIXME: Find a nice way to check for a correct parser.
-        self._init_parser(None)
-        # Parse metadata.
-        fullpath = self._recursive_find(pathname, self._metadatafile)
-        if not fullpath:
-            raise ReportNotFoundError('The metadata file is not found.')
-        fullpath = fullpath[0]
-        with open(fullpath, 'r') as f:
-            self.metadata = self.parser.parse_metadata(f.read())
-        # Parse report.
-        fullpath = self._recursive_find(pathname, self._reportfile)
-        if not fullpath:
-            raise ReportNotFoundError('The report file is not found.')
-        fullpath = fullpath[0]
-        with open(fullpath, 'r') as f:
-            self.vulns = self.parser.parse_report(f.read(), self.RANKING_SCALE)
+        self._init_parser(self.metadatafile, self.reportfile)
+        # Parser everything.
+        self.metadata = self.parser.parse_metadata()
+        self.vulns = self.parser.parse_report(self.RANKING_SCALE)
         return self.vulns

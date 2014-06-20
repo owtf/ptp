@@ -5,25 +5,40 @@ from libptp.exceptions import NotSupportedVersionError
 from libptp.parser import AbstractParser
 
 
-class SkipfishJSONParser(AbstractParser):
+class SkipfishJSParser(AbstractParser):
 
     __tool__ = 'skipfish'
-    __format__ = 'json'
+    __format__ = 'js'
     __version__ = ['2.10b']
 
-    def __init__(self, *args, **kwargs):
-        AbstractParser.__init__(self, *args, **kwargs)
+    def __init__(self, metadatafile, reportfile):
+        self.metadata_stream, self.report_stream = self.handle_file(
+            metadatafile, reportfile)
         self.re_metadata = re.compile(
             r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
         self.re_report = re.compile(
             r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
+    @classmethod
+    def handle_file(cls, metadatafile, reportfile):
+        if (not metadatafile.endswith(cls.__format__) or
+                not reportfile.endswith(cls.__format__)) :
+            raise ValueError(
+                "This parser only supports '%s' files" % cls.__format__)
+        with open(metadatafile, 'r') as f:
+            metadata_stream = f.read()
+        with open(reportfile, 'r') as f:
+            report_stream = f.read()
+        return (metadata_stream, report_stream)
+
     # FIXME: Find a nice way to check for a correct parser.
     @classmethod
-    def is_mine(cls, stream):
+    def is_mine(cls, metadatafile, reportfile):
+        metadata_stream, report_stream = cls.handle_file(
+            metadatafile, reportfile)
         return True
 
-    def parse_metadata(self, stream):
+    def parse_metadata(self):
         """Retrieve the metadata of the report.
 
         In skipfish the metadata are saved into the summary.js file as follow:
@@ -33,7 +48,7 @@ class SkipfishJSONParser(AbstractParser):
             var scan_ms    = elapsed time in ms<integer>;
 
         """
-        re_result = self.re_metadata.findall(stream)
+        re_result = self.re_metadata.findall(self.metadata_stream)
         metadata = dict({el[0]: el[1] for el in re_result})
         # Check if the version if the good one
         if self.check_version(metadata, key='sf_version'):
@@ -43,7 +58,7 @@ class SkipfishJSONParser(AbstractParser):
                 'PTP does NOT support this version of ' +
                 self.__tool__ + '.')
 
-    def parse_report(self, stream, scale):
+    def parse_report(self, scale):
         """Retrieve the results from the report.
 
         First retrieve the content of the samples file.
@@ -60,7 +75,7 @@ class SkipfishJSONParser(AbstractParser):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        re_result = self.re_report.findall(stream)
+        re_result = self.re_report.findall(self.report_stream)
         report = dict({el[0]: el[1] for el in re_result})
         if not REPORT_VAR_NAME in report:
             raise ReportNotFoundError(
