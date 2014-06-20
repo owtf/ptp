@@ -1,3 +1,12 @@
+"""
+
+.. module:: report
+    :synopsis: Specialized Report class for Skipfish.
+
+.. moduleauthor:: Tao Sauvage
+
+"""
+
 import os
 
 from libptp.exceptions import ReportNotFoundError
@@ -7,9 +16,11 @@ from libptp.tools.skipfish.parser import SkipfishJSParser
 
 
 class SkipfishReport(AbstractReport):
-    """Retrieve the information of a skipfish report."""
+    """Retrieve the information of a Skipfish report."""
 
+    #: :class:`str` -- Name of the tool.
     __tool__ = 'skipfish'
+    #: :class:`dict` -- Available parsers for Skipfish.
     __parsers__ = {SkipfishJSParser: '2.10b'}
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
@@ -35,7 +46,10 @@ class SkipfishReport(AbstractReport):
     def is_mine(cls, pathname):
         """Check if it is a Skipfish report and if I can handle it.
 
-        Return True if it is mine, False otherwise.
+        :param str pathname: Path to the report directory.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         metadatafile = cls._recursive_find(pathname, cls._metadatafile)
@@ -52,7 +66,16 @@ class SkipfishReport(AbstractReport):
             reportfile)
 
     def parse(self, pathname=None):
-        """Parse a skipfish report."""
+        """Parse a Skipfish report.
+
+        :param str pathname: Path to the report directory.
+        :return: List of dicts where each one represents a vuln.
+        :rtype: :class:`list`
+
+        :raises: :class:`ReportNotFoundError` -- if the report is not
+            supported.
+
+        """
         if (pathname is None or not os.path.isdir(pathname)):
             raise ReportNotFoundError(
                 'A directory to the report MUST be specified.')

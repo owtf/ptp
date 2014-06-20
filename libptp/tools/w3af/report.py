@@ -1,12 +1,23 @@
+"""
+
+.. module:: report
+    :synopsis: Specialized Report class for W3AF.
+
+.. moduleauthor:: Tao Sauvage
+
+"""
+
 from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.w3af.parser import W3AFXMLParser
 
 
 class W3AFReport(AbstractReport):
-    """Retrieve the information of a w3af report."""
+    """Retrieve the information of a W3AF report."""
 
+    #: :class:`str` -- Name of the tool.
     __tool__ = 'w3af'
+    #: :class:`dict` -- Available parsers for W3AF.
     __parsers__ = {W3AFXMLParser: '1.6.0.2'}
 
     HIGH = 'High'
@@ -26,9 +37,13 @@ class W3AFReport(AbstractReport):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a W3af report and if I can handle it.
+        """Check if it is a W3AF report and if it can handle it.
 
-        Return True if it is mine, False otherwise.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         fullpath = cls._recursive_find(pathname, filename)
@@ -38,7 +53,15 @@ class W3AFReport(AbstractReport):
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
     def parse(self, pathname=None, filename='*.xml'):
-        """Parse a w3af resport."""
+        """Parse a W3AF report.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: List of dicts where each one represents a vuln.
+        :rtype: :class:`list`
+
+        """
         # Reconstruct the path to the report if any.
         self.fullpath = self._recursive_find(pathname, filename)[0]
         # Find the corresponding parser.

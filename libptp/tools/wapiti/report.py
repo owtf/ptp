@@ -1,11 +1,22 @@
+"""
+
+.. module:: report
+    :synopsis: Specialized Report class for Wapiti.
+
+.. moduleauthor:: Tao Sauvage
+
+"""
+
 from libptp.report import AbstractReport
 from libptp.tools.wapiti.parser import WapitiXMLParser
 
 
 class WapitiReport(AbstractReport):
-    """Retrieve the information of an wapiti report."""
+    """Retrieve the information of a WAPITI report."""
 
+    #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
+    #: :class:`dict` -- Available parsers for Wapiti.
     __parsers__ = {WapitiXMLParser: '2.3.0'}
 
     def __init__(self, *args, **kwargs):
@@ -13,9 +24,13 @@ class WapitiReport(AbstractReport):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a Wapiti report and if I can handle it.
+        """Check if it is a Wapiti report and if it can handle it.
 
-        Return True if it is mine, False otherwise.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         fullpath = cls._recursive_find(pathname, filename)
@@ -25,7 +40,15 @@ class WapitiReport(AbstractReport):
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
     def parse(self, pathname=None, filename='*.xml'):
-        """Parse an Wapiti resport."""
+        """Parse a Wapiti report.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: List of dicts where each one represents a vuln.
+        :rtype: :class:`list`
+
+        """
         # Reconstruct the path to the report if any.
         self.fullpath = self._recursive_find(pathname, filename)[0]
         # Find the corresponding parser.

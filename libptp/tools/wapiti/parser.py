@@ -1,3 +1,12 @@
+"""
+
+.. module:: parser
+    :synopsis: Specialized Parser classes for Wapiti.
+
+.. moduleauthor:: Tao Sauvage
+
+"""
+
 from libptp.exceptions import NotSupportedVersionError
 from libptp.parser import XMLParser
 from libptp.tools.wapiti.signatures import SIGNATURES
@@ -5,8 +14,11 @@ from libptp.tools.wapiti.signatures import SIGNATURES
 
 class WapitiXMLParser(XMLParser):
 
+    #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
+    #: :class:`str` -- Format of Wapiti reports it supports.
     __format__ = 'xml'
+    #: :class:`list` -- Wapiti versions it supports.
     __version__ = ['2.3.0']
 
     def __init__(self, pathname):
@@ -14,7 +26,14 @@ class WapitiXMLParser(XMLParser):
 
     @classmethod
     def is_mine(cls, pathname):
-        """Check if it is a supported report."""
+        """Check if it is a supported Wapiti report.
+
+        :param str pathname: Path to the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
         stream = cls.handle_file(pathname)
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
@@ -27,7 +46,15 @@ class WapitiXMLParser(XMLParser):
         return True
 
     def parse_metadata(self):
-        """Parse the metadatas of the report."""
+        """Parse the metadatas of the report.
+
+        :return: The metadatas of the report.
+        :rtype: dict
+
+        :raises: :class:`NotSupportedVersionError` -- if it does not support
+            the version of this report.
+
+        """
         # Find the metadata of Wapiti.
         raw_metadata = self.stream.find('.//report_infos')
         # Reconstruct the metadata
@@ -42,7 +69,12 @@ class WapitiXMLParser(XMLParser):
                 'PTP does NOT support this version of ' + self.__tool__ + '.')
 
     def parse_report(self):
-        """Parse the report."""
+        """Parse the results of the report.
+
+        :return: List of dicts where each one represents a vuln.
+        :rtype: :class:`list`
+
+        """
         vulns = self.stream.find('.//vulnerabilities')
         return [{
             'name': vuln.get('name'),

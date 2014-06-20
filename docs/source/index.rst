@@ -16,6 +16,10 @@ Contents:
    libptp/parser
    libptp/exceptions
    libptp/constants
+   libptp/tools/arachni
+   libptp/tools/skipfish
+   libptp/tools/w3af
+   libptp/tools/wapiti
 
 
 Indices and tables

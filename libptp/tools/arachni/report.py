@@ -1,12 +1,23 @@
+"""
+
+.. module:: report
+    :synopsis: Specialized Report class for Arachni.
+
+.. moduleauthor:: Tao Sauvage
+
+"""
+
 from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.arachni.parser import ArachniXMLParser
 
 
 class ArachniReport(AbstractReport):
-    """Retrieve the information of an arachni report."""
+    """Retrieve the information of an Arachni report."""
 
+    #: :class:`str` -- Name of the tool.
     __tool__ = 'arachni'
+    #: :class:`dict` -- Available parsers for Arachni.
     __parsers__ = {ArachniXMLParser: '0.4.6'}
 
     HIGH = 'High'
@@ -26,9 +37,13 @@ class ArachniReport(AbstractReport):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a Arachni report and if I can handle it.
+        """Check if it is an Arachni report and if it can handle it.
 
-        Return True if it is mine, False otherwise.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         fullpath = cls._recursive_find(pathname, filename)
@@ -38,7 +53,15 @@ class ArachniReport(AbstractReport):
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
     def parse(self, pathname=None, filename='*.xml'):
-        """Parse an arachni resport."""
+        """Parse an Arachni report.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: List of dicts where each one represents a vuln.
+        :rtype: :class:`list`
+
+        """
         # Reconstruct the path to the report if any.
         self.fullpath = self._recursive_find(pathname, filename)[0]
         # Find the corresponding parser.
