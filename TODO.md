@@ -4,4 +4,4 @@
 
 # FIXME
 
-+ --Skipfish support is currently broken because of the new XMLParser class.--
++ ~~Skipfish support is currently broken because of the new XMLParser class.~~
