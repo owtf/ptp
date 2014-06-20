@@ -119,5 +119,5 @@ class XMLParser(AbstractParser):
         """
         if not pathname.endswith(cls.__format__):
             raise ValueError(
-                "This parser only supports '%s' files" % self.__format__)
+                "This parser only supports '%s' files" % cls.__format__)
         return etree.parse(pathname).getroot()
