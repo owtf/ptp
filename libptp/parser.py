@@ -49,10 +49,10 @@ class AbstractParser(object):
     def is_mine(cls, *args, **kwargs):
         """Check if the parser supports the tool.
 
-        :param *args: Arguments that will be pass to the parser.
-        :type *args: list.
-        :param **kwargs: Arguments that will be pass to the parser.
-        :type **kwargs: dict.
+        :param args: Arguments that will be pass to the parser.
+        :type args: list.
+        :param kwargs: Arguments that will be pass to the parser.
+        :type kwargs: dict.
         :raises: NotImplementedError
 
         """

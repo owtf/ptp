@@ -63,10 +63,10 @@ class AbstractReport(object):
 
         :param parsers: The available parsers of this class.
         :type parsers: AbstractParser.
-        :param *args: Arguments that will be pass to the parser.
-        :type *args: list.
-        :param **kwargs: Arguments that will be pass to the parser.
-        :type **kwargs: dict.
+        :param args: Arguments that will be pass to the parser.
+        :type args: list.
+        :param kwargs: Arguments that will be pass to the parser.
+        :type kwargs: dict.
 
         :returns: bool -- `True` if this class has a parser for this tool,
                   `False` otherwise
@@ -124,10 +124,10 @@ class AbstractReport(object):
     def _init_parser(self, *args, **kwargs):
         """Instantiate the correct parser for the report.
 
-        :param *args: Arguments that will be pass to the parser.
-        :type *args: list.
-        :param **kwargs: Arguments that will be pass to the parser.
-        :type **kwargs: dict.
+        :param args: Arguments that will be pass to the parser.
+        :type args: list.
+        :param kwargs: Arguments that will be pass to the parser.
+        :type kwargs: dict.
         :raises: NotSupportedVersionError
 
         """
