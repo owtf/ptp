@@ -2,7 +2,7 @@
 
 .. module:: parser
     :synopsis: The Parser class will extract the information contained in a
-               report.
+        report.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -16,18 +16,17 @@ from lxml.etree import LxmlError
 class AbstractParser(object):
     """Abstract representation of a parser."""
 
-    #: str -- Name of the tool.
+    #: :class:`str` -- Name of the tool.
     __tool__ = None
-    #: str -- Format of reports it supports.
+    #: :class:`str` -- Format of reports it supports.
     __format__ = None
-    #: list -- Versions it can supports.
+    #: :class:`list` -- Versions it can supports.
     __version__ = None
 
     def __init__(self, pathname):
         """Initialize AbstractParser.
 
-        :param pathname: path to the report file.
-        :type pathname: str.
+        :param str pathname: path to the report file.
 
         """
         #: i/o stream -- i/o stream of the report.
@@ -37,9 +36,10 @@ class AbstractParser(object):
     def handle_file(cls, pathname):
         """Process the report file(s) in order to create an i/o stream.
 
-        :param pathname: Path to the report file.
-        :type pathname: str.
-        :raises: NotImplementedError
+        :param str pathname: Path to the report file.
+
+        :raises: :class:`NotImplementedError` because this is an abstract
+            method.
 
         """
         raise NotImplementedError(
@@ -49,11 +49,11 @@ class AbstractParser(object):
     def is_mine(cls, *args, **kwargs):
         """Check if the parser supports the tool.
 
-        :param args: Arguments that will be pass to the parser.
-        :type args: list.
-        :param kwargs: Arguments that will be pass to the parser.
-        :type kwargs: dict.
-        :raises: NotImplementedError
+        :param list args: Arguments that will be pass to the parser.
+        :param dict kwargs: Arguments that will be pass to the parser.
+
+        :raises: :class:`NotImplementedError` because this is an abstract
+            method.
 
         """
         raise NotImplementedError("A parser MUST define the `is_mine` method.")
@@ -62,12 +62,11 @@ class AbstractParser(object):
     def check_version(cls, metadata, key='version'):
         """Checks the version in the metadata against the supported one.
 
-        :param metadata: The metadata in which to find the version.
-        :type metadata: dict.
-        :param key: The :attr:`metadata` key containing the version value.
-        :type key: str.
+        :param dict metadata: The metadata in which to find the version.
+        :param str key: The :attr:`metadata` key containing the version value.
 
-        :returns: bool -- `True` if it can parse the report, `False` otherwise.
+        :return: `True` if it can parse the report, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         if metadata[key] in cls.__version__:
@@ -77,7 +76,8 @@ class AbstractParser(object):
     def parse_metadata(self):
         """Parse the metadata of a report.
 
-        :raises: NotImplementedError
+        :raises: :class:`NotImplementedError` because this is an abstract
+            method.
 
         """
         raise NotImplementedError(
@@ -86,7 +86,8 @@ class AbstractParser(object):
     def parse_report(self):
         """Parse the discoveries of a report.
 
-        :raises: NotImplementedError
+        :raises: :class:`NotImplementedError` because this is an abstract
+            method.
 
         """
         raise NotImplementedError(
@@ -102,8 +103,7 @@ class XMLParser(AbstractParser):
     def __init__(self, pathname):
         """Initialize XMLParser.
 
-        :param pathname: path to the report file.
-        :type pathname: str.
+        :param str pathname: path to the report file.
 
         """
         AbstractParser.__init__(self, pathname)
@@ -112,9 +112,9 @@ class XMLParser(AbstractParser):
     def handle_file(cls, pathname):
         """Specialized file handler for XML files.
 
-        :param pathname: path to the report file.
-        :type pathname: str.
-        :raises: ValueError, LmxlError
+        :param str pathname: path to the report file.
+        :raises ValueError: if the report file has not the right extension.
+        :raises LxmlError: if Lxml cannot parse the XML file.
 
         """
         if not pathname.endswith(cls.__format__):

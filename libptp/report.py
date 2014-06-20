@@ -2,7 +2,7 @@
 
 .. module:: report
     :synopsis: The Report class will be the summary of a complete report
-               provided by a pentesting tool.
+        provided by a pentesting tool.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -27,9 +27,9 @@ class AbstractReport(object):
 
     """
 
-    #: Supported versions of the tool.
-    __version__ = None
-    #: Available parsers for the tool.
+    #: :class:`str` -- Name of the tool.
+    __tool__ = None
+    #: :class:`dict` -- Available parsers for the tool.
     __parsers__ = None
 
     def __init__(self, vulns=None):
@@ -46,13 +46,10 @@ class AbstractReport(object):
     def is_mine(cls, pathname, filename=None):
         """Check if it is a report from the tool this class supports.
 
-        :param pathname: The path to the report.
-        :type pathname: str.
-        :param filename: The name of the report file.
-        :type filename: str.
-
-        :returns: bool -- `True` if this class supports this tool, `False`
-                  otherwise
+        :param str pathname: The path to the report.
+        :param str filename: The name of the report file.
+        :return: `True` if this class supports this tool, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         return False
@@ -61,15 +58,13 @@ class AbstractReport(object):
     def _is_parser(cls, parsers, *args, **kwargs):
         """Check if a parser exists for that report.
 
-        :param parsers: The available parsers of this class.
-        :type parsers: AbstractParser.
-        :param args: Arguments that will be pass to the parser.
-        :type args: list.
-        :param kwargs: Arguments that will be pass to the parser.
-        :type kwargs: dict.
-
-        :returns: bool -- `True` if this class has a parser for this tool,
-                  `False` otherwise
+        :param :class:`AbstractParser` parsers: The available parsers of this
+            class.
+        :param list args: Arguments that will be pass to the parser.
+        :param dict kwargs: Arguments that will be pass to the parser.
+        :return: `True` if this class has a parser for this tool, `False`
+            otherwise.
+        :rtype: :class:`bool`
 
         """
         if parsers is not None:
@@ -82,12 +77,10 @@ class AbstractReport(object):
     def check_version(cls, metadata, key='version'):
         """Checks the version from the metadata against the supported ones.
 
-        :param metadata: The metadata in which to find the version.
-        :type metadata: dict.
-        :param key: The :attr:`metadata` key containing the version value.
-        :type key: str.
-
-        :returns: bool -- `True` if it support that version, `False` otherwise.
+        :param idct metadata: The metadata in which to find the version.
+        :param str key: The :attr:`metadata` key containing the version value.
+        :return: `True` if it support that version, `False` otherwise.
+        :rtype: :class:`bool`
 
         """
         if metadata[key] in cls.__parsers__.itervalues():
@@ -99,16 +92,14 @@ class AbstractReport(object):
         """Retrieve the full path to the report.
 
         The search occurs in the directory `pathname`.
-        :param pathname: The root directory where to start the search.
-        :type pathname: str.
-        :param file_regex: The regex that will be matched against all files
-                           from within `pathname`.
-        :type file_regex: re.
-        :param early_break: Stop the search as soon as a file has been matched.
-        :type early_break: bool.
-
-        :returns: list -- A list of paths to matched files starting from
-                  `pathname`.
+        :param str pathname: The root directory where to start the search.
+        :param re file_regex: The regex that will be matched against all files
+            from within `pathname`.
+        :param bool early_break: Stop the search as soon as a file has been
+            matched.
+        :return: A list of paths to matched files starting from
+            `pathname`.
+        :rtype: :class:`list`
 
         """
         founds = []
@@ -124,11 +115,11 @@ class AbstractReport(object):
     def _init_parser(self, *args, **kwargs):
         """Instantiate the correct parser for the report.
 
-        :param args: Arguments that will be pass to the parser.
-        :type args: list.
-        :param kwargs: Arguments that will be pass to the parser.
-        :type kwargs: dict.
-        :raises: NotSupportedVersionError
+        :param list args: Arguments that will be pass to the parser.
+        :param dict kwargs: Arguments that will be pass to the parser.
+
+        :raises: :class:`NotSupportedVersionError` -- if it does not support
+            that version of the tool.
 
         """
         for parser in iter(self.__parsers__):
@@ -143,8 +134,9 @@ class AbstractReport(object):
     def get_highest_ranking(self):
         """Return the highest ranking id of the report.
 
-        :returns: int -- the risk id of the highest ranked vulnerability
-                  referenced in the report.
+        :return: the risk id of the highest ranked vulnerability
+            referenced in the report.
+        :rtype: :class:`int`
 
         .. note::
 
@@ -159,7 +151,8 @@ class AbstractReport(object):
     def parse(self):
         """Abstract parser that will parse the report of a tool.
 
-        :raises: NotImplementedError
+        :raises: :class:`NotImplementedError` -- because this is an abstract
+            method.
 
         """
         raise NotImplementedError('The parser MUST be define for each tool.')

@@ -6,5 +6,5 @@ AbstractReport
 .. autoclass:: AbstractReport
     :members:
 
-    .. autoattribute:: __version__
+    .. autoattribute:: __tool__
     .. autoattribute:: __parsers__
