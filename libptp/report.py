@@ -58,7 +58,7 @@ class AbstractReport(object):
         return False
 
     @classmethod
-    def _is_parser(cls, pathname, parsers):
+    def _is_parser(cls, parsers, *args, **kwargs):
         """Check if a parser exists for that report.
 
         :param pathname: Path to the report file.
@@ -72,7 +72,7 @@ class AbstractReport(object):
         """
         if parsers is not None:
             for parser in iter(parsers):
-                if parser.is_mine(pathname):
+                if parser.is_mine(*args, **kwargs):
                     return True
         return False
 
@@ -119,7 +119,7 @@ class AbstractReport(object):
                 break
         return founds
 
-    def _init_parser(self, pathname):
+    def _init_parser(self, *args, **kwargs):
         """Instantiate the correct parser for the report.
 
         :param pathname: path to the report.
@@ -129,9 +129,9 @@ class AbstractReport(object):
         """
         for parser in iter(self.__parsers__):
             try:
-                if parser.is_mine(pathname):
-                    self.parser = parser(pathname)
-            except NotSupportedVersionError:
+                if parser.is_mine(*args, **kwargs):
+                    self.parser = parser(*args, **kwargs)
+            except TypeError, NotSupportedVersionError:
                 pass
         if self.parser is None:
             raise NotSupportedVersionError

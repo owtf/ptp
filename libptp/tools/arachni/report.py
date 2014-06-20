@@ -35,7 +35,7 @@ class ArachniReport(AbstractReport):
         if not fullpath:
             return False
         fullpath = fullpath[0]  # Only keep the first file.
-        return AbstractReport._is_parser(fullpath, cls.__parsers__)
+        return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
     def parse(self, pathname=None, filename='*.xml'):
         """Parse an arachni resport."""

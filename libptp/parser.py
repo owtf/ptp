@@ -46,7 +46,7 @@ class AbstractParser(object):
             "A parser MUST define the `handle_file` method.")
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, *args, **kwargs):
         """Check if the parser supports the tool.
 
         :param pathname: Path to the report file.
