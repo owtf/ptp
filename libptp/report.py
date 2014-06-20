@@ -61,10 +61,12 @@ class AbstractReport(object):
     def _is_parser(cls, parsers, *args, **kwargs):
         """Check if a parser exists for that report.
 
-        :param pathname: Path to the report file.
-        :type pathname: str.
         :param parsers: The available parsers of this class.
         :type parsers: AbstractParser.
+        :param *args: Arguments that will be pass to the parser.
+        :type *args: list.
+        :param **kwargs: Arguments that will be pass to the parser.
+        :type **kwargs: dict.
 
         :returns: bool -- `True` if this class has a parser for this tool,
                   `False` otherwise
@@ -122,8 +124,10 @@ class AbstractReport(object):
     def _init_parser(self, *args, **kwargs):
         """Instantiate the correct parser for the report.
 
-        :param pathname: path to the report.
-        :type pathname: str.
+        :param *args: Arguments that will be pass to the parser.
+        :type *args: list.
+        :param **kwargs: Arguments that will be pass to the parser.
+        :type **kwargs: dict.
         :raises: NotSupportedVersionError
 
         """
