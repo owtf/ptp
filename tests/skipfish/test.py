@@ -7,6 +7,9 @@ from ptp import PTP
 from libptp.constants import HIGH, MEDIUM
 
 
+__testname__ = 'skipfish'
+
+
 def run():
     ptp = PTP('skipfish')
     print('\ttest parse():', end=' ')

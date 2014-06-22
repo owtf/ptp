@@ -7,6 +7,9 @@ from ptp import PTP
 from libptp.constants import HIGH
 
 
+__testname__ = 'arachni'
+
+
 def run():
     ptp = PTP('arachni')
     print('\ttest parse():', end=' ')

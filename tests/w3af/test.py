@@ -7,6 +7,9 @@ from ptp import PTP
 from libptp.constants import HIGH
 
 
+__testname__ = 'w3af'
+
+
 def run():
     ptp = PTP('w3af')
     print('\ttest parse():', end=' ')
