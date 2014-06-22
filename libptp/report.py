@@ -126,7 +126,9 @@ class AbstractReport(object):
             try:
                 if parser.is_mine(*args, **kwargs):
                     self.parser = parser(*args, **kwargs)
-            except TypeError, NotSupportedVersionError:
+            except TypeError:
+                pass
+            except NotSupportedVersionError:
                 pass
         if self.parser is None:
             raise NotSupportedVersionError
