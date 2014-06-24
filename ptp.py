@@ -52,7 +52,11 @@ class PTP(object):
 
         """
         if self.tool_name is None:
-            for tool in self.supported.itervalues():
+            try:
+                supported = self.supported.itervalues()
+            except AttributeError:  # Python3 then.
+                supported = self.supported.values()
+            for tool in supported:
                 if tool.is_mine(pathname):
                     self.report = tool
                     break

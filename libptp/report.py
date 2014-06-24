@@ -83,7 +83,11 @@ class AbstractReport(object):
         :rtype: :class:`bool`
 
         """
-        if metadata[key] in cls.__parsers__.itervalues():
+        try:
+            parsers = cls.__parsers__.itervalues()
+        except AttributeError:  # Python3 then.
+            parsers = cls.__parsers__.values()
+        if metadata[key] in parsers:
             return True
         return False
 
