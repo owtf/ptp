@@ -77,7 +77,7 @@ class AbstractReport(object):
     def check_version(cls, metadata, key='version'):
         """Checks the version from the metadata against the supported ones.
 
-        :param idct metadata: The metadata in which to find the version.
+        :param dict metadata: The metadata in which to find the version.
         :param str key: The :attr:`metadata` key containing the version value.
         :return: `True` if it support that version, `False` otherwise.
         :rtype: :class:`bool`
