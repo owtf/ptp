@@ -121,3 +121,30 @@ class XMLParser(AbstractParser):
             raise ValueError(
                 "This parser only supports '%s' files" % cls.__format__)
         return etree.parse(pathname).getroot()
+
+
+class FileParser(AbstractParser):
+    """Specialized parser for general report."""
+
+    #: str -- A file can have any extension.
+    __format__ = ''
+
+    def __init__(self, pathname):
+        """Initialized FileParser.
+
+        :param str pathname: path to the report file.
+
+        """
+        AbstractParser.__init__(self, pathname)
+
+    @classmethod
+    def handle_file(cls, pathname):
+        """Specialized file handler for general files.
+
+        :param str pathname: path to the report file.
+        :raises OSError, IOError: if an error occurs when opening/reading the
+            report file.
+
+        """
+        with open(pathname, 'r') as f:
+            return f.read()
