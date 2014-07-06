@@ -8,6 +8,7 @@
 """
 
 from libptp.exceptions import NotSupportedVersionError
+from libptp.constants import UNKNOWN
 from libptp.parser import XMLParser
 from libptp.tools.wapiti.signatures import SIGNATURES
 
@@ -78,7 +79,7 @@ class WapitiXMLParser(XMLParser):
         vulns = self.stream.find('.//vulnerabilities')
         return [{
             'name': vuln.get('name'),
-            'ranking': SIGNATURES.get(vuln.get('name')),
-            'description':vuln.find('.//description')}
+            'ranking': SIGNATURES.get(vuln.get('name'), UNKNOWN),
+            'description': vuln.find('.//description')}
             for vuln in vulns.findall('.//vulnerability')
             if vuln.get('name') in SIGNATURES]
