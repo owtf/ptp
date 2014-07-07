@@ -41,7 +41,7 @@ class PTP(object):
     def __str__(self):
         return self.report.__str__()
 
-    def parse(self, pathname=None):
+    def parse(self, *args, **kwargs):
         """Parse a tool report.
 
         :param pathname: The path to the report.
@@ -58,7 +58,7 @@ class PTP(object):
             except AttributeError:  # Python3 then.
                 supported = self.supported.values()
             for tool in supported:
-                if tool.is_mine(pathname):
+                if tool.is_mine(*args, **kwargs):
                     self.report = tool
                     break
         else:
@@ -66,7 +66,7 @@ class PTP(object):
         if self.report is None:
             raise NotSupportedToolError('This tool is not supported by PTP.')
         self.report = self.report()  # Instantiate the report class.
-        return self.report.parse(pathname)
+        return self.report.parse(*args, **kwargs)
 
     def get_highest_ranking(self):
         """Retrieve the highest ranked vulnerability level from the report.
