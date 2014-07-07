@@ -15,30 +15,33 @@ SIGNATURES = {
     # Metasploit's scanner modules.
     'auxiliary/scanner/ftp/anonymous': {
         'Anonymous READ/WRITE ': MEDIUM,
-        'has READ/WRITE access': MEDIUM,
         'Anonymous READ ': LOW,
-        'has READ access': LOW},
+        },
 
     'auxiliary/scanner/ftp/ftp_version': {
+        'FTP Banner': INFO,
         },
 
     'auxiliary/scanner/ftp/ftp_login': {
-        'Successful authentication': MEDIUM,
+        'has READ/WRITE access': MEDIUM,
+        'has READ access': LOW,
         },
 
     'auxiliary/scanner/smtp/smtp_enum': {
+        'Found user': LOW,
+        'Users found': LOW,
         },
 
     'auxiliary/scanner/smtp/smtp_version': {
-        },
-
-    'auxiliary/fuzzers/smtp/smtp_fuzzer': {
+        'SMTP': INFO,
         },
 
     'auxiliary/scanner/vnc/vnc_login': {
+        'VNC server password': MEDIUM,
         },
 
     'auxiliary/scanner/vnc/vnc_none_auth': {
+        'free access': MEDIUM
         },
 
     'auxiliary/scanner/x11/open_x11': {
@@ -96,6 +99,10 @@ SIGNATURES = {
         },
 
     'auxiliary/scanner/snmp/snmp_login': {
+        },
+
+    # Metasploit's fuzzer modules.
+    'auxiliary/fuzzers/smtp/smtp_fuzzer': {
         },
 
     # Metasploit's Exploit modules.
