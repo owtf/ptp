@@ -5,18 +5,36 @@ import traceback
 
 from ptp import PTP
 from libptp.tools.metasploit.report import MetasploitReport
-from libptp.constants import LOW, MEDIUM
+from libptp.constants import INFO, LOW, MEDIUM
 
 
 __testname__ = 'metasploit'
 
 
 REPORTS = {
+    # Scanner
     'auxiliary/scanner/ftp/anonymous': {
         'report_low.metasploit': LOW,
+        'report_medium.metasploit': MEDIUM,
+    },
+    'auxiliary/scanner/ftp/ftp_version': {
+        'report_info.metasploit': INFO,
+        'report_info2.metasploit': INFO,
+    },
+    'auxiliary/scanner/ftp/ftp_login': {
+        'report_low.metasploit': LOW,
+        'report_medium.metasploit': MEDIUM,
+    },
+    'auxiliary/scanner/smtp/smtp_enum': {
+        'report_low.metasploit': LOW,
         'report_low2.metasploit': LOW,
+    },
+    'auxiliary/scanner/vnc/vnc_login': {
         'report_medium.metasploit': MEDIUM,
         'report_medium2.metasploit': MEDIUM,
+    },
+    'auxiliary/scanner/vnc/vnc_none_auth': {
+        'report_medium.metasploit': MEDIUM,
     },
 }
 
