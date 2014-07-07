@@ -14,6 +14,7 @@ from libptp.tools.arachni.report import ArachniReport
 from libptp.tools.skipfish.report import SkipfishReport
 from libptp.tools.w3af.report import W3AFReport
 from libptp.tools.wapiti.report import WapitiReport
+from libptp.tools.metasploit.report import MetasploitReport
 
 
 class PTP(object):
@@ -32,7 +33,8 @@ class PTP(object):
         'arachni': ArachniReport,
         'skipfish': SkipfishReport,
         'w3af': W3AFReport,
-        'wapiti': WapitiReport,}
+        'wapiti': WapitiReport,
+        'metasploit': MetasploitReport,}
 
     def __init__(self, tool_name=None):
         self.tool_name = tool_name
