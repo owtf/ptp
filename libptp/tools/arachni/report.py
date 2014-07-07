@@ -63,7 +63,10 @@ class ArachniReport(AbstractReport):
 
         """
         # Reconstruct the path to the report if any.
-        self.fullpath = self._recursive_find(pathname, filename)[0]
+        self.fullpath = self._recursive_find(pathname, filename)
+        if not self.fullpath:
+            return []
+        self.fullpath = self.fullpath[0]
         # Find the corresponding parser.
         self._init_parser(self.fullpath)
         # Parse specific stuff.
