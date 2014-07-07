@@ -13,7 +13,7 @@ import os
 import fnmatch
 
 from libptp.exceptions import NotSupportedVersionError
-from libptp.constants import RANKING_SCALE
+from libptp.constants import UNKNOWN, RANKING_SCALE
 
 
 class AbstractReport(object):
@@ -150,7 +150,8 @@ class AbstractReport(object):
             highest risk).
 
         """
-
+        if not self.vulns:
+            return UNKNOWN
         return max(
             RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
 
