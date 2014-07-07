@@ -12,7 +12,7 @@ from libptp.tools.wapiti.parser import WapitiXMLParser
 
 
 class WapitiReport(AbstractReport):
-    """Retrieve the information of a WAPITI report."""
+    """Retrieve the information of a Wapiti report."""
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
