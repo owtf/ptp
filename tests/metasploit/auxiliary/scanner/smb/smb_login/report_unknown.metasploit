@@ -1,0 +1,9 @@
+[*] IP-Address:445 SMB - Starting SMB login bruteforce
+[-]IP-Address - This system allows guest sessions with any credentials, these instances will not be reported.
+[*]IP-Address - GUEST LOGIN (Windows 5.1) admin :
+[*]IP-Address - GUEST LOGIN (Windows 5.1) admin : admin
+[*]IP-Address- GUEST LOGIN (Windows 5.1) admin : password
+[*]IP-Address - GUEST LOGIN (Windows 5.1) administrator :
+[*]IP-Address - GUEST LOGIN (Windows 5.1) administrator : administrator
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed

@@ -1,0 +1,12 @@
+[+] SNMP: 192.168.1.2 community string: 'public' info: 'GSM7224 L2 Managed Gigabit Switch'
+[+] SNMP: 192.168.1.199 community string: 'public' info: 'HP ETHERNET MULTI-ENVIRONMENT'
+[+] SNMP: 192.168.1.2 community string: 'private' info: 'GSM7224 L2 Managed Gigabit Switch'
+[+] SNMP: 192.168.1.199 community string: 'private' info: 'HP ETHERNET MULTI-ENVIRONMENT'
+[*] Validating scan results from 2 hosts...
+[*] Host 192.168.1.199 provides READ-WRITE access with community 'internal'
+[*] Host 192.168.1.199 provides READ-WRITE access with community 'private'
+[*] Host 192.168.1.199 provides READ-WRITE access with community 'public'
+[*] Host 192.168.1.2 provides READ-WRITE access with community 'private'
+[*] Host 192.168.1.2 provides READ-ONLY access with community 'public'
+[*] Scanned 256 of 256 hosts (100% complete)
+[*] Auxiliary module execution completed

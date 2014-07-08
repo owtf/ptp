@@ -1,0 +1,19 @@
+[*] Starting SMB login attempt on 192.168.1.165
+[*] Starting SMB login attempt on 192.168.1.153
+...snip...
+[*] Starting SMB login attempt on 192.168.1.156
+[*] 192.168.1.154 - FAILED LOGIN () Administrator :  (STATUS_LOGON_FAILURE)
+[*] 192.168.1.150 - FAILED LOGIN (Windows 5.1) Administrator :  (STATUS_LOGON_FAILURE)
+[*] 192.168.1.160 - FAILED LOGIN (Windows 5.1) Administrator :  (STATUS_LOGON_FAILURE)
+[*] 192.168.1.154 - FAILED LOGIN () Administrator : s3cr3t (STATUS_LOGON_FAILURE)
+[-] 192.168.1.162 - FAILED LOGIN (Windows 7 Enterprise 7600) Administrator :  (STATUS_ACCOUNT_DISABLED)
+[*] 192.168.1.161 - FAILED LOGIN (Windows 5.1) Administrator :  (STATUS_LOGON_FAILURE)
+[+] 192.168.1.150 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'
+[*] Scanned 04 of 16 hosts (025% complete)
+[+] 192.168.1.160 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'
+[+] 192.168.1.161 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'
+[*] Scanned 13 of 16 hosts (081% complete)
+[*] Scanned 14 of 16 hosts (087% complete)
+[*] Scanned 15 of 16 hosts (093% complete)
+[*] Scanned 16 of 16 hosts (100% complete)
+[*] Auxiliary module execution completed

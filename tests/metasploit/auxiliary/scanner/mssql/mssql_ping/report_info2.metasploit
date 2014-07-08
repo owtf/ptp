@@ -1,0 +1,8 @@
+[*] SQL Server information for 192.168.128.12:
+[*] tcp = 1433
+[*] np = SRVBDD-0pipesqlquery
+[*] Version = 8.00.192
+[*] InstanceName = MSSQLSERVER
+[*] IsClustered = No
+[*] ServerName = SRVBDD-0
+[*] Auxiliary module execution completed

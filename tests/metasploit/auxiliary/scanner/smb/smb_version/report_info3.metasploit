@@ -1,0 +1,10 @@
+[*] 192.168.1.162 is running Windows 7 Enterprise (Build 7600) (language: Unknown) (name:XEN-WIN7-BARE) (domain:HOTZONE)
+[*] 192.168.1.154 is running Unix Samba 3.0.20-Debian (language: Unknown) (domain:WORKGROUP)
+[*] 192.168.1.150 is running Windows XP Service Pack 2 (language: English) (name:V-XPSP2-SPLOIT-) (domain:WORKGROUP)
+[*] Scanned 04 of 16 hosts (025% complete)
+[*] 192.168.1.160 is running Windows XP Service Pack 3 (language: English) (name:XEN-XP-PATCHED) (domain:HOTZONE)
+[*] 192.168.1.161 is running Windows XP Service Pack 2 (language: English) (name:XEN-XP-SP2-BARE) (domain:XEN-XP-SP2-BARE)
+[*] Scanned 11 of 16 hosts (068% complete)
+[*] Scanned 14 of 16 hosts (087% complete)
+[*] Scanned 16 of 16 hosts (100% complete)
+[*] Auxiliary module execution completed

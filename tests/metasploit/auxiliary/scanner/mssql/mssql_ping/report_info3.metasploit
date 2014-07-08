@@ -1,0 +1,8 @@
+[*] SQL Server information for ipaddress:
+[+] ServerName = LAB
+[+] InstanceName = SQLEXPRESS
+[+] IsClustered = No
+[+] Version = 9.00.1399.06
+[+] tcp = 1433
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
