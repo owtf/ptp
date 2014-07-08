@@ -9,6 +9,7 @@
 
 
 from libptp.exceptions import NotSupportedToolError
+from libptp.constants import UNKNOWN
 from libptp.tools.arachni.report import ArachniReport
 from libptp.tools.skipfish.report import SkipfishReport
 from libptp.tools.w3af.report import W3AFReport
@@ -82,4 +83,4 @@ class PTP(object):
         """
         if self.report:
             return self.report.get_highest_ranking()
-        return None
+        return UNKNOWN
