@@ -1,0 +1,23 @@
+[*] Scanned 026 of 256 hosts (010% complete)
+[*] Scanned 052 of 256 hosts (020% complete)
+[*] Scanned 077 of 256 hosts (030% complete)
+[*] SQL Server information for 192.168.1.108:
+[*]    tcp             = 1433
+[*]    Version         = 9.00.1399.06
+[*]    InstanceName    = MSSQLSERVER
+[*]    IsClustered     = No
+[*]    ServerName      = DBSQL2K501
+[*] Scanned 103 of 256 hosts (040% complete)
+[*] Scanned 128 of 256 hosts (050% complete)
+[*] SQL Server information for 192.168.1.156:
+[*]    tcp             = 1433
+[*]    Version         = 10.0.1600.22
+[*]    InstanceName    = MSSQLSERVER
+[*]    IsClustered     = No
+[*]    ServerName      = DBSQL2K801
+[*] Scanned 155 of 256 hosts (060% complete)
+[*] Scanned 180 of 256 hosts (070% complete)
+[*] Scanned 205 of 256 hosts (080% complete)
+[*] Scanned 232 of 256 hosts (090% complete)
+[*] Scanned 256 of 256 hosts (100% complete)
+[*] Auxiliary module execution completed

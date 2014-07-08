@@ -1,0 +1,13 @@
+[-] 192.168.1.162 - FAILED LOGIN (Windows 7 Enterprise 7600) Administrator :  (STATUS_ACCOUNT_DISABLED)
+[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) dale :
+[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) chip :
+[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) dookie :
+[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) jimmie :
+[+] 192.168.1.150 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'
+[+] 192.168.1.160 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'
+[+] 192.168.1.161 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'
+[+] 192.168.1.161 - SUCCESSFUL LOGIN (Windows 5.1) 'victim' : 's3cr3t'
+[+] 192.168.1.162 - SUCCESSFUL LOGIN (Windows 7 Enterprise 7600) 'victim' : 's3cr3t'
+[*] Scanned 15 of 16 hosts (093% complete)
+[*] Scanned 16 of 16 hosts (100% complete)
+[*] Auxiliary module execution completed
