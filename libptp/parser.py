@@ -142,8 +142,10 @@ class FileParser(AbstractParser):
         """Specialized file handler for general files.
 
         :param str pathname: path to the report file.
-        :raises OSError, IOError: if an error occurs when opening/reading the
-            report file.
+        :raises OSError: if an error occurs when opening/reading the report
+            file.
+        :raises IOError: if an error occurs when opening/reading the report
+            file.
 
         """
         with open(pathname, 'r') as f:
