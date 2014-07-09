@@ -7,14 +7,14 @@
 """
 
 
-from libptp.constants import HIGH, MEDIUM, LOW, INFO
+from libptp.constants import HIGH, MEDIUM, LOW, INFO, HIGH
 
 
 # TODO: Complete the signatures database.
 SIGNATURES = {
     # Metasploit's scanner modules.
     'auxiliary/scanner/ftp/anonymous': {
-        'Anonymous READ/WRITE ': MEDIUM,
+        'Anonymous READ/WRITE ': HIGH,
         'Anonymous READ ': LOW,
         },
 
@@ -23,7 +23,7 @@ SIGNATURES = {
         },
 
     'auxiliary/scanner/ftp/ftp_login': {
-        'has READ/WRITE access': MEDIUM,
+        'has READ/WRITE access': HIGH,
         'has READ access': LOW,
         },
 
@@ -37,15 +37,15 @@ SIGNATURES = {
         },
 
     'auxiliary/scanner/vnc/vnc_login': {
-        'VNC server password': MEDIUM,
+        'VNC server password': HIGH,
         },
 
     'auxiliary/scanner/vnc/vnc_none_auth': {
-        'free access': MEDIUM,
+        'free access': HIGH,
         },
 
     'auxiliary/scanner/x11/open_x11': {
-        'Open X Server': MEDIUM,
+        'Open X Server': HIGH,
         },
 
     'auxiliary/scanner/emc/alphastor_devicemanager': {
@@ -61,17 +61,17 @@ SIGNATURES = {
         },
 
     'auxiliary/scanner/mssql/mssql_login': {
-        'MSSQL - successful login': MEDIUM,
-        'successful logged in as': MEDIUM,
+        'MSSQL - successful login': HIGH,
+        'successful logged in as': HIGH,
         },
 
     # TODO: Enhance the matching string.
     'auxiliary/scanner/mssql/mssql_hashdump': {
-        'Saving': MEDIUM,
+        'Saving': HIGH,
         },
 
     'auxiliary/scanner/mssql/mssql_schemadump': {
-        'Microsoft SQL Server Schema': MEDIUM,
+        'Microsoft SQL Server Schema': HIGH,
         },
 
     # TODO: Complete the matching strings.
@@ -100,16 +100,16 @@ SIGNATURES = {
         },
 
     'auxiliary/scanner/smb/smb_login': {
-        'SUCCESSFUL LOGIN': MEDIUM,
+        'SUCCESSFUL LOGIN': HIGH,
         },
 
     'auxiliary/scanner/snmp/snmp_enumusers': {
-        'Found Users': INFO,
+        'Found Users': LOW,
         },
 
     # TODO: Enhance the matching string (using regexp IMO).
     'auxiliary/scanner/snmp/snmp_enumshares': {
-        ' - ': INFO,
+        ' - ': LOW,
         },
 
     'auxiliary/scanner/snmp/snmp_enum': {
@@ -121,9 +121,9 @@ SIGNATURES = {
         },
 
     'auxiliary/scanner/snmp/snmp_login': {
-        'community string': INFO,
-        'provides READ-ONLY access': INFO,
-        'provides READ-WRITE access': MEDIUM,
+        'community string': LOW,
+        'provides READ-ONLY access': LOW,
+        'provides READ-WRITE access': HIGH,
         },
 
     # Metasploit's fuzzer modules.
