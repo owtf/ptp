@@ -5,7 +5,7 @@ import traceback
 
 from ptp import PTP
 from libptp.tools.metasploit.report import MetasploitReport
-from libptp.constants import UNKNOWN, INFO, LOW, MEDIUM
+from libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 
 
 __testname__ = 'metasploit'
@@ -15,7 +15,7 @@ REPORTS = {
     # Scanner
     'auxiliary/scanner/ftp/anonymous': {
         'report_low.metasploit': LOW,
-        'report_medium.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
     },
     'auxiliary/scanner/ftp/ftp_version': {
         'report_info.metasploit': INFO,
@@ -23,22 +23,22 @@ REPORTS = {
     },
     'auxiliary/scanner/ftp/ftp_login': {
         'report_low.metasploit': LOW,
-        'report_medium.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
     },
     'auxiliary/scanner/smtp/smtp_enum': {
         'report_low.metasploit': LOW,
         'report_low2.metasploit': LOW,
     },
     'auxiliary/scanner/vnc/vnc_login': {
-        'report_medium.metasploit': MEDIUM,
-        'report_medium2.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
+        'report_high2.metasploit': HIGH,
     },
     'auxiliary/scanner/vnc/vnc_none_auth': {
-        'report_medium.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
     },
     'auxiliary/scanner/x11/open_x11': {
-        'report_medium.metasploit': MEDIUM,
-        'report_medium2.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
+        'report_high2.metasploit': HIGH,
     },
     # TODO: Add report examples for EMC AlphaStor.
     'auxiliary/scanner/mssql/mssql_ping': {
@@ -47,11 +47,11 @@ REPORTS = {
         'report_info3.metasploit': INFO,
     },
     'auxiliary/scanner/mssql/mssql_login': {
-        'report_medium.metasploit': MEDIUM,
-        'report_medium2.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
+        'report_high2.metasploit': HIGH,
     },
     'auxiliary/scanner/mssql/mssql_hashdump': {
-        'report_medium.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
     },
     # TODO: Add report examples for MSSQL Schema dump.
     # TODO: Add report examples for DCERPC endpoint mapper.
@@ -71,22 +71,22 @@ REPORTS = {
         'report_info3.metasploit': INFO,
     },
     'auxiliary/scanner/smb/smb_login': {
-        'report_medium.metasploit': MEDIUM,
-        'report_medium2.metasploit': MEDIUM,
+        'report_high.metasploit': HIGH,
+        'report_high2.metasploit': HIGH,
         'report_unknown.metasploit': UNKNOWN,
     },
     'auxiliary/scanner/snmp/snmp_enumusers': {
-        'report_info.metasploit': INFO,
+        'report_low.metasploit': LOW,
     },
     'auxiliary/scanner/snmp/snmp_enumshares': {
-        'report_info.metasploit': INFO,
+        'report_low.metasploit': LOW,
     },
     # TODO: Add report examples for SNMP enums.
     # TODO: Add report examples for SNMP AIX version.
     'auxiliary/scanner/snmp/snmp_login': {
-        'report_info.metasploit': INFO,
-        'report_medium.metasploit': MEDIUM,
-        'report_medium2.metasploit': MEDIUM,
+        'report_low.metasploit': LOW,
+        'report_high.metasploit': HIGH,
+        'report_high2.metasploit': HIGH,
     }
 }
 
