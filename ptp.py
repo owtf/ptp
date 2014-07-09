@@ -77,7 +77,7 @@ class PTP(object):
 
         .. note::
 
-            The `level` starts from `0` to `n` where `0` represents the highest
+            The `level` starts from `0` to `n` where `n` represents the highest
             risk.
 
         """
