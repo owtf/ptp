@@ -14,3 +14,6 @@ Parser classes
     :members:
 
     .. autoattribute:: __format__
+
+.. autoclass:: FileParser
+    :members:

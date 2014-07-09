@@ -17,6 +17,7 @@ Contents:
    libptp/exceptions
    libptp/constants
    libptp/tools/arachni
+   libptp/tools/metasploit
    libptp/tools/skipfish
    libptp/tools/w3af
    libptp/tools/wapiti
