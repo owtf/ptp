@@ -344,4 +344,45 @@ SIGNATURES = {
     'exploit/windows/antivirus/ams_xfr': {
         'Got data, execution successful!': HIGH,
         },
+
+    'exploit/windows/games/ut2004_secure': {
+        'This system appears to be exploitable': HIGH,
+        'This system appears to be running UT2003': MEDIUM,
+        },
+
+    'exploit/windows/iis/ms01_026_dbldecode': {
+        'Command output': HIGH,
+        },
+
+    'exploit/windows/iis/ms03_007_ntdll_webdav': {
+        'The server stopped accepting requests': HIGH,
+        },
+
+    'exploit/windows/license/calicserv_getconfig': {
+        'CA License Server reports OS': HIGH,
+        },
+
+    'exploit/windows/misc/bakbone_netvault_heap': {
+        'Detected NetVault Build': HIGH,
+        },
+
+    'exploit/windows/mssql/lyris_listmanager_weak_pass': {
+        'Successfully authenticated to': HIGH,
+        },
+
+    'exploit/windows/postgres/postgres_payload': {
+        'Authentication successful.': HIGH,
+        },
+
+    'exploit/windows/smtp/ypops_overflow1': {
+        'Vulnerable SMTP server': HIGH,
+        },
+
+    'exploit/windows/ssh/freeftpd_key_exchange': {
+        'Trying target': HIGH,
+        },
+
+    'exploit/windows/ssh/freesshd_key_exchange': {
+        'Trying target': HIGH,
+        },
 }
