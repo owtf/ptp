@@ -7,7 +7,7 @@
 """
 
 
-from libptp.constants import HIGH, MEDIUM, LOW, INFO, HIGH
+from libptp.constants import HIGH, MEDIUM, LOW, INFO
 
 
 # TODO: Complete the signatures database.
@@ -187,6 +187,7 @@ SIGNATURES = {
     'auxiliary/dos/windows/smb/ms09_050_smb2_session_logoff': {
         'No response. The target system has probably crashed.': HIGH,
         },
+
     # Metasploit's Exploit modules.
     'exploit/dialup/multi/login/manyargs': {
         'Success!!!': HIGH,
