@@ -31,6 +31,8 @@ if __name__ == '__main__':
 + arachni (0.4.6) (XML report)
     + Metadata
     + Rankings
++ dirbuster
+    + Rankings
 + metasploit
     + Rankings
         + Scanner modules

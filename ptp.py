@@ -15,6 +15,7 @@ from libptp.tools.skipfish.report import SkipfishReport
 from libptp.tools.w3af.report import W3AFReport
 from libptp.tools.wapiti.report import WapitiReport
 from libptp.tools.metasploit.report import MetasploitReport
+from libptp.tools.dirbuster.report import DirbusterReport
 
 
 class PTP(object):
@@ -34,7 +35,8 @@ class PTP(object):
         'skipfish': SkipfishReport,
         'w3af': W3AFReport,
         'wapiti': WapitiReport,
-        'metasploit': MetasploitReport,}
+        'metasploit': MetasploitReport,
+        'dirbuster': DirbusterReport,}
 
     def __init__(self, tool_name=None):
         self.tool_name = tool_name
