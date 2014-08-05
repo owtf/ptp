@@ -36,6 +36,8 @@ if __name__ == '__main__':
 + metasploit
     + Rankings
         + Scanner modules
++ nmap
+    + Metadata
 + skipfish (2.10b)
     + Metadata
     + Rankings

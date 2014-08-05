@@ -16,6 +16,7 @@ from libptp.tools.w3af.report import W3AFReport
 from libptp.tools.wapiti.report import WapitiReport
 from libptp.tools.metasploit.report import MetasploitReport
 from libptp.tools.dirbuster.report import DirbusterReport
+from libptp.tools.nmap.report import NmapReport
 
 
 class PTP(object):
@@ -36,7 +37,8 @@ class PTP(object):
         'w3af': W3AFReport,
         'wapiti': WapitiReport,
         'metasploit': MetasploitReport,
-        'dirbuster': DirbusterReport,}
+        'dirbuster': DirbusterReport,
+        'nmap': NmapReport,}
 
     def __init__(self, tool_name=None):
         self.tool_name = tool_name
