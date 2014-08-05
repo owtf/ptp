@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import os
+import sys
 import imp
 import fnmatch
 
@@ -26,7 +27,7 @@ def find_tests(pathname):
     return founds
 
 
-def run_tests(pathnames):
+def run_tests(pathnames, test_name=None):
     """Loads each test module and run their `run` function.
 
     :param list pathnames: List of (module_name, path_to_the_module).
@@ -36,9 +37,14 @@ def run_tests(pathnames):
         current_mod = imp.load_source(
             os.path.splitext(module)[0],
             os.path.join(path, module))
+        if test_name and test_name != current_mod.__testname__:
+            continue
         print("Testing:", current_mod.__testname__)
         current_mod.run()
 
 
 if __name__ == '__main__':
-    run_tests(find_tests(os.path.join(os.getcwd(), DIR_TEST)))
+    test_name = None
+    if len(sys.argv) == 2:
+        test_name = sys.argv[1]
+    run_tests(find_tests(os.path.join(os.getcwd(), DIR_TEST)), test_name)
