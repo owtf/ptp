@@ -34,7 +34,10 @@ class ArachniXMLParser(XMLParser):
         :rtype: :class:`bool`
 
         """
-        stream = cls.handle_file(pathname)
+        try:
+            stream = cls.handle_file(pathname)
+        except ValueError:
+            return False
         if not cls.__tool__ in stream.tag:
             return False
         return True

@@ -150,3 +150,34 @@ class FileParser(AbstractParser):
         """
         with open(pathname, 'r') as f:
             return f.read()
+
+
+class LineParser(AbstractParser):
+    """Specialized parser for general report read line by line."""
+
+    #: str -- A file can have any extension.
+    __format__ = ''
+
+    def __init__(self, pathname):
+        """Initialized LineParser.
+
+        :param str pathname: path to the report file.
+
+        """
+        AbstractParser.__init__(self, pathname)
+
+    @classmethod
+    def handle_file(cls, pathname, skip_empty=True):
+        """Specialized file handler for general files read line by line.
+
+        :param str pathname: path to the report file.
+        :raises OSError: if an error occurs when opening/reading the report
+            file.
+        :raises IOError: if an error occurs when opening/reading the report
+            file.
+
+        """
+        with open(pathname, 'r') as f:
+            if skip_empty:
+                return [line.rstrip('\n') for line in f.readlines() if line.rstrip('\n')]
+            return [line.rstrip('\n') for line in f.readlines()]

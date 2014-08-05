@@ -35,7 +35,10 @@ class WapitiXMLParser(XMLParser):
         :rtype: :class:`bool`
 
         """
-        stream = cls.handle_file(pathname)
+        try:
+            stream = cls.handle_file(pathname)
+        except ValueError:
+            return False
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
             return False

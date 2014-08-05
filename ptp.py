@@ -60,9 +60,12 @@ class PTP(object):
             except AttributeError:  # Python3 then.
                 supported = self.supported.values()
             for tool in supported:
-                if tool.is_mine(*args, **kwargs):
-                    self.report = tool
-                    break
+                try:
+                    if tool.is_mine(*args, **kwargs):
+                        self.report = tool
+                        break
+                except TypeError:
+                    pass
         else:
             self.report = self.supported.get(self.tool_name)
         if self.report is None:
