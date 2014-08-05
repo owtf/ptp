@@ -38,7 +38,10 @@ class W3AFXMLParser(XMLParser):
         :rtype: :class:`bool`
 
         """
-        stream = cls.handle_file(pathname)
+        try:
+            stream = cls.handle_file(pathname)
+        except ValueError:
+            return False
         if stream.find('.//w3af-version') is None:
             return False
         return True
