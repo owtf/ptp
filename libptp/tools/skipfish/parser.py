@@ -10,7 +10,7 @@
 import re
 import ast
 
-from libptp.exceptions import NotSupportedVersionError
+from libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
 from libptp.parser import AbstractParser
 
 
