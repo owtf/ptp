@@ -22,7 +22,7 @@ class W3AFXMLParser(XMLParser):
     #: :class:`str` -- Format of W3AF reports it supports.
     __format__ = 'xml'
     #: :class:`list` -- W3AF versions it supports.
-    __version__ = ['1.6.0.2']
+    __version__ = ['1.6.0.2', '1.6.0.3']
 
     def __init__(self, pathname):
         XMLParser.__init__(self, pathname)
