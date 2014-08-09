@@ -31,7 +31,7 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Regex matching DirBuster files status code.
     _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) responce:$"
 
-    def __init__(self, pathname, filename):
+    def __init__(self, pathname):
         LineParser.__init__(self, pathname)
 
     # TODO: Properly check the supported versions.

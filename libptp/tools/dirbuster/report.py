@@ -31,7 +31,7 @@ class DirbusterReport(AbstractReport):
         fullpath = fullpath[0]  # Only keep the first file.
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
-    def parse(self, pathname=None, filename='*.dirbuster', plugin=''):
+    def parse(self, pathname=None, filename='DirBuster-Report*'):
         """Parse a Dirbuster report.
 
         :param str pathname: Path to the report directory.
@@ -47,7 +47,7 @@ class DirbusterReport(AbstractReport):
             return []
         self.fullpath = self.fullpath[0]
         # Find the corresponding parser.
-        self._init_parser(self.fullpath, plugin)
+        self._init_parser(self.fullpath)
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
         self.vulns = self.parser.parse_report()
