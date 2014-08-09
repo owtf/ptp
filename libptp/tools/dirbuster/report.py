@@ -17,14 +17,14 @@ class DirbusterReport(AbstractReport):
     #: :class:`str` -- Name of the tool.
     __tool__ = 'dirbuster'
     #: :class:`dict` -- Available parsers for DirBuster.
-    __parsers__ = {DirbusterParser: ''}
+    __parsers__ = {DirbusterParser: '1.0-RC1'}
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)
 
     # TODO: Properly check if it is a DirBuster report.
     @classmethod
-    def is_mine(cls, pathname=None, filename='*.dirbuster'):
+    def is_mine(cls, pathname=None, filename='DirBuster-Report*'):
         fullpath = cls._recursive_find(pathname, filename)
         if not fullpath:
             return False
