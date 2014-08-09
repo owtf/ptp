@@ -4,7 +4,7 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import HIGH
+from libptp.constants import MEDIUM
 
 
 __testname__ = 'wapiti'
@@ -35,7 +35,7 @@ def run():
     print('\ttest get_highest_ranking():', end=' ')
     res = 'ok'
     try:
-        assert ptp.get_highest_ranking() == HIGH
+        assert ptp.get_highest_ranking() == MEDIUM
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

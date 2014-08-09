@@ -79,10 +79,20 @@ class WapitiXMLParser(XMLParser):
         :rtype: :class:`list`
 
         """
-        vulns = self.stream.find('.//vulnerabilities')
-        return [{
-            'name': vuln.get('name'),
-            'ranking': SIGNATURES.get(vuln.get('name'), UNKNOWN),
-            'description': vuln.find('.//description')}
-            for vuln in vulns.findall('.//vulnerability')
-            if vuln.get('name') in SIGNATURES]
+        section_vuln = self.stream.find('.//vulnerabilities')
+        if section_vuln is None:
+            return []
+        vulns = []
+        for category in section_vuln.findall('.//vulnerability'):
+            entries = category.find('.//entries')
+            if not len(entries):
+                pass
+            # Ensure that there are 'entry' sub-sections that represent the
+            # actual discoveries/vulnerabilities.
+            if (len(entries.findall('.//entry')) and
+                    category.get('name') in SIGNATURES):
+                vulns.append({
+                    'name': category.get('name'),
+                    'ranking': SIGNATURES.get(category.get('name'), UNKNOWN),
+                    'description': category.find('.//description').text})
+        return vulns
