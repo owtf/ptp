@@ -10,7 +10,6 @@
 from libptp.constants import HIGH, MEDIUM, LOW, INFO
 
 
-# TODO: Complete the signatures database.
 SIGNATURES = {
     # High ranked vulnerabilities
     'SQL Injection': HIGH,

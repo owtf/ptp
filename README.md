@@ -22,7 +22,7 @@ from ptp import PTP
 
 if __name__ == '__main__':
     ptp = PTP()
-    ptp.parse(path_to_report='path/to/the/report/directory')
+    ptp.parse('path/to/the/report/directory')
     print('Highest severity:', ptp.get_highest_ranking())
 ```
 
@@ -31,19 +31,21 @@ if __name__ == '__main__':
 + arachni (0.4.6) (XML report)
     + Metadata
     + Rankings
-+ dirbuster
++ dirbuster (1.0-RC1)
     + Rankings
 + metasploit
     + Rankings
         + Scanner modules
++ nmap (XML report)
+    + Metadata
 + skipfish (2.10b)
     + Metadata
     + Rankings
-+ w3af (1.6.0.2) (XML report)
++ w3af (1.6.0.2, 1.6.0.3) (XML report)
     + Metadata
     + Rankings
-+ wapiti (2.3.0) (XML report)
++ wapiti (2.2.1, 2.3.0) (XML report)
     + Metadata
-    + Rankings (database needs to be completed though)
+    + Rankings
     + Names
     + Descriptions

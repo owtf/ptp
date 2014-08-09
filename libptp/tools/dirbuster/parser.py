@@ -20,7 +20,7 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Format of DirBuster reports it supports.
     __format__ = 'dirbuster'
     #: :class:`list` -- DirBuster versions it supports.
-    __version__ = ['']
+    __version__ = ['1.0-RC1']
 
     #: :class:`str` -- Regex matching DirBuster section separator.
     _re_sep = r"^-*$"
@@ -29,14 +29,14 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Regex matching DirBuster directories status code.
     _re_dir_status = r"^Dirs found with a (?P<status>[0-9]{3}) response:$"
     #: :class:`str` -- Regex matching DirBuster files status code.
-    _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) response:$"
+    _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) responce:$"
 
-    def __init__(self, pathname, filename):
+    def __init__(self, pathname):
         LineParser.__init__(self, pathname)
 
     # TODO: Properly check the supported versions.
     @classmethod
-    def is_mine(cls, pathname=None, filename='*.dirbuster'):
+    def is_mine(cls, pathname=None, filename='DirBuster-Report*'):
         stream = cls.handle_file(pathname)
         if stream and re.match(cls._re_version, stream[0]):
             return True
@@ -47,7 +47,7 @@ class DirbusterParser(LineParser):
         return {}
 
     def parse_report(self):
-        """Parser the results of a DirBuster plugin.
+        """Parser the results of a DirBuster report.
 
         :return: List of dicts where each one represents a vuln.
         :rtype: :class:`list`

@@ -11,8 +11,8 @@ __testname__ = 'dirbuster'
 
 
 REPORTS = {
-        'report_info.dirbuster': INFO,
-        'report_high.dirbuster': HIGH,
+        'DirBuster-Report-info.txt': INFO,
+        'DirBuster-Report-high.txt': HIGH,
 }
 
 

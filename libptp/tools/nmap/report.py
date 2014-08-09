@@ -1,33 +1,30 @@
 """
 
 .. module:: report
-    :synopsis: Specialized Report class for Wapiti.
+    :synopsis: Specialized Report class for Nmap.
 
 .. moduleauthor:: Tao Sauvage
 
 """
 
 from libptp.report import AbstractReport
-from libptp.tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
+from libptp.tools.nmap.parser import NmapXMLParser
 
 
-class WapitiReport(AbstractReport):
-    """Retrieve the information of a Wapiti report."""
+class NmapReport(AbstractReport):
+    """Retrieve the information of a Nmap report."""
 
     #: :class:`str` -- Name of the tool.
-    __tool__ = 'wapiti'
-    #: :class:`dict` -- Available parsers for Wapiti.
-    __parsers__ = {
-        WapitiXMLParser: '2.3.0',
-        Wapiti221XMLParser: '2.2.1',
-        }
+    __tool__ = 'nmap'
+    #: :class:`dict` -- Available parsers for Nmap.
+    __parsers__ = {NmapXMLParser: '6.46'}
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a Wapiti report and if it can handle it.
+        """Check if it is a Nmap report and if it can handle it.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
@@ -43,7 +40,7 @@ class WapitiReport(AbstractReport):
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
     def parse(self, pathname=None, filename='*.xml'):
-        """Parse a Wapiti report.
+        """Parse a Nmap report.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
