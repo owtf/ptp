@@ -22,7 +22,7 @@ Dirs found with a 403 response:
 --------------------------------
 Files found during testing:
 
-Files found with a 200 response:
+Files found with a 200 responce:
 
 /index.php
 /config.php
