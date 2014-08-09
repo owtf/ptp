@@ -4,7 +4,7 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import MEDIUM
+from libptp.constants import HIGH, MEDIUM
 
 
 __testname__ = 'wapiti'
@@ -28,6 +28,7 @@ def run():
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'))
         assert ptp.report.__tool__ == 'wapiti'
+        assert '2.3.0' in ptp.report.parser.__version__
     except Exception:
         print(traceback.format_exc())
         res = 'ko'
@@ -36,6 +37,37 @@ def run():
     res = 'ok'
     try:
         assert ptp.get_highest_ranking() == MEDIUM
+    except Exception:
+        print(traceback.format_exc())
+        res = 'ko'
+    print(res)
+
+    print('\ttest parse():', end=' ')
+    res = 'ok'
+    try:
+        ptp.parse(
+            pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
+    except Exception:
+        print(traceback.format_exc())
+        res = 'ko'
+    print(res)
+    ptp = PTP()
+    print('\ttest is_mine():', end=' ')
+    res = 'ok'
+    try:
+        ptp.parse(
+            pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
+        assert ptp.report.__tool__ == 'wapiti'
+        assert '2.2.1' in ptp.report.parser.__version__
+    except Exception:
+        print(traceback.format_exc())
+        res = 'ko'
+    print(res)
+    print('\ttest get_highest_ranking():', end=' ')
+    res = 'ok'
+    try:
+        # Haha, Wapiti 2.2.1 detects SQL injections that 2.3.0 doesn't.
+        assert ptp.get_highest_ranking() == HIGH
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

@@ -8,7 +8,7 @@
 """
 
 from libptp.report import AbstractReport
-from libptp.tools.wapiti.parser import WapitiXMLParser
+from libptp.tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
 
 
 class WapitiReport(AbstractReport):
@@ -17,7 +17,10 @@ class WapitiReport(AbstractReport):
     #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
     #: :class:`dict` -- Available parsers for Wapiti.
-    __parsers__ = {WapitiXMLParser: '2.3.0'}
+    __parsers__ = {
+        WapitiXMLParser: '2.3.0',
+        Wapiti221XMLParser: '2.2.1',
+        }
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)
