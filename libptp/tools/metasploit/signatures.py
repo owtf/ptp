@@ -107,10 +107,12 @@ SIGNATURES = {
         'Found Users': LOW,
         },
 
-    # TODO: Enhance the matching string (using regexp IMO).
-    'auxiliary/scanner/snmp/snmp_enumshares': {
-        ' - ': LOW,
-        },
+    # FIXME: when the connection is refused, the report contains the following
+    # string: "The unit tests of metasploit are not complete." which matches
+    # the " - " signature string.
+    #'auxiliary/scanner/snmp/snmp_enumshares': {
+    #    ' - ': LOW,
+    #    },
 
     'auxiliary/scanner/snmp/snmp_enum': {
         ', Connected.': INFO,
