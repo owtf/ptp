@@ -20,6 +20,7 @@ SIGNATURES = {
     'Htaccess Bypass': MEDIUM,
     'Cross Site Scripting': MEDIUM,
     'CRLF Injection': MEDIUM,
+    'CRLF': MEDIUM,
 
     # Low ranked vulnerabilities
     'File Handling': LOW,  # a.k.a Path or Directory listing
