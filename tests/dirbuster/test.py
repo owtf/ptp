@@ -4,14 +4,14 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import INFO, HIGH
+from libptp.constants import LOW, HIGH
 
 
 __testname__ = 'dirbuster'
 
 
 REPORTS = {
-        'DirBuster-Report-info.txt': INFO,
+        'DirBuster-Report-low.txt': LOW,
         'DirBuster-Report-high.txt': HIGH,
 }
 
