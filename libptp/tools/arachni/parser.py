@@ -19,7 +19,7 @@ class ArachniXMLParser(XMLParser):
     #: :class:`str` -- Format of Arachni reports it supports.
     __format__ = 'xml'
     #: :class:`list` -- Arachni versions it supports.
-    __version__ = ['0.4.6']
+    __version__ = ['0.4.6', '0.4.7']
 
     def __init__(self, pathname):
         XMLParser.__init__(self, pathname)
