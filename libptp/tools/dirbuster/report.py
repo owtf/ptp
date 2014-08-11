@@ -16,8 +16,8 @@ class DirbusterReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'dirbuster'
-    #: :class:`dict` -- Available parsers for DirBuster.
-    __parsers__ = {DirbusterParser: '1.0-RC1'}
+    #: :class:`list` -- Available parsers for DirBuster.
+    __parsers__ = [DirbusterParser]
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)

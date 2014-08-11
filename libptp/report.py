@@ -29,7 +29,7 @@ class AbstractReport(object):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = None
-    #: :class:`dict` -- Available parsers for the tool.
+    #: :class:`tuple` -- Available parsers for the tool.
     __parsers__ = None
 
     def __init__(self, vulns=None):
@@ -58,7 +58,7 @@ class AbstractReport(object):
     def _is_parser(cls, parsers, *args, **kwargs):
         """Check if a parser exists for that report.
 
-        :param :class:`AbstractParser` parsers: The available parsers of this
+        :param :class:`list` parsers: The available parsers of this
             class.
         :param list args: Arguments that will be pass to the parser.
         :param dict kwargs: Arguments that will be pass to the parser.
@@ -68,7 +68,7 @@ class AbstractReport(object):
 
         """
         if parsers is not None:
-            for parser in iter(parsers):
+            for parser in parsers:
                 if parser.is_mine(*args, **kwargs):
                     return True
         return False
@@ -108,7 +108,7 @@ class AbstractReport(object):
             that version of the tool.
 
         """
-        for parser in iter(self.__parsers__):
+        for parser in self.__parsers__:
             try:
                 if parser.is_mine(*args, **kwargs):
                     self.parser = parser(*args, **kwargs)

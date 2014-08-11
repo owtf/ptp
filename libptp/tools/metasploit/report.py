@@ -16,8 +16,8 @@ class MetasploitReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'metasploit'
-    #: :class:`dict` -- Available parsers for Metasploit.
-    __parsers__ = {MetasploitParser: ''}
+    #: :class:`list` -- Available parsers for Metasploit.
+    __parsers__ = [MetasploitParser]
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)

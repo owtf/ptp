@@ -17,8 +17,8 @@ class W3AFReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'w3af'
-    #: :class:`dict` -- Available parsers for W3AF.
-    __parsers__ = {W3AFXMLParser: '1.6.0.2'}
+    #: :class:`list` -- Available parsers for W3AF.
+    __parsers__ = [W3AFXMLParser]
 
     HIGH = 'High'
     MEDIUM = 'Medium'

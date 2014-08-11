@@ -16,8 +16,8 @@ class NmapReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'nmap'
-    #: :class:`dict` -- Available parsers for Nmap.
-    __parsers__ = {NmapXMLParser: '6.46'}
+    #: :class:`list` -- Available parsers for Nmap.
+    __parsers__ = [NmapXMLParser]
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)

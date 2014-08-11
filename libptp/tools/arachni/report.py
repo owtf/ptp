@@ -17,8 +17,8 @@ class ArachniReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'arachni'
-    #: :class:`dict` -- Available parsers for Arachni.
-    __parsers__ = {ArachniXMLParser: '0.4.6'}
+    #: :class:`list` -- Available parsers for Arachni.
+    __parsers__ = [ArachniXMLParser]
 
     HIGH = 'High'
     MEDIUM = 'Medium'

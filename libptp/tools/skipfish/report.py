@@ -20,8 +20,8 @@ class SkipfishReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'skipfish'
-    #: :class:`dict` -- Available parsers for Skipfish.
-    __parsers__ = {SkipfishJSParser: '2.10b'}
+    #: :class:`list` -- Available parsers for Skipfish.
+    __parsers__ = [SkipfishJSParser]
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
 

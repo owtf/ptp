@@ -16,11 +16,8 @@ class WapitiReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
-    #: :class:`dict` -- Available parsers for Wapiti.
-    __parsers__ = {
-        WapitiXMLParser: '2.3.0',
-        Wapiti221XMLParser: '2.2.1',
-        }
+    #: :class:`list` -- Available parsers for Wapiti.
+    __parsers__ = [WapitiXMLParser, Wapiti221XMLParser]
 
     def __init__(self, *args, **kwargs):
         AbstractReport.__init__(self, *args, **kwargs)
