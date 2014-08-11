@@ -73,24 +73,6 @@ class AbstractReport(object):
                     return True
         return False
 
-    @classmethod
-    def check_version(cls, metadata, key='version'):
-        """Checks the version from the metadata against the supported ones.
-
-        :param dict metadata: The metadata in which to find the version.
-        :param str key: The :attr:`metadata` key containing the version value.
-        :return: `True` if it support that version, `False` otherwise.
-        :rtype: :class:`bool`
-
-        """
-        try:
-            parsers = cls.__parsers__.itervalues()
-        except AttributeError:  # Python3 then.
-            parsers = cls.__parsers__.values()
-        if metadata[key] in parsers:
-            return True
-        return False
-
     @staticmethod
     def _recursive_find(pathname='./', file_regex='*', early_break=True):
         """Retrieve the full path to the report.
