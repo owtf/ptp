@@ -18,6 +18,7 @@ from libptp.tools.metasploit.report import MetasploitReport
 from libptp.tools.dirbuster.report import DirbusterReport
 from libptp.tools.nmap.report import NmapReport
 from libptp.tools.owasp.cm008.report import OWASPCM008Report
+from libptp.tools.robots.report import RobotsReport
 
 
 class PTP(object):
@@ -40,7 +41,8 @@ class PTP(object):
         'metasploit': MetasploitReport,
         'dirbuster': DirbusterReport,
         'nmap': NmapReport,
-        'owasp-cm-008': OWASPCM008Report}
+        'owasp-cm-008': OWASPCM008Report,
+        'robots': RobotsReport}
 
     def __init__(self, tool_name=None):
         self.tool_name = tool_name
