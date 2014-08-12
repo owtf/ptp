@@ -34,10 +34,19 @@ if __name__ == '__main__':
 + dirbuster (1.0-RC1)
     + Rankings
 + metasploit
-    + Rankings
-        + Scanner modules
+    + Scanner modules
+        + Rankings
+    + DoS modules
+        + Rankings
+    + Exploit modules
+        + Rankings
 + nmap (XML report)
     + Metadata
++ owasp
+    + OWASP-CM-008
+        + Rankings
++ robots.txt
+    + Rankings
 + skipfish (2.10b)
     + Metadata
     + Rankings
