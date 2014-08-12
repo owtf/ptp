@@ -17,6 +17,7 @@ from libptp.tools.wapiti.report import WapitiReport
 from libptp.tools.metasploit.report import MetasploitReport
 from libptp.tools.dirbuster.report import DirbusterReport
 from libptp.tools.nmap.report import NmapReport
+from libptp.tools.owasp.cm008.report import OWASPCM008Report
 
 
 class PTP(object):
@@ -38,7 +39,8 @@ class PTP(object):
         'wapiti': WapitiReport,
         'metasploit': MetasploitReport,
         'dirbuster': DirbusterReport,
-        'nmap': NmapReport,}
+        'nmap': NmapReport,
+        'owasp-cm-008': OWASPCM008Report}
 
     def __init__(self, tool_name=None):
         self.tool_name = tool_name
