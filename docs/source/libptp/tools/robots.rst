@@ -1,17 +1,17 @@
-Metasploit
+Robots.txt
 **********
 
-.. currentmodule:: libptp.tools.metasploit.report
+.. currentmodule:: libptp.tools.robots.report
 
-.. autoclass:: MetasploitReport
+.. autoclass:: RobotsReport
     :members:
 
     .. autoattribute:: __tool__
     .. autoattribute:: __parsers__
 
-.. currentmodule:: libptp.tools.metasploit.parser
+.. currentmodule:: libptp.tools.robots.parser
 
-.. autoclass:: MetasploitParser
+.. autoclass:: RobotsParser
     :members:
 
     .. autoattribute:: __tool__
