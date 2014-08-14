@@ -89,7 +89,6 @@ class SkipfishReport(AbstractReport):
             raise ReportNotFoundError('The report file is not found.')
         self.reportfile = reportfile[0]
         # Find the corresponding parser.
-        # FIXME: Find a nice way to check for a correct parser.
         self._init_parser(self.metadatafile, self.reportfile)
         # Parser everything.
         self.metadata = self.parser.parse_metadata()

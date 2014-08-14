@@ -21,7 +21,6 @@ class OWASPCM008Parser(LineParser):
     def __init__(self, fullpath):
         LineParser.__init__(self, fullpath)
 
-    # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath):
         try:
@@ -32,7 +31,6 @@ class OWASPCM008Parser(LineParser):
             return True
         return False
 
-    # TODO: Properly retrieve the metadatas.
     def parse_metadata(self):
         return {
             'date': line.lstrip('Date: ')

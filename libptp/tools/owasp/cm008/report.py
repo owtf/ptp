@@ -50,5 +50,4 @@ class OWASPCM008Report(AbstractReport):
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
         self.vulns = self.parser.parse_report()
-        # TODO: Return something like an unified version of the report.
         return self.vulns

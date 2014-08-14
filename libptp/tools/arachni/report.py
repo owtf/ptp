@@ -73,5 +73,4 @@ class ArachniReport(AbstractReport):
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
         self.vulns = self.parser.parse_report(self.RANKING_SCALE)
-        # TODO: Return something like an unified version of the report.
         return self.vulns

@@ -26,7 +26,6 @@ class RobotsParser(LineParser):
         """
         LineParser.__init__(self, fullpath)
 
-    # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath, filename='*.txt'):
         try:
