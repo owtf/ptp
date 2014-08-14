@@ -1,8 +1,8 @@
 """
 
-    Wapiti does not provide ranking for the vulnerabilities it has found.
-    This file tries to define a ranking for every vulnerability Wapiti might
-    find.
+:synopsis: Wapiti does not provide ranking for the vulnerabilities it has
+    found. This file tries to define a ranking for every vulnerability Wapiti
+    might find.
 
 """
 

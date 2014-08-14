@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for Nmap.
+:synopsis: Specialized Report class for the tool Nmap.
 
 .. moduleauthor:: Tao Sauvage
 

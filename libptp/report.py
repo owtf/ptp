@@ -1,8 +1,7 @@
 """
 
-.. module:: report
-    :synopsis: The Report class will be the summary of a complete report
-        provided by a pentesting tool.
+:synopsis: Define the basic report classes that will represent the data from
+    the report file(s).
 
 .. moduleauthor:: Tao Sauvage
 

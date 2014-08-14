@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for Skipfish.
+:synopsis: Specialized Report class for Skipfish.
 
 .. moduleauthor:: Tao Sauvage
 

@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for Wapiti.
+:synopsis: Specialized Report class for Wapiti.
 
 .. moduleauthor:: Tao Sauvage
 

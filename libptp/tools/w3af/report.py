@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for W3AF.
+:synopsis: Specialized Report class for W3AF.
 
 .. moduleauthor:: Tao Sauvage
 

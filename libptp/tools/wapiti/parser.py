@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for Wapiti.
+:synopsis: Specialized Parser classes for Wapiti.
 
 .. moduleauthor:: Tao Sauvage
 

@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for OWASP-CM-008.
+:synopsis: Specialized Parser classes for OWASP-CM-008.
 
 .. moduleauthor:: Tao Sauvage
 

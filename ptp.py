@@ -1,7 +1,6 @@
 """
 
-.. module:: ptp
-    :synopsis: PTP library.
+:synopsis: PTP library entry point that exposes the public available functions.
 
 .. moduleauthor:: Tao Sauvage
 

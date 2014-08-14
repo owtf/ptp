@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for Arachni.
+:synopsis: Specialized Parser classes for the tool Arachni.
 
 .. moduleauthor:: Tao Sauvage
 

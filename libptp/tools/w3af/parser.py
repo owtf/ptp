@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for W3AF.
+:synopsis: Specialized Parser classes for W3AF.
 
 .. moduleauthor:: Tao Sauvage
 

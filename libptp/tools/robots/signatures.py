@@ -1,7 +1,7 @@
 """
 
-    Robots.txt might contains interesting Disallow entries.
-    This file tries to define a ranking for them.
+:synopsis: Robots.txt might contains interesting Disallow entries. This file
+    tries to define a ranking for them.
 
 """
 

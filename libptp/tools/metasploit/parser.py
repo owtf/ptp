@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for Metasploit.
+:synopsis: Specialized Parser classes for Metasploit.
 
 .. moduleauthor:: Tao Sauvage
 

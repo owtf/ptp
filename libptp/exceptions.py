@@ -1,7 +1,6 @@
 """
 
-.. module:: exceptions
-    :synopsis: Custom exceptions for PTP.
+:synopsis: Custom exceptions used across the :mod:`ptp` library.
 
 .. moduleauthor:: Tao Sauvage
 

@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for Reports.txt.
+:synopsis: Specialized Report class for Reports.txt.
 
 .. moduleauthor:: Tao Sauvage
 

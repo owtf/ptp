@@ -1,8 +1,9 @@
 """
 
-    OWASP-CM-008 does not provide ranking for the HTTP allowed methods  it has
-    found.
-    This file tries to define a ranking for each possible method.
+:synopsis: OWASP-CM-008 does not provide ranking for the HTTP allowed methods
+    it has found. This file tries to define a ranking for each possible method.
+
+.. moduleauthor:: Tao Sauvage
 
 """
 

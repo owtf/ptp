@@ -1,8 +1,10 @@
 """
 
-    DirBuster does not provide ranking for the vulnerabilities it has found.
-    This file tries to define a ranking for every DirBuster's discoveries it
-    might find.
+:synopsis: DirBuster does not provide ranking for the vulnerabilities it has
+    found. This file tries to define a ranking for every DirBuster's
+    discoveries it might find.
+
+.. moduleauthor:: Tao Sauvage
 
 """
 

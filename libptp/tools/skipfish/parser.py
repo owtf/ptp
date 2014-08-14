@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for Skipfish.
+:synopsis: Specialized Parser classes for Skipfish.
 
 .. moduleauthor:: Tao Sauvage
 

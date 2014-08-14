@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for DirBuster.
+:synopsis: Specialized Report class for the tool DirBuster.
 
 .. moduleauthor:: Tao Sauvage
 

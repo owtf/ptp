@@ -1,8 +1,7 @@
 """
 
-.. module:: parser
-    :synopsis: The Parser class will extract the information contained in a
-        report.
+:synopsis: Define the basic parser classes that will parse the data from the
+    report file(s).
 
 .. moduleauthor:: Tao Sauvage
 

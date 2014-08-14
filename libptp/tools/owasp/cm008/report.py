@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for OWASP-CM-008 test.
+:synopsis: Specialized Report class for OWASP-CM-008 test.
 
 .. moduleauthor:: Tao Sauvage
 

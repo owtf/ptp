@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for DirBuster.
+:synopsis: Specialized Parser classes for the tool DirBuster.
 
 .. moduleauthor:: Tao Sauvage
 

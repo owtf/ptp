@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for Metasploit.
+:synopsis: Specialized Report class for Metasploit.
 
 .. moduleauthor:: Tao Sauvage
 

@@ -1,7 +1,6 @@
 """
 
-.. module:: report
-    :synopsis: Specialized Report class for Arachni.
+:synopsis: Specialized Report class for the tool Arachni.
 
 .. moduleauthor:: Tao Sauvage
 

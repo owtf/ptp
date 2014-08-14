@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for Robots.txt.
+:synopsis: Specialized Parser class for Robots.txt.
 
 .. moduleauthor:: Tao Sauvage
 

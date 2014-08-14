@@ -1,7 +1,6 @@
 """
 
-.. module:: constants
-    :synopsis: Constants used across the PTP library.
+:synopsis: Constants used across the :mod:`ptp` library.
 
 .. moduleauthor:: Tao Sauvage
 

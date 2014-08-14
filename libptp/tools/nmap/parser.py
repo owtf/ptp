@@ -1,7 +1,6 @@
 """
 
-.. module:: parser
-    :synopsis: Specialized Parser classes for Nmap.
+:synopsis: Specialized Parser classes for the tool Nmap.
 
 .. moduleauthor:: Tao Sauvage
 
