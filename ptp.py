@@ -22,7 +22,7 @@ from libptp.tools.robots.report import RobotsReport
 
 class PTP(object):
 
-    """PTP class definition aiming to help users to use `libptp`.
+    """PTP class exposing the PTP's public API.
 
     Example::
 
@@ -31,7 +31,7 @@ class PTP(object):
 
     """
 
-    #: Dictionary linking the tools to their report classes.
+    #: :class:`dict` -- Dict linking the supported tools with their reports.
     supported = {
         'arachni': ArachniReport,
         'skipfish': SkipfishReport,
@@ -44,21 +44,32 @@ class PTP(object):
         'robots': RobotsReport}
 
     def __init__(self, tool_name=''):
+        """Initialize a PTP instance.
+
+        :param str tool_name: help PTP by specifying the name of the tool that
+            has generated the target report.
+
+        """
         self.tool_name = tool_name
         self.report = None
 
     def parse(self, *args, **kwargs):
         """Parse a tool report.
 
-        :param pathname: The path to the report.
-        :type pathname: str.
-        :raises: NotSupportedToolError
+        :param list \*args: List of arguments that are needed by the specific
+            report.
+        :param dict \*\*kwargs: Dict of arguments that are needed by the
+            specific report.
+        :raises NotSupportedToolError: if the tool that has generated the
+            report is not supported by PTP.
 
-        :returns: list -- The list of dictionaries of the results found in the
-                  report.
+        :return: The list of dictionaries of the results found in the report.
+        :rtype: :class:`list`
 
         """
-        if self.tool_name is None:
+        if not self.tool_name:
+            # Since no tool name has been specified by the user, try to
+            # automatically detect it.
             try:
                 supported = self.supported.itervalues()
             except AttributeError:  # Python3 then.
@@ -78,14 +89,15 @@ class PTP(object):
         return self.report.parse(*args, **kwargs)
 
     def get_highest_ranking(self):
-        """Retrieve the highest ranked vulnerability level from the report.
+        """Retrieve the rank of the most critical discovery.
 
-        :returns: int -- The highest ranked vulnerability level.
+        :return: The most critical rank value.
+        :rtype: :class:`int`
 
         .. note::
 
-            The `level` starts from `0` to `n` where `n` represents the highest
-            risk.
+            The rank value starts from `0` to `n` where `n` represents the
+            most critical risk.
 
         """
         if self.report:
