@@ -15,32 +15,49 @@ class MetasploitParser(FileParser):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'metasploit'
-    #: :class:`str` -- Format of Metasploit reports it supports.
-    __format__ = 'metasploit'
-    #: :class:`list` -- Metasploit versions it supports.
-    __version__ = ['']
-    #: :class:`str` -- Metasploit plugin full name.
+    #: :class:`str` -- Name of the Metasploit module.
     __plugin__ = ''
 
     def __init__(self, fullpath, plugin=''):
+        """Initialize MetasploitParser.
+
+        :param str fullpath: Full path to the report file.
+        :param str plugin: Name of the plugin that generated the report.
+
+        """
         FileParser.__init__(self, fullpath)
         self.__plugin__ = plugin
 
-    # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath, plugin=''):
+        """Check if it is a supported Metasploit report.
+
+        :param str fullpath: Full path to the report file.
+        :param str plugin: Name of the plugin that generated the report.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
+        # TODO: Properly check the supported versions.
         if plugin:
             return True
         return False
 
-    # TODO: Properly retrieve the metadatas.
     def parse_metadata(self):
+        """Parse the metadata of the report.
+
+        :return: The metadata of the report.
+        :rtype: dict
+
+        """
+        # TODO: Properly retrieve the metadata.
         return {}
 
     def parse_report(self):
-        """Parser the results of a Metasploit plugin.
+        """Parse the results of the report.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         """

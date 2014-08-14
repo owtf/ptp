@@ -22,9 +22,19 @@ class MetasploitReport(AbstractReport):
         """Initialize MetasploitReport."""
         AbstractReport.__init__(self)
 
-    # TODO: Properly check if it is a Metasploit report.
     @classmethod
     def is_mine(cls, pathname, filename='*.txt', plugin=''):
+        """Check if it is a Metasploit report and if it can handle it.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+        :param str plugin: Name of the plugin that generated the report.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
+        # TODO: Properly check if it is a Metasploit report.
         if plugin:
             return True
         return False
@@ -34,6 +44,7 @@ class MetasploitReport(AbstractReport):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param str plugin: Name of the plugin that generated the report.
 
         :return: List of dicts where each one represents a vuln.
         :rtype: :class:`list`

@@ -11,6 +11,7 @@ from libptp.constants import HIGH, MEDIUM, LOW, INFO
 
 
 # TODO: Complete the signatures database.
+#: :data: :class:`dict` of the modules with their rank.
 SIGNATURES = {
     # Metasploit's scanner modules.
     'auxiliary/scanner/ftp/anonymous': {
