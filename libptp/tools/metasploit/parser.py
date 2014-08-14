@@ -13,9 +13,7 @@ from libptp.tools.metasploit.signatures import SIGNATURES
 class MetasploitParser(FileParser):
     """Metasploit specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'metasploit'
-    #: :class:`str` -- Name of the Metasploit module.
     __plugin__ = ''
 
     def __init__(self, fullpath, plugin=''):

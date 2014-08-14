@@ -16,11 +16,8 @@ from libptp.parser import XMLParser
 class ArachniXMLParser(XMLParser):
     """Arachni XML specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'arachni'
-    #: :class:`str` -- Format of Arachni reports it supports.
     __format__ = 'xml'
-    #: :class:`list` -- Versions of Arachni that are supported.
     __version__ = ['0.4.6', '0.4.7']
 
     HIGH = 'High'
@@ -28,7 +25,6 @@ class ArachniXMLParser(XMLParser):
     LOW = 'Low'
     INFO = 'Informational'
 
-    #: :class:`dict` -- Convert the Arachni's ranking scale to an unified one.
     RANKING_SCALE = {
         HIGH: constants.HIGH,
         MEDIUM: constants.MEDIUM,

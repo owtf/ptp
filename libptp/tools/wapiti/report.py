@@ -13,9 +13,7 @@ from libptp.tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
 class WapitiReport(AbstractReport):
     """Retrieve the information of a Wapiti report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
-    #: :class:`list` -- Available parsers for Wapiti.
     __parsers__ = [WapitiXMLParser, Wapiti221XMLParser]
 
     def __init__(self):

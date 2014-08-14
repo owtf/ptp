@@ -13,9 +13,7 @@ from libptp.tools.dirbuster.parser import DirbusterParser
 class DirbusterReport(AbstractReport):
     """Retrieve the information of a DirBuster report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'dirbuster'
-    #: :class:`list` -- Available parsers for DirBuster.
     __parsers__ = [DirbusterParser]
 
     def __init__(self):

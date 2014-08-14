@@ -13,9 +13,7 @@ from libptp.tools.robots.parser import RobotsParser
 class RobotsReport(AbstractReport):
     """Retrieve the information of a Robots.txt report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'robots'
-    #: :class:`list` -- Available parsers for robots.txt.
     __parsers__ = [RobotsParser]
 
     def __init__(self):

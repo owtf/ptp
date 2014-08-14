@@ -15,11 +15,8 @@ from libptp.tools.dirbuster.signatures import DIRECTORIES, FILES
 class DirbusterParser(LineParser):
     """DirBuster specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'dirbuster'
-    #: :class:`str` -- Format of DirBuster reports it supports.
     __format__ = 'dirbuster'
-    #: :class:`list` -- DirBuster versions it supports.
     __version__ = ['1.0-RC1']
 
     #: :class:`str` -- Regex matching DirBuster section separator.

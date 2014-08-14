@@ -13,9 +13,7 @@ from libptp.tools.metasploit.parser import MetasploitParser
 class MetasploitReport(AbstractReport):
     """Retrieve the information of a Metasploit report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'metasploit'
-    #: :class:`list` -- Available parsers for Metasploit.
     __parsers__ = [MetasploitParser]
 
     def __init__(self):

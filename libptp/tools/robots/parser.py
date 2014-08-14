@@ -14,9 +14,7 @@ from libptp.tools.robots.signatures import SIGNATURES
 class RobotsParser(LineParser):
     """Robots specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'robots'
-    #: :class:`str` -- Format of Robots reports it supports.
     __format__ = 'txt'
 
     def __init__(self, fullpath):

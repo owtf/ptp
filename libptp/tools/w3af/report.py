@@ -13,9 +13,7 @@ from libptp.tools.w3af.parser import W3AFXMLParser
 class W3AFReport(AbstractReport):
     """Retrieve the information of a W3AF report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'w3af'
-    #: :class:`list` -- Available parsers for W3AF.
     __parsers__ = [W3AFXMLParser]
 
     def __init__(self, *args, **kwargs):

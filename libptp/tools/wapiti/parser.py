@@ -17,11 +17,8 @@ from libptp.tools.wapiti.signatures import SIGNATURES
 class WapitiXMLParser(XMLParser):
     """Wapiti XML specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
-    #: :class:`str` -- Format of Wapiti reports it supports.
     __format__ = 'xml'
-    #: :class:`list` -- Wapiti versions it supports.
     __version__ = ['2.3.0']
 
     def __init__(self, fullpath):

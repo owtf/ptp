@@ -16,7 +16,6 @@ from libptp.tools.owasp.cm008.signatures import SIGNATURES
 class OWASPCM008Parser(LineParser):
     """OWASPCM008 specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'owasp-cm-008'
 
     def __init__(self, fullpath):

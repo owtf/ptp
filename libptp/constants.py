@@ -7,17 +7,17 @@
 """
 
 
-#: :class:`int` Ranking value of an unknown/unranked vulnerability.
+#: :class:`int` Value of an unknown/unranked vulnerability.
 UNKNOWN = 0
-#: :class:`int` Ranking value of an informational risk vulnerability.
+#: :class:`int` Value of an informational risk vulnerability.
 INFO = 1
-#: :class:`int` Ranking value of a low risk vulnerability.
+#: :class:`int` Value of a low risk vulnerability.
 LOW = 2
-#: :class:`int` Ranking value of a medium risk vulnerability.
+#: :class:`int` Value of a medium risk vulnerability.
 MEDIUM = 3
-#: :class:`int` Ranking value of a high risk vulnerability.
+#: :class:`int` Value of a high risk vulnerability.
 HIGH = 4
 
-#: :class:`dict` Unified scale of the ranking values.
+#: :class:`dict` PTP's scale of the ranking values.
 RANKING_SCALE = {
     HIGH: HIGH, MEDIUM: MEDIUM, LOW: LOW, INFO: INFO, UNKNOWN: UNKNOWN}

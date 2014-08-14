@@ -13,9 +13,7 @@ from libptp.tools.owasp.cm008.parser import OWASPCM008Parser
 class OWASPCM008Report(AbstractReport):
     """Retrieve the information of the OWASP-CM-008 test."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'owasp-cm-008'
-    #: :class:`list` -- Available parsers for OWASP-CM-008.
     __parsers__ = [OWASPCM008Parser]
 
     def __init__(self):

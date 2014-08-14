@@ -14,11 +14,8 @@ from libptp.tools.nmap.signatures import SIGNATURES
 
 class NmapXMLParser(XMLParser):
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'nmap'
-    #: :class:`str` -- Format of Nmap reports it supports.
     __format__ = 'xml'
-    #: :class:`list` -- Nmap versions it supports.
     __version__ = ['6.46']
 
     def __init__(self, fullpath):

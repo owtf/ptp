@@ -13,9 +13,7 @@ from libptp.tools.nmap.parser import NmapXMLParser
 class NmapReport(AbstractReport):
     """Retrieve the information of a Nmap report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'nmap'
-    #: :class:`list` -- Available parsers for Nmap.
     __parsers__ = [NmapXMLParser]
 
     def __init__(self):

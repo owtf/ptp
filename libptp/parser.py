@@ -1,7 +1,7 @@
 """
 
 :synopsis: Define the basic parser classes that will parse the data from the
-    report file(s).
+    report file.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -45,7 +45,7 @@ class AbstractParser(object):
 
     @classmethod
     def handle_file(cls, fullpath):
-        """Process the report file(s) in order to create an i/o stream.
+        """Process the report file.
 
         :param str fullpath: Full path to the report file.
 
@@ -96,7 +96,7 @@ class AbstractParser(object):
             '`parse_metadata` function MUST be define for each parser.')
 
     def parse_report(self):
-        """Parse the results of a report file(s).
+        """Parse the results of a report file.
 
         :raises: :class:`NotImplementedError` because this is an abstract
             method.
@@ -108,10 +108,10 @@ class AbstractParser(object):
 
 class XMLParser(AbstractParser):
 
-    """Specialized parser for XML formatted report file(s).
+    """Specialized parser for XML formatted report files.
 
-    Define the special :func:`handle_file` function in order to process XML
-    report file(s).
+    Define the special :func:`handle_file` function in order to process the XML
+    report file.
 
     """
 
@@ -128,7 +128,7 @@ class XMLParser(AbstractParser):
 
     @classmethod
     def handle_file(cls, fullpath):
-        """Specialized file handler for XML files.
+        """Return the root node of the XML file.
 
         :param str fullpath: path to the report file.
         :raises ValueError: if the report file has not the right extension.
@@ -148,8 +148,8 @@ class FileParser(AbstractParser):
 
     """Specialized parser for generic report file(s).
 
-    Define the special :func:`handle_file` function in order to process generic
-    report file(s).
+    Define the special :func:`handle_file` function in order to process the
+    generic report file.
 
     """
 
@@ -163,7 +163,7 @@ class FileParser(AbstractParser):
 
     @classmethod
     def handle_file(cls, fullpath):
-        """Specialized file handler for generic file(s).
+        """Return a string of the content of the file.
 
         :param str fullpath: full path to the report file.
         :raises OSError: if an error occurs when opening/reading the report
@@ -182,10 +182,10 @@ class FileParser(AbstractParser):
 
 
 class LineParser(AbstractParser):
-    """Specialized parser for generic report file(s).
+    """Specialized parser for generic report files.
 
-    Define the special :func:`handle_file` function in order to process generic
-    report file(s).
+    Define the special :func:`handle_file` function in order to process the
+    generic report file.
 
     .. note::
 
@@ -204,7 +204,7 @@ class LineParser(AbstractParser):
 
     @classmethod
     def handle_file(cls, fullpath, skip_empty=True):
-        """Specialized file handler for general files read line by line.
+        """Return a list of the lines of the file.
 
         :param str fullpath: path to the report file.
         :param bool skip_empty: skip the empty lines that can occur in the

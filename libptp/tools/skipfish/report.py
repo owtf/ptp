@@ -16,9 +16,7 @@ from libptp.tools.skipfish.parser import SkipfishJSParser
 class SkipfishReport(AbstractReport):
     """Retrieve the information of a Skipfish report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'skipfish'
-    #: :class:`list` -- Available parsers for Skipfish.
     __parsers__ = [SkipfishJSParser]
 
     _reportfile = 'samples.js'

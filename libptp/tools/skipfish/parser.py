@@ -17,11 +17,8 @@ from libptp.parser import AbstractParser
 class SkipfishJSParser(AbstractParser):
     """Skipfish JS specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'skipfish'
-    #: :class:`str` -- Format of Skipfish reports it supports.
     __format__ = 'js'
-    #: :class:`list` -- Skipfish versions it supports.
     __version__ = ['2.10b']
 
     HIGH = 4
@@ -30,7 +27,6 @@ class SkipfishJSParser(AbstractParser):
     WARNINGS = 1
     INFO = 0
 
-    #: :class:`dict` -- Convert the Skipfish's ranking scale to an unified one.
     RANKING_SCALE = {
         HIGH: constants.HIGH,
         MEDIUM: constants.MEDIUM,
@@ -54,7 +50,7 @@ class SkipfishJSParser(AbstractParser):
 
     @classmethod
     def handle_file(cls, metadatafile, reportfile):
-        """Create handlers on the Skipfish report files.
+        """Process the two report files of the Skipfish report.
 
         :param str metadatafile: Path to the metadata file.
         :param str reportfile: Path to the report file.

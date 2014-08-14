@@ -13,9 +13,7 @@ from libptp.tools.arachni.parser import ArachniXMLParser
 class ArachniReport(AbstractReport):
     """Retrieve the information of an Arachni report."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'arachni'
-    #: :class:`list` -- Available parsers for Arachni.
     __parsers__ = [ArachniXMLParser]
 
     def __init__(self):

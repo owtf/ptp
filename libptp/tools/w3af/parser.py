@@ -18,11 +18,8 @@ from libptp.parser import XMLParser
 class W3AFXMLParser(XMLParser):
     """W3AF XML specialized parser."""
 
-    #: :class:`str` -- Name of the tool.
     __tool__ = 'w3af'
-    #: :class:`str` -- Format of W3AF reports it supports.
     __format__ = 'xml'
-    #: :class:`list` -- Versions of W3AF that are supported.
     __version__ = ['1.6.0.2', '1.6.0.3']
 
     HIGH = 'High'
@@ -30,7 +27,6 @@ class W3AFXMLParser(XMLParser):
     LOW = 'Low'
     INFO = 'Information'
 
-    #: :class:`dict` -- Convert the W3AF's ranking scale to an unified one.
     RANKING_SCALE = {
         HIGH: constants.HIGH,
         MEDIUM: constants.MEDIUM,
