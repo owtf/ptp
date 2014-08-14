@@ -21,26 +21,28 @@ class WapitiXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = ['2.3.0']
 
-    def __init__(self, fullpath):
+    def __init__(self, pathname, filename='*.xml'):
         """Initialize WapitiXMLParser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        XMLParser.__init__(self, fullpath)
+        XMLParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath):
+    def is_mine(cls, pathname, filename='*.xml'):
         """Check if it is a supported Wapiti report.
 
-        :param str fullpath: Path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
+            stream = cls.handle_file(pathname, filename)
         except (ValueError, LxmlError):
             return False
         raw_metadata = stream.find('.//report_infos')
@@ -113,26 +115,28 @@ class Wapiti221XMLParser(XMLParser):
     #: :class:`list` -- Wapiti versions it supports.
     __version__ = ['2.2.1']
 
-    def __init__(self, fullpath):
+    def __init__(self, pathname, filename='*.xml'):
         """Initialize Wapiti221XMLParser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        XMLParser.__init__(self, fullpath)
+        XMLParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath):
+    def is_mine(cls, pathname, filename='*.xml'):
         """Check if it is a supported Wapiti report.
 
-        :param str fullpath: Path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
+            stream = cls.handle_file(pathname, filename)
         except (ValueError, LxmlError):
             return False
         raw_metadata = stream.find('.//generatedBy')

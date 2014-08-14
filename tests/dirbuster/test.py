@@ -41,7 +41,7 @@ def run():
             ptp.parse(
                 pathname=os.path.join(os.getcwd(), 'tests/dirbuster/1.0'),
                 filename=report)
-            assert ptp.report.__tool__ == 'dirbuster'
+            assert ptp.parser.__tool__ == 'dirbuster'
         except Exception:
             print(traceback.format_exc())
             res = 'ko'

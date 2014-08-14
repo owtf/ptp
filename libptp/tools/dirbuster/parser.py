@@ -28,27 +28,29 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Regex matching DirBuster files status code.
     _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) responce:$"
 
-    def __init__(self, fullpath):
+    def __init__(self, pathname, filename='DirBuster-Report*'):
         """Initialize DirbusterParser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        LineParser.__init__(self, fullpath)
+        LineParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath):
+    def is_mine(cls, pathname, filename='DirBuster-Report*'):
         """Check if it is a supported DirBuster report.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
-        except (OSError, IOError):
+            stream = cls.handle_file(pathname, filename)
+        except (OSError, IOError, ValueError):
             return False
         if stream and re.match(cls._re_version, stream[0]):
             return True

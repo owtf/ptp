@@ -16,21 +16,23 @@ class MetasploitParser(FileParser):
     __tool__ = 'metasploit'
     __plugin__ = ''
 
-    def __init__(self, fullpath, plugin=''):
+    def __init__(self, pathname, filename='*.txt', plugin=''):
         """Initialize MetasploitParser.
 
-        :param str fullpath: Full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
 
         """
-        FileParser.__init__(self, fullpath)
         self.__plugin__ = plugin
+        FileParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath, plugin=''):
+    def is_mine(cls, pathname, filename='*.txt', plugin=''):
         """Check if it is a supported Metasploit report.
 
-        :param str fullpath: Full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
 
         :return: `True` if it supports the report, `False` otherwise.

@@ -18,26 +18,28 @@ class NmapXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = ['6.46']
 
-    def __init__(self, fullpath):
+    def __init__(self, pathname, filename='*.xml'):
         """Initialize NmapXMLParser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        XMLParser.__init__(self, fullpath)
+        XMLParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath):
+    def is_mine(cls, pathname, filename='*.xml'):
         """Check if it is a supported Nmap report.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
+            stream = cls.handle_file(pathname, filename)
         except ValueError:
             return False
         if stream.get('scanner') != cls.__tool__:

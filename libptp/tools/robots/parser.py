@@ -17,27 +17,29 @@ class RobotsParser(LineParser):
     __tool__ = 'robots'
     __format__ = 'txt'
 
-    def __init__(self, fullpath):
+    def __init__(self, pathname, filename='*.txt'):
         """Initialize RobotsParser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        LineParser.__init__(self, fullpath)
+        LineParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath, filename='*.txt'):
+    def is_mine(cls, pathname, filename='*.txt'):
         """Check if it is a supported robots.txt report.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
-        except (OSError, IOError):
+            stream = cls.handle_file(pathname, filename)
+        except (OSError, IOError, ValueError):
             return False
         if stream and stream[0].startswith('User-agent'):
             return True

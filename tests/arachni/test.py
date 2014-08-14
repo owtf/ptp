@@ -25,7 +25,7 @@ def run():
     res = 'ok'
     try:
         ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
-        assert ptp.report.__tool__ == 'arachni'
+        assert ptp.parser.__tool__ == 'arachni'
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

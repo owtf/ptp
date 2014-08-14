@@ -33,27 +33,29 @@ class W3AFXMLParser(XMLParser):
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, fullpath):
+    def __init__(self, pathname, filename='*.xml'):
         """Initialize W3AFXMLParser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        XMLParser.__init__(self, fullpath)
+        XMLParser.__init__(self, pathname, filename)
         self.re_version = re.compile(r'Version: (\S*)\s')
 
     @classmethod
-    def is_mine(cls, fullpath):
+    def is_mine(cls, pathname, filename='*.xml'):
         """Check if it is a supported W3AF report.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
+            stream = cls.handle_file(pathname, filename)
         except (ValueError, LxmlError):
             return False
         if stream.find('.//w3af-version') is None:

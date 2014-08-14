@@ -34,13 +34,23 @@ class SkipfishJSParser(AbstractParser):
         WARNINGS: constants.INFO,
         INFO: constants.INFO}
 
-    def __init__(self, metadatafile, reportfile):
+    _reportfile = 'samples.js'
+    _metadatafile = 'summary.js'
+
+    def __init__(self, pathname):
         """Initialize ArachniXMLParser.
 
-        :param str metadatafile: full path to the metadata file.
-        :param str reportfile: full path to the report file.
+        :param str pathname: Path to the report directory.
 
         """
+        metadatafile = self._recursive_find(pathname, self._metadatafile)
+        if not metadatafile:
+            return False
+        metadatafile = metadatafile[0]
+        reportfile = self._recursive_find(pathname, self._reportfile)
+        if not reportfile:
+            return False
+        reportfile = reportfile[0]
         self.metadata_stream, self.report_stream = self.handle_file(
             metadatafile, reportfile)
         self.re_metadata = re.compile(
@@ -73,16 +83,23 @@ class SkipfishJSParser(AbstractParser):
         return (metadata_stream, report_stream)
 
     @classmethod
-    def is_mine(cls, metadatafile, reportfile):
+    def is_mine(cls, pathname):
         """Check if it is a supported Skipfish report.
 
-        :param str metadatafile: Path to the metadata file.
-        :param str reportfile: Path to the report file.
+        :param str pathname: Path to the report directory.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
+        metadatafile = cls._recursive_find(pathname, cls._metadatafile)
+        if not metadatafile:
+            return False
+        metadatafile = metadatafile[0]
+        reportfile = cls._recursive_find(pathname, cls._reportfile)
+        if not reportfile:
+            return False
+        reportfile = reportfile[0]
         try:
             metadata_stream, report_stream = cls.handle_file(
                 metadatafile,

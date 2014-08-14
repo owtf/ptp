@@ -4,7 +4,6 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.tools.owasp.cm008.report import OWASPCM008Report
 from libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 
 
@@ -53,7 +52,7 @@ def run():
                         'tests/owasp/',
                         test),
                     )
-                assert ptp.report.__tool__ == 'owasp-cm-008'
+                assert ptp.parser.__tool__ == 'owasp-cm-008'
             except Exception:
                 print(traceback.format_exc())
                 res = 'ko'

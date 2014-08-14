@@ -27,7 +27,7 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
-        assert ptp.report.__tool__ == 'w3af'
+        assert ptp.parser.__tool__ == 'w3af'
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

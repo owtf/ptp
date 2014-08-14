@@ -6,18 +6,17 @@
 
 """
 
-
-from libptp.exceptions import NotSupportedToolError
-from libptp.constants import UNKNOWN
-from libptp.tools.arachni.report import ArachniReport
-from libptp.tools.skipfish.report import SkipfishReport
-from libptp.tools.w3af.report import W3AFReport
-from libptp.tools.wapiti.report import WapitiReport
-from libptp.tools.metasploit.report import MetasploitReport
-from libptp.tools.dirbuster.report import DirbusterReport
-from libptp.tools.nmap.report import NmapReport
-from libptp.tools.owasp.cm008.report import OWASPCM008Report
-from libptp.tools.robots.report import RobotsReport
+from libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
+from libptp.constants import UNKNOWN, RANKING_SCALE
+from libptp.tools.arachni.parser import ArachniXMLParser
+from libptp.tools.skipfish.parser import SkipfishJSParser
+from libptp.tools.w3af.parser import W3AFXMLParser
+from libptp.tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
+from libptp.tools.metasploit.parser import MetasploitParser
+from libptp.tools.dirbuster.parser import DirbusterParser
+from libptp.tools.nmap.parser import NmapXMLParser
+from libptp.tools.owasp.cm008.parser import OWASPCM008Parser
+from libptp.tools.robots.parser import RobotsParser
 
 
 class PTP(object):
@@ -31,19 +30,19 @@ class PTP(object):
 
     """
 
-    #: :class:`dict` -- Dict linking the supported tools with their reports.
+    #: :class:`dict` -- Dict linking the supported tools with their parsers.
     supported = {
-        'arachni': ArachniReport,
-        'skipfish': SkipfishReport,
-        'w3af': W3AFReport,
-        'wapiti': WapitiReport,
-        'metasploit': MetasploitReport,
-        'dirbuster': DirbusterReport,
-        'nmap': NmapReport,
-        'owasp-cm-008': OWASPCM008Report,
-        'robots': RobotsReport}
+        'arachni': [ArachniXMLParser],
+        'skipfish': [SkipfishJSParser],
+        'w3af': [W3AFXMLParser],
+        'wapiti': [WapitiXMLParser, Wapiti221XMLParser],
+        'metasploit': [MetasploitParser],
+        'dirbuster': [DirbusterParser],
+        'nmap': [NmapXMLParser],
+        'owasp-cm-008': [OWASPCM008Parser],
+        'robots': [RobotsParser]}
 
-    def __init__(self, tool_name=''):
+    def __init__(self, tool_name='', *args, **kwargs):
         """Initialize a PTP instance.
 
         :param str tool_name: help PTP by specifying the name of the tool that
@@ -51,14 +50,38 @@ class PTP(object):
 
         """
         self.tool_name = tool_name
-        self.report = None
+        self.parser = None
         self.vulns = []
+        if args or kwargs:
+            self._init_parser(*args, **kwargs)
+
+    def _init_parser(self, *args, **kwargs):
+        if not self.tool_name:
+            # Since no tool name has been specified by the user, try to
+            # automatically detect it.
+            try:
+                supported = self.supported.itervalues()
+            except AttributeError:  # Python3 then.
+                supported = self.supported.values()
+        else:
+            supported = [self.supported.get(self.tool_name)]
+        supported = [parser for parsers in supported for parser in parsers]
+
+        for parser in supported:
+            try:
+                if parser.is_mine(*args, **kwargs):
+                    self.parser = parser
+                    break
+            except TypeError:
+                pass
+            except NotSupportedVersionError:
+                pass
+        if self.parser:
+            self.parser = self.parser(*args, **kwargs)
 
     def parse(self, *args, **kwargs):
         """Parse a tool report.
 
-        :param list \*args: List of arguments that are needed by the specific
-            report.
         :param dict \*\*kwargs: Dict of arguments that are needed by the
             specific report.
         :raises NotSupportedToolError: if the tool that has generated the
@@ -68,33 +91,21 @@ class PTP(object):
         :rtype: :class:`list`
 
         """
-        if not self.tool_name:
-            # Since no tool name has been specified by the user, try to
-            # automatically detect it.
-            try:
-                supported = self.supported.itervalues()
-            except AttributeError:  # Python3 then.
-                supported = self.supported.values()
-            for tool in supported:
-                try:
-                    if tool.is_mine(*args, **kwargs):
-                        self.report = tool
-                        break
-                except TypeError:
-                    pass
-        else:
-            self.report = self.supported.get(self.tool_name)
-        if self.report is None:
+        if self.parser is None:
+            self._init_parser(*args, **kwargs)
+        if self.parser is None:
             raise NotSupportedToolError('This tool is not supported by PTP.')
-        self.report = self.report()  # Instantiate the report class.
-        self.tool_name = self.report.__tool__
-        self.vulns = self.report.parse(*args, **kwargs)
+        # Instantiate the report class.
+        self.tool_name = self.parser.__tool__
+        self.metadata = self.parser.parse_metadata()
+        self.vulns = self.parser.parse_report()
         return self.vulns
 
     def get_highest_ranking(self):
-        """Retrieve the rank of the most critical discovery.
+        """Return the highest ranking value of the report.
 
-        :return: The most critical rank value.
+        :return: the risk id of the highest ranked vulnerability
+            referenced in the report.
         :rtype: :class:`int`
 
         .. note::
@@ -103,6 +114,7 @@ class PTP(object):
             most critical risk.
 
         """
-        if self.report:
-            return self.report.get_highest_ranking()
-        return UNKNOWN
+        if not self.vulns:
+            return UNKNOWN
+        return max(
+            RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)

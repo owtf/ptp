@@ -27,7 +27,7 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/robots/reports'))
-        assert ptp.report.__tool__ == 'robots'
+        assert ptp.parser.__tool__ == 'robots'
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

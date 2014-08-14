@@ -33,7 +33,7 @@ def run():
                 os.getcwd(),
                 'tests/skipfish/2.10b/demo.testfire.net')
             )
-        assert ptp.report.__tool__ == 'skipfish'
+        assert ptp.parser.__tool__ == 'skipfish'
     except Exception:
         print(traceback.format_exc())
         res = 'ko'
@@ -68,7 +68,7 @@ def run():
                 os.getcwd(),
                 'tests/skipfish/2.10b/local.xss')
             )
-        assert ptp.report.__tool__ == 'skipfish'
+        assert ptp.parser.__tool__ == 'skipfish'
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

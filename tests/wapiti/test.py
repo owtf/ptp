@@ -27,8 +27,8 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'))
-        assert ptp.report.__tool__ == 'wapiti'
-        assert '2.3.0' in ptp.report.parser.__version__
+        assert ptp.parser.__tool__ == 'wapiti'
+        assert '2.3.0' in ptp.parser.__version__
     except Exception:
         print(traceback.format_exc())
         res = 'ko'
@@ -45,8 +45,7 @@ def run():
     print('\ttest parse():', end=' ')
     res = 'ok'
     try:
-        ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
+        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
     except Exception:
         print(traceback.format_exc())
         res = 'ko'
@@ -57,8 +56,8 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
-        assert ptp.report.__tool__ == 'wapiti'
-        assert '2.2.1' in ptp.report.parser.__version__
+        assert ptp.parser.__tool__ == 'wapiti'
+        assert '2.2.1' in ptp.parser.__version__
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

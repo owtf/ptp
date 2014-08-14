@@ -18,27 +18,29 @@ class OWASPCM008Parser(LineParser):
 
     __tool__ = 'owasp-cm-008'
 
-    def __init__(self, fullpath):
-        """Initialize ArachniXMLParser.
+    def __init__(self, pathname, filename='*.txt'):
+        """Initialize OWASPCM008Parser.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        LineParser.__init__(self, fullpath)
+        LineParser.__init__(self, pathname, filename)
 
     @classmethod
-    def is_mine(cls, fullpath):
+    def is_mine(cls, pathname, filename='*.txt'):
         """Check if it is a supported OWASP-CM-008 report.
 
-        :param str fullpath: full path to the report file.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(fullpath)
-        except (OSError, IOError):
+            stream = cls.handle_file(pathname, filename)
+        except (OSError, IOError, ValueError):
             return False
         if stream and stream[0].startswith('HTTP'):
             return True

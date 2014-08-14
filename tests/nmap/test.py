@@ -27,7 +27,7 @@ def run():
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/nmap/6.46'))
-        assert ptp.report.__tool__ == 'nmap'
+        assert ptp.parser.__tool__ == 'nmap'
     except Exception:
         print(traceback.format_exc())
         res = 'ko'

@@ -4,7 +4,6 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.tools.metasploit.report import MetasploitReport
 from libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 
 
