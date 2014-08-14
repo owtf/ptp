@@ -15,6 +15,7 @@ from libptp.tools.wapiti.signatures import SIGNATURES
 
 
 class WapitiXMLParser(XMLParser):
+    """Wapiti XML specialized parser."""
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
@@ -35,7 +36,7 @@ class WapitiXMLParser(XMLParser):
     def is_mine(cls, fullpath):
         """Check if it is a supported Wapiti report.
 
-        :param str pathname: Path to the report file.
+        :param str fullpath: Path to the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -56,13 +57,13 @@ class WapitiXMLParser(XMLParser):
         return True
 
     def parse_metadata(self):
-        """Parse the metadatas of the report.
-
-        :return: The metadatas of the report.
-        :rtype: dict
+        """Parse the metadata of the report.
 
         :raises: :class:`NotSupportedVersionError` -- if it does not support
             the version of this report.
+
+        :return: The metadata of the report.
+        :rtype: dict
 
         """
         # Find the metadata of Wapiti.
@@ -76,12 +77,12 @@ class WapitiXMLParser(XMLParser):
             self.metadata = metadata
         else:
             raise NotSupportedVersionError(
-                'PTP does NOT support this version of ' + self.__tool__ + '.')
+                'PTP does NOT support this version of Wapiti.')
 
     def parse_report(self):
         """Parse the results of the report.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         """
@@ -106,6 +107,7 @@ class WapitiXMLParser(XMLParser):
 
 
 class Wapiti221XMLParser(XMLParser):
+    """Wapiti XML specialized parser."""
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'wapiti'
@@ -126,7 +128,7 @@ class Wapiti221XMLParser(XMLParser):
     def is_mine(cls, fullpath):
         """Check if it is a supported Wapiti report.
 
-        :param str pathname: Path to the report file.
+        :param str fullpath: Path to the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -147,13 +149,13 @@ class Wapiti221XMLParser(XMLParser):
         return True
 
     def parse_metadata(self):
-        """Parse the metadatas of the report.
-
-        :return: The metadatas of the report.
-        :rtype: dict
+        """Parse the metadata of the report.
 
         :raises: :class:`NotSupportedVersionError` -- if it does not support
             the version of this report.
+
+        :return: The metadata of the report.
+        :rtype: dict
 
         """
         # Find the metadata of Wapiti.
@@ -165,12 +167,12 @@ class Wapiti221XMLParser(XMLParser):
             self.metadata = metadata
         else:
             raise NotSupportedVersionError(
-                'PTP does NOT support this version of ' + self.__tool__ + '.')
+                'PTP does NOT support this version of Wapiti.')
 
     def parse_report(self):
         """Parse the results of the report.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         """
