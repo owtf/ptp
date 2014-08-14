@@ -14,14 +14,13 @@ MyParser class
 ==============
 
 In order for :mod:`ptp` to correctly retrieve the information that are
-contained in a tool report, it needs a parser to will take care of the
-technical parsing stuff.
+contained in a tool report, it needs a specialized parser.
 
 Let's start by writing the skeleton of our parser class. Since we are aiming to
-support *MyTool*'s XML reports, :ref:`xmlparser-label` seems the best
-class from which to inherit ours.
+support *MyTool*'s XML reports, :ref:`xmlparser-label` seems to be the best
+class from which to inherit.
 
-The :ref:`xmlparser-label` already defines the
+The :ref:`xmlparser-label` already defines
 :meth:`libptpt.parser.XMLParser.handle_file` for us. This will initialize the
 :attr:`MyParser.stream` instance variable with a handle on the root node of the
 file.
@@ -77,22 +76,19 @@ specify the `__format__` class attribute, which is already set to `.xml`.
 
 .. note::
 
-    Both the `__format__` and the `__version__` attributes are not mandatory.
-    Some of :mod:`ptp`'s parsers, such as :ref:`RobotsParser
-    <robotsparser-class-label>`, do not have the `__version__` one.
+    Both the `__format__` and the `__version__` attributes are optional.
 
-    This can happen when no version can be found for the target tool (such as
-    robots.txt which has no version number).
+    For instance `__version__` is optional because some tools don't provide
+    such information (e.g. robots.txt).
 
 Matching the supported reports
 ==============================
 
-The next step is to write the :meth:`is_mine` class method. It will tell
-:mod:`ptp` if the report file it has in input is the one supported by our
-parser or not.
+The next step is to write the :meth:`is_mine` class method which tells
+:mod:`ptp` whether or not it can parse the report file.
 
-Let us say that in our case, *MyTool*'s XML report has the `<mytool
-version='x.x'>` tag as the root XML tag.
+Let us say that *MyTool*'s XML report has `<mytool version='x.x'>`
+as the root XML tag.
 
 Therefore, our :meth:`is_mine` function is:
 
@@ -133,8 +129,6 @@ Therefore, our :meth:`is_mine` function is:
                 return False
             return True
 
-Now we have to implement the parsing methods.
-
 Parsing methods
 ===============
 
@@ -148,9 +142,7 @@ two methods:
   :class:`list` of :class:`dict`.
 
 In order to keep it simple, we will not detail the implementations of these
-methods for our fake tool. We get the idea.
-
-All in all, we have our complete parser class for our wonderful `MytTool` tool.
+methods for our fake tool.
 
 .. code-block:: python
 
@@ -189,13 +181,10 @@ All in all, we have our complete parser class for our wonderful `MytTool` tool.
             return True
 
         def parse_metadata(self):
-            return {}
+            return {}  # The expected behavior is to return a dict.
 
         def parse_report(self):
-            return []
-
-Now that we have a parser for our tool, let us see how to write our first
-:doc:`libptp/report` class.
+            return []  # The expected behavior is to return a list.
 
 ==============
 MyReport class
@@ -226,12 +215,12 @@ the same convention as when writing the parser (see. the :ref:`Skeleton
 Default :meth:`is_mine` method
 ==============================
 
-The :class:`libptp.report.AbstractReport` already defines the default behavior
+:class:`libptp.report.AbstractReport` already defines the default behavior
 of the :meth:`libptp.report.AbstractReport.is_mine` class method. It consists
 in finding the first file matching the `filename` regex parameter and go
 through each of its parsers in order to find the right one.
 
-What we need to do is specify shuch filename regex and which parsers are
+What we need to do is specify such filename regex and which parsers are
 availables.
 
 .. code-block:: python
@@ -268,9 +257,8 @@ availables.
 Parse method
 ============
 
-Then, we need to override the :meth:`libptp.report.AbstractReport.parse`
-method. That will specify how to deal with the data that was retrieved by our
-parser.
+we need to override the :meth:`libptp.report.AbstractReport.parse` method. That
+will specify how to deal with the data that was retrieved by our parser.
 
 The first step is to first retrieve the report. Here we follow the simplest
 idea that is using the `filename` regex in order to retrieve the first report
@@ -290,7 +278,7 @@ file that matches.
                 return []
             self.fullpath = self.fullpath[0]
 
-Then we need to initialize the correct parser using
+Then we need to initialize the correct parser using the
 :meth:`libptp.report.AbstractReport._init_parser` method.
 
 .. code-block:: python
@@ -319,14 +307,14 @@ metadata and the discoveries listed in the XML report.
         def parse(self, pathname, filename='*.xml'):
             # Omitted unchanged code
 
-            # Parse specific stuff.
+            # Parse specific data.
             self.metadata = self.parser.parse_metadata()
             self.vulns = self.parser.parse_report()
             return self.vulns
 
 .. note::
 
-    The :meth:`parse` method must always return :class:`list` of the
+    The :meth:`parse` method must always return a :class:`list` of the
     discoveries.
 
 If we put all the pieces together, we end up with the following
@@ -379,12 +367,10 @@ If we put all the pieces together, we end up with the following
             self.fullpath = self.fullpath[0]
             # Find the corresponding parser.
             self._init_parser(self.fullpath)
-            # Parse specific stuff.
+            # Parse specific data.
             self.metadata = self.parser.parse_metadata()
             self.vulns = self.parser.parse_report()
             return self.vulns
-
-One more step and *MyTool* will be supported by :mod:`ptp`!
 
 ===============
 Tell :mod:`ptp`

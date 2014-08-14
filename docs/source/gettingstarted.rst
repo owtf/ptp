@@ -16,16 +16,14 @@ for the `OWASP - OWTF project <https://www.owasp.org/index.php/OWASP_OWTF>`_.
 But :mod:`ptp` tries to go even beyond the original idea.
 
 Apart from its main feature which is **ranking the results from any security
-reports**, it also provides an **unified way to reuse these reports directly in
-your python code**, without having to deal with complexe parsing.
+tools reports**, it also provides an **unified way to reuse these reports
+directly in your python code**, without having to deal with complexe parsing.
 
 .. note::
 
     When we say **any**, we mean that it is our ultimate goal. For now,
     :mod:`ptp` is in its early development phase and *only* supports a small
     amount of tools.
-
-Let us now see how to install and use :mod:`ptp`!
 
 ============
 Installation
@@ -39,9 +37,6 @@ In order to properly configure :mod:`ptp`, the following command should be run:
 .. code-block:: bash
 
     $ pip install -r ptp.pip
-
-Now that :mod:`ptp` is correctly installed, let us see what it offers as basic
-usages.
 
 ============
 Basic usages
@@ -57,7 +52,7 @@ Auto-detection mode
 ===================
 
 The simplest way to use :mod:`ptp` library is by using its **auto-detection
-mode**. This mode try to reduce as much as possible the usages for us by
+mode**. This mode tries to reduce as much as possible our work by
 auto-detecting which tool has generated a given report.
 
 That way, we do not have to bother knowing if the report we want to parse comes
