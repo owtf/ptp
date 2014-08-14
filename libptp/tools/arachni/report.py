@@ -72,5 +72,4 @@ class ArachniReport(AbstractReport):
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
         self.vulns = self.parser.parse_report(self.RANKING_SCALE)
-        print('#Debug Arachni parse', self.vulns)
         return self.vulns
