@@ -52,6 +52,7 @@ class PTP(object):
         """
         self.tool_name = tool_name
         self.report = None
+        self.vulns = []
 
     def parse(self, *args, **kwargs):
         """Parse a tool report.
@@ -86,7 +87,9 @@ class PTP(object):
         if self.report is None:
             raise NotSupportedToolError('This tool is not supported by PTP.')
         self.report = self.report()  # Instantiate the report class.
-        return self.report.parse(*args, **kwargs)
+        self.tool_name = self.report.__tool__
+        self.vulns = self.report.parse(*args, **kwargs)
+        return self.vulns
 
     def get_highest_ranking(self):
         """Retrieve the rank of the most critical discovery.
