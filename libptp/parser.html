@@ -59,7 +59,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Define the basic parser classes that will parse the data from the
-report file(s).</td>
+report file.</td>
 </tr>
 </tbody>
 </table>
@@ -115,7 +115,7 @@ tool will add its own parsing specificities.</p>
 <dl class="classmethod">
 <dt id="libptp.parser.AbstractParser.handle_file">
 <em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.handle_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Process the report file(s) in order to create an i/o stream.</p>
+<dd><p>Process the report file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -175,7 +175,7 @@ method.</td>
 <dl class="method">
 <dt id="libptp.parser.AbstractParser.parse_report">
 <tt class="descname">parse_report</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.parse_report" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse the results of a report file(s).</p>
+<dd><p>Parse the results of a report file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -207,9 +207,9 @@ method.</td>
 <dl class="class">
 <dt id="libptp.parser.XMLParser">
 <em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">XMLParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized parser for XML formatted report file(s).</p>
-<p>Define the special <a class="reference internal" href="#libptp.parser.XMLParser.handle_file" title="libptp.parser.XMLParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process XML
-report file(s).</p>
+<dd><p>Specialized parser for XML formatted report files.</p>
+<p>Define the special <a class="reference internal" href="#libptp.parser.XMLParser.handle_file" title="libptp.parser.XMLParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the XML
+report file.</p>
 <dl class="method">
 <dt id="libptp.parser.XMLParser.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
@@ -227,7 +227,7 @@ report file(s).</p>
 <dl class="classmethod">
 <dt id="libptp.parser.XMLParser.handle_file">
 <em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.handle_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized file handler for XML files.</p>
+<dd><p>Return the root node of the XML file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -260,8 +260,8 @@ report file(s).</p>
 <dt id="libptp.parser.FileParser">
 <em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">FileParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialized parser for generic report file(s).</p>
-<p>Define the special <a class="reference internal" href="#libptp.parser.FileParser.handle_file" title="libptp.parser.FileParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process generic
-report file(s).</p>
+<p>Define the special <a class="reference internal" href="#libptp.parser.FileParser.handle_file" title="libptp.parser.FileParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the
+generic report file.</p>
 <dl class="method">
 <dt id="libptp.parser.FileParser.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.__init__" title="Permalink to this definition">¶</a></dt>
@@ -279,7 +279,7 @@ report file(s).</p>
 <dl class="classmethod">
 <dt id="libptp.parser.FileParser.handle_file">
 <em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.handle_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized file handler for generic file(s).</p>
+<dd><p>Return a string of the content of the file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -313,9 +313,9 @@ file.</li>
 <dl class="class">
 <dt id="libptp.parser.LineParser">
 <em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">LineParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized parser for generic report file(s).</p>
-<p>Define the special <a class="reference internal" href="#libptp.parser.LineParser.handle_file" title="libptp.parser.LineParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process generic
-report file(s).</p>
+<dd><p>Specialized parser for generic report files.</p>
+<p>Define the special <a class="reference internal" href="#libptp.parser.LineParser.handle_file" title="libptp.parser.LineParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the
+generic report file.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Contrary to <a class="reference internal" href="#libptp.parser.FileParser" title="libptp.parser.FileParser"><tt class="xref py py-class docutils literal"><span class="pre">FileParser</span></tt></a>, this class reads the file line by line
@@ -338,7 +338,7 @@ and generates a list, instead of a string.</p>
 <dl class="classmethod">
 <dt id="libptp.parser.LineParser.handle_file">
 <em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em>, <em>skip_empty=True</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser.handle_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized file handler for general files read line by line.</p>
+<dd><p>Return a list of the lines of the file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

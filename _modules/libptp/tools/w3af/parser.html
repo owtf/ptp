@@ -67,11 +67,8 @@
 <div class="viewcode-block" id="W3AFXMLParser"><a class="viewcode-back" href="../../../../libptp/tools/w3af.html#libptp.tools.w3af.parser.W3AFXMLParser">[docs]</a><span class="k">class</span> <span class="nc">W3AFXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;W3AF XML specialized parser.&quot;&quot;&quot;</span>
 
-    <span class="c">#: :class:`str` -- Name of the tool.</span>
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;w3af&#39;</span>
-    <span class="c">#: :class:`str` -- Format of W3AF reports it supports.</span>
     <span class="n">__format__</span> <span class="o">=</span> <span class="s">&#39;xml&#39;</span>
-    <span class="c">#: :class:`list` -- Versions of W3AF that are supported.</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1.6.0.2&#39;</span><span class="p">,</span> <span class="s">&#39;1.6.0.3&#39;</span><span class="p">]</span>
 
     <span class="n">HIGH</span> <span class="o">=</span> <span class="s">&#39;High&#39;</span>
@@ -79,7 +76,6 @@
     <span class="n">LOW</span> <span class="o">=</span> <span class="s">&#39;Low&#39;</span>
     <span class="n">INFO</span> <span class="o">=</span> <span class="s">&#39;Information&#39;</span>
 
-    <span class="c">#: :class:`dict` -- Convert the W3AF&#39;s ranking scale to an unified one.</span>
     <span class="n">RANKING_SCALE</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">HIGH</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
         <span class="n">MEDIUM</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
