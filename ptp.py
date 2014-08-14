@@ -47,9 +47,6 @@ class PTP(object):
         self.tool_name = tool_name
         self.report = None
 
-    def __str__(self):
-        return self.report.__str__()
-
     def parse(self, *args, **kwargs):
         """Parse a tool report.
 

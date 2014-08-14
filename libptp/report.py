@@ -38,9 +38,6 @@ class AbstractReport(object):
         #: List of dictionaries of the results found in the report.
         self.vulns = [] or vulns
 
-    def __str__(self):
-        return ', '.join([info.__str__() for info in self.vulns])
-
     @classmethod
     def is_mine(cls):
         """Check if the report can parse the report.
