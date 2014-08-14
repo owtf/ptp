@@ -62,9 +62,9 @@ class ArachniXMLParser(XMLParser):
         version = self.stream.find('.//version')
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        metadata = {version.tag: version.text,}
-        if self.check_version(metadata):
-            return metadata
+        self.metadata = {version.tag: version.text}
+        if self.check_version(self.metadata):
+            return self.metadata
         else:
             raise NotSupportedVersionError(
                 'PTP does NOT support this version of Arachni.')
@@ -78,6 +78,7 @@ class ArachniXMLParser(XMLParser):
         :rtype: :class:`list`
 
         """
-        return [
+        self.vulns = [
             {'ranking': scale[vuln.find('.//severity').text]}
             for vuln in self.stream.find('.//issues')]
+        return self.vulns

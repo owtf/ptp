@@ -52,6 +52,7 @@ class OWASPCM008Parser(LineParser):
             if line.startswith('Allow')][0]
         if not allowed_methods:
             return []
-        return [
+        self.vulns = [
             {'ranking': SIGNATURES.get(method, UNKNOWN)}
             for method in allowed_methods]
+        return self.vulns

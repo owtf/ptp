@@ -142,6 +142,7 @@ class SkipfishJSParser(AbstractParser):
                 'right file?')
         # We now have a raw version of the Skipfish report as a list of
         # dict.
-        return [
+        self.vulns = [
             {'ranking': scale[vuln['severity']]}
             for vuln in ast.literal_eval(report[REPORT_VAR_NAME])]
+        return self.vulns

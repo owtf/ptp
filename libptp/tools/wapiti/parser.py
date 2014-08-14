@@ -101,6 +101,7 @@ class WapitiXMLParser(XMLParser):
                     'name': category.get('name'),
                     'ranking': SIGNATURES.get(category.get('name'), UNKNOWN),
                     'description': category.find('.//description').text})
+        self.vulns = vulns
         return vulns
 
 
@@ -189,4 +190,5 @@ class Wapiti221XMLParser(XMLParser):
                     'name': category.get('name'),
                     'ranking': SIGNATURES.get(category.get('name'), UNKNOWN),
                     'description': category.find('.//description').text})
+        self.vulns = vulns
         return vulns

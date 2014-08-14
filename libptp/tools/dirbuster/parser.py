@@ -93,4 +93,5 @@ class DirbusterParser(LineParser):
                     if re.match(signature, disco)]
                 if True in matched:
                     vulns.extend([{'ranking': ranking}])
+        self.vulns = vulns
         return vulns

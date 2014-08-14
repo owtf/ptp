@@ -77,6 +77,7 @@ class W3AFXMLParser(XMLParser):
         :rtype: :class:`list`
 
         """
-        return [
+        self.vulns = [
             {'ranking': scale[vuln.get('severity')],}
             for vuln in self.stream.findall('.//vulnerability')]
+        return self.vulns

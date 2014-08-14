@@ -48,8 +48,9 @@ class MetasploitParser(FileParser):
             signatures = SIGNATURES.get(self.__plugin__, {}).iteritems()
         except AttributeError:  # Python3
             signatures = SIGNATURES.get(self.__plugin__, {}).items()
-        return [{
+        self.vulns = [{
             'name': self.__plugin__,
             'ranking': ranking}
             for signature, ranking in signatures
             if signature in self.stream]
+        return self.vulns

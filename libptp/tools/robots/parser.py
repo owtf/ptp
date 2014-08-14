@@ -53,6 +53,7 @@ class RobotsParser(LineParser):
             if line.startswith('Disallow')]
         if not disallowed_entries:
             return []
-        return [
+        self.vulns = [
             {'ranking': SIGNATURES.get(entry, UNKNOWN)}
             for entry in disallowed_entries]
+        return self.vulns
