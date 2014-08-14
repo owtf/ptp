@@ -24,7 +24,7 @@ class W3AFReport(AbstractReport):
     LOW = 'Low'
     INFO = 'Information'
 
-    # Convert the W3AF's ranking scale to an unified one.
+    #: :class:`dict` -- Convert the W3AF's ranking scale to an unified one.
     RANKING_SCALE = {
         HIGH: constants.HIGH,
         MEDIUM: constants.MEDIUM,
@@ -32,6 +32,7 @@ class W3AFReport(AbstractReport):
         INFO: constants.INFO}
 
     def __init__(self, *args, **kwargs):
+        """Initialize W3AFReport."""
         AbstractReport.__init__(self, *args, **kwargs)
 
     @classmethod
@@ -57,7 +58,8 @@ class W3AFReport(AbstractReport):
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery from the
+            report.
         :rtype: :class:`list`
 
         """

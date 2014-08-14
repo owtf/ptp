@@ -21,10 +21,15 @@ class W3AFXMLParser(XMLParser):
     __tool__ = 'w3af'
     #: :class:`str` -- Format of W3AF reports it supports.
     __format__ = 'xml'
-    #: :class:`list` -- W3AF versions it supports.
+    #: :class:`list` -- Versions of W3AF that are supported.
     __version__ = ['1.6.0.2', '1.6.0.3']
 
     def __init__(self, fullpath):
+        """Initialize W3AFXMLParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
         XMLParser.__init__(self, fullpath)
         self.re_version = re.compile(r'Version: (\S*)\s')
 
@@ -32,7 +37,7 @@ class W3AFXMLParser(XMLParser):
     def is_mine(cls, fullpath):
         """Check if it is a supported W3AF report.
 
-        :param str pathname: Path to the report file.
+        :param str fullpath: full path to the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -47,13 +52,13 @@ class W3AFXMLParser(XMLParser):
         return True
 
     def parse_metadata(self):
-        """Parse the metadatas of the report.
-
-        :return: The metadatas of the report.
-        :rtype: dict
+        """Parse the metadata of the report.
 
         :raises: :class:`NotSupportedVersionError` -- if it does not support
             the version of this report.
+
+        :return: The metadata of the report.
+        :rtype: dict
 
         """
         raw_metadata = self.stream.find('.//w3af-version').text
@@ -68,12 +73,12 @@ class W3AFXMLParser(XMLParser):
             self.metadata = metadata
         else:
             raise NotSupportedVersionError(
-                'PTP does NOT support this version of ' + self.__tool__ + '.')
+                'PTP does NOT support this version of W3AF.')
 
     def parse_report(self, scale):
         """Parse the results of the report.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         """
