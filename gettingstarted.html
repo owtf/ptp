@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome! &mdash; ptp 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.5.0 documentation" href="index.html" />
+    <link rel="next" title="Write our own support" href="contribute.html" />
+    <link rel="prev" title="Getting started" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contribute.html" title="Write our own support"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Getting started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome">
+<h1>Welcome!<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
+<p>Here we present the <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> (<em>Pentesters&#8217; Tools Parser</em>) project.</p>
+<p>Before coding anything, let us start with some brief explanation about the
+project, its context and its aims.</p>
+<p>The project has been developed during the <a class="reference external" href="https://www.google-melange.com/gsoc/homepage/google/gsoc2014">Google Summer of Code 2014, 10th
+edition</a>, in
+order to create an <a class="reference external" href="https://www.owasp.org/index.php/GSoC2014_Ideas#OWASP_OWTF_-_Automated_Vulnerability_Severity_Rankings">automated ranking system</a>
+for the <a class="reference external" href="https://www.owasp.org/index.php/OWASP_OWTF">OWASP - OWTF project</a>.</p>
+<p>But <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> tries to go even beyond the original idea.</p>
+<p>Apart from its main feature which is <strong>ranking the results from any security
+reports</strong>, it also provides an <strong>unified way to reuse these reports directly in
+your python code</strong>, without having to deal with complexe parsing.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When we say <strong>any</strong>, we mean that it is our ultimate goal. For now,
+<a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> is in its early development phase and <em>only</em> supports a small
+amount of tools.</p>
+</div>
+<p>Let us now see how to install and use <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>!</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> provides the <tt class="file docutils literal"><span class="pre">ptp.pip</span></tt> file which contains the required
+dependencies of the project.</p>
+<p>In order to properly configure <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>, the following command should be run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install -r ptp.pip
+</pre></div>
+</div>
+<p>Now that <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> is correctly installed, let us see what it offers as basic
+usages.</p>
+</div>
+<div class="section" id="basic-usages">
+<h1>Basic usages<a class="headerlink" href="#basic-usages" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we see what we can expect from the library for basic purposes.</p>
+<p>First we use the simplest mode a.k.a the <strong>auto-detection mode</strong> in which we do
+not even have to specify the tool.
+Then, the <strong>explicit mode</strong> in which we specify what tool generated our report.</p>
+<div class="section" id="auto-detection-mode">
+<h2>Auto-detection mode<a class="headerlink" href="#auto-detection-mode" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to use <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> library is by using its <strong>auto-detection
+mode</strong>. This mode try to reduce as much as possible the usages for us by
+auto-detecting which tool has generated a given report.</p>
+<p>That way, we do not have to bother knowing if the report we want to parse comes
+from <a class="reference external" href="http://w3af.org/">W3AF</a>, <a class="reference external" href="https://www.owasp.org/index.php/Category:OWASP_DirBuster_Project">DirBuster</a> or even
+<a class="reference external" href="https://code.google.com/p/skipfish/">Skipfish</a>.</p>
+<p>Example:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ptp</span> <span class="kn">import</span> <span class="n">PTP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s">&#39;my/directory&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;my_report&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;ranking&#39;: 4}, ..., {&#39;ranking&#39;: 3}, ..., {&#39;ranking&#39;: 1}]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In the example above, the filename could have been omitted. In that case,
+<a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a> would have recursively walked into the directory
+<cite>pathname</cite> until a file would have matched one supported tool.</p>
+<p>For instance, we could have done:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ptp</span> <span class="kn">import</span> <span class="n">PTP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s">&#39;my/directory&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;ranking&#39;: 4}, ..., {&#39;ranking&#39;: 3}, ..., {&#39;ranking&#39;: 1}]</span>
+</pre></div>
+</div>
+<p class="last">Be careful though, when omitting the <cite>filename</cite> parameter, <a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a>
+will stop as soon as a supported report file will be found! (i.e.
+<a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a> will not parse all the files in the <cite>pathname</cite> directory.)</p>
+</div>
+<p>If we are only looking for the highest risk that is listed in the report, we
+can use the following function:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span><span class="o">.</span><span class="n">get_highest_ranking</span><span class="p">()</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">libptp.constants</span> <span class="kn">import</span> <span class="n">HIGH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span><span class="o">.</span><span class="n">get_highest_ranking</span><span class="p">()</span> <span class="o">==</span> <span class="n">HIGH</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To know the possible ranking values, please refer to the
+<a class="reference internal" href="libptp/constants.html"><em>Constants</em></a> section.</p>
+</div>
+<p>If we are interested in the name of the tool that generated the report, it is
+stored in the <a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a> class and can be retrieved like below:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">myptp</span><span class="o">.</span><span class="n">tool_name</span><span class="p">)</span>
+<span class="go">arachni  # In our case, it is Arachni that has generated our report.</span>
+</pre></div>
+</div>
+<p>The big advantage in using the auto-detection mode is that <a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a>
+does all the job for us.</p>
+<p>One possible drawback would be that it is slower than if <a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a> knew
+which tool had generated the report. Indeed <a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a> has to go through
+all its supported tool classes and asked them if it supports the current file.</p>
+</div>
+<div class="section" id="explicit-mode">
+<h2>Explicit mode<a class="headerlink" href="#explicit-mode" title="Permalink to this headline">¶</a></h2>
+<p>If we already know which tool has generated the report, we can explicitly give
+that information to <a class="reference internal" href="ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a>. That will even speed up the whole process
+since it will not have to lookup for the right parser.</p>
+<p>The list of the supported tools can be found like below:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PTP</span><span class="o">.</span><span class="n">supported</span>
+<span class="go">{</span>
+<span class="go">    &#39;metasploit&#39;: &lt;class &#39;libptp.tools.metasploit.report.MetasploitReport&#39;&gt;,</span>
+<span class="go">    &#39;w3af&#39;: &lt;class &#39;libptp.tools.w3af.report.W3AFReport&#39;&gt;,</span>
+<span class="go">    &#39;nmap&#39;: &lt;class &#39;libptp.tools.nmap.report.NmapReport&#39;&gt;,</span>
+<span class="go">    &#39;owasp-cm-008&#39;: &lt;class &#39;libptp.tools.owasp.cm008.report.OWASPCM008Report&#39;&gt;,</span>
+<span class="go">    &#39;arachni&#39;: &lt;class &#39;libptp.tools.arachni.report.ArachniReport&#39;&gt;,</span>
+<span class="go">    &#39;robots&#39;: &lt;class &#39;libptp.tools.robots.report.RobotsReport&#39;&gt;,</span>
+<span class="go">    &#39;wapiti&#39;: &lt;class &#39;libptp.tools.wapiti.report.WapitiReport&#39;&gt;,</span>
+<span class="go">    &#39;skipfish&#39;: &lt;class &#39;libptp.tools.skipfish.report.SkipfishReport&#39;&gt;,</span>
+<span class="go">    &#39;dirbuster&#39;: &lt;class &#39;libptp.tools.dirbuster.report.DirbusterReport&#39;&gt;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The current support to Nmap does not provide any ranking yet.
+Refer to the <a class="reference internal" href="libptp/tools/nmap.html"><em>Nmap</em></a> section for more information.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">(</span><span class="s">&#39;skipfish&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s">&#39;my/other/directory&#39;</span><span class="p">)</span>
+<span class="go">[{&#39;ranking&#39;: 2}, {&#39;ranking&#39;: 2}, {&#39;ranking&#39;: 1}]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome!</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#basic-usages">Basic usages</a><ul>
+<li><a class="reference internal" href="#auto-detection-mode">Auto-detection mode</a></li>
+<li><a class="reference internal" href="#explicit-mode">Explicit mode</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Getting started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contribute.html"
+                        title="next chapter">Write our own support</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/gettingstarted.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contribute.html" title="Write our own support"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Getting started"
+             >previous</a> |</li>
+        <li><a href="index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

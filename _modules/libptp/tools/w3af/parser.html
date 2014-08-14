@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>libptp.tools.w3af.parser &mdash; ptp 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.5.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">ptp 0.5.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for libptp.tools.w3af.parser</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">:synopsis: Specialized Parser classes for W3AF.</span>
+
+<span class="sd">.. moduleauthor:: Tao Sauvage</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">LxmlError</span>
+
+<span class="kn">from</span> <span class="nn">libptp</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">libptp.exceptions</span> <span class="kn">import</span> <span class="n">NotSupportedVersionError</span>
+<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+
+
+<div class="viewcode-block" id="W3AFXMLParser"><a class="viewcode-back" href="../../../../libptp/tools/w3af.html#libptp.tools.w3af.parser.W3AFXMLParser">[docs]</a><span class="k">class</span> <span class="nc">W3AFXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;W3AF XML specialized parser.&quot;&quot;&quot;</span>
+
+    <span class="c">#: :class:`str` -- Name of the tool.</span>
+    <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;w3af&#39;</span>
+    <span class="c">#: :class:`str` -- Format of W3AF reports it supports.</span>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="s">&#39;xml&#39;</span>
+    <span class="c">#: :class:`list` -- Versions of W3AF that are supported.</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1.6.0.2&#39;</span><span class="p">,</span> <span class="s">&#39;1.6.0.3&#39;</span><span class="p">]</span>
+
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="s">&#39;High&#39;</span>
+    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="s">&#39;Medium&#39;</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="s">&#39;Low&#39;</span>
+    <span class="n">INFO</span> <span class="o">=</span> <span class="s">&#39;Information&#39;</span>
+
+    <span class="c">#: :class:`dict` -- Convert the W3AF&#39;s ranking scale to an unified one.</span>
+    <span class="n">RANKING_SCALE</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">HIGH</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        <span class="n">MEDIUM</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        <span class="n">LOW</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
+
+<div class="viewcode-block" id="W3AFXMLParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/w3af.html#libptp.tools.w3af.parser.W3AFXMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize W3AFXMLParser.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">re_version</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;Version: (\S*)\s&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="W3AFXMLParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/w3af.html#libptp.tools.w3af.parser.W3AFXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if it is a supported W3AF report.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
+<span class="sd">        :rtype: :class:`bool`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//w3af-version&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="W3AFXMLParser.parse_metadata"><a class="viewcode-back" href="../../../../libptp/tools/w3af.html#libptp.tools.w3af.parser.W3AFXMLParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the metadata of the report.</span>
+
+<span class="sd">        :raises: :class:`NotSupportedVersionError` -- if it does not support</span>
+<span class="sd">            the version of this report.</span>
+
+<span class="sd">        :return: The metadata of the report.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">raw_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//w3af-version&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="c"># Find the version of w3af.</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">re_version</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">raw_metadata</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">version</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>  <span class="c"># In case we found several version numbers.</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c"># Reconstruct the metadata</span>
+        <span class="c"># TODO: Retrieve the other metadata likes the date, etc.</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;version&#39;</span><span class="p">:</span> <span class="n">version</span><span class="p">,}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_version</span><span class="p">(</span><span class="n">metadata</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotSupportedVersionError</span><span class="p">(</span>
+                <span class="s">&#39;PTP does NOT support this version of W3AF.&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="W3AFXMLParser.parse_report"><a class="viewcode-back" href="../../../../libptp/tools/w3af.html#libptp.tools.w3af.parser.W3AFXMLParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the results of the report.</span>
+
+<span class="sd">        :return: List of dicts where each one represents a discovery.</span>
+<span class="sd">        :rtype: :class:`list`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s">&#39;ranking&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">RANKING_SCALE</span><span class="p">[</span><span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;severity&#39;</span><span class="p">)],}</span>
+            <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;.//vulnerability&#39;</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">ptp 0.5.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

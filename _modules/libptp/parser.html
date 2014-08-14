@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>libptp.parser &mdash; ptp 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">ptp 0.5.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for libptp.parser</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">:synopsis: Define the basic parser classes that will parse the data from the</span>
+<span class="sd">    report file(s).</span>
+
+<span class="sd">.. moduleauthor:: Tao Sauvage</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">LxmlError</span>
+
+
+<div class="viewcode-block" id="AbstractParser"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser">[docs]</a><span class="k">class</span> <span class="nc">AbstractParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Abstract representation of a parser.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        This class will be extended for each pentesting tool. That way, each</span>
+<span class="sd">        tool will add its own parsing specificities.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">#: :class:`str` -- Name of the tool.</span>
+    <span class="n">__tool__</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="c">#: :class:`str` -- Format of reports it supports.</span>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="c">#: :class:`list` -- Versions it can supports.</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="AbstractParser.__init__"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize AbstractParser.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#: :class:`type` -- i/o stream of the report.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+        <span class="c">#: :class:`list` -- List of dict of the results found in the report.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c">#: :class:`dict` -- Dict of the metadata found in the report.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="AbstractParser.handle_file"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Process the report file(s) in order to create an i/o stream.</span>
+
+<span class="sd">        :param str fullpath: Full path to the report file.</span>
+
+<span class="sd">        :raises: :class:`NotImplementedError` because this is an abstract</span>
+<span class="sd">            method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&#39;`handle_file` function MUST be define for each parser.&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="AbstractParser.is_mine"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the parser supports the tool.</span>
+
+<span class="sd">        :param list \*args: Arguments that will be passed to the parser.</span>
+<span class="sd">        :param dict \*\*kwargs: Arguments that will be passed to the parser.</span>
+
+<span class="sd">        :raises: :class:`NotImplementedError` because this is an abstract</span>
+<span class="sd">            method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&#39;`is_mine` function MUST be define for each parser.&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="AbstractParser.check_version"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser.check_version">[docs]</a>    <span class="k">def</span> <span class="nf">check_version</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s">&#39;version&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks the version in the metadata against the supported one(s).</span>
+
+<span class="sd">        :param dict metadata: The metadata in which to find the version.</span>
+<span class="sd">        :param str key: The :attr:`metadata` key containing the version value.</span>
+
+<span class="sd">        :return: `True` if it can parse the report, `False` otherwise.</span>
+<span class="sd">        :rtype: :class:`bool`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="AbstractParser.parse_metadata"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the metadata of a report.</span>
+
+<span class="sd">        :raises: :class:`NotImplementedError` because this is an abstract</span>
+<span class="sd">            method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&#39;`parse_metadata` function MUST be define for each parser.&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AbstractParser.parse_report"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.AbstractParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the results of a report file(s).</span>
+
+<span class="sd">        :raises: :class:`NotImplementedError` because this is an abstract</span>
+<span class="sd">            method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&#39;`parse_report` function MUST be define for each parser.&#39;</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="XMLParser"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.XMLParser">[docs]</a><span class="k">class</span> <span class="nc">XMLParser</span><span class="p">(</span><span class="n">AbstractParser</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Specialized parser for XML formatted report file(s).</span>
+
+<span class="sd">    Define the special :func:`handle_file` function in order to process XML</span>
+<span class="sd">    report file(s).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">#: str -- XMLParser only supports XML files.</span>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="s">&#39;xml&#39;</span>
+
+<div class="viewcode-block" id="XMLParser.__init__"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.XMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize XMLParser.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AbstractParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="XMLParser.handle_file"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.XMLParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Specialized file handler for XML files.</span>
+
+<span class="sd">        :param str fullpath: path to the report file.</span>
+<span class="sd">        :raises ValueError: if the report file has not the right extension.</span>
+<span class="sd">        :raises LxmlError: if Lxml cannot parse the XML file.</span>
+
+<span class="sd">        :return: handle on the root node element from the XML file.</span>
+<span class="sd">        :rtype: :class:`lxml.etree._Element`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__format__</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s">&quot;This parser only supports &#39;</span><span class="si">%s</span><span class="s">&#39; files&quot;</span> <span class="o">%</span> <span class="n">cls</span><span class="o">.</span><span class="n">__format__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+
+</div></div>
+<div class="viewcode-block" id="FileParser"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.FileParser">[docs]</a><span class="k">class</span> <span class="nc">FileParser</span><span class="p">(</span><span class="n">AbstractParser</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Specialized parser for generic report file(s).</span>
+
+<span class="sd">    Define the special :func:`handle_file` function in order to process generic</span>
+<span class="sd">    report file(s).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FileParser.__init__"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.FileParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize FileParser.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AbstractParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="FileParser.handle_file"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.FileParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Specialized file handler for generic file(s).</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+<span class="sd">        :raises OSError: if an error occurs when opening/reading the report</span>
+<span class="sd">            file.</span>
+<span class="sd">        :raises IOError: if an error occurs when opening/reading the report</span>
+<span class="sd">            file.</span>
+
+<span class="sd">        :return: string containing all the data from the file.</span>
+<span class="sd">        :rtype: :class:`str`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+</div></div>
+<div class="viewcode-block" id="LineParser"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.LineParser">[docs]</a><span class="k">class</span> <span class="nc">LineParser</span><span class="p">(</span><span class="n">AbstractParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Specialized parser for generic report file(s).</span>
+
+<span class="sd">    Define the special :func:`handle_file` function in order to process generic</span>
+<span class="sd">    report file(s).</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Contrary to :class:`FileParser`, this class reads the file line by line</span>
+<span class="sd">        and generates a list, instead of a string.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LineParser.__init__"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.LineParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize LineParser.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AbstractParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="LineParser.handle_file"><a class="viewcode-back" href="../../libptp/parser.html#libptp.parser.LineParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">,</span> <span class="n">skip_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Specialized file handler for general files read line by line.</span>
+
+<span class="sd">        :param str fullpath: path to the report file.</span>
+<span class="sd">        :param bool skip_empty: skip the empty lines that can occur in the</span>
+<span class="sd">            file if `True`, otherwise keep them.</span>
+<span class="sd">        :raises OSError: if an error occurs when opening/reading the report</span>
+<span class="sd">            file.</span>
+<span class="sd">        :raises IOError: if an error occurs when opening/reading the report</span>
+<span class="sd">            file.</span>
+
+<span class="sd">        :return: list of strings containing all the data from the file, line</span>
+<span class="sd">            by line.</span>
+<span class="sd">        :rtype: :class:`str`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">skip_empty</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">ptp 0.5.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

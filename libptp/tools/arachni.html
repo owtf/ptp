@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Arachni &mdash; ptp 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.5.0 documentation" href="../../index.html" />
+    <link rel="next" title="DirBuster" href="dirbuster.html" />
+    <link rel="prev" title="Constants" href="../constants.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dirbuster.html" title="DirBuster"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../constants.html" title="Constants"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arachni">
+<h1>Arachni<a class="headerlink" href="#arachni" title="Permalink to this headline">¶</a></h1>
+<p>The tool Arachni is supported by PTP thanks to the following classes.</p>
+<div class="section" id="module-libptp.tools.arachni.report">
+<span id="report"></span><h2>Report<a class="headerlink" href="#module-libptp.tools.arachni.report" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Report class for the tool Arachni.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="libptp.tools.arachni.report.ArachniReport">
+<em class="property">class </em><tt class="descclassname">libptp.tools.arachni.report.</tt><tt class="descname">ArachniReport</tt><a class="reference internal" href="../../_modules/libptp/tools/arachni/report.html#ArachniReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.report.ArachniReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the information of an Arachni report.</p>
+<dl class="attribute">
+<dt id="libptp.tools.arachni.report.ArachniReport.__tool__">
+<tt class="descname">__tool__</tt><em class="property"> = 'arachni'</em><a class="headerlink" href="#libptp.tools.arachni.report.ArachniReport.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> &#8211; Name of the tool.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="libptp.tools.arachni.report.ArachniReport.__parsers__">
+<tt class="descname">__parsers__</tt><em class="property"> = [&lt;class 'libptp.tools.arachni.parser.ArachniXMLParser'&gt;]</em><a class="headerlink" href="#libptp.tools.arachni.report.ArachniReport.__parsers__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> &#8211; Available parsers for Arachni.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libptp.tools.arachni.report.ArachniReport.__init__">
+<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/report.html#ArachniReport.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.report.ArachniReport.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize ArachniReport.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="libptp.tools.arachni.report.ArachniReport.is_mine">
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/report.html#ArachniReport.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.report.ArachniReport.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is an Arachni report and if it can handle it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libptp.tools.arachni.report.ArachniReport.parse">
+<tt class="descname">parse</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/report.html#ArachniReport.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.report.ArachniReport.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse an Arachni report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the XML report file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of dicts where each one represents a discovery from the
+report.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-libptp.tools.arachni.parser">
+<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-libptp.tools.arachni.parser" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Parser classes for the tool Arachni.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser">
+<em class="property">class </em><tt class="descclassname">libptp.tools.arachni.parser.</tt><tt class="descname">ArachniXMLParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/parser.html#ArachniXMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arachni XML specialized parser.</p>
+<dl class="attribute">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.__tool__">
+<tt class="descname">__tool__</tt><em class="property"> = 'arachni'</em><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> &#8211; Name of the tool.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.__format__">
+<tt class="descname">__format__</tt><em class="property"> = 'xml'</em><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> &#8211; Format of Arachni reports it supports.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.__version__">
+<tt class="descname">__version__</tt><em class="property"> = ['0.4.6', '0.4.7']</em><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.__version__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> &#8211; Versions of Arachni that are supported.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.RANKING_SCALE">
+<tt class="descname">RANKING_SCALE</tt><em class="property"> = {'High': 4, 'Medium': 3, 'Informational': 1, 'Low': 2}</em><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.RANKING_SCALE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> &#8211; Convert the Arachni&#8217;s ranking scale to an unified one.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/parser.html#ArachniXMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize ArachniXMLParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.is_mine">
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/parser.html#ArachniXMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is a supported Arachni report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.parse_metadata">
+<tt class="descname">parse_metadata</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/parser.html#ArachniXMLParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">NotSupportedVersionError</span></tt> &#8211; if it does not support
+the version of this report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metadata of the report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libptp.tools.arachni.parser.ArachniXMLParser.parse_report">
+<tt class="descname">parse_report</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/arachni/parser.html#ArachniXMLParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.arachni.parser.ArachniXMLParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Arachni</a><ul>
+<li><a class="reference internal" href="#module-libptp.tools.arachni.report">Report</a></li>
+<li><a class="reference internal" href="#module-libptp.tools.arachni.parser">Parser</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../constants.html"
+                        title="previous chapter">Constants</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dirbuster.html"
+                        title="next chapter">DirBuster</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/libptp/tools/arachni.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dirbuster.html" title="DirBuster"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../constants.html" title="Constants"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

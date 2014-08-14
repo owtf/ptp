@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>libptp.tools.dirbuster.parser &mdash; ptp 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.5.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">ptp 0.5.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for libptp.tools.dirbuster.parser</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">:synopsis: Specialized Parser classes for the tool DirBuster.</span>
+
+<span class="sd">.. moduleauthor:: Tao Sauvage</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">LineParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.dirbuster.signatures</span> <span class="kn">import</span> <span class="n">DIRECTORIES</span><span class="p">,</span> <span class="n">FILES</span>
+
+
+<div class="viewcode-block" id="DirbusterParser"><a class="viewcode-back" href="../../../../libptp/tools/dirbuster.html#libptp.tools.dirbuster.parser.DirbusterParser">[docs]</a><span class="k">class</span> <span class="nc">DirbusterParser</span><span class="p">(</span><span class="n">LineParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;DirBuster specialized parser.&quot;&quot;&quot;</span>
+
+    <span class="c">#: :class:`str` -- Name of the tool.</span>
+    <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;dirbuster&#39;</span>
+    <span class="c">#: :class:`str` -- Format of DirBuster reports it supports.</span>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="s">&#39;dirbuster&#39;</span>
+    <span class="c">#: :class:`list` -- DirBuster versions it supports.</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1.0-RC1&#39;</span><span class="p">]</span>
+
+    <span class="c">#: :class:`str` -- Regex matching DirBuster section separator.</span>
+    <span class="n">_re_sep</span> <span class="o">=</span> <span class="s">r&quot;^-*$&quot;</span>
+    <span class="c">#: :class:`str` -- Regex matching DirBuster version.</span>
+    <span class="n">_re_version</span> <span class="o">=</span> <span class="s">r&quot;^DirBuster (?P&lt;version&gt;[0-9]+\.[0-9]+(-RC[0-9])?) - Report$&quot;</span>
+    <span class="c">#: :class:`str` -- Regex matching DirBuster directories status code.</span>
+    <span class="n">_re_dir_status</span> <span class="o">=</span> <span class="s">r&quot;^Dirs found with a (?P&lt;status&gt;[0-9]{3}) response:$&quot;</span>
+    <span class="c">#: :class:`str` -- Regex matching DirBuster files status code.</span>
+    <span class="n">_re_file_status</span> <span class="o">=</span> <span class="s">r&quot;^Files found with a (?P&lt;status&gt;[0-9]{3}) responce:$&quot;</span>
+
+<div class="viewcode-block" id="DirbusterParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/dirbuster.html#libptp.tools.dirbuster.parser.DirbusterParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize DirbusterParser.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LineParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="DirbusterParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/dirbuster.html#libptp.tools.dirbuster.parser.DirbusterParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if it is a supported DirBuster report.</span>
+
+<span class="sd">        :param str fullpath: full path to the report file.</span>
+
+<span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
+<span class="sd">        :rtype: :class:`bool`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">stream</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">_re_version</span><span class="p">,</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="DirbusterParser.parse_metadata"><a class="viewcode-back" href="../../../../libptp/tools/dirbuster.html#libptp.tools.dirbuster.parser.DirbusterParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the metadata of the report.</span>
+
+<span class="sd">        :return: The metadata of the report.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># TODO: Properly retrieve the metadata.</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</div>
+<div class="viewcode-block" id="DirbusterParser.parse_report"><a class="viewcode-back" href="../../../../libptp/tools/dirbuster.html#libptp.tools.dirbuster.parser.DirbusterParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parser the results of a DirBuster report.</span>
+
+<span class="sd">        :return: List of dicts where each one represents a vuln.</span>
+<span class="sd">        :rtype: :class:`list`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Retrieve the results from the report.</span>
+        <span class="n">discoveries</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;directories&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s">&#39;files&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s">&#39;errors&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="n">type_disco</span> <span class="o">=</span> <span class="s">&#39;errors&#39;</span>
+        <span class="n">status_code</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">:</span>
+            <span class="n">match_dir_status</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_re_dir_status</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="n">match_file_status</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_re_file_status</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match_dir_status</span><span class="p">:</span>
+                <span class="n">type_disco</span> <span class="o">=</span> <span class="s">&#39;directories&#39;</span>
+                <span class="n">status_code</span> <span class="o">=</span> <span class="n">match_dir_status</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">match_file_status</span><span class="p">:</span>
+                <span class="n">type_disco</span> <span class="o">=</span> <span class="s">&#39;files&#39;</span>
+                <span class="n">status_code</span> <span class="o">=</span> <span class="n">match_file_status</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>  <span class="c"># This line contains a discovery</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">status_code</span><span class="p">)</span>
+                <span class="c"># If this is the section of the successful ones (2xx).</span>
+                <span class="k">if</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">200</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">:</span>
+                    <span class="n">discoveries</span><span class="p">[</span><span class="n">type_disco</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="c"># Match found discoveries against signatures database.</span>
+        <span class="n">vulns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">matching</span> <span class="o">=</span> <span class="p">((</span><span class="n">DIRECTORIES</span><span class="p">,</span> <span class="s">&#39;directories&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">FILES</span><span class="p">,</span> <span class="s">&#39;files&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">signatures</span><span class="p">,</span> <span class="n">type_disco</span> <span class="ow">in</span> <span class="n">matching</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">signatures</span> <span class="o">=</span> <span class="n">signatures</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>  <span class="c"># Python3</span>
+                <span class="n">signatures</span> <span class="o">=</span> <span class="n">signatures</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">signature</span><span class="p">,</span> <span class="n">ranking</span> <span class="ow">in</span> <span class="n">signatures</span><span class="p">:</span>
+                <span class="n">matched</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="bp">True</span>
+                    <span class="k">for</span> <span class="n">disco</span> <span class="ow">in</span> <span class="n">discoveries</span><span class="p">[</span><span class="n">type_disco</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">disco</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="bp">True</span> <span class="ow">in</span> <span class="n">matched</span><span class="p">:</span>
+                    <span class="n">vulns</span><span class="o">.</span><span class="n">extend</span><span class="p">([{</span><span class="s">&#39;ranking&#39;</span><span class="p">:</span> <span class="n">ranking</span><span class="p">}])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="n">vulns</span>
+        <span class="k">return</span> <span class="n">vulns</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">ptp 0.5.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
