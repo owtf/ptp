@@ -19,7 +19,7 @@ class ArachniXMLParser(XMLParser):
     __tool__ = 'arachni'
     #: :class:`str` -- Format of Arachni reports it supports.
     __format__ = 'xml'
-    #: :class:`list` -- Arachni versions it supports.
+    #: :class:`list` -- Versions of Arachni that are supported.
     __version__ = ['0.4.6', '0.4.7']
 
     def __init__(self, fullpath):
@@ -34,7 +34,7 @@ class ArachniXMLParser(XMLParser):
     def is_mine(cls, fullpath):
         """Check if it is a supported Arachni report.
 
-        :param str pathname: Path to the report file.
+        :param str fullpath: full path to the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -49,13 +49,13 @@ class ArachniXMLParser(XMLParser):
         return True
 
     def parse_metadata(self):
-        """Parse the metadatas of the report.
-
-        :return: The metadatas of the report.
-        :rtype: dict
+        """Parse the metadata of the report.
 
         :raises: :class:`NotSupportedVersionError` -- if it does not support
             the version of this report.
+
+        :return: The metadata of the report.
+        :rtype: dict
 
         """
         # Find the version of Arachni.
@@ -72,7 +72,9 @@ class ArachniXMLParser(XMLParser):
     def parse_report(self, scale):
         """Parse the results of the report.
 
-        :return: List of dicts where each one represents a vuln.
+        :param dict scale: Unified scale between Arachni and PTP.
+
+        :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         """
