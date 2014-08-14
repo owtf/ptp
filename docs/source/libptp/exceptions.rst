@@ -1,7 +1,7 @@
 Exceptions
-**********
+##########
 
-.. currentmodule:: libptp.exceptions
+.. automodule:: libptp.exceptions
 
 .. autoclass:: PTPError
     :members:

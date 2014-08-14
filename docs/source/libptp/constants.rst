@@ -1,7 +1,7 @@
 Constants
-*********
+#########
 
-.. currentmodule:: libptp.constants
+.. automodule:: libptp.constants
 
 .. autodata:: UNKNOWN
 .. autodata:: INFO

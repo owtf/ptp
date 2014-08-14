@@ -1,18 +1,30 @@
 Skipfish
-********
+########
 
-.. currentmodule:: libptp.tools.skipfish.report
+The tool Skipfish is supported by PTP thanks to the following classes.
+
+Report
+******
+
+.. automodule:: libptp.tools.skipfish.report
 
 .. autoclass:: SkipfishReport
     :members:
+    :private-members:
+    :special-members:
 
     .. autoattribute:: __tool__
     .. autoattribute:: __parsers__
 
-.. currentmodule:: libptp.tools.skipfish.parser
+Parser
+******
+
+.. automodule:: libptp.tools.skipfish.parser
 
 .. autoclass:: SkipfishJSParser
     :members:
+    :private-members:
+    :special-members:
 
     .. autoattribute:: __tool__
     .. autoattribute:: __format__
