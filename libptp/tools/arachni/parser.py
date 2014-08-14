@@ -6,6 +6,8 @@
 
 """
 
+from lxml.etree import LxmlError
+
 from libptp.exceptions import NotSupportedVersionError
 from libptp.parser import XMLParser
 
@@ -39,8 +41,8 @@ class ArachniXMLParser(XMLParser):
 
         """
         try:
-            stream = cls.handle_file(pathname)
-        except ValueError:
+            stream = cls.handle_file(fullpath)
+        except (ValueError, LxmlError):
             return False
         if not cls.__tool__ in stream.tag:
             return False

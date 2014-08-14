@@ -9,6 +9,8 @@
 import re
 import re
 
+from lxml.etree import LxmlError
+
 from libptp.exceptions import NotSupportedVersionError
 from libptp.parser import XMLParser
 
@@ -39,7 +41,7 @@ class W3AFXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(fullpath)
-        except ValueError:
+        except (ValueError, LxmlError):
             return False
         if stream.find('.//w3af-version') is None:
             return False
