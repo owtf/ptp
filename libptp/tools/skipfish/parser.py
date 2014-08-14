@@ -24,6 +24,12 @@ class SkipfishJSParser(AbstractParser):
     __version__ = ['2.10b']
 
     def __init__(self, metadatafile, reportfile):
+        """Initialize ArachniXMLParser.
+
+        :param str metadatafile: full path to the metadata file.
+        :param str reportfile: full path to the report file.
+
+        """
         self.metadata_stream, self.report_stream = self.handle_file(
             metadatafile, reportfile)
         self.re_metadata = re.compile(
@@ -37,12 +43,12 @@ class SkipfishJSParser(AbstractParser):
 
         :param str metadatafile: Path to the metadata file.
         :param str reportfile: Path to the report file.
-        :return: Both metadata and report handles.
-        :rtype: :class:`tuple`
-
         :raises ValueError: if the files have not the right extension.
         :raises OSError: if an error occurs when reading the files.
         :raises IOError: if an error occurs when reading the files.
+
+        :return: Both metadata and report files' contents.
+        :rtype: :class:`tuple`
 
         """
         if (not metadatafile.endswith(cls.__format__) or
@@ -55,19 +61,15 @@ class SkipfishJSParser(AbstractParser):
             report_stream = f.read()
         return (metadata_stream, report_stream)
 
-    # FIXME: Find a nice way to check for a correct parser.
     @classmethod
     def is_mine(cls, metadatafile, reportfile):
         """Check if it is a supported Skipfish report.
 
         :param str metadatafile: Path to the metadata file.
         :param str reportfile: Path to the report file.
+
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
-
-        .. warning::
-
-            Currently broken.
 
         """
         try:
@@ -81,11 +83,11 @@ class SkipfishJSParser(AbstractParser):
     def parse_metadata(self):
         """Retrieve the metadata of the report.
 
-        :return: Dictionary containing the metadatas.
-        :rtype: :class:`dict`
-
         :raises: :class:`NotSupportedVersionError` -- if it does not support
             this version of the report.
+
+        :return: Dictionary containing the metadatas.
+        :rtype: :class:`dict`
 
         .. note::
 
@@ -107,14 +109,13 @@ class SkipfishJSParser(AbstractParser):
             return metadata
         else:
             raise NotSupportedVersionError(
-                'PTP does NOT support this version of ' +
-                self.__tool__ + '.')
+                'PTP does NOT support this version of Skipfish.')
 
     def parse_report(self, scale):
         """Retrieve the results from the report.
 
         :param dict scale: Unified scale between Skipfish and PTP.
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         :raises: :class:`ReportNotFoundError` -- if the report file was not
@@ -122,7 +123,8 @@ class SkipfishJSParser(AbstractParser):
 
         .. note::
 
-            Example of retrieved data after conversion (i.e. `raw_report`):
+            Example of retrieved data after conversion (i.e. `raw_report`)
+            using the module :mod:`ast`:
 
             .. code-block:: js
 

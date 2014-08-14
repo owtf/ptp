@@ -21,6 +21,7 @@ class SkipfishReport(AbstractReport):
     __tool__ = 'skipfish'
     #: :class:`list` -- Available parsers for Skipfish.
     __parsers__ = [SkipfishJSParser]
+
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
 
@@ -30,7 +31,7 @@ class SkipfishReport(AbstractReport):
     WARNINGS = 1
     INFO = 0
 
-    # Convert the Skipfish's ranking scale to an unified one.
+    #: :class:`dict` -- Convert the Skipfish's ranking scale to an unified one.
     RANKING_SCALE = {
         HIGH: constants.HIGH,
         MEDIUM: constants.MEDIUM,
@@ -38,12 +39,13 @@ class SkipfishReport(AbstractReport):
         WARNINGS: constants.INFO,
         INFO: constants.INFO}
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize SkipfishReport."""
+        AbstractReport.__init__(self)
 
     @classmethod
     def is_mine(cls, pathname):
-        """Check if it is a Skipfish report and if I can handle it.
+        """Check if it is a Skipfish report and if it can handle it.
 
         :param str pathname: Path to the report directory.
 
@@ -64,29 +66,29 @@ class SkipfishReport(AbstractReport):
             metadatafile,
             reportfile)
 
-    def parse(self, pathname=None):
+    def parse(self, pathname):
         """Parse a Skipfish report.
 
         :param str pathname: Path to the report directory.
-        :return: List of dicts where each one represents a vuln.
+        :raises: :class:`ReportNotFoundError` -- if the report was not found.
+
+        :return: List of dicts where each one represents a discovery from the
+            report.
         :rtype: :class:`list`
 
-        :raises: :class:`ReportNotFoundError` -- if the report is not
-            supported.
-
         """
-        if (pathname is None or not os.path.isdir(pathname)):
+        if not os.path.isdir(pathname):
             raise ReportNotFoundError(
                 'A directory to the report MUST be specified.')
         # Find metadata file.
         metadatafile = self._recursive_find(pathname, self._metadatafile)
         if not metadatafile:
-            raise ReportNotFoundError('The metadata file is not found.')
+            raise ReportNotFoundError('The metadata file was not found.')
         self.metadatafile = metadatafile[0]
         # Find report file.
         reportfile = self._recursive_find(pathname, self._reportfile)
         if not reportfile:
-            raise ReportNotFoundError('The report file is not found.')
+            raise ReportNotFoundError('The report file was not found.')
         self.reportfile = reportfile[0]
         # Find the corresponding parser.
         self._init_parser(self.metadatafile, self.reportfile)
