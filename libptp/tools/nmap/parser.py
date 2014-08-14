@@ -22,13 +22,18 @@ class NmapXMLParser(XMLParser):
     __version__ = ['6.46']
 
     def __init__(self, fullpath):
+        """Initialize NmapXMLParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
         XMLParser.__init__(self, fullpath)
 
     @classmethod
     def is_mine(cls, fullpath):
         """Check if it is a supported Nmap report.
 
-        :param str pathname: Path to the report file.
+        :param str fullpath: full path to the report file.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -60,15 +65,19 @@ class NmapXMLParser(XMLParser):
             self.metadata = metadata
         else:
             raise NotSupportedVersionError(
-                'PTP does NOT support this version of ' + self.__tool__ + '.')
+                'PTP does NOT support this version of Nmap.')
 
-    # TODO: Parse Nmap result
     def parse_report(self):
         """Parse the results of the report.
 
         :return: List of dicts where each one represents a vuln.
         :rtype: :class:`list`
 
+        .. warning::
+
+            Not implemented yet.
+
         """
+        # TODO: Parse Nmap result
         ports = self.stream.findall('.//port')
         return []

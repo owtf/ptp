@@ -45,7 +45,8 @@ class NmapReport(AbstractReport):
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery from the
+            report.
         :rtype: :class:`list`
 
         """
