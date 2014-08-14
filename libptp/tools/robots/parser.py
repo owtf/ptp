@@ -13,6 +13,7 @@ from libptp.tools.robots.signatures import SIGNATURES
 
 class RobotsParser(LineParser):
     """Robots specialized parser."""
+
     #: :class:`str` -- Name of the tool.
     __tool__ = 'robots'
     #: :class:`str` -- Format of Robots reports it supports.
@@ -28,6 +29,14 @@ class RobotsParser(LineParser):
 
     @classmethod
     def is_mine(cls, fullpath, filename='*.txt'):
+        """Check if it is a supported robots.txt report.
+
+        :param str fullpath: full path to the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
         try:
             stream = cls.handle_file(fullpath)
         except (OSError, IOError):
@@ -37,6 +46,13 @@ class RobotsParser(LineParser):
         return False
 
     def parse_metadata(self):
+        """Parse the metadata of the report.
+
+        :return: The metadata of the report.
+        :rtype: dict
+
+        """
+        # TODO: Properly retrieve the metadata.
         return {}
 
     def parse_report(self):

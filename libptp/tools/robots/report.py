@@ -15,7 +15,7 @@ class RobotsReport(AbstractReport):
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'robots'
-    #: :class:`list` -- Available parsers for DirBuster.
+    #: :class:`list` -- Available parsers for robots.txt.
     __parsers__ = [RobotsParser]
 
     def __init__(self):
@@ -24,6 +24,15 @@ class RobotsReport(AbstractReport):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.txt'):
+        """Check if it is a robot.txt report and if it can handle it.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
         fullpath = cls._recursive_find(pathname, filename)
         if not fullpath:
             return False
@@ -36,7 +45,8 @@ class RobotsReport(AbstractReport):
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery from the
+            report.
         :rtype: :class:`list`
 
         """

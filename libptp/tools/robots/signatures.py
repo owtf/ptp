@@ -10,6 +10,7 @@ from libptp.constants import INFO
 
 
 # TODO: Complete the signatures database.
+#: :data: :class:`dict` of the methods with their rank.
 SIGNATURES = {
     # Admin interfaces
     '/phpmyadmin': INFO,
