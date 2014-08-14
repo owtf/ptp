@@ -11,7 +11,7 @@ from libptp.tools.owasp.cm008.parser import OWASPCM008Parser
 
 
 class OWASPCM008Report(AbstractReport):
-    """Retrieve the information of a OWASP CM 008 test."""
+    """Retrieve the information of the OWASP-CM-008 test."""
 
     #: :class:`str` -- Name of the tool.
     __tool__ = 'owasp-cm-008'
@@ -24,6 +24,15 @@ class OWASPCM008Report(AbstractReport):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.txt'):
+        """Check if it is an OWASP-CM-008 report and if it can handle it.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
         fullpath = cls._recursive_find(pathname, filename)
         if not fullpath:
             return False
@@ -36,7 +45,8 @@ class OWASPCM008Report(AbstractReport):
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery from the
+            report.
         :rtype: :class:`list`
 
         """
