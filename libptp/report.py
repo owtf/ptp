@@ -22,42 +22,41 @@ class AbstractReport(object):
     .. note::
 
         This class will be extended for each pentesting tool. That way, each
-        tool will add its own report/parsing specificities.
+        tool will add its own reporting specificities.
 
     """
 
-    #: :class:`str` -- Name of the tool.
+    #: :class:`str` -- Name of the tool that has generated the report file(s).
     __tool__ = None
-    #: :class:`tuple` -- Available parsers for the tool.
+    #: :class:`list` -- Available parsers for the tool.
     __parsers__ = None
 
     def __init__(self):
         """Initialized the AbstractReport instance."""
         #: :class:`AbstractParser` -- The current parser the report is using.
         self.parser = None
-        #: List of dictionaries of the results found in the report.
-        self.vulns = [] or vulns
+        #: :class:`list` -- List of dict of the results found in the report.
+        self.vulns = []
 
     @classmethod
     def is_mine(cls):
         """Check if the report can parse the report.
 
-        :param str pathname: The path to the report.
-        :param str filename: The name of the report file.
-        :return: `True` if this class supports this tool, `False` otherwise.
-        :rtype: :class:`bool`
+        :raises: :class:`NotImplementedError` -- because this is an abstract
+            method.
 
         """
-        return False
+        raise NotImplementedError(
+            '`is_mine` function MUST be define for each parser.')
 
     @classmethod
     def _is_parser(cls, parsers, *args, **kwargs):
         """Check if a parser exists for that report.
 
-        :param :class:`list` parsers: The available parsers of this
-            class.
-        :param list args: Arguments that will be pass to the parser.
-        :param dict kwargs: Arguments that will be pass to the parser.
+        :param list parsers: The available parsers of this class.
+        :param list \*args: Arguments that will be pass to the parser.
+        :param dict \*\*kwargs: Arguments that will be pass to the parser.
+
         :return: `True` if this class has a parser for this tool, `False`
             otherwise.
         :rtype: :class:`bool`
@@ -71,17 +70,20 @@ class AbstractReport(object):
 
     @staticmethod
     def _recursive_find(pathname='./', file_regex='*', early_break=True):
-        """Retrieve the full path to the report.
+        """Retrieve the full path to the report file(s).
 
-        The search occurs in the directory `pathname`.
-        :param str pathname: The root directory where to start the search.
+        :param str pathname: The root directory where to start searching.
         :param re file_regex: The regex that will be matched against all files
             from within `pathname`.
         :param bool early_break: Stop the search as soon as a file has been
             matched.
-        :return: A list of paths to matched files starting from
-            `pathname`.
+
+        :return: A list of path to the matched files that have been found.
         :rtype: :class:`list`
+
+        .. note::
+
+            The search occurs starting from `pathname` as the root directory.
 
         """
         founds = []
@@ -97,8 +99,8 @@ class AbstractReport(object):
     def _init_parser(self, *args, **kwargs):
         """Instantiate the correct parser for the report.
 
-        :param list args: Arguments that will be pass to the parser.
-        :param dict kwargs: Arguments that will be pass to the parser.
+        :param list args: Arguments that will be passed to the parser.
+        :param dict kwargs: Arguments that will be passed to the parser.
 
         :raises: :class:`NotSupportedVersionError` -- if it does not support
             that version of the tool.
@@ -116,7 +118,7 @@ class AbstractReport(object):
             raise NotSupportedVersionError
 
     def get_highest_ranking(self):
-        """Return the highest ranking id of the report.
+        """Return the highest ranking value of the report.
 
         :return: the risk id of the highest ranked vulnerability
             referenced in the report.
@@ -124,8 +126,8 @@ class AbstractReport(object):
 
         .. note::
 
-            The risk id varies from `0` (not ranked/unknown) to `n` (the
-            highest risk).
+            The rank value starts from `0` to `n` where `n` represents the
+            most critical risk.
 
         """
         if not self.vulns:
@@ -134,10 +136,11 @@ class AbstractReport(object):
             RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
 
     def parse(self):
-        """Abstract parser that will parse the report of a tool.
+        """Proxy call to the parser's parse function.
 
         :raises: :class:`NotImplementedError` -- because this is an abstract
             method.
 
         """
-        raise NotImplementedError('The parser MUST be define for each tool.')
+        raise NotImplementedError(
+            '`parse` function MUST be define for each parser.')
