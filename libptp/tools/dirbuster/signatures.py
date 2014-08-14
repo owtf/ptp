@@ -12,7 +12,8 @@
 from libptp.constants import HIGH, MEDIUM, LOW, INFO
 
 
-# TODO: Complete the signatures database.
+# TODO: Complete the directory signatures database.
+#: :data: :class:`dict` of the directories with their rank.
 DIRECTORIES = {
     r'.*/manager/html/.*': LOW,
     r'.*/admin/.*': LOW,
@@ -22,6 +23,8 @@ DIRECTORIES = {
 }
 
 
+# TODO: Complete the files signatures database.
+#: :data: :class:`dict` of the files with their rank.
 FILES = {
     r'.*/config\.php': HIGH,
     r'.*/c99\.php': HIGH,

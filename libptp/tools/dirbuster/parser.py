@@ -14,6 +14,7 @@ from libptp.tools.dirbuster.signatures import DIRECTORIES, FILES
 
 class DirbusterParser(LineParser):
     """DirBuster specialized parser."""
+
     #: :class:`str` -- Name of the tool.
     __tool__ = 'dirbuster'
     #: :class:`str` -- Format of DirBuster reports it supports.
@@ -38,9 +39,16 @@ class DirbusterParser(LineParser):
         """
         LineParser.__init__(self, fullpath)
 
-    # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath):
+        """Check if it is a supported DirBuster report.
+
+        :param str fullpath: full path to the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
         try:
             stream = cls.handle_file(fullpath)
         except (OSError, IOError):
@@ -49,8 +57,14 @@ class DirbusterParser(LineParser):
             return True
         return False
 
-    # TODO: Properly retrieve the metadatas.
     def parse_metadata(self):
+        """Parse the metadata of the report.
+
+        :return: The metadata of the report.
+        :rtype: dict
+
+        """
+        # TODO: Properly retrieve the metadata.
         return {}
 
     def parse_report(self):
