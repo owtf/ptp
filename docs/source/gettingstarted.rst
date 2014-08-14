@@ -1,13 +1,11 @@
-Getting started
-###############
+========
+Welcome!
+========
 
-Welcome! Here we present the :mod:`ptp` (*Pentesters' Tools Parser*) project.
+Here we present the :mod:`ptp` (*Pentesters' Tools Parser*) project.
 
 Before coding anything, let us start with some brief explanation about the
 project, its context and its aims.
-
-The ptp project
-***************
 
 The project has been developed during the `Google Summer of Code 2014, 10th
 edition <https://www.google-melange.com/gsoc/homepage/google/gsoc2014>`_, in
@@ -29,8 +27,9 @@ your python code**, without having to deal with complexe parsing.
 
 Let us now see how to install and use :mod:`ptp`!
 
-Install
-*******
+============
+Installation
+============
 
 :mod:`ptp` provides the :file:`ptp.pip` file which contains the required
 dependencies of the project.
@@ -41,16 +40,12 @@ In order to properly configure :mod:`ptp`, the following command should be run:
 
     $ pip install -r ptp.pip
 
-    # Omitted output
-
-    Successfully installed lxml
-    Cleaning up...
-
 Now that :mod:`ptp` is correctly installed, let us see what it offers as basic
 usages.
 
+============
 Basic usages
-************
+============
 
 In this section, we see what we can expect from the library for basic purposes.
 

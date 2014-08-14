@@ -6,11 +6,15 @@ Basic Parsers
 AbstractParser
 **************
 
+.. _abstractparser-class-label:
+
 .. autoclass:: AbstractParser
     :members:
     :private-members:
     :special-members:
     :exclude-members: __weakref__
+
+.. _xmlparser-label:
 
 XMLParser
 *********

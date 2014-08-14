@@ -3,17 +3,42 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ptp's documentation!
-###############################
-
-Contents:
+Getting started
+###############
 
 .. toctree::
     :maxdepth: 3
 
     gettingstarted
-    technicaldoc
 
+Hack into :mod:`ptp`
+####################
+
+.. toctree::
+    :maxdepth: 3
+
+    contribute
+
+Documentation
+#############
+
+.. toctree::
+    :maxdepth: 2
+
+    ptp
+    libptp/report
+    libptp/parser
+    libptp/exceptions
+    libptp/constants
+    libptp/tools/arachni
+    libptp/tools/dirbuster
+    libptp/tools/metasploit
+    libptp/tools/nmap
+    libptp/tools/owasp
+    libptp/tools/robots
+    libptp/tools/skipfish
+    libptp/tools/w3af
+    libptp/tools/wapiti
 
 Indices and tables
 ##################

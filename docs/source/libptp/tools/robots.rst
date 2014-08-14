@@ -21,6 +21,8 @@ Parser
 
 .. automodule:: libptp.tools.robots.parser
 
+.. _robotsparser-class-label:
+
 .. autoclass:: RobotsParser
     :members:
     :private-members:
