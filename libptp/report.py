@@ -40,9 +40,9 @@ class AbstractReport(object):
 
     @classmethod
     def is_mine(cls, parsers, pathname=None, filename=None):
-        """Check if the report can parse the report.
+        """Check if the report supports the report file(s).
 
-        :param :class:`libptp.parser.AbstractParser` parsers: List of the
+        :param `libptp.parser.AbstractParser` parsers: List of the
             available parsers for the report.
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
