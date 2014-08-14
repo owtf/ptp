@@ -78,9 +78,10 @@ REPORTS = {
     'auxiliary/scanner/snmp/snmp_enumusers': {
         'report_low.txt': LOW,
     },
-    'auxiliary/scanner/snmp/snmp_enumshares': {
-        'report_low.txt': LOW,
-    },
+    # FIXME: Fix the snmp_enumshares signature.
+    #'auxiliary/scanner/snmp/snmp_enumshares': {
+    #    'report_low.txt': LOW,
+    #},
     # TODO: Add report examples for SNMP enums.
     # TODO: Add report examples for SNMP AIX version.
     'auxiliary/scanner/snmp/snmp_login': {
