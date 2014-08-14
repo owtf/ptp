@@ -46,11 +46,10 @@ class ArachniReport(AbstractReport):
         :rtype: :class:`bool`
 
         """
-        fullpath = cls._recursive_find(pathname, filename)
-        if not fullpath:
-            return False
-        fullpath = fullpath[0]  # Only keep the first file.
-        return AbstractReport._is_parser(cls.__parsers__, fullpath)
+        return AbstractReport.is_mine(
+            cls.__parsers__,
+            pathname=pathname,
+            filename=filename)
 
     def parse(self, pathname, filename='*.xml'):
         """Parse an Arachni report.
@@ -73,4 +72,5 @@ class ArachniReport(AbstractReport):
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
         self.vulns = self.parser.parse_report(self.RANKING_SCALE)
+        print('#Debug Arachni parse', self.vulns)
         return self.vulns

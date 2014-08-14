@@ -33,12 +33,10 @@ class DirbusterReport(AbstractReport):
         :rtype: :class:`bool`
 
         """
-        fullpath = cls._recursive_find(pathname, filename)
-        if not fullpath:
-            return False
-        fullpath = fullpath[0]  # Only keep the first file.
-        # TODO: Properly check if it is a DirBuster report.
-        return AbstractReport._is_parser(cls.__parsers__, fullpath)
+        return AbstractReport.is_mine(
+            cls.__parsers__,
+            pathname=pathname,
+            filename=filename)
 
     def parse(self, pathname=None, filename='DirBuster-Report*'):
         """Parse a Dirbuster report.

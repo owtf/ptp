@@ -39,15 +39,22 @@ class AbstractReport(object):
         self.vulns = []
 
     @classmethod
-    def is_mine(cls):
+    def is_mine(cls, parsers, pathname=None, filename=None):
         """Check if the report can parse the report.
 
-        :raises: :class:`NotImplementedError` -- because this is an abstract
-            method.
+        :param :class:`libptp.parser.AbstractParser` parsers: List of the
+            available parsers for the report.
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
 
         """
-        raise NotImplementedError(
-            '`is_mine` function MUST be define for each parser.')
+        if pathname is None or filename is None:
+            return False
+        fullpath = cls._recursive_find(pathname, filename)
+        if not fullpath:
+            return False
+        fullpath = fullpath[0]  # Only keep the first file.
+        return AbstractReport._is_parser(parsers, fullpath)
 
     @classmethod
     def _is_parser(cls, parsers, *args, **kwargs):
