@@ -9,7 +9,6 @@
 import os
 
 from libptp.exceptions import ReportNotFoundError
-from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.skipfish.parser import SkipfishJSParser
 
@@ -24,20 +23,6 @@ class SkipfishReport(AbstractReport):
 
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
-
-    HIGH = 4
-    MEDIUM = 3
-    LOW = 2
-    WARNINGS = 1
-    INFO = 0
-
-    #: :class:`dict` -- Convert the Skipfish's ranking scale to an unified one.
-    RANKING_SCALE = {
-        HIGH: constants.HIGH,
-        MEDIUM: constants.MEDIUM,
-        LOW: constants.LOW,
-        WARNINGS: constants.INFO,
-        INFO: constants.INFO}
 
     def __init__(self):
         """Initialize SkipfishReport."""
@@ -94,5 +79,5 @@ class SkipfishReport(AbstractReport):
         self._init_parser(self.metadatafile, self.reportfile)
         # Parser everything.
         self.metadata = self.parser.parse_metadata()
-        self.vulns = self.parser.parse_report(self.RANKING_SCALE)
+        self.vulns = self.parser.parse_report()
         return self.vulns

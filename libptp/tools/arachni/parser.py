@@ -8,6 +8,7 @@
 
 from lxml.etree import LxmlError
 
+from libptp import constants
 from libptp.exceptions import NotSupportedVersionError
 from libptp.parser import XMLParser
 
@@ -21,6 +22,18 @@ class ArachniXMLParser(XMLParser):
     __format__ = 'xml'
     #: :class:`list` -- Versions of Arachni that are supported.
     __version__ = ['0.4.6', '0.4.7']
+
+    HIGH = 'High'
+    MEDIUM = 'Medium'
+    LOW = 'Low'
+    INFO = 'Informational'
+
+    #: :class:`dict` -- Convert the Arachni's ranking scale to an unified one.
+    RANKING_SCALE = {
+        HIGH: constants.HIGH,
+        MEDIUM: constants.MEDIUM,
+        LOW: constants.LOW,
+        INFO: constants.INFO}
 
     def __init__(self, fullpath):
         """Initialize ArachniXMLParser.
@@ -69,16 +82,14 @@ class ArachniXMLParser(XMLParser):
             raise NotSupportedVersionError(
                 'PTP does NOT support this version of Arachni.')
 
-    def parse_report(self, scale):
+    def parse_report(self):
         """Parse the results of the report.
-
-        :param dict scale: Unified scale between Arachni and PTP.
 
         :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         """
         self.vulns = [
-            {'ranking': scale[vuln.find('.//severity').text]}
+            {'ranking': self.RANKING_SCALE[vuln.find('.//severity').text]}
             for vuln in self.stream.find('.//issues')]
         return self.vulns

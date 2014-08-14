@@ -6,7 +6,6 @@
 
 """
 
-from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.w3af.parser import W3AFXMLParser
 
@@ -18,18 +17,6 @@ class W3AFReport(AbstractReport):
     __tool__ = 'w3af'
     #: :class:`list` -- Available parsers for W3AF.
     __parsers__ = [W3AFXMLParser]
-
-    HIGH = 'High'
-    MEDIUM = 'Medium'
-    LOW = 'Low'
-    INFO = 'Information'
-
-    #: :class:`dict` -- Convert the W3AF's ranking scale to an unified one.
-    RANKING_SCALE = {
-        HIGH: constants.HIGH,
-        MEDIUM: constants.MEDIUM,
-        LOW: constants.LOW,
-        INFO: constants.INFO}
 
     def __init__(self, *args, **kwargs):
         """Initialize W3AFReport."""
@@ -71,5 +58,5 @@ class W3AFReport(AbstractReport):
         self._init_parser(self.fullpath)
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
-        self.vulns = self.parser.parse_report(self.RANKING_SCALE)
+        self.vulns = self.parser.parse_report()
         return self.vulns

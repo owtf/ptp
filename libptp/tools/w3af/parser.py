@@ -10,6 +10,7 @@ import re
 
 from lxml.etree import LxmlError
 
+from libptp import constants
 from libptp.exceptions import NotSupportedVersionError
 from libptp.parser import XMLParser
 
@@ -23,6 +24,18 @@ class W3AFXMLParser(XMLParser):
     __format__ = 'xml'
     #: :class:`list` -- Versions of W3AF that are supported.
     __version__ = ['1.6.0.2', '1.6.0.3']
+
+    HIGH = 'High'
+    MEDIUM = 'Medium'
+    LOW = 'Low'
+    INFO = 'Information'
+
+    #: :class:`dict` -- Convert the W3AF's ranking scale to an unified one.
+    RANKING_SCALE = {
+        HIGH: constants.HIGH,
+        MEDIUM: constants.MEDIUM,
+        LOW: constants.LOW,
+        INFO: constants.INFO}
 
     def __init__(self, fullpath):
         """Initialize W3AFXMLParser.
@@ -75,7 +88,7 @@ class W3AFXMLParser(XMLParser):
             raise NotSupportedVersionError(
                 'PTP does NOT support this version of W3AF.')
 
-    def parse_report(self, scale):
+    def parse_report(self):
         """Parse the results of the report.
 
         :return: List of dicts where each one represents a discovery.
@@ -83,6 +96,6 @@ class W3AFXMLParser(XMLParser):
 
         """
         self.vulns = [
-            {'ranking': scale[vuln.get('severity')],}
+            {'ranking': self.RANKING_SCALE[vuln.get('severity')],}
             for vuln in self.stream.findall('.//vulnerability')]
         return self.vulns

@@ -9,6 +9,7 @@
 import re
 import ast
 
+from libptp import constants
 from libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
 from libptp.parser import AbstractParser
 
@@ -22,6 +23,20 @@ class SkipfishJSParser(AbstractParser):
     __format__ = 'js'
     #: :class:`list` -- Skipfish versions it supports.
     __version__ = ['2.10b']
+
+    HIGH = 4
+    MEDIUM = 3
+    LOW = 2
+    WARNINGS = 1
+    INFO = 0
+
+    #: :class:`dict` -- Convert the Skipfish's ranking scale to an unified one.
+    RANKING_SCALE = {
+        HIGH: constants.HIGH,
+        MEDIUM: constants.MEDIUM,
+        LOW: constants.LOW,
+        WARNINGS: constants.INFO,
+        INFO: constants.INFO}
 
     def __init__(self, metadatafile, reportfile):
         """Initialize ArachniXMLParser.
@@ -111,15 +126,14 @@ class SkipfishJSParser(AbstractParser):
             raise NotSupportedVersionError(
                 'PTP does NOT support this version of Skipfish.')
 
-    def parse_report(self, scale):
+    def parse_report(self):
         """Retrieve the results from the report.
-
-        :param dict scale: Unified scale between Skipfish and PTP.
-        :return: List of dicts where each one represents a discovery.
-        :rtype: :class:`list`
 
         :raises: :class:`ReportNotFoundError` -- if the report file was not
             found.
+
+        :return: List of dicts where each one represents a discovery.
+        :rtype: :class:`list`
 
         .. note::
 
@@ -145,6 +159,6 @@ class SkipfishJSParser(AbstractParser):
         # We now have a raw version of the Skipfish report as a list of
         # dict.
         self.vulns = [
-            {'ranking': scale[vuln['severity']]}
+            {'ranking': self.RANKING_SCALE[vuln['severity']]}
             for vuln in ast.literal_eval(report[REPORT_VAR_NAME])]
         return self.vulns

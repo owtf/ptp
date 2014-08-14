@@ -6,7 +6,6 @@
 
 """
 
-from libptp import constants
 from libptp.report import AbstractReport
 from libptp.tools.arachni.parser import ArachniXMLParser
 
@@ -18,18 +17,6 @@ class ArachniReport(AbstractReport):
     __tool__ = 'arachni'
     #: :class:`list` -- Available parsers for Arachni.
     __parsers__ = [ArachniXMLParser]
-
-    HIGH = 'High'
-    MEDIUM = 'Medium'
-    LOW = 'Low'
-    INFO = 'Informational'
-
-    #: :class:`dict` -- Convert the Arachni's ranking scale to an unified one.
-    RANKING_SCALE = {
-        HIGH: constants.HIGH,
-        MEDIUM: constants.MEDIUM,
-        LOW: constants.LOW,
-        INFO: constants.INFO}
 
     def __init__(self):
         """Initialize ArachniReport."""
@@ -71,5 +58,5 @@ class ArachniReport(AbstractReport):
         self._init_parser(self.fullpath)
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
-        self.vulns = self.parser.parse_report(self.RANKING_SCALE)
+        self.vulns = self.parser.parse_report()
         return self.vulns
