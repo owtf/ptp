@@ -19,8 +19,9 @@ class NmapReport(AbstractReport):
     #: :class:`list` -- Available parsers for Nmap.
     __parsers__ = [NmapXMLParser]
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize NmapReport."""
+        AbstractReport.__init__(self)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):

@@ -52,7 +52,7 @@ class W3AFReport(AbstractReport):
         fullpath = fullpath[0]  # Only keep the first file.
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
-    def parse(self, pathname=None, filename='*.xml'):
+    def parse(self, pathname, filename='*.xml'):
         """Parse a W3AF report.
 
         :param str pathname: Path to the report directory.

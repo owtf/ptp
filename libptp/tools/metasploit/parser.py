@@ -23,13 +23,13 @@ class MetasploitParser(FileParser):
     #: :class:`str` -- Metasploit plugin full name.
     __plugin__ = ''
 
-    def __init__(self, pathname, filename='*.txt', plugin=''):
-        FileParser.__init__(self, pathname)
+    def __init__(self, fullpath, plugin=''):
+        FileParser.__init__(self, fullpath)
         self.__plugin__ = plugin
 
     # TODO: Properly check the supported versions.
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', plugin=''):
+    def is_mine(cls, fullpath, plugin=''):
         if plugin:
             return True
         return False

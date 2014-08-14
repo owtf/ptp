@@ -25,15 +25,16 @@ class ArachniReport(AbstractReport):
     LOW = 'Low'
     INFO = 'Informational'
 
-    # Convert the Arachni's ranking scale to an unified one.
+    #: :class:`dict` -- Convert the Arachni's ranking scale to an unified one.
     RANKING_SCALE = {
         HIGH: constants.HIGH,
         MEDIUM: constants.MEDIUM,
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize ArachniReport."""
+        AbstractReport.__init__(self)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
@@ -52,13 +53,14 @@ class ArachniReport(AbstractReport):
         fullpath = fullpath[0]  # Only keep the first file.
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
-    def parse(self, pathname=None, filename='*.xml'):
+    def parse(self, pathname, filename='*.xml'):
         """Parse an Arachni report.
 
         :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
+        :param str filename: Regex matching the XML report file.
 
-        :return: List of dicts where each one represents a vuln.
+        :return: List of dicts where each one represents a discovery from the
+            report.
         :rtype: :class:`list`
 
         """

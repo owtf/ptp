@@ -21,11 +21,16 @@ class ArachniXMLParser(XMLParser):
     #: :class:`list` -- Arachni versions it supports.
     __version__ = ['0.4.6', '0.4.7']
 
-    def __init__(self, pathname):
-        XMLParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        """Initialize ArachniXMLParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
+        XMLParser.__init__(self, fullpath)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, fullpath):
         """Check if it is a supported Arachni report.
 
         :param str pathname: Path to the report file.

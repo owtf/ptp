@@ -23,7 +23,7 @@ class AbstractParser(object):
     #: :class:`list` -- Versions it can supports.
     __version__ = None
 
-    def __init__(self, pathname):
+    def __init__(self, fullpath):
         """Initialize AbstractParser.
 
         :param str pathname: path to the report file.
@@ -33,7 +33,7 @@ class AbstractParser(object):
         self.stream = self.handle_file(pathname)
 
     @classmethod
-    def handle_file(cls, pathname):
+    def handle_file(cls, fullpath):
         """Process the report file(s) in order to create an i/o stream.
 
         :param str pathname: Path to the report file.
@@ -100,16 +100,16 @@ class XMLParser(AbstractParser):
     #: str -- XMLParser only supports XML files.
     __format__ = 'xml'
 
-    def __init__(self, pathname):
+    def __init__(self, fullpath):
         """Initialize XMLParser.
 
         :param str pathname: path to the report file.
 
         """
-        AbstractParser.__init__(self, pathname)
+        AbstractParser.__init__(self, fullpath)
 
     @classmethod
-    def handle_file(cls, pathname):
+    def handle_file(cls, fullpath):
         """Specialized file handler for XML files.
 
         :param str pathname: path to the report file.
@@ -117,10 +117,10 @@ class XMLParser(AbstractParser):
         :raises LxmlError: if Lxml cannot parse the XML file.
 
         """
-        if not pathname.endswith(cls.__format__):
+        if not fullpath.endswith(cls.__format__):
             raise ValueError(
                 "This parser only supports '%s' files" % cls.__format__)
-        return etree.parse(pathname).getroot()
+        return etree.parse(fullpath).getroot()
 
 
 class FileParser(AbstractParser):
@@ -129,17 +129,19 @@ class FileParser(AbstractParser):
     #: str -- A file can have any extension.
     __format__ = ''
 
-    def __init__(self, pathname):
-        """Initialized FileParser.
+    """
 
-        :param str pathname: path to the report file.
+    def __init__(self, fullpath):
+        """Initialize FileParser.
+
+        :param str fullpath: full path to the report file.
 
         """
-        AbstractParser.__init__(self, pathname)
+        AbstractParser.__init__(self, fullpath)
 
     @classmethod
-    def handle_file(cls, pathname):
-        """Specialized file handler for general files.
+    def handle_file(cls, fullpath):
+        """Specialized file handler for generic file(s).
 
         :param str pathname: path to the report file.
         :raises OSError: if an error occurs when opening/reading the report
@@ -148,8 +150,10 @@ class FileParser(AbstractParser):
             file.
 
         """
-        with open(pathname, 'r') as f:
-            return f.read()
+        data = ''
+        with open(fullpath, 'r') as f:
+            data = f.read()
+        return data
 
 
 class LineParser(AbstractParser):
@@ -158,16 +162,16 @@ class LineParser(AbstractParser):
     #: str -- A file can have any extension.
     __format__ = ''
 
-    def __init__(self, pathname):
+    def __init__(self, fullpath):
         """Initialized LineParser.
 
         :param str pathname: path to the report file.
 
         """
-        AbstractParser.__init__(self, pathname)
+        AbstractParser.__init__(self, fullpath)
 
     @classmethod
-    def handle_file(cls, pathname, skip_empty=True):
+    def handle_file(cls, fullpath, skip_empty=True):
         """Specialized file handler for general files read line by line.
 
         :param str pathname: path to the report file.
@@ -177,7 +181,7 @@ class LineParser(AbstractParser):
             file.
 
         """
-        with open(pathname, 'r') as f:
+        with open(fullpath, 'r') as f:
             if skip_empty:
                 return [line.rstrip('\n') for line in f.readlines() if line.rstrip('\n')]
             return [line.rstrip('\n') for line in f.readlines()]

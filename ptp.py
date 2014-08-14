@@ -44,7 +44,7 @@ class PTP(object):
         'owasp-cm-008': OWASPCM008Report,
         'robots': RobotsReport}
 
-    def __init__(self, tool_name=None):
+    def __init__(self, tool_name=''):
         self.tool_name = tool_name
         self.report = None
 

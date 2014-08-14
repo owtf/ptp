@@ -19,18 +19,19 @@ class RobotsReport(AbstractReport):
     #: :class:`list` -- Available parsers for DirBuster.
     __parsers__ = [RobotsParser]
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize RobotsReport."""
+        AbstractReport.__init__(self)
 
     @classmethod
-    def is_mine(cls, pathname=None, filename='*.txt'):
+    def is_mine(cls, pathname, filename='*.txt'):
         fullpath = cls._recursive_find(pathname, filename)
         if not fullpath:
             return False
         fullpath = fullpath[0]  # Only keep the first file.
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
-    def parse(self, pathname=None, filename='*.txt'):
+    def parse(self, pathname, filename='*.txt'):
         """Parse a Robots.txt report.
 
         :param str pathname: Path to the report directory.

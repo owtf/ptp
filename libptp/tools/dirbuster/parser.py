@@ -31,12 +31,17 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Regex matching DirBuster files status code.
     _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) responce:$"
 
-    def __init__(self, pathname):
-        LineParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        """Initialize DirbusterParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
+        LineParser.__init__(self, fullpath)
 
     # TODO: Properly check the supported versions.
     @classmethod
-    def is_mine(cls, pathname=None, filename='DirBuster-Report*'):
+    def is_mine(cls, fullpath):
         stream = cls.handle_file(pathname)
         if stream and re.match(cls._re_version, stream[0]):
             return True

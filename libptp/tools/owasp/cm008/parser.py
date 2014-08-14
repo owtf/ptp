@@ -19,12 +19,12 @@ class OWASPCM008Parser(LineParser):
     #: :class:`str` -- Name of the tool.
     __tool__ = 'owasp-cm-008'
 
-    def __init__(self, pathname):
-        LineParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        LineParser.__init__(self, fullpath)
 
     # TODO: Properly check the supported versions.
     @classmethod
-    def is_mine(cls, pathname=None, filename='*.txt'):
+    def is_mine(cls, fullpath):
         stream = cls.handle_file(pathname)
         if stream and stream[0].startswith('HTTP'):
             return True

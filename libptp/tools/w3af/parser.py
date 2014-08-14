@@ -24,12 +24,12 @@ class W3AFXMLParser(XMLParser):
     #: :class:`list` -- W3AF versions it supports.
     __version__ = ['1.6.0.2', '1.6.0.3']
 
-    def __init__(self, pathname):
-        XMLParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        XMLParser.__init__(self, fullpath)
         self.re_version = re.compile(r'Version: (\S*)\s')
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, fullpath):
         """Check if it is a supported W3AF report.
 
         :param str pathname: Path to the report file.
@@ -39,7 +39,7 @@ class W3AFXMLParser(XMLParser):
 
         """
         try:
-            stream = cls.handle_file(pathname)
+            stream = cls.handle_file(fullpath)
         except ValueError:
             return False
         if stream.find('.//w3af-version') is None:

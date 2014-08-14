@@ -19,8 +19,9 @@ class WapitiReport(AbstractReport):
     #: :class:`list` -- Available parsers for Wapiti.
     __parsers__ = [WapitiXMLParser, Wapiti221XMLParser]
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize WapitiReport."""
+        AbstractReport.__init__(self)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):

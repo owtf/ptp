@@ -23,11 +23,11 @@ class NmapXMLParser(XMLParser):
     #: :class:`list` -- Nmap versions it supports.
     __version__ = ['6.46']
 
-    def __init__(self, pathname):
-        XMLParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        XMLParser.__init__(self, fullpath)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, fullpath):
         """Check if it is a supported Nmap report.
 
         :param str pathname: Path to the report file.
@@ -37,7 +37,7 @@ class NmapXMLParser(XMLParser):
 
         """
         try:
-            stream = cls.handle_file(pathname)
+            stream = cls.handle_file(fullpath)
         except ValueError:
             return False
         if stream.get('scanner') != cls.__tool__:

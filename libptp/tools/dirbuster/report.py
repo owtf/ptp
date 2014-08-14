@@ -19,16 +19,26 @@ class DirbusterReport(AbstractReport):
     #: :class:`list` -- Available parsers for DirBuster.
     __parsers__ = [DirbusterParser]
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize DirbusterReport."""
+        AbstractReport.__init__(self)
 
-    # TODO: Properly check if it is a DirBuster report.
     @classmethod
-    def is_mine(cls, pathname=None, filename='DirBuster-Report*'):
+    def is_mine(cls, pathname, filename='DirBuster-Report*'):
+        """Check if it is a DirBuster report and if it can handle it.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+
+        :return: `True` if it supports the report, `False` otherwise.
+        :rtype: :class:`bool`
+
+        """
         fullpath = cls._recursive_find(pathname, filename)
         if not fullpath:
             return False
         fullpath = fullpath[0]  # Only keep the first file.
+        # TODO: Properly check if it is a DirBuster report.
         return AbstractReport._is_parser(cls.__parsers__, fullpath)
 
     def parse(self, pathname=None, filename='DirBuster-Report*'):

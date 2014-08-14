@@ -21,13 +21,18 @@ class RobotsParser(LineParser):
     #: :class:`str` -- Format of Robots reports it supports.
     __format__ = 'txt'
 
-    def __init__(self, pathname):
-        LineParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        """Initialize RobotsParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
+        LineParser.__init__(self, fullpath)
 
     # TODO: Properly check the supported versions.
     @classmethod
-    def is_mine(cls, pathname=None, filename='*.txt'):
-        stream = cls.handle_file(pathname)
+    def is_mine(cls, fullpath, filename='*.txt'):
+        stream = cls.handle_file(filename)
         if stream and stream[0].startswith('User-agent'):
             return True
         return False

@@ -19,8 +19,9 @@ class MetasploitReport(AbstractReport):
     #: :class:`list` -- Available parsers for Metasploit.
     __parsers__ = [MetasploitParser]
 
-    def __init__(self, *args, **kwargs):
-        AbstractReport.__init__(self, *args, **kwargs)
+    def __init__(self):
+        """Initialize MetasploitReport."""
+        AbstractReport.__init__(self)
 
     # TODO: Properly check if it is a Metasploit report.
     @classmethod
@@ -29,7 +30,7 @@ class MetasploitReport(AbstractReport):
             return True
         return False
 
-    def parse(self, pathname=None, filename='*.txt', plugin=''):
+    def parse(self, pathname, filename='*.txt', plugin=''):
         """Parse a Metasploit report.
 
         :param str pathname: Path to the report directory.
@@ -45,7 +46,7 @@ class MetasploitReport(AbstractReport):
             return []
         self.fullpath = self.fullpath[0]
         # Find the corresponding parser.
-        self._init_parser(self.fullpath, filename, plugin)
+        self._init_parser(self.fullpath, plugin)
         # Parse specific stuff.
         self.metadata = self.parser.parse_metadata()
         self.vulns = self.parser.parse_report()

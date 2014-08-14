@@ -32,9 +32,9 @@ class AbstractReport(object):
     #: :class:`tuple` -- Available parsers for the tool.
     __parsers__ = None
 
-    def __init__(self, vulns=None):
-        """Self-explanatory."""
-        #: The current parser the report is using.
+    def __init__(self):
+        """Initialized the AbstractReport instance."""
+        #: :class:`AbstractParser` -- The current parser the report is using.
         self.parser = None
         #: List of dictionaries of the results found in the report.
         self.vulns = [] or vulns
@@ -43,8 +43,8 @@ class AbstractReport(object):
         return ', '.join([info.__str__() for info in self.vulns])
 
     @classmethod
-    def is_mine(cls, pathname, filename=None):
-        """Check if it is a report from the tool this class supports.
+    def is_mine(cls):
+        """Check if the report can parse the report.
 
         :param str pathname: The path to the report.
         :param str filename: The name of the report file.

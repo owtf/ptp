@@ -22,11 +22,16 @@ class WapitiXMLParser(XMLParser):
     #: :class:`list` -- Wapiti versions it supports.
     __version__ = ['2.3.0']
 
-    def __init__(self, pathname):
-        XMLParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        """Initialize WapitiXMLParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
+        XMLParser.__init__(self, fullpath)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, fullpath):
         """Check if it is a supported Wapiti report.
 
         :param str pathname: Path to the report file.
@@ -107,11 +112,16 @@ class Wapiti221XMLParser(XMLParser):
     #: :class:`list` -- Wapiti versions it supports.
     __version__ = ['2.2.1']
 
-    def __init__(self, pathname):
-        XMLParser.__init__(self, pathname)
+    def __init__(self, fullpath):
+        """Initialize Wapiti221XMLParser.
+
+        :param str fullpath: full path to the report file.
+
+        """
+        XMLParser.__init__(self, fullpath)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, fullpath):
         """Check if it is a supported Wapiti report.
 
         :param str pathname: Path to the report file.
