@@ -31,7 +31,10 @@ class RobotsParser(LineParser):
     # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath, filename='*.txt'):
-        stream = cls.handle_file(filename)
+        try:
+            stream = cls.handle_file(fullpath)
+        except (OSError, IOError):
+            return False
         if stream and stream[0].startswith('User-agent'):
             return True
         return False

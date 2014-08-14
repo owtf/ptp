@@ -41,6 +41,7 @@ class SkipfishJSParser(AbstractParser):
         :rtype: :class:`tuple`
 
         :raises ValueError: if the files have not the right extension.
+        :raises OSError: if an error occurs when reading the files.
         :raises IOError: if an error occurs when reading the files.
 
         """
@@ -69,8 +70,12 @@ class SkipfishJSParser(AbstractParser):
             Currently broken.
 
         """
-        metadata_stream, report_stream = cls.handle_file(
-            metadatafile, reportfile)
+        try:
+            metadata_stream, report_stream = cls.handle_file(
+                metadatafile,
+                reportfile)
+        except (OSError, IOError, ValueError):
+            return False
         return True
 
     def parse_metadata(self):

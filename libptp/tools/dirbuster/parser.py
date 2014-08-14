@@ -41,7 +41,10 @@ class DirbusterParser(LineParser):
     # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath):
-        stream = cls.handle_file(pathname)
+        try:
+            stream = cls.handle_file(fullpath)
+        except (OSError, IOError):
+            return False
         if stream and re.match(cls._re_version, stream[0]):
             return True
         return False

@@ -24,7 +24,10 @@ class OWASPCM008Parser(LineParser):
     # TODO: Properly check the supported versions.
     @classmethod
     def is_mine(cls, fullpath):
-        stream = cls.handle_file(pathname)
+        try:
+            stream = cls.handle_file(fullpath)
+        except (OSError, IOError):
+            return False
         if stream and stream[0].startswith('HTTP'):
             return True
         return False
