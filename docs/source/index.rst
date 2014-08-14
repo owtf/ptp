@@ -4,31 +4,19 @@
    contain the root `toctree` directive.
 
 Welcome to ptp's documentation!
-===============================
+###############################
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 3
 
-   ptp
-   libptp/report
-   libptp/parser
-   libptp/exceptions
-   libptp/constants
-   libptp/tools/arachni
-   libptp/tools/dirbuster
-   libptp/tools/metasploit
-   libptp/tools/nmap
-   libptp/tools/owasp
-   libptp/tools/robots
-   libptp/tools/skipfish
-   libptp/tools/w3af
-   libptp/tools/wapiti
+    gettingstarted
+    technicaldoc
 
 
 Indices and tables
-==================
+##################
 
 * :ref:`genindex`
 * :ref:`modindex`
