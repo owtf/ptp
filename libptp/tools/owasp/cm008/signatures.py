@@ -8,7 +8,7 @@
 """
 
 
-from libptp.constants import HIGH, MEDIUM, LOW, INFO
+from libptp.constants import HIGH, MEDIUM, LOW
 
 
 SIGNATURES = {

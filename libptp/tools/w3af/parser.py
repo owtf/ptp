@@ -7,7 +7,6 @@
 """
 
 import re
-import re
 
 from lxml.etree import LxmlError
 

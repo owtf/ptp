@@ -6,7 +6,6 @@
 
 """
 
-from lxml import etree
 from libptp.exceptions import NotSupportedVersionError
 from libptp.constants import UNKNOWN
 from libptp.parser import XMLParser
