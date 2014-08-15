@@ -1,7 +1,9 @@
-# What is PTP?
+============
+What is PTP?
+============
 
-The primary goal of ptp (Pentester's Tools Parser) is to enhance [OWASP - OWTF
-project](https://www.owasp.org/index.php/OWASP_OWTFA) in order to provide an
+The primary goal of ptp (Pentester's Tools Parser) is to enhance `OWASP - OWTF
+project <https://www.owasp.org/index.php/OWASP_OWTF>` in order to provide an
 automated ranking for each plugin. This will allow the user to focus attention
 on the most likely weak areas of a web application or network first, which will
 be valuable to efficiently use the remaining time in a penetration assessment.
@@ -19,43 +21,51 @@ Apart from its main feature which is **ranking the results from security tools
 reports**, it also provides an **unified way to reuse these reports directly in
 your python code**, without having to deal with complex parsing.
 
-# Installation
+============
+Installation
+============
 
 
 The first step is to clone the repository of the project:
 
-```bash
-$ git clone https://github.com/owtf/ptp.git
-```
+.. code-block:: bash
+
+    $ git clone https://github.com/owtf/ptp.git
 
 Then the script `setup.py` must be run:
 
-```bash
-$ ./setup.py install
-```
+.. code-block:: bash
 
-# Usage
+    $ ./setup.py install
 
-```python
-from __future__ import print_function
-from ptp import PTP
+=====
+Usage
+=====
+
+.. code-block:: python
+
+    from __future__ import print_function
+    from ptp import PTP
 
 
-if __name__ == '__main__':
-    ptp = PTP()
-    ptp.parse('path/to/the/report/directory')
-    print('Highest severity:', ptp.get_highest_ranking())
-```
+    if __name__ == '__main__':
+        ptp = PTP()
+        ptp.parse('path/to/the/report/directory')
+        print('Highest severity:', ptp.get_highest_ranking())
 
-# Documentation
+=============
+Documentation
+=============
 
 The ptp's documentation is available online at the following address:
-[http://owtf.github.io/ptp/](http://owtf.github.io/ptp/).
+`http://owtf.github.io/ptp/ <http://owtf.github.io/ptp/>`.
 
 It explained how to use the library and even how to contribute. Plus it
 contains the technical documentation of the project.
 
-# Current support
+===============
+Current support
+===============
 
 + arachni (0.4.6) (XML report)
 + dirbuster (1.0-RC1)
