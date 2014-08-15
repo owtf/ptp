@@ -2,10 +2,9 @@
 Welcome!
 ========
 
-Here we present the :mod:`ptp` (*Pentesters' Tools Parser*) project.
-
-Before coding anything, let us start with some brief explanation about the
-project, its context and its aims.
+Here we present the :mod:`ptp` (*Pentesters' Tools Parser*) project and answer
+the *What is it? What does it do? Why does it do it? How does it do it?*
+questions.
 
 The project has been developed during the `Google Summer of Code 2014, 10th
 edition <https://www.google-melange.com/gsoc/homepage/google/gsoc2014>`_, in
@@ -13,17 +12,43 @@ order to create an `automated ranking system
 <https://www.owasp.org/index.php/GSoC2014_Ideas#OWASP_OWTF_-_Automated_Vulnerability_Severity_Rankings>`_
 for the `OWASP - OWTF project <https://www.owasp.org/index.php/OWASP_OWTF>`_.
 
-But :mod:`ptp` tries to go even beyond the original idea.
+OWASP - OWTF in a word
+======================
 
-Apart from its main feature which is **ranking the results from any security
-tools reports**, it also provides an **unified way to reuse these reports
-directly in your python code**, without having to deal with complexe parsing.
+The `OWASP - OWTF project <https://www.owasp.org/index.php/OWASP_OWTF>`_
+provides an efficient approach to combine the power of automation with the
+out-of-the-box thinking that only the user can provide.
+
+It gathers a complete set of plugins and merges their results into an
+interactive report. The user has then the possibility to add notes, to change
+details and to add media like screenshots in order to have a complete report.
+
+The goals aimed by :mod:`ptp`
+=============================
+
+The primary goal of :mod:`ptp` is to enhance OWASP - OWTF in order to provide
+an automated ranking for each plugin. This will allow the user to focus
+attention on the most likely weak areas of a web application or network first,
+which will be valuable to efficiently use the remaining time in a penetration
+assessment.
+
+Instead of evaluating every plugins run by OWASP - OWTF and defining the
+rankings for each of them, thanks to :mod:`ptp`, the user will be able to focus
+on the ones that have been ranked with the highest risks. The user is then able
+to confirm or override the automated rankings since we estimate that she/he is
+the only one that can accurately detect the false positives.
+
+When developing the automated ranking system, :mod:`ptp`'s main goal was joined
+with a secondary one.  Apart from its main feature which is **ranking the
+results from security tools reports**, it also provides an **unified way to
+reuse these reports directly in your python code**, without having to deal with
+complex parsing.
 
 .. note::
 
-    When we say **any**, we mean that it is our ultimate goal. For now,
-    :mod:`ptp` is in its early development phase and *only* supports a small
-    amount of tools.
+    The long-term objective for :mod:`ptp` is to support all security tools and
+    tests. But :mod:`ptp` is in its early development phase and only supports
+    the main ones for now.
 
 ============
 Installation
