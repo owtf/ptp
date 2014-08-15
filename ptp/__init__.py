@@ -1,1 +1,1 @@
-from ptp import PTP
+from .ptp import PTP

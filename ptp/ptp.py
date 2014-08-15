@@ -6,17 +6,17 @@
 
 """
 
-from libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
-from libptp.constants import UNKNOWN, RANKING_SCALE
-from tools.arachni.parser import ArachniXMLParser
-from tools.skipfish.parser import SkipfishJSParser
-from tools.w3af.parser import W3AFXMLParser
-from tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
-from tools.metasploit.parser import MetasploitParser
-from tools.dirbuster.parser import DirbusterParser
-from tools.nmap.parser import NmapXMLParser
-from tools.owasp.cm008.parser import OWASPCM008Parser
-from tools.robots.parser import RobotsParser
+from .libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
+from .libptp.constants import UNKNOWN, RANKING_SCALE
+from .tools.arachni.parser import ArachniXMLParser
+from .tools.skipfish.parser import SkipfishJSParser
+from .tools.w3af.parser import W3AFXMLParser
+from .tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
+from .tools.metasploit.parser import MetasploitParser
+from .tools.dirbuster.parser import DirbusterParser
+from .tools.nmap.parser import NmapXMLParser
+from .tools.owasp.cm008.parser import OWASPCM008Parser
+from .tools.robots.parser import RobotsParser
 
 
 class PTP(object):
