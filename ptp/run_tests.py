@@ -27,12 +27,14 @@ def find_tests(pathname):
     return founds
 
 
-def run_tests(pathnames, test_name=None):
+def run_tests(pathnames=None, test_name=None):
     """Loads each test module and run their `run` function.
 
     :param list pathnames: List of (module_name, path_to_the_module).
 
     """
+    if pathnames is None:
+        pathnames = find_tests(os.path.join(os.getcwd(), DIR_TEST))
     for module, path in pathnames:
         current_mod = imp.load_source(
             os.path.splitext(module)[0],
