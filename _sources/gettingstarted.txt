@@ -130,16 +130,21 @@ The list of the supported tools can be found like below:
 
     >>> PTP.supported
     {
-        'metasploit': <class 'libptp.tools.metasploit.report.MetasploitReport'>,
-        'w3af': <class 'libptp.tools.w3af.report.W3AFReport'>,
-        'nmap': <class 'libptp.tools.nmap.report.NmapReport'>,
-        'owasp-cm-008': <class 'libptp.tools.owasp.cm008.report.OWASPCM008Report'>,
-        'arachni': <class 'libptp.tools.arachni.report.ArachniReport'>,
-        'robots': <class 'libptp.tools.robots.report.RobotsReport'>,
-        'wapiti': <class 'libptp.tools.wapiti.report.WapitiReport'>,
-        'skipfish': <class 'libptp.tools.skipfish.report.SkipfishReport'>,
-        'dirbuster': <class 'libptp.tools.dirbuster.report.DirbusterReport'>
+        'skipfish': [<class 'libptp.tools.skipfish.parser.SkipfishJSParser'>],
+        'nmap': [<class 'libptp.tools.nmap.parser.NmapXMLParser'>],
+        'dirbuster': [<class 'libptp.tools.dirbuster.parser.DirbusterParser'>],
+        'wapiti': [
+            <class 'libptp.tools.wapiti.parser.WapitiXMLParser'>,
+            <class 'libptp.tools.wapiti.parser.Wapiti221XMLParser'>
+        ],
+        'owasp-cm-008': [<class 'libptp.tools.owasp.cm008.parser.OWASPCM008Parser'>],
+        'w3af': [<class 'libptp.tools.w3af.parser.W3AFXMLParser'>],
+        'arachni': [<class 'libptp.tools.arachni.parser.ArachniXMLParser'>],
+        'metasploit': [<class
+        'libptp.tools.metasploit.parser.MetasploitParser'>],
+        'robots': [<class 'libptp.tools.robots.parser.RobotsParser'>]
     }
+
 
 .. warning::
 

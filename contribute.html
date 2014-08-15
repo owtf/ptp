@@ -59,9 +59,12 @@
 <p>First of all, we have to write a parser for our target tool. In our case, let
 us assume that the tool is named <em>MyTool</em> and that we want to parse its XML
 formatted reports.</p>
+<p>The parser source code must be saved into the <cite>libptp/tools/&lt;tool name&gt;/</cite> and
+be named <cite>parser.py</cite>. Therefore, the parser for <em>MyTool</em> will be saved under
+the name <cite>libptp/tools/mytool/parser.py</cite>.</p>
 </div>
-<div class="section" id="myparser-class">
-<h1>MyParser class<a class="headerlink" href="#myparser-class" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="myxmlparser-class">
+<h1>MyXMLParser class<a class="headerlink" href="#myxmlparser-class" title="Permalink to this headline">¶</a></h1>
 <p>In order for <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> to correctly retrieve the information that are
 contained in a tool report, it needs a specialized parser.</p>
 <p>Let&#8217;s start by writing the skeleton of our parser class. Since we are aiming to
@@ -69,51 +72,40 @@ support <em>MyTool</em>&#8216;s XML reports, <a class="reference internal" href=
 class from which to inherit.</p>
 <p>The <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> already defines
 <tt class="xref py py-meth docutils literal"><span class="pre">libptpt.parser.XMLParser.handle_file()</span></tt> for us. This will initialize the
-<tt class="xref py py-attr docutils literal"><span class="pre">MyParser.stream</span></tt> instance variable with a handle on the root node of the
-file.</p>
+<tt class="xref py py-attr docutils literal"><span class="pre">MyXMLParser.stream</span></tt> instance variable with a handle on the root node of
+the file.</p>
 <div class="section" id="the-skeleton">
 <h2>The skeleton<a class="headerlink" href="#the-skeleton" title="Permalink to this headline">¶</a></h2>
-<p>Time to write this famous skeleton!</p>
+<p>By convention, the class name must contain the format it parses (in our case
+<cite>XML</cite>).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
-<span class="k">class</span> <span class="nc">MyParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Self-explanatory.&quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The <tt class="xref py py-meth docutils literal"><span class="pre">__init__()</span></tt>&#8216;s <cite>fullpath</cite> parameter will be the path to the report file
-plus its name. For instance <cite>&#8216;full/path/to/myreport.xml&#8217;</cite>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <cite>fullpath</cite> can be both relative or absolute.</p>
-</div>
-<p>Then we add a couple of class attributes in order to give some information
-about what tool is parsed by our class and the supported versions.</p>
-<p>Since our parser inherits from <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a>, we do not have to
-specify the <cite>__format__</cite> class attribute, which is already set to <cite>.xml</cite>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0.1&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Self-explanatory.&quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize MyXMLParser.</span>
+
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="admonition note" id="toolname-conv-label">
-<p class="first admonition-title">Note</p>
-<p class="last">In order to keep the tool name homogene with the rest of the code base,
-<cite>__tool__</cite> must be lowercased.</p>
-</div>
+<p>We added a couple of class attributes in order to give some information
+about what tool is parsed by our class and the supported versions.</p>
+<p>Since our parser inherits from <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a>, we do not have to
+specify the <cite>__format__</cite> class attribute, which is already set to <cite>xml</cite>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Both the <cite>__format__</cite> and the <cite>__version__</cite> attributes are optional.</p>
+<p>In order to keep the tool name homogene with the rest of the code base,
+<cite>__tool__</cite> must be lowercased.</p>
+<p>Also, both the <cite>__format__</cite> and the <cite>__version__</cite> attributes are optional.</p>
 <p class="last">For instance <cite>__version__</cite> is optional because some tools don&#8217;t provide
 such information (e.g. robots.txt).</p>
 </div>
@@ -125,7 +117,7 @@ such information (e.g. robots.txt).</p>
 <p>Let us say that <em>MyTool</em>&#8216;s XML report has <cite>&lt;mytool version=&#8217;x.x&#8217;&gt;</cite>
 as the root XML tag.</p>
 <p>Therefore, our <tt class="xref py py-meth docutils literal"><span class="pre">is_mine()</span></tt> function is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
@@ -134,17 +126,18 @@ as the root XML tag.</p>
     <span class="c"># Omitted unchanged code</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported MyTool report.</span>
 
-<span class="sd">        :param str fullpath: full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
             <span class="c"># If an error occurs when trying to open the file, then the</span>
             <span class="c"># parser cannot deal with it.</span>
@@ -177,34 +170,46 @@ discoveries that are listed in the report and formats them into a
 methods for our fake tool.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
-<span class="k">class</span> <span class="nc">MyParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0.1&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Self-explanatory.&quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize MyXMLParser.</span>
+
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported MyTool report.</span>
 
-<span class="sd">        :param str fullpath: full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
+            <span class="c"># If an error occurs when trying to open the file, then the</span>
+            <span class="c"># parser cannot deal with it.</span>
             <span class="k">return</span> <span class="bp">False</span>
+        <span class="c"># The root tag must contain &#39;mytool&#39;.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cls</span><span class="o">.</span><span class="n">__tool__</span> <span class="ow">in</span> <span class="n">stream</span><span class="o">.</span><span class="n">tag</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
+        <span class="c"># Check if the root node has a &#39;version&#39; attribute.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;version&#39;</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
+        <span class="c"># Check if the version is the one this parser supports.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">stream</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
@@ -218,185 +223,15 @@ methods for our fake tool.</p>
 </div>
 </div>
 </div>
-<div class="section" id="myreport-class">
-<h1>MyReport class<a class="headerlink" href="#myreport-class" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>The skeleton<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>In order to support a tool, <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> needs a report class that will describe
-how the reports of the target tool behave. The <cite>__tool__</cite> attribute must follow
-the same convention as when writing the parser (see. the <a class="reference internal" href="#toolname-conv-label"><em>Skeleton</em></a> section)</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.report</span> <span class="kn">import</span> <span class="n">AbstractReport</span>
-
-
-<span class="k">class</span> <span class="nc">MyReport</span><span class="p">(</span><span class="n">AbstractReport</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized report for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Self-explanatory.&quot;&quot;&quot;</span>
-        <span class="n">AbstractReport</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="default-is-mine-method">
-<h2>Default <tt class="xref py py-meth docutils literal"><span class="pre">is_mine()</span></tt> method<a class="headerlink" href="#default-is-mine-method" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="libptp/report.html#libptp.report.AbstractReport" title="libptp.report.AbstractReport"><tt class="xref py py-class docutils literal"><span class="pre">libptp.report.AbstractReport</span></tt></a> already defines the default behavior
-of the <a class="reference internal" href="libptp/report.html#libptp.report.AbstractReport.is_mine" title="libptp.report.AbstractReport.is_mine"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.report.AbstractReport.is_mine()</span></tt></a> class method. It consists
-in finding the first file matching the <cite>filename</cite> regex parameter and go
-through each of its parsers in order to find the right one.</p>
-<p>What we need to do is specify such filename regex and which parsers are
-availables.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.report</span> <span class="kn">import</span> <span class="n">AbstractReport</span>
-<span class="c"># We don&#39;t forget to import the parser we just wrote.</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyParser</span>
-
-
-<span class="k">class</span> <span class="nc">MyReport</span><span class="p">(</span><span class="n">AbstractReport</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized report for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="c"># We link the report with the parser we have written before.</span>
-    <span class="n">__parsers__</span> <span class="o">=</span> <span class="p">[</span><span class="n">MyParser</span><span class="p">]</span>
-
-    <span class="c"># Omitted unchanged code</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if it is a MyTool report and if it can handle it.</span>
-
-<span class="sd">        :param str pathname: Path to the report directory.</span>
-<span class="sd">        :param str filename: Regex matching the report file.</span>
-
-<span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
-<span class="sd">        :rtype: :class:`bool`</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">AbstractReport</span><span class="o">.</span><span class="n">is_mine</span><span class="p">(</span>
-            <span class="n">cls</span><span class="o">.</span><span class="n">__parsers__</span><span class="p">,</span>  <span class="c"># Our parser.</span>
-            <span class="n">pathname</span><span class="o">=</span><span class="n">pathname</span><span class="p">,</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>  <span class="c"># The regex will match XML files.</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="parse-method">
-<h2>Parse method<a class="headerlink" href="#parse-method" title="Permalink to this headline">¶</a></h2>
-<p>we need to override the <a class="reference internal" href="libptp/report.html#libptp.report.AbstractReport.parse" title="libptp.report.AbstractReport.parse"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.report.AbstractReport.parse()</span></tt></a> method. That
-will specify how to deal with the data that was retrieved by our parser.</p>
-<p>The first step is to first retrieve the report. Here we follow the simplest
-idea that is using the <cite>filename</cite> regex in order to retrieve the first report
-file that matches.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyReport</span><span class="p">(</span><span class="n">AbstractReport</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized report for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="c"># Omitted unchanged code</span>
-
-    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="c"># Reconstruct the path to the report if any.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Then we need to initialize the correct parser using the
-<a class="reference internal" href="libptp/report.html#libptp.report.AbstractReport._init_parser" title="libptp.report.AbstractReport._init_parser"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.report.AbstractReport._init_parser()</span></tt></a> method.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyReport</span><span class="p">(</span><span class="n">AbstractReport</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized report for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="c"># Omitted unchanged code</span>
-
-    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="c"># Omitted unchanged code</span>
-
-        <span class="c"># Find the corresponding parser.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_parser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>And finally retrieve the data we want. In our case, we will retrieve both the
-metadata and the discoveries listed in the XML report.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyReport</span><span class="p">(</span><span class="n">AbstractReport</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized report for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="c"># Omitted unchanged code</span>
-
-    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="c"># Omitted unchanged code</span>
-
-        <span class="c"># Parse specific data.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_metadata</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_report</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <tt class="xref py py-meth docutils literal"><span class="pre">parse()</span></tt> method must always return a <tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> of the
-discoveries.</p>
-</div>
-<p>If we put all the pieces together, we end up with the following
-<tt class="xref py py-class docutils literal"><span class="pre">MyReport</span></tt> implementation.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.report</span> <span class="kn">import</span> <span class="n">AbstractReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyParser</span>
-
-
-<span class="k">class</span> <span class="nc">MyReport</span><span class="p">(</span><span class="n">AbstractReport</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Specialized report for MyTool.&quot;&quot;&quot;</span>
-
-    <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
-    <span class="n">__parsers__</span> <span class="o">=</span> <span class="p">[</span><span class="n">MyParser</span><span class="p">]</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if it is a MyTool report and if it can handle it.</span>
-
-<span class="sd">        :param str pathname: Path to the report directory.</span>
-<span class="sd">        :param str filename: Regex matching the report file.</span>
-
-<span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
-<span class="sd">        :rtype: :class:`bool`</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">AbstractReport</span><span class="o">.</span><span class="n">is_mine</span><span class="p">(</span>
-            <span class="n">cls</span><span class="o">.</span><span class="n">__parsers__</span><span class="p">,</span>
-            <span class="n">pathname</span><span class="o">=</span><span class="n">pathname</span><span class="p">,</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse a MyTool report.</span>
-
-<span class="sd">        :param str pathname: Path to the report directory.</span>
-<span class="sd">        :param str filename: Regex matching the report file.</span>
-
-<span class="sd">        :return: List of dicts where each one represents a discovery from</span>
-<span class="sd">            the report.</span>
-<span class="sd">        :rtype: :class:`list`</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Reconstruct the path to the report if any.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c"># Find the corresponding parser.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_parser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullpath</span><span class="p">)</span>
-        <span class="c"># Parse specific data.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_metadata</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_report</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="section" id="tell-ptp">
 <h1>Tell <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a><a class="headerlink" href="#tell-ptp" title="Permalink to this headline">¶</a></h1>
-<p>Now that <em>MyTool</em> is supported thanks to our implementation of <cite>MyParser</cite> and
-<cite>MyReport</cite>, we only have one more thing to do in order to finish.</p>
+<p>Now that <em>MyTool</em> is supported thanks to our implementation of <cite>MyXMLParser</cite>,
+we only have one more thing to do in order to finish.</p>
 <p>We need to update the <tt class="xref py py-attr docutils literal"><span class="pre">ptp.supported</span></tt> list attribute by inserting our
-<cite>MyReport</cite> inside like shown below:</p>
+<cite>MyXMLParser</cite> inside like shown below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Omitted imports</span>
 
-<span class="kn">from</span> <span class="nn">libptp.tools.mytool.report</span> <span class="kn">import</span> <span class="n">MyReport</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyXMLParser</span>
 
 <span class="k">class</span> <span class="nc">PTP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
@@ -406,11 +241,11 @@ discoveries.</p>
 
         <span class="c"># Omitted supported tools.</span>
 
-        <span class="s">&#39;w3af&#39;</span><span class="p">:</span> <span class="n">W3AFReport</span><span class="p">,</span>
+        <span class="s">&#39;w3af&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">W3AFReport</span><span class="p">],</span>
 
         <span class="c"># Omitted supported tools.</span>
 
-        <span class="s">&#39;mytool&#39;</span><span class="p">:</span> <span class="n">MyReport</span><span class="p">}</span>
+        <span class="s">&#39;mytool&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">MyXMLParser</span><span class="p">]}</span>
 </pre></div>
 </div>
 <p>We have done it! We have written our own support to the tool <em>MyTool</em> and
@@ -427,16 +262,10 @@ integrated that into <a class="reference internal" href="ptp.html#module-ptp" ti
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Write our own support</a></li>
-<li><a class="reference internal" href="#myparser-class">MyParser class</a><ul>
+<li><a class="reference internal" href="#myxmlparser-class">MyXMLParser class</a><ul>
 <li><a class="reference internal" href="#the-skeleton">The skeleton</a></li>
 <li><a class="reference internal" href="#matching-the-supported-reports">Matching the supported reports</a></li>
 <li><a class="reference internal" href="#parsing-methods">Parsing methods</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#myreport-class">MyReport class</a><ul>
-<li><a class="reference internal" href="#id1">The skeleton</a></li>
-<li><a class="reference internal" href="#default-is-mine-method">Default <tt class="docutils literal"><span class="pre">is_mine()</span></tt> method</a></li>
-<li><a class="reference internal" href="#parse-method">Parse method</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tell-ptp">Tell <tt class="docutils literal"><span class="pre">ptp</span></tt></a></li>

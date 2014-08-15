@@ -50,89 +50,6 @@
             
   <div class="section" id="wapiti">
 <h1>Wapiti<a class="headerlink" href="#wapiti" title="Permalink to this headline">¶</a></h1>
-<p>The Wapiti is supported by PTP thanks to the following classes.</p>
-<div class="section" id="module-libptp.tools.wapiti.report">
-<span id="report"></span><h2>Report<a class="headerlink" href="#module-libptp.tools.wapiti.report" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Report class for Wapiti.</td>
-</tr>
-</tbody>
-</table>
-<dl class="class">
-<dt id="libptp.tools.wapiti.report.WapitiReport">
-<em class="property">class </em><tt class="descclassname">libptp.tools.wapiti.report.</tt><tt class="descname">WapitiReport</tt><a class="reference internal" href="../../_modules/libptp/tools/wapiti/report.html#WapitiReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.report.WapitiReport" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the information of a Wapiti report.</p>
-<dl class="attribute">
-<dt id="libptp.tools.wapiti.report.WapitiReport.__tool__">
-<tt class="descname">__tool__</tt><em class="property"> = 'wapiti'</em><a class="headerlink" href="#libptp.tools.wapiti.report.WapitiReport.__tool__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="libptp.tools.wapiti.report.WapitiReport.__parsers__">
-<tt class="descname">__parsers__</tt><em class="property"> = [&lt;class 'libptp.tools.wapiti.parser.WapitiXMLParser'&gt;, &lt;class 'libptp.tools.wapiti.parser.Wapiti221XMLParser'&gt;]</em><a class="headerlink" href="#libptp.tools.wapiti.report.WapitiReport.__parsers__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.wapiti.report.WapitiReport.__init__">
-<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/report.html#WapitiReport.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.report.WapitiReport.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize WapitiReport.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="libptp.tools.wapiti.report.WapitiReport.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/report.html#WapitiReport.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.report.WapitiReport.is_mine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if it is a Wapiti report and if it can handle it.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.wapiti.report.WapitiReport.parse">
-<tt class="descname">parse</tt><big>(</big><em>pathname=None</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/report.html#WapitiReport.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.report.WapitiReport.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a Wapiti report.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of dicts where each one represents a discovery from the
-report.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 <div class="section" id="module-libptp.tools.wapiti.parser">
 <span id="parser"></span><h2>Parser<a class="headerlink" href="#module-libptp.tools.wapiti.parser" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
@@ -145,7 +62,7 @@ report.</p>
 </table>
 <dl class="class">
 <dt id="libptp.tools.wapiti.parser.WapitiXMLParser">
-<em class="property">class </em><tt class="descclassname">libptp.tools.wapiti.parser.</tt><tt class="descname">WapitiXMLParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#WapitiXMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.WapitiXMLParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.tools.wapiti.parser.</tt><tt class="descname">WapitiXMLParser</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#WapitiXMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.WapitiXMLParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wapiti XML specialized parser.</p>
 <dl class="attribute">
 <dt id="libptp.tools.wapiti.parser.WapitiXMLParser.__tool__">
@@ -164,13 +81,17 @@ report.</p>
 
 <dl class="method">
 <dt id="libptp.tools.wapiti.parser.WapitiXMLParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#WapitiXMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.WapitiXMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#WapitiXMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.WapitiXMLParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize WapitiXMLParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -178,17 +99,23 @@ report.</p>
 
 <dl class="classmethod">
 <dt id="libptp.tools.wapiti.parser.WapitiXMLParser.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#WapitiXMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.WapitiXMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#WapitiXMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.WapitiXMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if it is a supported Wapiti report.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -233,7 +160,7 @@ the version of this report.</td>
 
 <dl class="class">
 <dt id="libptp.tools.wapiti.parser.Wapiti221XMLParser">
-<em class="property">class </em><tt class="descclassname">libptp.tools.wapiti.parser.</tt><tt class="descname">Wapiti221XMLParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#Wapiti221XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.Wapiti221XMLParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.tools.wapiti.parser.</tt><tt class="descname">Wapiti221XMLParser</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#Wapiti221XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.Wapiti221XMLParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wapiti XML specialized parser.</p>
 <dl class="attribute">
 <dt id="libptp.tools.wapiti.parser.Wapiti221XMLParser.__tool__">
@@ -255,13 +182,17 @@ the version of this report.</td>
 
 <dl class="method">
 <dt id="libptp.tools.wapiti.parser.Wapiti221XMLParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#Wapiti221XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.Wapiti221XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#Wapiti221XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.Wapiti221XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize Wapiti221XMLParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -269,17 +200,23 @@ the version of this report.</td>
 
 <dl class="classmethod">
 <dt id="libptp.tools.wapiti.parser.Wapiti221XMLParser.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#Wapiti221XMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.Wapiti221XMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/wapiti/parser.html#Wapiti221XMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.wapiti.parser.Wapiti221XMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if it is a supported Wapiti report.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -360,7 +297,6 @@ might find.</td>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Wapiti</a><ul>
-<li><a class="reference internal" href="#module-libptp.tools.wapiti.report">Report</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.wapiti.parser">Parser</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.wapiti.signatures">Signatures</a></li>
 </ul>

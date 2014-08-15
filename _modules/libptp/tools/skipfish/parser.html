@@ -83,13 +83,23 @@
         <span class="n">WARNINGS</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
         <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
 
-<div class="viewcode-block" id="SkipfishJSParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/skipfish.html#libptp.tools.skipfish.parser.SkipfishJSParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadatafile</span><span class="p">,</span> <span class="n">reportfile</span><span class="p">):</span>
+    <span class="n">_reportfile</span> <span class="o">=</span> <span class="s">&#39;samples.js&#39;</span>
+    <span class="n">_metadatafile</span> <span class="o">=</span> <span class="s">&#39;summary.js&#39;</span>
+
+<div class="viewcode-block" id="SkipfishJSParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/skipfish.html#libptp.tools.skipfish.parser.SkipfishJSParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize ArachniXMLParser.</span>
 
-<span class="sd">        :param str metadatafile: full path to the metadata file.</span>
-<span class="sd">        :param str reportfile: full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metadatafile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadatafile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">metadatafile</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">metadatafile</span> <span class="o">=</span> <span class="n">metadatafile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">reportfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reportfile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">reportfile</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">reportfile</span> <span class="o">=</span> <span class="n">reportfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata_stream</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span>
             <span class="n">metadatafile</span><span class="p">,</span> <span class="n">reportfile</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">re_metadata</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
@@ -122,16 +132,23 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">metadata_stream</span><span class="p">,</span> <span class="n">report_stream</span><span class="p">)</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="SkipfishJSParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/skipfish.html#libptp.tools.skipfish.parser.SkipfishJSParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">metadatafile</span><span class="p">,</span> <span class="n">reportfile</span><span class="p">):</span>
+<div class="viewcode-block" id="SkipfishJSParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/skipfish.html#libptp.tools.skipfish.parser.SkipfishJSParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported Skipfish report.</span>
 
-<span class="sd">        :param str metadatafile: Path to the metadata file.</span>
-<span class="sd">        :param str reportfile: Path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metadatafile</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">_metadatafile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">metadatafile</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">metadatafile</span> <span class="o">=</span> <span class="n">metadatafile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">reportfile</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">_reportfile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">reportfile</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">reportfile</span> <span class="o">=</span> <span class="n">reportfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">metadata_stream</span><span class="p">,</span> <span class="n">report_stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span>
                 <span class="n">metadatafile</span><span class="p">,</span>

@@ -54,79 +54,6 @@
             
   <div class="section" id="skipfish">
 <h1>Skipfish<a class="headerlink" href="#skipfish" title="Permalink to this headline">¶</a></h1>
-<p>The tool Skipfish is supported by PTP thanks to the following classes.</p>
-<div class="section" id="module-libptp.tools.skipfish.report">
-<span id="report"></span><h2>Report<a class="headerlink" href="#module-libptp.tools.skipfish.report" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Report class for Skipfish.</td>
-</tr>
-</tbody>
-</table>
-<dl class="class">
-<dt id="libptp.tools.skipfish.report.SkipfishReport">
-<em class="property">class </em><tt class="descclassname">libptp.tools.skipfish.report.</tt><tt class="descname">SkipfishReport</tt><a class="reference internal" href="../../_modules/libptp/tools/skipfish/report.html#SkipfishReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.report.SkipfishReport" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the information of a Skipfish report.</p>
-<dl class="attribute">
-<dt id="libptp.tools.skipfish.report.SkipfishReport.__tool__">
-<tt class="descname">__tool__</tt><em class="property"> = 'skipfish'</em><a class="headerlink" href="#libptp.tools.skipfish.report.SkipfishReport.__tool__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="libptp.tools.skipfish.report.SkipfishReport.__parsers__">
-<tt class="descname">__parsers__</tt><em class="property"> = [&lt;class 'libptp.tools.skipfish.parser.SkipfishJSParser'&gt;]</em><a class="headerlink" href="#libptp.tools.skipfish.report.SkipfishReport.__parsers__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.skipfish.report.SkipfishReport.__init__">
-<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/report.html#SkipfishReport.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.report.SkipfishReport.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize SkipfishReport.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="libptp.tools.skipfish.report.SkipfishReport.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/report.html#SkipfishReport.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.report.SkipfishReport.is_mine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if it is a Skipfish report and if it can handle it.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.skipfish.report.SkipfishReport.parse">
-<tt class="descname">parse</tt><big>(</big><em>pathname</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/report.html#SkipfishReport.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.report.SkipfishReport.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a Skipfish report.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">ReportNotFoundError</span></tt> &#8211; if the report was not found.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery from the
-report.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 <div class="section" id="module-libptp.tools.skipfish.parser">
 <span id="parser"></span><h2>Parser<a class="headerlink" href="#module-libptp.tools.skipfish.parser" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
@@ -139,7 +66,7 @@ report.</td>
 </table>
 <dl class="class">
 <dt id="libptp.tools.skipfish.parser.SkipfishJSParser">
-<em class="property">class </em><tt class="descclassname">libptp.tools.skipfish.parser.</tt><tt class="descname">SkipfishJSParser</tt><big>(</big><em>metadatafile</em>, <em>reportfile</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/parser.html#SkipfishJSParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.parser.SkipfishJSParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.tools.skipfish.parser.</tt><tt class="descname">SkipfishJSParser</tt><big>(</big><em>pathname</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/parser.html#SkipfishJSParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.parser.SkipfishJSParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Skipfish JS specialized parser.</p>
 <dl class="attribute">
 <dt id="libptp.tools.skipfish.parser.SkipfishJSParser.__tool__">
@@ -158,17 +85,13 @@ report.</td>
 
 <dl class="method">
 <dt id="libptp.tools.skipfish.parser.SkipfishJSParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>metadatafile</em>, <em>reportfile</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/parser.html#SkipfishJSParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.parser.SkipfishJSParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/parser.html#SkipfishJSParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.parser.SkipfishJSParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize ArachniXMLParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>metadatafile</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the metadata file.</li>
-<li><strong>reportfile</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</td>
 </tr>
 </tbody>
 </table>
@@ -207,23 +130,17 @@ report.</td>
 
 <dl class="classmethod">
 <dt id="libptp.tools.skipfish.parser.SkipfishJSParser.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>metadatafile</em>, <em>reportfile</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/parser.html#SkipfishJSParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.parser.SkipfishJSParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/skipfish/parser.html#SkipfishJSParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.skipfish.parser.SkipfishJSParser.is_mine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if it is a supported Skipfish report.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>metadatafile</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the metadata file.</li>
-<li><strong>reportfile</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report file.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -304,7 +221,6 @@ using the module <a class="reference external" href="http://docs.python.org/libr
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Skipfish</a><ul>
-<li><a class="reference internal" href="#module-libptp.tools.skipfish.report">Report</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.skipfish.parser">Parser</a></li>
 </ul>
 </li>

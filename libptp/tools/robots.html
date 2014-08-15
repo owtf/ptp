@@ -54,41 +54,52 @@
             
   <div class="section" id="robots-txt">
 <h1>Robots.txt<a class="headerlink" href="#robots-txt" title="Permalink to this headline">¶</a></h1>
-<p>The robots.txt is supported by PTP thanks to the following classes.</p>
-<div class="section" id="module-libptp.tools.robots.report">
-<span id="report"></span><h2>Report<a class="headerlink" href="#module-libptp.tools.robots.report" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-libptp.tools.robots.parser">
+<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-libptp.tools.robots.parser" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Report class for Reports.txt.</td>
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Parser class for Robots.txt.</td>
 </tr>
 </tbody>
 </table>
-<dl class="class">
-<dt id="libptp.tools.robots.report.RobotsReport">
-<em class="property">class </em><tt class="descclassname">libptp.tools.robots.report.</tt><tt class="descname">RobotsReport</tt><a class="reference internal" href="../../_modules/libptp/tools/robots/report.html#RobotsReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.report.RobotsReport" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the information of a Robots.txt report.</p>
+<span class="target" id="robotsparser-class-label"></span><dl class="class">
+<dt id="libptp.tools.robots.parser.RobotsParser">
+<em class="property">class </em><tt class="descclassname">libptp.tools.robots.parser.</tt><tt class="descname">RobotsParser</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/parser.html#RobotsParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Robots specialized parser.</p>
 <dl class="attribute">
-<dt id="libptp.tools.robots.report.RobotsReport.__tool__">
-<tt class="descname">__tool__</tt><em class="property"> = 'robots'</em><a class="headerlink" href="#libptp.tools.robots.report.RobotsReport.__tool__" title="Permalink to this definition">¶</a></dt>
+<dt id="libptp.tools.robots.parser.RobotsParser.__tool__">
+<tt class="descname">__tool__</tt><em class="property"> = 'robots'</em><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.__tool__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="libptp.tools.robots.report.RobotsReport.__parsers__">
-<tt class="descname">__parsers__</tt><em class="property"> = [&lt;class 'libptp.tools.robots.parser.RobotsParser'&gt;]</em><a class="headerlink" href="#libptp.tools.robots.report.RobotsReport.__parsers__" title="Permalink to this definition">¶</a></dt>
+<dt id="libptp.tools.robots.parser.RobotsParser.__format__">
+<tt class="descname">__format__</tt><em class="property"> = 'txt'</em><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.__format__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="libptp.tools.robots.report.RobotsReport.__init__">
-<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/report.html#RobotsReport.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.report.RobotsReport.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize RobotsReport.</p>
+<dt id="libptp.tools.robots.parser.RobotsParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/parser.html#RobotsParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize RobotsParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="libptp.tools.robots.report.RobotsReport.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/report.html#RobotsReport.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.report.RobotsReport.is_mine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if it is a robot.txt report and if it can handle it.</p>
+<dt id="libptp.tools.robots.parser.RobotsParser.is_mine">
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/parser.html#RobotsParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is a supported robots.txt report.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -104,90 +115,6 @@
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
 </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.robots.report.RobotsReport.parse">
-<tt class="descname">parse</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/report.html#RobotsReport.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.report.RobotsReport.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a Robots.txt report.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of dicts where each one represents a discovery from the
-report.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-libptp.tools.robots.parser">
-<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-libptp.tools.robots.parser" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Parser class for Robots.txt.</td>
-</tr>
-</tbody>
-</table>
-<span class="target" id="robotsparser-class-label"></span><dl class="class">
-<dt id="libptp.tools.robots.parser.RobotsParser">
-<em class="property">class </em><tt class="descclassname">libptp.tools.robots.parser.</tt><tt class="descname">RobotsParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/parser.html#RobotsParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Robots specialized parser.</p>
-<dl class="attribute">
-<dt id="libptp.tools.robots.parser.RobotsParser.__tool__">
-<tt class="descname">__tool__</tt><em class="property"> = 'robots'</em><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.__tool__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="libptp.tools.robots.parser.RobotsParser.__format__">
-<tt class="descname">__format__</tt><em class="property"> = 'txt'</em><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.__format__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.robots.parser.RobotsParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/parser.html#RobotsParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize RobotsParser.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="libptp.tools.robots.parser.RobotsParser.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>fullpath</em>, <em>filename='*.txt'</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/robots/parser.html#RobotsParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.robots.parser.RobotsParser.is_mine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if it is a supported robots.txt report.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -264,7 +191,6 @@ tries to define a ranking for them.</td>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Robots.txt</a><ul>
-<li><a class="reference internal" href="#module-libptp.tools.robots.report">Report</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.robots.parser">Parser</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.robots.signatures">Signatures</a></li>
 </ul>

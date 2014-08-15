@@ -54,95 +54,11 @@
             
   <div class="section" id="metasploit">
 <h1>Metasploit<a class="headerlink" href="#metasploit" title="Permalink to this headline">¶</a></h1>
-<p>The tool Metasploit is supported by PTP thanks to the following classes.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Since Metasploit does not force the users to follow a specific syntax when
 writing a module, <a class="reference internal" href="../../ptp.html#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">ptp.PTP</span></tt></a> needs to know which <tt class="docutils literal"><span class="pre">plugin</span></tt> has
 generated the report in order to find the right signature.</p>
-</div>
-<div class="section" id="module-libptp.tools.metasploit.report">
-<span id="report"></span><h2>Report<a class="headerlink" href="#module-libptp.tools.metasploit.report" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Report class for Metasploit.</td>
-</tr>
-</tbody>
-</table>
-<dl class="class">
-<dt id="libptp.tools.metasploit.report.MetasploitReport">
-<em class="property">class </em><tt class="descclassname">libptp.tools.metasploit.report.</tt><tt class="descname">MetasploitReport</tt><a class="reference internal" href="../../_modules/libptp/tools/metasploit/report.html#MetasploitReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.report.MetasploitReport" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the information of a Metasploit report.</p>
-<dl class="attribute">
-<dt id="libptp.tools.metasploit.report.MetasploitReport.__tool__">
-<tt class="descname">__tool__</tt><em class="property"> = 'metasploit'</em><a class="headerlink" href="#libptp.tools.metasploit.report.MetasploitReport.__tool__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="libptp.tools.metasploit.report.MetasploitReport.__parsers__">
-<tt class="descname">__parsers__</tt><em class="property"> = [&lt;class 'libptp.tools.metasploit.parser.MetasploitParser'&gt;]</em><a class="headerlink" href="#libptp.tools.metasploit.report.MetasploitReport.__parsers__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.metasploit.report.MetasploitReport.__init__">
-<tt class="descname">__init__</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/report.html#MetasploitReport.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.report.MetasploitReport.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize MetasploitReport.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="libptp.tools.metasploit.report.MetasploitReport.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/report.html#MetasploitReport.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.report.MetasploitReport.is_mine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if it is a Metasploit report and if it can handle it.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
-<li><strong>plugin</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the plugin that generated the report.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="libptp.tools.metasploit.report.MetasploitReport.parse">
-<tt class="descname">parse</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/report.html#MetasploitReport.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.report.MetasploitReport.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a Metasploit report.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
-<li><strong>plugin</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the plugin that generated the report.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of dicts where each one represents a vuln.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-libptp.tools.metasploit.parser">
 <span id="parser"></span><h2>Parser<a class="headerlink" href="#module-libptp.tools.metasploit.parser" title="Permalink to this headline">¶</a></h2>
@@ -156,7 +72,7 @@ generated the report in order to find the right signature.</p>
 </table>
 <dl class="class">
 <dt id="libptp.tools.metasploit.parser.MetasploitParser">
-<em class="property">class </em><tt class="descclassname">libptp.tools.metasploit.parser.</tt><tt class="descname">MetasploitParser</tt><big>(</big><em>fullpath</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/parser.html#MetasploitParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.parser.MetasploitParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.tools.metasploit.parser.</tt><tt class="descname">MetasploitParser</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/parser.html#MetasploitParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.parser.MetasploitParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Metasploit specialized parser.</p>
 <dl class="attribute">
 <dt id="libptp.tools.metasploit.parser.MetasploitParser.__tool__">
@@ -170,14 +86,15 @@ generated the report in order to find the right signature.</p>
 
 <dl class="method">
 <dt id="libptp.tools.metasploit.parser.MetasploitParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/parser.html#MetasploitParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.parser.MetasploitParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/parser.html#MetasploitParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.parser.MetasploitParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize MetasploitParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Full path to the report file.</li>
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
 <li><strong>plugin</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the plugin that generated the report.</li>
 </ul>
 </td>
@@ -188,14 +105,15 @@ generated the report in order to find the right signature.</p>
 
 <dl class="classmethod">
 <dt id="libptp.tools.metasploit.parser.MetasploitParser.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>fullpath</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/parser.html#MetasploitParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.parser.MetasploitParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../../_modules/libptp/tools/metasploit/parser.html#MetasploitParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.tools.metasploit.parser.MetasploitParser.is_mine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if it is a supported Metasploit report.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Full path to the report file.</li>
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
 <li><strong>plugin</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the plugin that generated the report.</li>
 </ul>
 </td>
@@ -282,7 +200,6 @@ discoveries it might find.</td>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Metasploit</a><ul>
-<li><a class="reference internal" href="#module-libptp.tools.metasploit.report">Report</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.metasploit.parser">Parser</a></li>
 <li><a class="reference internal" href="#module-libptp.tools.metasploit.signatures">Signatures</a></li>
 </ul>

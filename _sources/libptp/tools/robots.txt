@@ -1,21 +1,6 @@
 Robots.txt
 ##########
 
-The robots.txt is supported by PTP thanks to the following classes.
-
-Report
-******
-
-.. automodule:: libptp.tools.robots.report
-
-.. autoclass:: RobotsReport
-    :members:
-    :private-members:
-    :special-members:
-
-    .. autoattribute:: __tool__
-    .. autoattribute:: __parsers__
-
 Parser
 ******
 

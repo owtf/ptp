@@ -80,26 +80,28 @@
         <span class="n">LOW</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
         <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
 
-<div class="viewcode-block" id="ArachniXMLParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/arachni.html#libptp.tools.arachni.parser.ArachniXMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/arachni.html#libptp.tools.arachni.parser.ArachniXMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize ArachniXMLParser.</span>
 
-<span class="sd">        :param str fullpath: full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
+        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ArachniXMLParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/arachni.html#libptp.tools.arachni.parser.ArachniXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/arachni.html#libptp.tools.arachni.parser.ArachniXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported Arachni report.</span>
 
-<span class="sd">        :param str fullpath: full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cls</span><span class="o">.</span><span class="n">__tool__</span> <span class="ow">in</span> <span class="n">stream</span><span class="o">.</span><span class="n">tag</span><span class="p">:</span>

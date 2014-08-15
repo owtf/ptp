@@ -55,18 +55,17 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-
-<span class="kn">from</span> <span class="nn">libptp.exceptions</span> <span class="kn">import</span> <span class="n">NotSupportedToolError</span>
-<span class="kn">from</span> <span class="nn">libptp.constants</span> <span class="kn">import</span> <span class="n">UNKNOWN</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.arachni.report</span> <span class="kn">import</span> <span class="n">ArachniReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.skipfish.report</span> <span class="kn">import</span> <span class="n">SkipfishReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.w3af.report</span> <span class="kn">import</span> <span class="n">W3AFReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.wapiti.report</span> <span class="kn">import</span> <span class="n">WapitiReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.metasploit.report</span> <span class="kn">import</span> <span class="n">MetasploitReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.dirbuster.report</span> <span class="kn">import</span> <span class="n">DirbusterReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.nmap.report</span> <span class="kn">import</span> <span class="n">NmapReport</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.owasp.cm008.report</span> <span class="kn">import</span> <span class="n">OWASPCM008Report</span>
-<span class="kn">from</span> <span class="nn">libptp.tools.robots.report</span> <span class="kn">import</span> <span class="n">RobotsReport</span>
+<span class="kn">from</span> <span class="nn">libptp.exceptions</span> <span class="kn">import</span> <span class="n">NotSupportedToolError</span><span class="p">,</span> <span class="n">NotSupportedVersionError</span>
+<span class="kn">from</span> <span class="nn">libptp.constants</span> <span class="kn">import</span> <span class="n">UNKNOWN</span><span class="p">,</span> <span class="n">RANKING_SCALE</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.arachni.parser</span> <span class="kn">import</span> <span class="n">ArachniXMLParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.skipfish.parser</span> <span class="kn">import</span> <span class="n">SkipfishJSParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.w3af.parser</span> <span class="kn">import</span> <span class="n">W3AFXMLParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.wapiti.parser</span> <span class="kn">import</span> <span class="n">WapitiXMLParser</span><span class="p">,</span> <span class="n">Wapiti221XMLParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.metasploit.parser</span> <span class="kn">import</span> <span class="n">MetasploitParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.dirbuster.parser</span> <span class="kn">import</span> <span class="n">DirbusterParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.nmap.parser</span> <span class="kn">import</span> <span class="n">NmapXMLParser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.owasp.cm008.parser</span> <span class="kn">import</span> <span class="n">OWASPCM008Parser</span>
+<span class="kn">from</span> <span class="nn">libptp.tools.robots.parser</span> <span class="kn">import</span> <span class="n">RobotsParser</span>
 
 
 <div class="viewcode-block" id="PTP"><a class="viewcode-back" href="../ptp.html#ptp.PTP">[docs]</a><span class="k">class</span> <span class="nc">PTP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -80,19 +79,19 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c">#: :class:`dict` -- Dict linking the supported tools with their reports.</span>
+    <span class="c">#: :class:`dict` -- Dict linking the supported tools with their parsers.</span>
     <span class="n">supported</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;arachni&#39;</span><span class="p">:</span> <span class="n">ArachniReport</span><span class="p">,</span>
-        <span class="s">&#39;skipfish&#39;</span><span class="p">:</span> <span class="n">SkipfishReport</span><span class="p">,</span>
-        <span class="s">&#39;w3af&#39;</span><span class="p">:</span> <span class="n">W3AFReport</span><span class="p">,</span>
-        <span class="s">&#39;wapiti&#39;</span><span class="p">:</span> <span class="n">WapitiReport</span><span class="p">,</span>
-        <span class="s">&#39;metasploit&#39;</span><span class="p">:</span> <span class="n">MetasploitReport</span><span class="p">,</span>
-        <span class="s">&#39;dirbuster&#39;</span><span class="p">:</span> <span class="n">DirbusterReport</span><span class="p">,</span>
-        <span class="s">&#39;nmap&#39;</span><span class="p">:</span> <span class="n">NmapReport</span><span class="p">,</span>
-        <span class="s">&#39;owasp-cm-008&#39;</span><span class="p">:</span> <span class="n">OWASPCM008Report</span><span class="p">,</span>
-        <span class="s">&#39;robots&#39;</span><span class="p">:</span> <span class="n">RobotsReport</span><span class="p">}</span>
+        <span class="s">&#39;arachni&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">ArachniXMLParser</span><span class="p">],</span>
+        <span class="s">&#39;skipfish&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">SkipfishJSParser</span><span class="p">],</span>
+        <span class="s">&#39;w3af&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">W3AFXMLParser</span><span class="p">],</span>
+        <span class="s">&#39;wapiti&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">WapitiXMLParser</span><span class="p">,</span> <span class="n">Wapiti221XMLParser</span><span class="p">],</span>
+        <span class="s">&#39;metasploit&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">MetasploitParser</span><span class="p">],</span>
+        <span class="s">&#39;dirbuster&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">DirbusterParser</span><span class="p">],</span>
+        <span class="s">&#39;nmap&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">NmapXMLParser</span><span class="p">],</span>
+        <span class="s">&#39;owasp-cm-008&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">OWASPCM008Parser</span><span class="p">],</span>
+        <span class="s">&#39;robots&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">RobotsParser</span><span class="p">]}</span>
 
-<div class="viewcode-block" id="PTP.__init__"><a class="viewcode-back" href="../ptp.html#ptp.PTP.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="PTP.__init__"><a class="viewcode-back" href="../ptp.html#ptp.PTP.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize a PTP instance.</span>
 
 <span class="sd">        :param str tool_name: help PTP by specifying the name of the tool that</span>
@@ -100,14 +99,38 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span> <span class="o">=</span> <span class="n">tool_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">or</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_parser</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </div>
+    <span class="k">def</span> <span class="nf">_init_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span><span class="p">:</span>
+            <span class="c"># Since no tool name has been specified by the user, try to</span>
+            <span class="c"># automatically detect it.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">supported</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>  <span class="c"># Python3 then.</span>
+                <span class="n">supported</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">supported</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">supported</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span><span class="p">)]</span>
+        <span class="n">supported</span> <span class="o">=</span> <span class="p">[</span><span class="n">parser</span> <span class="k">for</span> <span class="n">parsers</span> <span class="ow">in</span> <span class="n">supported</span> <span class="k">for</span> <span class="n">parser</span> <span class="ow">in</span> <span class="n">parsers</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">parser</span> <span class="ow">in</span> <span class="n">supported</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">parser</span><span class="o">.</span><span class="n">is_mine</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">parser</span>
+                    <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">except</span> <span class="n">NotSupportedVersionError</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
 <div class="viewcode-block" id="PTP.parse"><a class="viewcode-back" href="../ptp.html#ptp.PTP.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse a tool report.</span>
 
-<span class="sd">        :param list \*args: List of arguments that are needed by the specific</span>
-<span class="sd">            report.</span>
 <span class="sd">        :param dict \*\*kwargs: Dict of arguments that are needed by the</span>
 <span class="sd">            specific report.</span>
 <span class="sd">        :raises NotSupportedToolError: if the tool that has generated the</span>
@@ -117,33 +140,21 @@
 <span class="sd">        :rtype: :class:`list`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span><span class="p">:</span>
-            <span class="c"># Since no tool name has been specified by the user, try to</span>
-            <span class="c"># automatically detect it.</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">supported</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span>
-            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>  <span class="c"># Python3 then.</span>
-                <span class="n">supported</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">supported</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">tool</span><span class="o">.</span><span class="n">is_mine</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="o">=</span> <span class="n">tool</span>
-                        <span class="k">break</span>
-                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                    <span class="k">pass</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_parser</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NotSupportedToolError</span><span class="p">(</span><span class="s">&#39;This tool is not supported by PTP.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>  <span class="c"># Instantiate the report class.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">__tool__</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c"># Instantiate the report class.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">__tool__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_metadata</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_report</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span>
 </div>
 <div class="viewcode-block" id="PTP.get_highest_ranking"><a class="viewcode-back" href="../ptp.html#ptp.PTP.get_highest_ranking">[docs]</a>    <span class="k">def</span> <span class="nf">get_highest_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Retrieve the rank of the most critical discovery.</span>
+        <span class="sd">&quot;&quot;&quot;Return the highest ranking value of the report.</span>
 
-<span class="sd">        :return: The most critical rank value.</span>
+<span class="sd">        :return: the risk id of the highest ranked vulnerability</span>
+<span class="sd">            referenced in the report.</span>
 <span class="sd">        :rtype: :class:`int`</span>
 
 <span class="sd">        .. note::</span>
@@ -152,9 +163,10 @@
 <span class="sd">            most critical risk.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">get_highest_ranking</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">UNKNOWN</span></div></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">UNKNOWN</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="n">RANKING_SCALE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;ranking&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

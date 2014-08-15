@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="ptp 0.5.0 documentation" href="../index.html" />
     <link rel="next" title="Exceptions" href="exceptions.html" />
-    <link rel="prev" title="Basic Reports" href="report.html" /> 
+    <link rel="prev" title="PTP" href="../ptp.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,7 +41,7 @@
           <a href="exceptions.html" title="Exceptions"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="report.html" title="Basic Reports"
+          <a href="../ptp.html" title="PTP"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
       </ul>
@@ -67,7 +67,7 @@ report file.</td>
 <h2>AbstractParser<a class="headerlink" href="#abstractparser" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="abstractparser-class-label"></span><dl class="class">
 <dt id="libptp.parser.AbstractParser">
-<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">AbstractParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">AbstractParser</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract representation of a parser.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -76,16 +76,51 @@ tool will add its own parsing specificities.</p>
 </div>
 <dl class="method">
 <dt id="libptp.parser.AbstractParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize AbstractParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="libptp.parser.AbstractParser._recursive_find">
+<em class="property">static </em><tt class="descname">_recursive_find</tt><big>(</big><em>pathname='./'</em>, <em>file_regex='*'</em>, <em>early_break=True</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser._recursive_find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser._recursive_find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the full path to the report file(s).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The root directory where to start searching.</li>
+<li><strong>file_regex</strong> (<a class="reference external" href="http://docs.python.org/library/re.html#module-re" title="(in Python v2.7)"><em>re</em></a>) &#8211; The regex that will be matched against all files
+from within <cite>pathname</cite>.</li>
+<li><strong>early_break</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Stop the search as soon as a file has been
+matched.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of path to the matched files that have been found.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The search occurs starting from <cite>pathname</cite> as the root directory.</p>
+</div>
 </dd></dl>
 
 <dl class="classmethod">
@@ -114,16 +149,21 @@ tool will add its own parsing specificities.</p>
 
 <dl class="classmethod">
 <dt id="libptp.parser.AbstractParser.handle_file">
-<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.handle_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.handle_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the report file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">NotImplementedError</span></tt> because this is an abstract
-method.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">NotImplementedError</span></tt> because this is an abstract
+method.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -131,21 +171,14 @@ method.</td>
 
 <dl class="classmethod">
 <dt id="libptp.parser.AbstractParser.is_mine">
-<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.is_mine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the parser supports the tool.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*args</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Arguments that will be passed to the parser.</li>
-<li><strong>**kwargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Arguments that will be passed to the parser.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">NotImplementedError</span></tt> because this is an abstract
-method.</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">NotImplementedError</span></tt> because this is an abstract
+method.</td>
 </tr>
 </tbody>
 </table>
@@ -206,19 +239,23 @@ method.</td>
 <span id="xmlparser-label"></span><h2>XMLParser<a class="headerlink" href="#xmlparser" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="libptp.parser.XMLParser">
-<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">XMLParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">XMLParser</tt><big>(</big><em>pathname='./'</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialized parser for XML formatted report files.</p>
 <p>Define the special <a class="reference internal" href="#libptp.parser.XMLParser.handle_file" title="libptp.parser.XMLParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the XML
 report file.</p>
 <dl class="method">
 <dt id="libptp.parser.XMLParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize XMLParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -226,13 +263,16 @@ report file.</p>
 
 <dl class="classmethod">
 <dt id="libptp.parser.XMLParser.handle_file">
-<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.handle_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>pathname='./'</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.handle_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the root node of the XML file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; path to the report file.</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
@@ -258,19 +298,23 @@ report file.</p>
 <h2>FileParser<a class="headerlink" href="#fileparser" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="libptp.parser.FileParser">
-<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">FileParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">FileParser</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialized parser for generic report file(s).</p>
 <p>Define the special <a class="reference internal" href="#libptp.parser.FileParser.handle_file" title="libptp.parser.FileParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the
 generic report file.</p>
 <dl class="method">
 <dt id="libptp.parser.FileParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize FileParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -278,13 +322,16 @@ generic report file.</p>
 
 <dl class="classmethod">
 <dt id="libptp.parser.FileParser.handle_file">
-<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.handle_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.handle_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string of the content of the file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
@@ -312,7 +359,7 @@ file.</li>
 <h2>LineParser<a class="headerlink" href="#lineparser" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="libptp.parser.LineParser">
-<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">LineParser</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">LineParser</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialized parser for generic report files.</p>
 <p>Define the special <a class="reference internal" href="#libptp.parser.LineParser.handle_file" title="libptp.parser.LineParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the
 generic report file.</p>
@@ -323,13 +370,17 @@ and generates a list, instead of a string.</p>
 </div>
 <dl class="method">
 <dt id="libptp.parser.LineParser.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize LineParser.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; full path to the report file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -337,14 +388,15 @@ and generates a list, instead of a string.</p>
 
 <dl class="classmethod">
 <dt id="libptp.parser.LineParser.handle_file">
-<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>fullpath</em>, <em>skip_empty=True</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser.handle_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">handle_file</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em>, <em>skip_empty=True</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser.handle_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of the lines of the file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>fullpath</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; path to the report file.</li>
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
 <li><strong>skip_empty</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; skip the empty lines that can occur in the
 file if <cite>True</cite>, otherwise keep them.</li>
 </ul>
@@ -392,8 +444,8 @@ by line.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="report.html"
-                        title="previous chapter">Basic Reports</a></p>
+  <p class="topless"><a href="../ptp.html"
+                        title="previous chapter">PTP</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="exceptions.html"
                         title="next chapter">Exceptions</a></p>
@@ -432,7 +484,7 @@ by line.</p>
           <a href="exceptions.html" title="Exceptions"
              >next</a> |</li>
         <li class="right" >
-          <a href="report.html" title="Basic Reports"
+          <a href="../ptp.html" title="PTP"
              >previous</a> |</li>
         <li><a href="../index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
       </ul>

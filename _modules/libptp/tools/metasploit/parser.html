@@ -65,21 +65,23 @@
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;metasploit&#39;</span>
     <span class="n">__plugin__</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
 
-<div class="viewcode-block" id="MetasploitParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/metasploit.html#libptp.tools.metasploit.parser.MetasploitParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="MetasploitParser.__init__"><a class="viewcode-back" href="../../../../libptp/tools/metasploit.html#libptp.tools.metasploit.parser.MetasploitParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.txt&#39;</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize MetasploitParser.</span>
 
-<span class="sd">        :param str fullpath: Full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
 <span class="sd">        :param str plugin: Name of the plugin that generated the report.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">FileParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__plugin__</span> <span class="o">=</span> <span class="n">plugin</span>
+        <span class="n">FileParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="MetasploitParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/metasploit.html#libptp.tools.metasploit.parser.MetasploitParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="MetasploitParser.is_mine"><a class="viewcode-back" href="../../../../libptp/tools/metasploit.html#libptp.tools.metasploit.parser.MetasploitParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.txt&#39;</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported Metasploit report.</span>
 
-<span class="sd">        :param str fullpath: Full path to the report file.</span>
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
 <span class="sd">        :param str plugin: Name of the plugin that generated the report.</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>

@@ -152,15 +152,19 @@ since it will not have to lookup for the right parser.</p>
 <p>The list of the supported tools can be found like below:</p>
 <div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PTP</span><span class="o">.</span><span class="n">supported</span>
 <span class="go">{</span>
-<span class="go">    &#39;metasploit&#39;: &lt;class &#39;libptp.tools.metasploit.report.MetasploitReport&#39;&gt;,</span>
-<span class="go">    &#39;w3af&#39;: &lt;class &#39;libptp.tools.w3af.report.W3AFReport&#39;&gt;,</span>
-<span class="go">    &#39;nmap&#39;: &lt;class &#39;libptp.tools.nmap.report.NmapReport&#39;&gt;,</span>
-<span class="go">    &#39;owasp-cm-008&#39;: &lt;class &#39;libptp.tools.owasp.cm008.report.OWASPCM008Report&#39;&gt;,</span>
-<span class="go">    &#39;arachni&#39;: &lt;class &#39;libptp.tools.arachni.report.ArachniReport&#39;&gt;,</span>
-<span class="go">    &#39;robots&#39;: &lt;class &#39;libptp.tools.robots.report.RobotsReport&#39;&gt;,</span>
-<span class="go">    &#39;wapiti&#39;: &lt;class &#39;libptp.tools.wapiti.report.WapitiReport&#39;&gt;,</span>
-<span class="go">    &#39;skipfish&#39;: &lt;class &#39;libptp.tools.skipfish.report.SkipfishReport&#39;&gt;,</span>
-<span class="go">    &#39;dirbuster&#39;: &lt;class &#39;libptp.tools.dirbuster.report.DirbusterReport&#39;&gt;</span>
+<span class="go">    &#39;skipfish&#39;: [&lt;class &#39;libptp.tools.skipfish.parser.SkipfishJSParser&#39;&gt;],</span>
+<span class="go">    &#39;nmap&#39;: [&lt;class &#39;libptp.tools.nmap.parser.NmapXMLParser&#39;&gt;],</span>
+<span class="go">    &#39;dirbuster&#39;: [&lt;class &#39;libptp.tools.dirbuster.parser.DirbusterParser&#39;&gt;],</span>
+<span class="go">    &#39;wapiti&#39;: [</span>
+<span class="go">        &lt;class &#39;libptp.tools.wapiti.parser.WapitiXMLParser&#39;&gt;,</span>
+<span class="go">        &lt;class &#39;libptp.tools.wapiti.parser.Wapiti221XMLParser&#39;&gt;</span>
+<span class="go">    ],</span>
+<span class="go">    &#39;owasp-cm-008&#39;: [&lt;class &#39;libptp.tools.owasp.cm008.parser.OWASPCM008Parser&#39;&gt;],</span>
+<span class="go">    &#39;w3af&#39;: [&lt;class &#39;libptp.tools.w3af.parser.W3AFXMLParser&#39;&gt;],</span>
+<span class="go">    &#39;arachni&#39;: [&lt;class &#39;libptp.tools.arachni.parser.ArachniXMLParser&#39;&gt;],</span>
+<span class="go">    &#39;metasploit&#39;: [&lt;class</span>
+<span class="go">    &#39;libptp.tools.metasploit.parser.MetasploitParser&#39;&gt;],</span>
+<span class="go">    &#39;robots&#39;: [&lt;class &#39;libptp.tools.robots.parser.RobotsParser&#39;&gt;]</span>
 <span class="go">}</span>
 </pre></div>
 </div>
