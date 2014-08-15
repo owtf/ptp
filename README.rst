@@ -3,7 +3,7 @@ What is PTP?
 ============
 
 The primary goal of ptp (Pentester's Tools Parser) is to enhance `OWASP - OWTF
-project <https://www.owasp.org/index.php/OWASP_OWTF>` in order to provide an
+project <https://www.owasp.org/index.php/OWASP_OWTF>`_ in order to provide an
 automated ranking for each plugin. This will allow the user to focus attention
 on the most likely weak areas of a web application or network first, which will
 be valuable to efficiently use the remaining time in a penetration assessment.
@@ -58,7 +58,7 @@ Documentation
 =============
 
 The ptp's documentation is available online at the following address:
-`http://owtf.github.io/ptp/ <http://owtf.github.io/ptp/>`.
+`http://owtf.github.io/ptp/ <http://owtf.github.io/ptp/>`_.
 
 It explained how to use the library and even how to contribute. Plus it
 contains the technical documentation of the project.
