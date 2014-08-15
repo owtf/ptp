@@ -7,7 +7,7 @@
 """
 
 
-from libptp.constants import HIGH, MEDIUM, LOW, INFO
+from ptp.libptp.constants import HIGH, MEDIUM, LOW, INFO
 
 
 # TODO: Complete the signatures database.

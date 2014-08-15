@@ -4,19 +4,18 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import INFO
+from ptp.libptp.constants import HIGH
 
 
-__testname__ = 'robots'
+__testname__ = 'arachni'
 
 
 def run():
-    ptp = PTP('robots')
+    ptp = PTP('arachni')
     print('\ttest parse():', end=' ')
     res = 'OK'
     try:
-        ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/robots/reports'))
+        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -25,9 +24,8 @@ def run():
     print('\ttest is_mine():', end=' ')
     res = 'OK'
     try:
-        ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/robots/reports'))
-        assert ptp.parser.__tool__ == 'robots'
+        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
+        assert ptp.parser.__tool__ == 'arachni'
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -35,7 +33,7 @@ def run():
     print('\ttest get_highest_ranking():', end=' ')
     res = 'OK'
     try:
-        assert ptp.get_highest_ranking() == INFO
+        assert ptp.get_highest_ranking() == HIGH
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'

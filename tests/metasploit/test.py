@@ -4,7 +4,7 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
+from ptp.libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 
 
 __testname__ = 'metasploit'

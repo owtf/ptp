@@ -4,19 +4,19 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import HIGH
+from ptp.libptp.constants import INFO
 
 
-__testname__ = 'w3af'
+__testname__ = 'robots'
 
 
 def run():
-    ptp = PTP('w3af')
+    ptp = PTP('robots')
     print('\ttest parse():', end=' ')
     res = 'OK'
     try:
         ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
+            pathname=os.path.join(os.getcwd(), 'tests/robots/reports'))
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -26,8 +26,8 @@ def run():
     res = 'OK'
     try:
         ptp.parse(
-            pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
-        assert ptp.parser.__tool__ == 'w3af'
+            pathname=os.path.join(os.getcwd(), 'tests/robots/reports'))
+        assert ptp.parser.__tool__ == 'robots'
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -35,7 +35,7 @@ def run():
     print('\ttest get_highest_ranking():', end=' ')
     res = 'OK'
     try:
-        assert ptp.get_highest_ranking() == HIGH
+        assert ptp.get_highest_ranking() == INFO
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'

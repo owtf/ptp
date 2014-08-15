@@ -1,14 +1,14 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool Metasploit.
 
 .. moduleauthor:: Tao Sauvage
 
 """
 
-from libptp.parser import FileParser
-from tools.metasploit.signatures import SIGNATURES
+from ptp.libptp.parser import FileParser
+from ptp.tools.metasploit.signatures import SIGNATURES
 
 
 class MetasploitParser(FileParser):

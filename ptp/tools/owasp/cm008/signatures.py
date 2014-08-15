@@ -8,7 +8,7 @@
 """
 
 
-from libptp.constants import HIGH, MEDIUM, LOW
+from ptp.libptp.constants import HIGH, MEDIUM, LOW
 
 
 # TODO: Complete the methods signatures database.

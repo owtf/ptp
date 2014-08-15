@@ -6,7 +6,6 @@ import sys
 import imp
 import fnmatch
 
-
 # Test directory
 DIR_TEST = 'tests'
 

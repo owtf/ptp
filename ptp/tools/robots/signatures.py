@@ -6,7 +6,7 @@
 """
 
 
-from libptp.constants import INFO
+from ptp.libptp.constants import INFO
 
 
 # TODO: Complete the signatures database.

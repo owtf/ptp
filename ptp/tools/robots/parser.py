@@ -1,15 +1,15 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     robots.txt files.
 
 .. moduleauthor:: Tao Sauvage
 
 """
 
-from libptp.constants import UNKNOWN
-from libptp.parser import LineParser
-from tools.robots.signatures import SIGNATURES
+from ptp.libptp.constants import UNKNOWN
+from ptp.libptp.parser import LineParser
+from ptp.tools.robots.signatures import SIGNATURES
 
 
 class RobotsParser(LineParser):

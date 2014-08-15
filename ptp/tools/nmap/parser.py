@@ -1,16 +1,16 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool Nmap.
 
 .. moduleauthor:: Tao Sauvage
 
 """
 
-from libptp.exceptions import NotSupportedVersionError
-from libptp.constants import UNKNOWN
-from libptp.parser import XMLParser
-from tools.nmap.signatures import SIGNATURES
+from ptp.libptp.exceptions import NotSupportedVersionError
+from ptp.libptp.constants import UNKNOWN
+from ptp.libptp.parser import XMLParser
+from ptp.tools.nmap.signatures import SIGNATURES
 
 
 class NmapXMLParser(XMLParser):

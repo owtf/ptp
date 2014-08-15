@@ -1,6 +1,6 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool OWASP-CM-008.
 
 .. moduleauthor:: Tao Sauvage
@@ -9,9 +9,9 @@
 
 import re
 
-from libptp.constants import UNKNOWN
-from libptp.parser import LineParser
-from tools.owasp.cm008.signatures import SIGNATURES
+from ptp.libptp.constants import UNKNOWN
+from ptp.libptp.parser import LineParser
+from ptp.tools.owasp.cm008.signatures import SIGNATURES
 
 
 class OWASPCM008Parser(LineParser):

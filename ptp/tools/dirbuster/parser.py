@@ -1,6 +1,6 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool DirBuster.
 
 .. moduleauthor:: Tao Sauvage
@@ -9,8 +9,8 @@
 
 import re
 
-from libptp.parser import LineParser
-from tools.dirbuster.signatures import DIRECTORIES, FILES
+from ptp.libptp.parser import LineParser
+from ptp.tools.dirbuster.signatures import DIRECTORIES, FILES
 
 
 class DirbusterParser(LineParser):

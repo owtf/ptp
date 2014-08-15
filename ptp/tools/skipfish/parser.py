@@ -1,6 +1,6 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool Skipfish.
 
 .. moduleauthor:: Tao Sauvage
@@ -10,9 +10,9 @@
 import re
 import ast
 
-from libptp import constants
-from libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
-from libptp.parser import AbstractParser
+from ptp.libptp import constants
+from ptp.libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
+from ptp.libptp.parser import AbstractParser
 
 
 class SkipfishJSParser(AbstractParser):

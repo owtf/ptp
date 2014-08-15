@@ -7,7 +7,7 @@
 """
 
 
-from libptp.constants import HIGH, MEDIUM, LOW, INFO
+from ptp.libptp.constants import HIGH, MEDIUM, LOW, INFO
 
 
 #: :data: :class:`dict` of the categories with their rank.

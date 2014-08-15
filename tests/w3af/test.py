@@ -4,18 +4,19 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import HIGH
+from ptp.libptp.constants import HIGH
 
 
-__testname__ = 'arachni'
+__testname__ = 'w3af'
 
 
 def run():
-    ptp = PTP('arachni')
+    ptp = PTP('w3af')
     print('\ttest parse():', end=' ')
     res = 'OK'
     try:
-        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
+        ptp.parse(
+            pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -24,8 +25,9 @@ def run():
     print('\ttest is_mine():', end=' ')
     res = 'OK'
     try:
-        ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/0.4.6'))
-        assert ptp.parser.__tool__ == 'arachni'
+        ptp.parse(
+            pathname=os.path.join(os.getcwd(), 'tests/w3af/1.6.0.2'))
+        assert ptp.parser.__tool__ == 'w3af'
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'

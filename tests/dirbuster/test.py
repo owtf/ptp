@@ -4,7 +4,7 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import LOW, HIGH
+from ptp.libptp.constants import LOW, HIGH
 
 
 __testname__ = 'dirbuster'

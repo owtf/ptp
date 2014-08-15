@@ -1,6 +1,6 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool Arachni.
 
 .. moduleauthor:: Tao Sauvage
@@ -9,9 +9,9 @@
 
 from lxml.etree import LxmlError
 
-from libptp import constants
-from libptp.exceptions import NotSupportedVersionError
-from libptp.parser import XMLParser
+from ptp.libptp import constants
+from ptp.libptp.exceptions import NotSupportedVersionError
+from ptp.libptp.parser import XMLParser
 
 
 class ArachniXMLParser(XMLParser):

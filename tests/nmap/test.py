@@ -4,7 +4,7 @@ import os
 import traceback
 
 from ptp import PTP
-from libptp.constants import INFO, HIGH
+from ptp.libptp.constants import INFO, HIGH
 
 
 __testname__ = 'nmap'

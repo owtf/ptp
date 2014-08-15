@@ -54,3 +54,7 @@ docs/_build/
 
 # ctags
 tags
+
+# Virtualenv folders
+venv/
+venv2/

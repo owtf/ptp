@@ -17,7 +17,6 @@ setup(
     keywords="PTP Security Automated Ranking",
     url="http://owtf.github.io/ptp",
     packages=find_packages(exclude=['docs']),
-    include_package_data=True,
     use_2to3 = True,
     install_requires = ["lxml"],
 )

@@ -1,6 +1,6 @@
 """
 
-:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
     tool Wapiti.
 
 .. moduleauthor:: Tao Sauvage
@@ -9,10 +9,10 @@
 
 from lxml.etree import LxmlError
 
-from libptp.exceptions import NotSupportedVersionError
-from libptp.constants import UNKNOWN
-from libptp.parser import XMLParser
-from tools.wapiti.signatures import SIGNATURES
+from ptp.libptp.exceptions import NotSupportedVersionError
+from ptp.libptp.constants import UNKNOWN
+from ptp.libptp.parser import XMLParser
+from ptp.tools.wapiti.signatures import SIGNATURES
 
 
 class WapitiXMLParser(XMLParser):
