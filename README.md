@@ -31,7 +31,7 @@ $ git clone https://github.com/owtf/ptp.git
 Then the script `setup.py` must be run:
 
 ```bash
-    $ ./setup.py install
+$ ./setup.py install
 ```
 
 # Usage
