@@ -58,13 +58,18 @@ The first step is to clone the repository of the project:
 
 .. code-block:: bash
 
-   $ git clone https://github.com/owtf/ptp.git
+    $ git clone https://github.com/owtf/ptp.git
 
 Then the script `setup.py` must be run:
 
 .. code-block:: bash
 
     $ ./setup.py install
+
+.. note::
+
+    If an error occurs during the installation process, check your permissions.
+    It might be required to run the installation script as root.
 
 ============
 Basic usages
@@ -200,12 +205,17 @@ And the metadata thanks to the :attr:`ptp.PTP.metadata` attribute.
 Unit tests
 ==========
 
-The :mod:`ptp` module can be tested by running the `run_tests.py` python script
-under the sub-directory `ptp/`.
+The :mod:`ptp` module can be tested by running the `run_tests.py` python
+script.
 
 .. code-block:: bash
 
     $ ./run_tests.py
+
+.. note::
+
+    Make sure the ``./setup.py install`` has been successful before running the
+    script.
 
 This script will run every existing unit tests that have been created for the
 module. If an error occurs, the string `FAIL` will be outputted in the

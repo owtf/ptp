@@ -6,38 +6,39 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>tools.arachni.parser &mdash; ptp 0.1.0 documentation</title>
+    <title>ptp.tools.arachni.parser &mdash; ptp 0.1.0 documentation</title>
     
-    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
+        URL_ROOT:    '../../../../',
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="ptp 0.1.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.1.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="ptp" href="../../../ptp.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
+          <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">ptp 0.1.0 documentation</a> &raquo;</li>
-          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li><a href="../../../../index.html">ptp 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../../ptp.html" accesskey="U">ptp</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,10 +47,10 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <h1>Source code for tools.arachni.parser</h1><div class="highlight"><pre>
+  <h1>Source code for ptp.tools.arachni.parser</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the</span>
+<span class="sd">:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the</span>
 <span class="sd">    tool Arachni.</span>
 
 <span class="sd">.. moduleauthor:: Tao Sauvage</span>
@@ -58,12 +59,12 @@
 
 <span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">LxmlError</span>
 
-<span class="kn">from</span> <span class="nn">libptp</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">libptp.exceptions</span> <span class="kn">import</span> <span class="n">NotSupportedVersionError</span>
-<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp.exceptions</span> <span class="kn">import</span> <span class="n">NotSupportedVersionError</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
-<div class="viewcode-block" id="ArachniXMLParser"><a class="viewcode-back" href="../../../tools/arachni.html#tools.arachni.parser.ArachniXMLParser">[docs]</a><span class="k">class</span> <span class="nc">ArachniXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser">[docs]</a><span class="k">class</span> <span class="nc">ArachniXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Arachni XML specialized parser.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;arachni&#39;</span>
@@ -81,7 +82,7 @@
         <span class="n">LOW</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
         <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
 
-<div class="viewcode-block" id="ArachniXMLParser.__init__"><a class="viewcode-back" href="../../../tools/arachni.html#tools.arachni.parser.ArachniXMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.__init__"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize ArachniXMLParser.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -91,7 +92,7 @@
         <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ArachniXMLParser.is_mine"><a class="viewcode-back" href="../../../tools/arachni.html#tools.arachni.parser.ArachniXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.is_mine"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -109,7 +110,7 @@
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
 </div>
-<div class="viewcode-block" id="ArachniXMLParser.parse_metadata"><a class="viewcode-back" href="../../../tools/arachni.html#tools.arachni.parser.ArachniXMLParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.parse_metadata"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the metadata of the report.</span>
 
 <span class="sd">        :raises: :class:`NotSupportedVersionError` -- if it does not support</span>
@@ -130,7 +131,7 @@
             <span class="k">raise</span> <span class="n">NotSupportedVersionError</span><span class="p">(</span>
                 <span class="s">&#39;PTP does NOT support this version of Arachni.&#39;</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="ArachniXMLParser.parse_report"><a class="viewcode-back" href="../../../tools/arachni.html#tools.arachni.parser.ArachniXMLParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.parse_report"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the results of the report.</span>
 
 <span class="sd">        :return: List of dicts where each one represents a discovery.</span>
@@ -150,7 +151,7 @@
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
+    <form class="search" action="../../../../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -169,13 +170,14 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
+          <a href="../../../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
+          <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">ptp 0.1.0 documentation</a> &raquo;</li>
-          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+        <li><a href="../../../../index.html">ptp 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../../ptp.html" >ptp</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

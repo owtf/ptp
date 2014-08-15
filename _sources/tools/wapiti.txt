@@ -4,7 +4,7 @@ Wapiti
 Parser
 ******
 
-.. automodule:: tools.wapiti.parser
+.. automodule:: ptp.tools.wapiti.parser
 
 .. autoclass:: WapitiXMLParser
     :members:
@@ -27,5 +27,5 @@ Parser
 Signatures
 **********
 
-.. automodule:: tools.wapiti.signatures
+.. automodule:: ptp.tools.wapiti.signatures
     :members:

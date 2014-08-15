@@ -4,7 +4,7 @@ Robots.txt
 Parser
 ******
 
-.. automodule:: tools.robots.parser
+.. automodule:: ptp.tools.robots.parser
 
 .. _robotsparser-class-label:
 
@@ -19,5 +19,5 @@ Parser
 Signatures
 **********
 
-.. automodule:: tools.robots.signatures
+.. automodule:: ptp.tools.robots.signatures
     :members:

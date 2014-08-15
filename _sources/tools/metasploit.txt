@@ -10,7 +10,7 @@ Metasploit
 Parser
 ******
 
-.. automodule:: tools.metasploit.parser
+.. automodule:: ptp.tools.metasploit.parser
 
 .. autoclass:: MetasploitParser
     :members:
@@ -23,5 +23,5 @@ Parser
 Signatures
 **********
 
-.. automodule:: tools.metasploit.signatures
+.. automodule:: ptp.tools.metasploit.signatures
     :members:

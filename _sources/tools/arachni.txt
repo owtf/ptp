@@ -4,7 +4,7 @@ Arachni
 Parser
 ******
 
-.. automodule:: tools.arachni.parser
+.. automodule:: ptp.tools.arachni.parser
 
 .. autoclass:: ArachniXMLParser
     :members:

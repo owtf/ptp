@@ -1,7 +1,7 @@
 Basic Parsers
 #############
 
-.. automodule:: libptp.parser
+.. automodule:: ptp.libptp.parser
 
 AbstractParser
 **************

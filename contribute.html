@@ -71,7 +71,7 @@ contained in a tool report, it needs a specialized parser.</p>
 support <em>MyTool</em>&#8216;s XML reports, <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> seems to be the best
 class from which to inherit.</p>
 <p>The <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> already defines
-<a class="reference internal" href="libptp/parser.html#libptp.parser.XMLParser.handle_file" title="libptp.parser.XMLParser.handle_file"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.XMLParser.handle_file()</span></tt></a> for us. This will initialize the
+<tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.XMLParser.handle_file()</span></tt> for us. This will initialize the
 <tt class="xref py py-attr docutils literal"><span class="pre">MyXMLParser.stream</span></tt> instance variable with a handle on the root node of
 the file.</p>
 <div class="section" id="the-skeleton">
@@ -160,9 +160,9 @@ as the root XML tag.</p>
 <p>Each <a class="reference internal" href="libptp/parser.html#abstractparser-class-label"><em>AbstractParser</em></a> class has to provide
 two methods:</p>
 <ul class="simple">
-<li><a class="reference internal" href="libptp/parser.html#libptp.parser.AbstractParser.parse_metadata" title="libptp.parser.AbstractParser.parse_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.AbstractParser.parse_metadata()</span></tt></a> which parses the metadata
+<li><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.AbstractParser.parse_metadata()</span></tt> which parses the metadata
 of the report and formats them into a <a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</li>
-<li><a class="reference internal" href="libptp/parser.html#libptp.parser.AbstractParser.parse_report" title="libptp.parser.AbstractParser.parse_report"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.AbstractParser.parse_report()</span></tt></a> which parses the
+<li><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.AbstractParser.parse_report()</span></tt> which parses the
 discoveries that are listed in the report and formats them into a
 <tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> of <a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</li>
 </ul>
