@@ -26,7 +26,6 @@ Documentation
     :maxdepth: 2
 
     ptp
-    libptp/report
     libptp/parser
     libptp/exceptions
     libptp/constants
