@@ -49,7 +49,7 @@
   <h1>Source code for ptp</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">:synopsis: PTP library entry point that exposes the public available functions.</span>
+<span class="sd">:synopsis: :mod:`ptp` library entry point that exposes the public API.</span>
 
 <span class="sd">.. moduleauthor:: Tao Sauvage</span>
 
@@ -70,16 +70,16 @@
 
 <div class="viewcode-block" id="PTP"><a class="viewcode-back" href="../ptp.html#ptp.PTP">[docs]</a><span class="k">class</span> <span class="nc">PTP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="sd">&quot;&quot;&quot;PTP class exposing the PTP&#39;s public API.</span>
+    <span class="sd">&quot;&quot;&quot;:class:`PTP` class exposing :mod:`ptp`&#39;s public API.</span>
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        ptp = PTP()</span>
-<span class="sd">        ptp.parse(path_to_report)</span>
+<span class="sd">        ptp = PTP(pathname=&#39;my/path&#39;)</span>
+<span class="sd">        ptp.parse()</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c">#: :class:`dict` -- Dict linking the supported tools with their parsers.</span>
+    <span class="c">#: :class:`dict` -- Supported tools and their parser(s).</span>
     <span class="n">supported</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">&#39;arachni&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">ArachniXMLParser</span><span class="p">],</span>
         <span class="s">&#39;skipfish&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">SkipfishJSParser</span><span class="p">],</span>
@@ -92,19 +92,34 @@
         <span class="s">&#39;robots&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">RobotsParser</span><span class="p">]}</span>
 
 <div class="viewcode-block" id="PTP.__init__"><a class="viewcode-back" href="../ptp.html#ptp.PTP.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize a PTP instance.</span>
+        <span class="sd">&quot;&quot;&quot;Initialize :class:`PTP`.</span>
 
-<span class="sd">        :param str tool_name: help PTP by specifying the name of the tool that</span>
-<span class="sd">            has generated the target report.</span>
+<span class="sd">        :param str tool_name: help :mod:`ptp` by specifying the name of the</span>
+<span class="sd">            tool that has generated the target report.</span>
+<span class="sd">        :param list \*args: Arguments that are needed by the parser.</span>
+<span class="sd">        :param dict \*\*kwargs: Arguments that are needed by the parser.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#: :class:`str` -- Name of the tool that generated the report.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span> <span class="o">=</span> <span class="n">tool_name</span>
+        <span class="c">#: :class:`libptp.AbstractParser` -- Parser used on the report.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c">#: :class:`list` -- Vulnerabilities that are listed in the report.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c">#: :class:`dict` -- Metadata from the report.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">or</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_init_parser</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </div>
-    <span class="k">def</span> <span class="nf">_init_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="PTP._init_parser"><a class="viewcode-back" href="../ptp.html#ptp.PTP._init_parser">[docs]</a>    <span class="k">def</span> <span class="nf">_init_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find and initialize the parser.</span>
+
+<span class="sd">        :param str tool_name: help PTP by specifying the name of the tool that</span>
+<span class="sd">            has generated the target report.</span>
+<span class="sd">        :param list \*args: Arguments that are needed by the parser.</span>
+<span class="sd">        :param dict \*\*kwargs: Arguments that are needed by the parser.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_name</span><span class="p">:</span>
             <span class="c"># Since no tool name has been specified by the user, try to</span>
             <span class="c"># automatically detect it.</span>
@@ -125,14 +140,14 @@
                 <span class="k">pass</span>
             <span class="k">except</span> <span class="n">NotSupportedVersionError</span><span class="p">:</span>
                 <span class="k">pass</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">,</span> <span class="s">&#39;stream&#39;</span><span class="p">):</span>  <span class="c"># Check if instanciated.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
+</div>
 <div class="viewcode-block" id="PTP.parse"><a class="viewcode-back" href="../ptp.html#ptp.PTP.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse a tool report.</span>
 
-<span class="sd">        :param dict \*\*kwargs: Dict of arguments that are needed by the</span>
-<span class="sd">            specific report.</span>
+<span class="sd">        :param list \*args: Arguments that are needed by the parser.</span>
+<span class="sd">        :param dict \*\*kwargs: Arguments that are needed by the parser.</span>
 <span class="sd">        :raises NotSupportedToolError: if the tool that has generated the</span>
 <span class="sd">            report is not supported by PTP.</span>
 
@@ -151,16 +166,16 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span>
 </div>
 <div class="viewcode-block" id="PTP.get_highest_ranking"><a class="viewcode-back" href="../ptp.html#ptp.PTP.get_highest_ranking">[docs]</a>    <span class="k">def</span> <span class="nf">get_highest_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the highest ranking value of the report.</span>
+        <span class="sd">&quot;&quot;&quot;Return the highest ranking of the report.</span>
 
-<span class="sd">        :return: the risk id of the highest ranked vulnerability</span>
-<span class="sd">            referenced in the report.</span>
+<span class="sd">        :return: the risk id of the highest ranked vulnerability referenced in</span>
+<span class="sd">            the report.</span>
 <span class="sd">        :rtype: :class:`int`</span>
 
 <span class="sd">        .. note::</span>
 
-<span class="sd">            The rank value starts from `0` to `n` where `n` represents the</span>
-<span class="sd">            most critical risk.</span>
+<span class="sd">            The ranking starts from `0` to `n` where `n` represents the most</span>
+<span class="sd">            critical risk. (See :mod:`libptp.constants`).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span><span class="p">:</span>

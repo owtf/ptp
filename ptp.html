@@ -58,29 +58,54 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">PTP library entry point that exposes the public available functions.</td>
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body"><a class="reference internal" href="#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> library entry point that exposes the public API.</td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="ptp.PTP">
 <em class="property">class </em><tt class="descclassname">ptp.</tt><tt class="descname">PTP</tt><big>(</big><em>tool_name=''</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ptp.html#PTP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP" title="Permalink to this definition">¶</a></dt>
-<dd><p>PTP class exposing the PTP&#8217;s public API.</p>
+<dd><p><a class="reference internal" href="#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">PTP</span></tt></a> class exposing <a class="reference internal" href="#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>&#8216;s public API.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">()</span>
-<span class="n">ptp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">path_to_report</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s">&#39;my/path&#39;</span><span class="p">)</span>
+<span class="n">ptp</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="ptp.PTP.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>tool_name=''</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ptp.html#PTP.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize a PTP instance.</p>
+<dd><p>Initialize <a class="reference internal" href="#ptp.PTP" title="ptp.PTP"><tt class="xref py py-class docutils literal"><span class="pre">PTP</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tool_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; help PTP by specifying the name of the tool that
-has generated the target report.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tool_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; help <a class="reference internal" href="#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> by specifying the name of the
+tool that has generated the target report.</li>
+<li><strong>*args</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Arguments that are needed by the parser.</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Arguments that are needed by the parser.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.PTP._init_parser">
+<tt class="descname">_init_parser</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/ptp.html#PTP._init_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP._init_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find and initialize the parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tool_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; help PTP by specifying the name of the tool that
+has generated the target report.</li>
+<li><strong>*args</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Arguments that are needed by the parser.</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Arguments that are needed by the parser.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -89,13 +114,13 @@ has generated the target report.</td>
 <dl class="method">
 <dt id="ptp.PTP.get_highest_ranking">
 <tt class="descname">get_highest_ranking</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ptp.html#PTP.get_highest_ranking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP.get_highest_ranking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the highest ranking value of the report.</p>
+<dd><p>Return the highest ranking of the report.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the risk id of the highest ranked vulnerability
-referenced in the report.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the risk id of the highest ranked vulnerability referenced in
+the report.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">int</span></tt></td>
 </tr>
@@ -103,9 +128,15 @@ referenced in the report.</td>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The rank value starts from <cite>0</cite> to <cite>n</cite> where <cite>n</cite> represents the
-most critical risk.</p>
+<p class="last">The ranking starts from <cite>0</cite> to <cite>n</cite> where <cite>n</cite> represents the most
+critical risk. (See <a class="reference internal" href="libptp/constants.html#module-libptp.constants" title="libptp.constants"><tt class="xref py py-mod docutils literal"><span class="pre">libptp.constants</span></tt></a>).</p>
 </div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.metadata">
+<tt class="descname">metadata</tt><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> &#8211; Metadata from the report.</p>
 </dd></dl>
 
 <dl class="method">
@@ -116,25 +147,49 @@ most critical risk.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Dict of arguments that are needed by the
-specific report.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>*args</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; Arguments that are needed by the parser.</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Arguments that are needed by the parser.</li>
+</ul>
+</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Raises NotSupportedToolError:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">if the tool that has generated the
-report is not supported by PTP.</td>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first">if the tool that has generated the
+report is not supported by PTP.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list of dictionaries of the results found in the report.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The list of dictionaries of the results found in the report.</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
+</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="ptp.PTP.parser">
+<tt class="descname">parser</tt><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.parser" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">libptp.AbstractParser</span></tt> &#8211; Parser used on the report.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="ptp.PTP.supported">
 <tt class="descname">supported</tt><em class="property"> = {'metasploit': [&lt;class 'tools.metasploit.parser.MetasploitParser'&gt;], 'owasp-cm-008': [&lt;class 'tools.owasp.cm008.parser.OWASPCM008Parser'&gt;], 'wapiti': [&lt;class 'tools.wapiti.parser.WapitiXMLParser'&gt;, &lt;class 'tools.wapiti.parser.Wapiti221XMLParser'&gt;], 'skipfish': [&lt;class 'tools.skipfish.parser.SkipfishJSParser'&gt;], 'nmap': [&lt;class 'tools.nmap.parser.NmapXMLParser'&gt;], 'w3af': [&lt;class 'tools.w3af.parser.W3AFXMLParser'&gt;], 'robots': [&lt;class 'tools.robots.parser.RobotsParser'&gt;], 'dirbuster': [&lt;class 'tools.dirbuster.parser.DirbusterParser'&gt;], 'arachni': [&lt;class 'tools.arachni.parser.ArachniXMLParser'&gt;]}</em><a class="headerlink" href="#ptp.PTP.supported" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> &#8211; Dict linking the supported tools with their parsers.</p>
+<dd><p><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> &#8211; Supported tools and their parser(s).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.tool_name">
+<tt class="descname">tool_name</tt><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.tool_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> &#8211; Name of the tool that generated the report.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.vulns">
+<tt class="descname">vulns</tt><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.vulns" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> &#8211; Vulnerabilities that are listed in the report.</p>
 </dd></dl>
 
 </dd></dl>

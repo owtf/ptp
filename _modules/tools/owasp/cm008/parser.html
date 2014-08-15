@@ -49,7 +49,8 @@
   <h1>Source code for tools.owasp.cm008.parser</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">:synopsis: Specialized Parser classes for OWASP-CM-008.</span>
+<span class="sd">:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the</span>
+<span class="sd">    tool OWASP-CM-008.</span>
 
 <span class="sd">.. moduleauthor:: Tao Sauvage</span>
 
@@ -78,7 +79,7 @@
 </div>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="OWASPCM008Parser.is_mine"><a class="viewcode-back" href="../../../../tools/owasp.html#tools.owasp.cm008.parser.OWASPCM008Parser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.txt&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if it is a supported OWASP-CM-008 report.</span>
+        <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>

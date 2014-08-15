@@ -49,7 +49,8 @@
   <h1>Source code for tools.wapiti.parser</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">:synopsis: Specialized Parser classes for Wapiti.</span>
+<span class="sd">:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the</span>
+<span class="sd">    tool Wapiti.</span>
 
 <span class="sd">.. moduleauthor:: Tao Sauvage</span>
 
@@ -81,7 +82,7 @@
 </div>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="WapitiXMLParser.is_mine"><a class="viewcode-back" href="../../../tools/wapiti.html#tools.wapiti.parser.WapitiXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if it is a supported Wapiti report.</span>
+        <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>

@@ -58,8 +58,8 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Define the basic parser classes that will parse the data from the
-report file.</td>
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Define the basic <a class="reference external" href="http://docs.python.org/library/parser.html#module-parser" title="(in Python v2.7)"><tt class="xref py py-mod docutils literal"><span class="pre">parser</span></tt></a> classes that will parse the
+data from the report file.</td>
 </tr>
 </tbody>
 </table>
@@ -77,7 +77,7 @@ tool will add its own parsing specificities.</p>
 <dl class="method">
 <dt id="libptp.parser.AbstractParser.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize AbstractParser.</p>
+<dd><p>Initialize <a class="reference internal" href="#libptp.parser.AbstractParser" title="libptp.parser.AbstractParser"><tt class="xref py py-class docutils literal"><span class="pre">AbstractParser</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -172,7 +172,7 @@ method.</p>
 <dl class="classmethod">
 <dt id="libptp.parser.AbstractParser.is_mine">
 <em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#AbstractParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.AbstractParser.is_mine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if the parser supports the tool.</p>
+<dd><p>Check if it can handle the report file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -240,13 +240,13 @@ method.</td>
 <dl class="class">
 <dt id="libptp.parser.XMLParser">
 <em class="property">class </em><tt class="descclassname">libptp.parser.</tt><tt class="descname">XMLParser</tt><big>(</big><em>pathname='./'</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized parser for XML formatted report files.</p>
+<dd><p>Specialized parser for XML files.</p>
 <p>Define the special <a class="reference internal" href="#libptp.parser.XMLParser.handle_file" title="libptp.parser.XMLParser.handle_file"><tt class="xref py py-func docutils literal"><span class="pre">handle_file()</span></tt></a> function in order to process the XML
 report file.</p>
 <dl class="method">
 <dt id="libptp.parser.XMLParser.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize XMLParser.</p>
+<dd><p>Initialize <a class="reference internal" href="#libptp.parser.XMLParser" title="libptp.parser.XMLParser"><tt class="xref py py-class docutils literal"><span class="pre">XMLParser</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -305,7 +305,7 @@ generic report file.</p>
 <dl class="method">
 <dt id="libptp.parser.FileParser.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#FileParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.FileParser.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize FileParser.</p>
+<dd><p>Initialize <a class="reference internal" href="#libptp.parser.FileParser" title="libptp.parser.FileParser"><tt class="xref py py-class docutils literal"><span class="pre">FileParser</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -342,7 +342,7 @@ file.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">string containing all the data from the file.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">all the data from the file.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt></p>
@@ -366,12 +366,12 @@ generic report file.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Contrary to <a class="reference internal" href="#libptp.parser.FileParser" title="libptp.parser.FileParser"><tt class="xref py py-class docutils literal"><span class="pre">FileParser</span></tt></a>, this class reads the file line by line
-and generates a list, instead of a string.</p>
+and return a <tt class="xref py py-class docutils literal"><span class="pre">list</span></tt>, instead of a <tt class="xref py py-class docutils literal"><span class="pre">str</span></tt>.</p>
 </div>
 <dl class="method">
 <dt id="libptp.parser.LineParser.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>pathname='./'</em>, <em>filename='*'</em><big>)</big><a class="reference internal" href="../_modules/libptp/parser.html#LineParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#libptp.parser.LineParser.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize LineParser.</p>
+<dd><p>Initialize <a class="reference internal" href="#libptp.parser.LineParser" title="libptp.parser.LineParser"><tt class="xref py py-class docutils literal"><span class="pre">LineParser</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -410,11 +410,10 @@ file.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of strings containing all the data from the file, line
-by line.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">all the data from the file, line by line.</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
 </td>
 </tr>
 </tbody>
