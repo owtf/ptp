@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for Wapiti.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool Wapiti.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -32,7 +33,7 @@ class WapitiXMLParser(XMLParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a supported Wapiti report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

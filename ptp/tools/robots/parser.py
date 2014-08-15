@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser class for Robots.txt.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    robots.txt files.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -28,7 +29,7 @@ class RobotsParser(LineParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.txt'):
-        """Check if it is a supported robots.txt report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for the tool Arachni.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool Arachni.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -42,7 +43,7 @@ class ArachniXMLParser(XMLParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a supported Arachni report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

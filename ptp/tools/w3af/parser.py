@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for W3AF.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool W3AF.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -45,7 +46,7 @@ class W3AFXMLParser(XMLParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a supported W3AF report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

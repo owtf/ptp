@@ -1,7 +1,7 @@
 """
 
-:synopsis: Define the basic parser classes that will parse the data from the
-    report file.
+:synopsis: Define the basic :mod:`parser` classes that will parse the
+    data from the report file.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -33,7 +33,7 @@ class AbstractParser(object):
     __version__ = None
 
     def __init__(self, pathname='./', filename='*'):
-        """Initialize AbstractParser.
+        """Initialize :class:`AbstractParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
@@ -91,7 +91,7 @@ class AbstractParser(object):
 
     @classmethod
     def is_mine(cls):
-        """Check if the parser supports the tool.
+        """Check if it can handle the report file.
 
         :raises: :class:`NotImplementedError` because this is an abstract
             method.
@@ -138,7 +138,7 @@ class AbstractParser(object):
 
 class XMLParser(AbstractParser):
 
-    """Specialized parser for XML formatted report files.
+    """Specialized parser for XML files.
 
     Define the special :func:`handle_file` function in order to process the XML
     report file.
@@ -149,7 +149,7 @@ class XMLParser(AbstractParser):
     __format__ = 'xml'
 
     def __init__(self, pathname='./', filename='*.xml'):
-        """Initialize XMLParser.
+        """Initialize :class:`XMLParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
@@ -190,7 +190,7 @@ class FileParser(AbstractParser):
     """
 
     def __init__(self, pathname='./', filename='*'):
-        """Initialize FileParser.
+        """Initialize :class:`FileParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
@@ -209,7 +209,7 @@ class FileParser(AbstractParser):
         :raises IOError: if an error occurs when opening/reading the report
             file.
 
-        :return: string containing all the data from the file.
+        :return: all the data from the file.
         :rtype: :class:`str`
 
         """
@@ -232,12 +232,12 @@ class LineParser(AbstractParser):
     .. note::
 
         Contrary to :class:`FileParser`, this class reads the file line by line
-        and generates a list, instead of a string.
+        and return a :class:`list`, instead of a :class:`str`.
 
     """
 
     def __init__(self, pathname='./', filename='*'):
-        """Initialize LineParser.
+        """Initialize :class:`LineParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
@@ -258,9 +258,8 @@ class LineParser(AbstractParser):
         :raises IOError: if an error occurs when opening/reading the report
             file.
 
-        :return: list of strings containing all the data from the file, line
-            by line.
-        :rtype: :class:`str`
+        :return: all the data from the file, line by line.
+        :rtype: :class:`list`
 
         """
         fullpath = cls._recursive_find(pathname, filename)

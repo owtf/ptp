@@ -1,6 +1,6 @@
 """
 
-:synopsis: PTP library entry point that exposes the public available functions.
+:synopsis: :mod:`ptp` library entry point that exposes the public API.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -21,16 +21,16 @@ from tools.robots.parser import RobotsParser
 
 class PTP(object):
 
-    """PTP class exposing the PTP's public API.
+    """:class:`PTP` class exposing :mod:`ptp`'s public API.
 
     Example::
 
-        ptp = PTP()
-        ptp.parse(path_to_report)
+        ptp = PTP(pathname='my/path')
+        ptp.parse()
 
     """
 
-    #: :class:`dict` -- Dict linking the supported tools with their parsers.
+    #: :class:`dict` -- Supported tools and their parser(s).
     supported = {
         'arachni': [ArachniXMLParser],
         'skipfish': [SkipfishJSParser],
@@ -43,10 +43,12 @@ class PTP(object):
         'robots': [RobotsParser]}
 
     def __init__(self, tool_name='', *args, **kwargs):
-        """Initialize a PTP instance.
+        """Initialize :class:`PTP`.
 
-        :param str tool_name: help PTP by specifying the name of the tool that
-            has generated the target report.
+        :param str tool_name: help :mod:`ptp` by specifying the name of the
+            tool that has generated the target report.
+        :param list \*args: Arguments that are needed by the parser.
+        :param dict \*\*kwargs: Arguments that are needed by the parser.
 
         """
         #: :class:`str` -- Name of the tool that generated the report.
@@ -61,6 +63,14 @@ class PTP(object):
             self._init_parser(*args, **kwargs)
 
     def _init_parser(self, *args, **kwargs):
+        """Find and initialize the parser.
+
+        :param str tool_name: help PTP by specifying the name of the tool that
+            has generated the target report.
+        :param list \*args: Arguments that are needed by the parser.
+        :param dict \*\*kwargs: Arguments that are needed by the parser.
+
+        """
         if not self.tool_name:
             # Since no tool name has been specified by the user, try to
             # automatically detect it.
@@ -87,8 +97,8 @@ class PTP(object):
     def parse(self, *args, **kwargs):
         """Parse a tool report.
 
-        :param dict \*\*kwargs: Dict of arguments that are needed by the
-            specific report.
+        :param list \*args: Arguments that are needed by the parser.
+        :param dict \*\*kwargs: Arguments that are needed by the parser.
         :raises NotSupportedToolError: if the tool that has generated the
             report is not supported by PTP.
 
@@ -107,16 +117,16 @@ class PTP(object):
         return self.vulns
 
     def get_highest_ranking(self):
-        """Return the highest ranking value of the report.
+        """Return the highest ranking of the report.
 
-        :return: the risk id of the highest ranked vulnerability
-            referenced in the report.
+        :return: the risk id of the highest ranked vulnerability referenced in
+            the report.
         :rtype: :class:`int`
 
         .. note::
 
-            The rank value starts from `0` to `n` where `n` represents the
-            most critical risk.
+            The ranking starts from `0` to `n` where `n` represents the most
+            critical risk. (See :mod:`libptp.constants`).
 
         """
         if not self.vulns:

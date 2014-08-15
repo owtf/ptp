@@ -13,15 +13,15 @@ class PTPError(Exception):
 
 
 class ReportNotFoundError(PTPError):
-    """:mod:`ptp` error raised when the report file(s) was not found."""
+    """:mod:`ptp` error when the report file(s) was not found."""
     pass
 
 
 class NotSupportedToolError(PTPError):
-    """:mod:`ptp` error raised when the tool is not supported"""
+    """:mod:`ptp` error when the tool is not supported."""
     pass
 
 
 class NotSupportedVersionError(PTPError):
-    """:mod:`ptp` error raised when the version of the tool is not supported"""
+    """:mod:`ptp` error when the version of the tool is not supported."""
     pass

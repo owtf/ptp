@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for the tool DirBuster.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool DirBuster.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -39,7 +40,7 @@ class DirbusterParser(LineParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='DirBuster-Report*'):
-        """Check if it is a supported DirBuster report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

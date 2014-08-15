@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for Skipfish.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool Skipfish.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -84,7 +85,7 @@ class SkipfishJSParser(AbstractParser):
 
     @classmethod
     def is_mine(cls, pathname):
-        """Check if it is a supported Skipfish report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
 

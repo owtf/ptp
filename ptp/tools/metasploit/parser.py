@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for Metasploit.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool Metasploit.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -29,7 +30,7 @@ class MetasploitParser(FileParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.txt', plugin=''):
-        """Check if it is a supported Metasploit report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

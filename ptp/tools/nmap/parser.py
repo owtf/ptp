@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for the tool Nmap.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool Nmap.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -29,7 +30,7 @@ class NmapXMLParser(XMLParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml'):
-        """Check if it is a supported Nmap report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.

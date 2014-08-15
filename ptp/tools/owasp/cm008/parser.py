@@ -1,6 +1,7 @@
 """
 
-:synopsis: Specialized Parser classes for OWASP-CM-008.
+:synopsis: Specialized :class:`libptp.parser.AbstractParser` classes for the
+    tool OWASP-CM-008.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -29,7 +30,7 @@ class OWASPCM008Parser(LineParser):
 
     @classmethod
     def is_mine(cls, pathname, filename='*.txt'):
-        """Check if it is a supported OWASP-CM-008 report.
+        """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
