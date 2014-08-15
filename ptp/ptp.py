@@ -49,8 +49,11 @@ class PTP(object):
             has generated the target report.
 
         """
+        #: :class:`str` -- Name of the tool that generated the report.
         self.tool_name = tool_name
+        #: :class:`libptp.AbstractParser` -- Parser used on the report.
         self.parser = None
+        #: :class:`list` -- Vulnerabilities that are listed in the report.
         self.vulns = []
         if args or kwargs:
             self._init_parser(*args, **kwargs)
