@@ -1,17 +1,38 @@
-# PTP
+# What is PTP?
 
-Pentester's tools parser provides an unified way to retrieve the information
-from all (final goal) automated pentesting tools.
+The primary goal of ptp (Pentester's Tools Parser) is to enhance [OWASP - OWTF
+project](https://www.owasp.org/index.php/OWASP_OWTFA) in order to provide an
+automated ranking for each plugin. This will allow the user to focus attention
+on the most likely weak areas of a web application or network first, which will
+be valuable to efficiently use the remaining time in a penetration assessment.
 
-# General
+Instead of evaluating every plugins run by OWASP - OWTF and defining the
+rankings for each of them, thanks to `ptp`, the user will be able to focus
+on the ones that have been ranked with the highest risks. The user is then able
+to confirm or override the automated rankings since we estimate that she/he is
+the only one that can accurately detect the false positives.
 
-This standalone library is created in order to be used by
-[OWTF](https://github.com/owtf) when it will try to retrieve the automated
-rankings already provided by some pentesting tools.
+When developing the automated ranking system, `ptp`'s main goal was joined
+with a secondary one.
 
-# Features
+Apart from its main feature which is **ranking the results from security tools
+reports**, it also provides an **unified way to reuse these reports directly in
+your python code**, without having to deal with complex parsing.
 
-+ Auto-detection of the tool that generated the report.
+# Installation
+
+
+The first step is to clone the repository of the project:
+
+```bash
+$ git clone https://github.com/owtf/ptp.git
+```
+
+Then the script `setup.py` must be run:
+
+```bash
+    $ ./setup.py install
+```
 
 # Usage
 
@@ -26,35 +47,21 @@ if __name__ == '__main__':
     print('Highest severity:', ptp.get_highest_ranking())
 ```
 
+# Documentation
+
+The ptp's documentation is available online at the following address:
+[http://owtf.github.io/ptp/](http://owtf.github.io/ptp/).
+
+It explained how to use the library and even how to contribute. Plus it
+contains the technical documentation of the project.
+
 # Current support
 
 + arachni (0.4.6) (XML report)
-    + Metadata
-    + Rankings
 + dirbuster (1.0-RC1)
-    + Rankings
 + metasploit
-    + Scanner modules
-        + Rankings
-    + DoS modules
-        + Rankings
-    + Exploit modules
-        + Rankings
-+ nmap (XML report)
-    + Metadata
 + owasp
-    + OWASP-CM-008
-        + Rankings
 + robots.txt
-    + Rankings
 + skipfish (2.10b)
-    + Metadata
-    + Rankings
 + w3af (1.6.0.2, 1.6.0.3) (XML report)
-    + Metadata
-    + Rankings
 + wapiti (2.2.1, 2.3.0) (XML report)
-    + Metadata
-    + Rankings
-    + Names
-    + Descriptions
