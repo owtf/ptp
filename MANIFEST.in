@@ -1,0 +1,1 @@
+recursive-include ptp/tests *.txt *.xml *.js
