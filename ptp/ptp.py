@@ -55,6 +55,8 @@ class PTP(object):
         self.parser = None
         #: :class:`list` -- Vulnerabilities that are listed in the report.
         self.vulns = []
+        #: :class:`dict` -- Metadata from the report.
+        self.metadata = {}
         if args or kwargs:
             self._init_parser(*args, **kwargs)
 
