@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Metasploit &mdash; ptp 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.1.0 documentation" href="../index.html" />
+    <link rel="next" title="Nmap" href="nmap.html" />
+    <link rel="prev" title="DirBuster" href="dirbuster.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nmap.html" title="Nmap"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dirbuster.html" title="DirBuster"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="metasploit">
+<h1>Metasploit<a class="headerlink" href="#metasploit" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since Metasploit does not force the users to follow a specific syntax when
+writing a module, <tt class="xref py py-class docutils literal"><span class="pre">PTP</span></tt> needs to know which <tt class="docutils literal"><span class="pre">plugin</span></tt> has
+generated the report in order to find the right signature.</p>
+</div>
+<div class="section" id="module-tools.metasploit.parser">
+<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-tools.metasploit.parser" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Parser classes for Metasploit.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="tools.metasploit.parser.MetasploitParser">
+<em class="property">class </em><tt class="descclassname">tools.metasploit.parser.</tt><tt class="descname">MetasploitParser</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../_modules/tools/metasploit/parser.html#MetasploitParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metasploit specialized parser.</p>
+<dl class="attribute">
+<dt id="tools.metasploit.parser.MetasploitParser.__tool__">
+<tt class="descname">__tool__</tt><em class="property"> = 'metasploit'</em><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.metasploit.parser.MetasploitParser.__plugin__">
+<tt class="descname">__plugin__</tt><em class="property"> = ''</em><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser.__plugin__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.metasploit.parser.MetasploitParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../_modules/tools/metasploit/parser.html#MetasploitParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize MetasploitParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+<li><strong>plugin</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the plugin that generated the report.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="tools.metasploit.parser.MetasploitParser.is_mine">
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.txt'</em>, <em>plugin=''</em><big>)</big><a class="reference internal" href="../_modules/tools/metasploit/parser.html#MetasploitParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is a supported Metasploit report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+<li><strong>plugin</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the plugin that generated the report.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.metasploit.parser.MetasploitParser.parse_metadata">
+<tt class="descname">parse_metadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/tools/metasploit/parser.html#MetasploitParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The metadata of the report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.metasploit.parser.MetasploitParser.parse_report">
+<tt class="descname">parse_report</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/tools/metasploit/parser.html#MetasploitParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.metasploit.parser.MetasploitParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.metasploit.signatures">
+<span id="signatures"></span><h2>Signatures<a class="headerlink" href="#module-tools.metasploit.signatures" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Metasploit does not provide ranking for the vulnerabilities it has
+found. This file tries to define a ranking for every Metasploit&#8217;s modules
+discoveries it might find.</td>
+</tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="tools.metasploit.signatures.SIGNATURES">
+<tt class="descclassname">tools.metasploit.signatures.</tt><tt class="descname">SIGNATURES</tt><em class="property"> = {'exploit/unix/webapp/oracle_vm_agent_utl': {'Our request was accepted!': 4}, 'exploit/unix/misc/zabbix_agent_exec': {'The zabbix agent should have executed our command.': 4}, 'exploit/solaris/lpd/sendmail_exec': {'Uploaded': 4}, 'exploit/windows/smtp/ypops_overflow1': {'Vulnerable SMTP server': 4}, 'exploit/unix/webapp/twiki_search': {'Successfully sent exploit request': 4}, 'exploit/unix/http/contentkeeperweb_mimencode': {'Privilege escalation appears to have worked!': 4}, 'exploit/solaris/sunrpc/sadmind_exec': {'exploit did not give us an error, this is good...': 4}, 'exploit/linux/samba/lsa_transnames_heap': {'Server did not respond, this is expected': 4, 'Server disconnected, this is expected': 4}, 'exploit/windows/antivirus/ams_xfr': {'Got data, execution successful!': 4}, 'auxiliary/scanner/mssql/mssql_ping': {'SQL Server information for': 1}, 'auxiliary/scanner/vnc/vnc_none_auth': {'free access': 4}, 'exploit/multi/http/jboss_deploymentfilerepository': {'Successfully called': 4}, 'exploit/unix/webapp/nagios3_statuswml_ping': {'Session created, enjoy!': 4}, 'exploit/windows/ssh/freesshd_key_exchange': {'Trying target': 4}, 'exploit/unix/ftp/vsftpd_234_backdoor': {'Backdoor service has been spawned, handling...': 4}, 'exploit/unix/webapp/php_vbulletin_template': {'Command returned': 3, 'exploit successful': 3}, 'exploit/windows/mssql/lyris_listmanager_weak_pass': {'Successfully authenticated to': 4}, 'exploit/multi/http/sit_file_upload': {'Successfully': 4}, 'exploit/unix/webapp/awstats_migrate_exec': {'Command output from the server:': 4}, 'exploit/unix/webapp/awstats_configdir_exec': {'Command output from the server:': 4}, 'exploit/linux/games/ut2004_secure': {'This system appears to be exploitable': 4}, 'auxiliary/scanner/x11/open_x11': {'Open X Server': 4}, 'auxiliary/scanner/emc/alphastor_devicemanager': {'is running the EMC AlphaStor Device Manager': 1}, 'auxiliary/scanner/snmp/snmp_enumusers': {'Found Users': 2}, 'auxiliary/scanner/dcerpc/hidden': {'HIDDEN: UUID': 1}, 'auxiliary/scanner/mssql/mssql_login': {'MSSQL - successful login': 4, 'successful logged in as': 4}, 'auxiliary/scanner/snmp/snmp_enum': {', Connected.': 1}, 'exploit/windows/iis/ms03_007_ntdll_webdav': {'The server stopped accepting requests': 4}, 'exploit/unix/webapp/openview_connectednodes_exec': {'Command output from the server:': 4}, 'exploit/multi/misc/openview_omniback_exec': {'The remote service is exploitable': 4}, 'auxiliary/dos/http/3com_superstack_switch': {'DoS packet successful.': 4}, 'exploit/windows/iis/ms01_026_dbldecode': {'Command output': 4}, 'auxiliary/scanner/smb/pipe_auditor': {'- Pipes:': 1}, 'exploit/multi/http/jboss_maindeployer': {'Successfully triggered payload at': 4}, 'exploit/windows/ssh/freeftpd_key_exchange': {'Trying target': 4}, 'auxiliary/dos/http/apache_range_dos': {'Found Byte-Range Header DOS at': 4}, 'auxiliary/scanner/smtp/smtp_version': {'SMTP': 1}, 'auxiliary/scanner/smb/smb_enumusers': {', ': 1}, 'auxiliary/scanner/dcerpc/endpoint_mapper': {'Endpoint Mapper': 1}, 'exploit/unix/webapp/barracuda_img_exec': {'Command output from the server:': 4}, 'exploit/unix/webapp/cacti_graphimage_exec': {'Command output from the server:': 4}, 'exploit/unix/webapp/php_xmlrpc_eval': {'Command returned': 3, 'exploit successful': 3}, 'exploit/windows/postgres/postgres_payload': {'Authentication successful.': 4}, 'auxiliary/dos/samba/lsa_addprivs_heap': {'Server did not respond, this is expected': 4, 'Server disconnected, this is expected': 4}, 'exploit/linux/http/piranha_passwd_exec': {'Command successfully executed (according to the server).': 4}, 'auxiliary/scanner/mssql/mssql_schemadump': {'Microsoft SQL Server Schema': 4}, 'exploit/unix/webapp/sphpblog_file_upload': {'Successfully': 4}, 'exploit/unix/smtp/exim4_string_format': {'Perl binary detected, attempt to escalate...': 4, 'Payload result:': 4}, 'exploit/multi/http/glassfish_deployer': {'GlassFish - SUCCESSFUL login for': 4}, 'auxiliary/dos/windows/smb/ms05_047_pnp': {'Server did not respond, this is expected': 4, 'Server disconnected, this is expected': 4, 'Connection reset by peer (possible success)': 4}, 'exploit/dialup/multi/login/manyargs': {'Success!!!': 4}, 'auxiliary/scanner/snmp/aix_version': {'IBM AIX Version': 1}, 'exploit/windows/games/ut2004_secure': {'This system appears to be running UT2003': 3, 'This system appears to be exploitable': 4}, 'auxiliary/scanner/smb/smb_version': {'is running': 1}, 'exploit/unix/webapp/tikiwiki_jhot_exec': {'Command output from the server :': 4, 'Successfully': 4}, 'auxiliary/dos/windows/http/ms10_065_ii6_asp_dos': {'IIS should now be unavailable': 4}, 'exploit/unix/webapp/twiki_history': {'Successfully sent exploit request': 4}, 'exploit/unix/webapp/google_proxystylesheet_exec': {'This system appears to be vulnerable': 4}, 'auxiliary/scanner/ftp/anonymous': {'Anonymous READ ': 2, 'Anonymous READ/WRITE ': 4}, 'auxiliary/scanner/ftp/ftp_login': {'has READ/WRITE access': 4, 'has READ access': 2}, 'exploit/multi/http/freenas_exec_raw': {'Triggering payload...': 4}, 'auxiliary/dos/windows/games/kaillera': {'Target is down': 4}, 'auxiliary/dos/solaris/lpd/cascade_delete': {'Successfully deleted': 4}, 'auxiliary/dos/samba/lsa_transnames_heap': {'Server did not respond, this is expected': 4, 'Server disconnected, this is expected': 4}, 'auxiliary/scanner/smb/smb_login': {'SUCCESSFUL LOGIN': 4}, 'exploit/multi/php/php_unserialize_zval_cookie': {'The server runs a vulnerable version of PHP': 4}, 'exploit/unix/webapp/coppermine_piceditor': {&quot;Successfully POST'd exploit data&quot;: 4}, 'exploit/multi/ftp/wuftpd_site_exec_format': {'Your payload should have executed now': 4}, 'auxiliary/dos/windows/smb/ms09_050_smb2_negotiate_pidhigh': {'The target system has likely crashed': 4}, 'exploit/windows/misc/bakbone_netvault_heap': {'Detected NetVault Build': 4}, 'auxiliary/scanner/snmp/snmp_login': {'provides READ-WRITE access': 4, 'provides READ-ONLY access': 2, 'community string': 2}, 'auxiliary/scanner/mssql/mssql_hashdump': {'Saving': 4}, 'auxiliary/scanner/ftp/ftp_version': {'FTP Banner': 1}, 'exploit/multi/misc/java_rmi_server': {'may be exploitable...': 4}, 'auxiliary/dos/windows/smb/ms09_050_smb2_session_logoff': {'No response. The target system has probably crashed.': 4}, 'exploit/unix/webapp/openx_banner_edit': {'Successfully deleted banner': 3}, 'exploit/unix/webapp/awstatstotals_multisort': {'Command output from the server:': 4}, 'auxiliary/scanner/emc/alphastor_librarymanager': {'is running the EMC AlphaStor Library Manager': 1}, 'auxiliary/dos/windows/ftp/iis_list_exhaustion': {'Success! Service is down': 4}, 'exploit/windows/license/calicserv_getconfig': {'CA License Server reports OS': 4}, 'auxiliary/scanner/smtp/smtp_enum': {'Users found': 2, 'Found user': 2}, 'auxiliary/dos/smtp/sendmail_prescan': {'target vulnerable.': 4}, 'exploit/unix/webapp/tikiwiki_graph_formula_exec': {'TikiWiki database informations': 4}, 'auxiliary/scanner/vnc/vnc_login': {'VNC server password': 4}, 'auxiliary/dos/http/apache_tomcat_transfer_encoding': {'DoS packet successful.': 4}}</em><a class="headerlink" href="#tools.metasploit.signatures.SIGNATURES" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> of the modules with their rank.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Metasploit</a><ul>
+<li><a class="reference internal" href="#module-tools.metasploit.parser">Parser</a></li>
+<li><a class="reference internal" href="#module-tools.metasploit.signatures">Signatures</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dirbuster.html"
+                        title="previous chapter">DirBuster</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nmap.html"
+                        title="next chapter">Nmap</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tools/metasploit.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nmap.html" title="Nmap"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dirbuster.html" title="DirBuster"
+             >previous</a> |</li>
+        <li><a href="../index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

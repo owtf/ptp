@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome! &mdash; ptp 0.5.0 documentation</title>
+    <title>Welcome! &mdash; ptp 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.0',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="ptp 0.5.0 documentation" href="index.html" />
+    <link rel="top" title="ptp 0.1.0 documentation" href="index.html" />
     <link rel="next" title="Write our own support" href="contribute.html" />
     <link rel="prev" title="Getting started" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Getting started"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,32 +54,67 @@
             
   <div class="section" id="welcome">
 <h1>Welcome!<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
-<p>Here we present the <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> (<em>Pentesters&#8217; Tools Parser</em>) project.</p>
-<p>Before coding anything, let us start with some brief explanation about the
-project, its context and its aims.</p>
+<p>Here we present the <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> (<em>Pentesters&#8217; Tools Parser</em>) project and answer
+the <em>What is it? What does it do? Why does it do it? How does it do it?</em>
+questions.</p>
 <p>The project has been developed during the <a class="reference external" href="https://www.google-melange.com/gsoc/homepage/google/gsoc2014">Google Summer of Code 2014, 10th
 edition</a>, in
 order to create an <a class="reference external" href="https://www.owasp.org/index.php/GSoC2014_Ideas#OWASP_OWTF_-_Automated_Vulnerability_Severity_Rankings">automated ranking system</a>
 for the <a class="reference external" href="https://www.owasp.org/index.php/OWASP_OWTF">OWASP - OWTF project</a>.</p>
-<p>But <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> tries to go even beyond the original idea.</p>
-<p>Apart from its main feature which is <strong>ranking the results from any security
-tools reports</strong>, it also provides an <strong>unified way to reuse these reports
-directly in your python code</strong>, without having to deal with complexe parsing.</p>
+<div class="section" id="owasp-owtf-in-a-word">
+<h2>OWASP - OWTF in a word<a class="headerlink" href="#owasp-owtf-in-a-word" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.owasp.org/index.php/OWASP_OWTF">OWASP - OWTF project</a>
+provides an efficient approach to combine the power of automation with the
+out-of-the-box thinking that only the user can provide.</p>
+<p>It gathers a complete set of plugins and merges their results into an
+interactive report. The user has then the possibility to add notes, to change
+details and to add media like screenshots in order to have a complete report.</p>
+</div>
+<div class="section" id="the-goals-aimed-by-ptp">
+<h2>The goals aimed by <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a><a class="headerlink" href="#the-goals-aimed-by-ptp" title="Permalink to this headline">¶</a></h2>
+<p>The primary goal of <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> is to enhance OWASP - OWTF in order to provide
+an automated ranking for each plugin. This will allow the user to focus
+attention on the most likely weak areas of a web application or network first,
+which will be valuable to efficiently use the remaining time in a penetration
+assessment.</p>
+<p>Instead of evaluating every plugins run by OWASP - OWTF and defining the
+rankings for each of them, thanks to <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>, the user will be able to focus
+on the ones that have been ranked with the highest risks. The user is then able
+to confirm or override the automated rankings since we estimate that she/he is
+the only one that can accurately detect the false positives.</p>
+<p>When developing the automated ranking system, <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>&#8216;s main goal was joined
+with a secondary one.  Apart from its main feature which is <strong>ranking the
+results from security tools reports</strong>, it also provides an <strong>unified way to
+reuse these reports directly in your python code</strong>, without having to deal with
+complex parsing.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When we say <strong>any</strong>, we mean that it is our ultimate goal. For now,
-<a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> is in its early development phase and <em>only</em> supports a small
-amount of tools.</p>
+<p class="last">The long-term objective for <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> is to support all security tools and
+tests. But <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> is in its early development phase and only supports
+the main ones for now.</p>
+</div>
 </div>
 </div>
 <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> provides the <tt class="file docutils literal"><span class="pre">ptp.pip</span></tt> file which contains the required
-dependencies of the project.</p>
-<p>In order to properly configure <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>, the following command should be run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install -r ptp.pip
+<p>In order to properly install <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a>, the following command should be run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python setup.py install
 </pre></div>
 </div>
+</div>
+<div class="section" id="unit-tests">
+<h1>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> module can be tested by running the <cite>run_tests.py</cite> python script
+under the directory <cite>ptp/</cite>.</p>
+<p>This script will run every existing unit tests that have been created for the
+module. If an error occurs, the string <cite>FAIL</cite> will be outputted in the
+terminal.</p>
+<p>It is possible to specify which unit test to run by specifying a parameter like
+below:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python run_tests.py arachni
+</pre></div>
+</div>
+<p>Using the command above, only the unit tests for Arachni will be run.</p>
 </div>
 <div class="section" id="basic-usages">
 <h1>Basic usages<a class="headerlink" href="#basic-usages" title="Permalink to this headline">¶</a></h1>
@@ -171,7 +206,7 @@ since it will not have to lookup for the right parser.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The current support to Nmap does not provide any ranking yet.
-Refer to the <a class="reference internal" href="libptp/tools/nmap.html"><em>Nmap</em></a> section for more information.</p>
+Refer to the <a class="reference internal" href="tools/nmap.html"><em>Nmap</em></a> section for more information.</p>
 </div>
 <p>Example:</p>
 <div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">myptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">(</span><span class="s">&#39;skipfish&#39;</span><span class="p">)</span>
@@ -190,8 +225,13 @@ Refer to the <a class="reference internal" href="libptp/tools/nmap.html"><em>Nma
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome!</a></li>
+<li><a class="reference internal" href="#">Welcome!</a><ul>
+<li><a class="reference internal" href="#owasp-owtf-in-a-word">OWASP - OWTF in a word</a></li>
+<li><a class="reference internal" href="#the-goals-aimed-by-ptp">The goals aimed by <tt class="docutils literal"><span class="pre">ptp</span></tt></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#unit-tests">Unit tests</a></li>
 <li><a class="reference internal" href="#basic-usages">Basic usages</a><ul>
 <li><a class="reference internal" href="#auto-detection-mode">Auto-detection mode</a></li>
 <li><a class="reference internal" href="#explicit-mode">Explicit mode</a></li>
@@ -242,7 +282,7 @@ Refer to the <a class="reference internal" href="libptp/tools/nmap.html"><em>Nma
         <li class="right" >
           <a href="index.html" title="Getting started"
              >previous</a> |</li>
-        <li><a href="index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

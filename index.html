@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting started &mdash; ptp 0.5.0 documentation</title>
+    <title>Getting started &mdash; ptp 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.0',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="ptp 0.5.0 documentation" href="#" />
+    <link rel="top" title="ptp 0.1.0 documentation" href="#" />
     <link rel="next" title="Welcome!" href="gettingstarted.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="gettingstarted.html" title="Welcome!"
              accesskey="N">next</a> |</li>
-        <li><a href="#">ptp 0.5.0 documentation</a> &raquo;</li> 
+        <li><a href="#">ptp 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,8 +52,13 @@
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Welcome!</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#owasp-owtf-in-a-word">OWASP - OWTF in a word</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#the-goals-aimed-by-ptp">The goals aimed by <tt class="docutils literal"><span class="pre">ptp</span></tt></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#unit-tests">Unit tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#basic-usages">Basic usages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#auto-detection-mode">Auto-detection mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#explicit-mode">Explicit mode</a></li>
@@ -91,44 +96,44 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="libptp/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libptp/constants.html">Constants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/arachni.html">Arachni</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/arachni.html#module-libptp.tools.arachni.parser">Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/arachni.html">Arachni</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/arachni.html#module-tools.arachni.parser">Parser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/dirbuster.html">DirBuster</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/dirbuster.html#module-libptp.tools.dirbuster.parser">Parser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/dirbuster.html#module-libptp.tools.dirbuster.signatures">Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/dirbuster.html">DirBuster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/dirbuster.html#module-tools.dirbuster.parser">Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/dirbuster.html#module-tools.dirbuster.signatures">Signatures</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/metasploit.html">Metasploit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/metasploit.html#module-libptp.tools.metasploit.parser">Parser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/metasploit.html#module-libptp.tools.metasploit.signatures">Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/metasploit.html">Metasploit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/metasploit.html#module-tools.metasploit.parser">Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/metasploit.html#module-tools.metasploit.signatures">Signatures</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/nmap.html">Nmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/nmap.html#module-libptp.tools.nmap.parser">Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/nmap.html">Nmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/nmap.html#module-tools.nmap.parser">Parser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/owasp.html">OWASP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/owasp.html#cm-008">CM-008</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/owasp.html">OWASP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/owasp.html#cm-008">CM-008</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/robots.html">Robots.txt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/robots.html#module-libptp.tools.robots.parser">Parser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/robots.html#module-libptp.tools.robots.signatures">Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/robots.html">Robots.txt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/robots.html#module-tools.robots.parser">Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/robots.html#module-tools.robots.signatures">Signatures</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/skipfish.html">Skipfish</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/skipfish.html#module-libptp.tools.skipfish.parser">Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/skipfish.html">Skipfish</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/skipfish.html#module-tools.skipfish.parser">Parser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/w3af.html">W3AF</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/w3af.html#module-libptp.tools.w3af.parser">Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/w3af.html">W3AF</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/w3af.html#module-tools.w3af.parser">Parser</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="libptp/tools/wapiti.html">Wapiti</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/wapiti.html#module-libptp.tools.wapiti.parser">Parser</a></li>
-<li class="toctree-l2"><a class="reference internal" href="libptp/tools/wapiti.html#module-libptp.tools.wapiti.signatures">Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/wapiti.html">Wapiti</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/wapiti.html#module-tools.wapiti.parser">Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/wapiti.html#module-tools.wapiti.signatures">Signatures</a></li>
 </ul>
 </li>
 </ul>
@@ -194,7 +199,7 @@
         <li class="right" >
           <a href="gettingstarted.html" title="Welcome!"
              >next</a> |</li>
-        <li><a href="#">ptp 0.5.0 documentation</a> &raquo;</li> 
+        <li><a href="#">ptp 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

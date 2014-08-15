@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Write our own support &mdash; ptp 0.5.0 documentation</title>
+    <title>Write our own support &mdash; ptp 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.0',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="ptp 0.5.0 documentation" href="index.html" />
+    <link rel="top" title="ptp 0.1.0 documentation" href="index.html" />
     <link rel="next" title="PTP" href="ptp.html" />
     <link rel="prev" title="Welcome!" href="gettingstarted.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="gettingstarted.html" title="Welcome!"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -59,9 +59,9 @@
 <p>First of all, we have to write a parser for our target tool. In our case, let
 us assume that the tool is named <em>MyTool</em> and that we want to parse its XML
 formatted reports.</p>
-<p>The parser source code must be saved into the <cite>libptp/tools/&lt;tool name&gt;/</cite> and
+<p>The parser source code must be saved into the <cite>tools/&lt;tool name&gt;/</cite> and
 be named <cite>parser.py</cite>. Therefore, the parser for <em>MyTool</em> will be saved under
-the name <cite>libptp/tools/mytool/parser.py</cite>.</p>
+the name <cite>tools/mytool/parser.py</cite>.</p>
 </div>
 <div class="section" id="myxmlparser-class">
 <h1>MyXMLParser class<a class="headerlink" href="#myxmlparser-class" title="Permalink to this headline">¶</a></h1>
@@ -71,7 +71,7 @@ contained in a tool report, it needs a specialized parser.</p>
 support <em>MyTool</em>&#8216;s XML reports, <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> seems to be the best
 class from which to inherit.</p>
 <p>The <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> already defines
-<tt class="xref py py-meth docutils literal"><span class="pre">libptpt.parser.XMLParser.handle_file()</span></tt> for us. This will initialize the
+<a class="reference internal" href="libptp/parser.html#libptp.parser.XMLParser.handle_file" title="libptp.parser.XMLParser.handle_file"><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.XMLParser.handle_file()</span></tt></a> for us. This will initialize the
 <tt class="xref py py-attr docutils literal"><span class="pre">MyXMLParser.stream</span></tt> instance variable with a handle on the root node of
 the file.</p>
 <div class="section" id="the-skeleton">
@@ -231,7 +231,7 @@ we only have one more thing to do in order to finish.</p>
 <cite>MyXMLParser</cite> inside like shown below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Omitted imports</span>
 
-<span class="kn">from</span> <span class="nn">libptp.tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyXMLParser</span>
+<span class="kn">from</span> <span class="nn">tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyXMLParser</span>
 
 <span class="k">class</span> <span class="nc">PTP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
@@ -314,7 +314,7 @@ integrated that into <a class="reference internal" href="ptp.html#module-ptp" ti
         <li class="right" >
           <a href="gettingstarted.html" title="Welcome!"
              >previous</a> |</li>
-        <li><a href="index.html">ptp 0.5.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

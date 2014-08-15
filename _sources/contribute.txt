@@ -9,9 +9,9 @@ First of all, we have to write a parser for our target tool. In our case, let
 us assume that the tool is named *MyTool* and that we want to parse its XML
 formatted reports.
 
-The parser source code must be saved into the `libptp/tools/<tool name>/` and
+The parser source code must be saved into the `tools/<tool name>/` and
 be named `parser.py`. Therefore, the parser for *MyTool* will be saved under
-the name `libptp/tools/mytool/parser.py`.
+the name `tools/mytool/parser.py`.
 
 =================
 MyXMLParser class
@@ -25,7 +25,7 @@ support *MyTool*'s XML reports, :ref:`xmlparser-label` seems to be the best
 class from which to inherit.
 
 The :ref:`xmlparser-label` already defines
-:meth:`libptpt.parser.XMLParser.handle_file` for us. This will initialize the
+:meth:`libptp.parser.XMLParser.handle_file` for us. This will initialize the
 :attr:`MyXMLParser.stream` instance variable with a handle on the root node of
 the file.
 
@@ -203,7 +203,7 @@ We need to update the :attr:`ptp.supported` list attribute by inserting our
 
     # Omitted imports
 
-    from libptp.tools.mytool.parser import MyXMLParser
+    from tools.mytool.parser import MyXMLParser
 
     class PTP(object):
 

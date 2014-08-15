@@ -29,15 +29,15 @@ Documentation
     libptp/parser
     libptp/exceptions
     libptp/constants
-    libptp/tools/arachni
-    libptp/tools/dirbuster
-    libptp/tools/metasploit
-    libptp/tools/nmap
-    libptp/tools/owasp
-    libptp/tools/robots
-    libptp/tools/skipfish
-    libptp/tools/w3af
-    libptp/tools/wapiti
+    tools/arachni
+    tools/dirbuster
+    tools/metasploit
+    tools/nmap
+    tools/owasp
+    tools/robots
+    tools/skipfish
+    tools/w3af
+    tools/wapiti
 
 Indices and tables
 ##################

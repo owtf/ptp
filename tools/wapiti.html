@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wapiti &mdash; ptp 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ptp 0.1.0 documentation" href="../index.html" />
+    <link rel="prev" title="W3AF" href="w3af.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="w3af.html" title="W3AF"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wapiti">
+<h1>Wapiti<a class="headerlink" href="#wapiti" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tools.wapiti.parser">
+<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-tools.wapiti.parser" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized Parser classes for Wapiti.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="tools.wapiti.parser.WapitiXMLParser">
+<em class="property">class </em><tt class="descclassname">tools.wapiti.parser.</tt><tt class="descname">WapitiXMLParser</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#WapitiXMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wapiti XML specialized parser.</p>
+<dl class="attribute">
+<dt id="tools.wapiti.parser.WapitiXMLParser.__tool__">
+<tt class="descname">__tool__</tt><em class="property"> = 'wapiti'</em><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.wapiti.parser.WapitiXMLParser.__format__">
+<tt class="descname">__format__</tt><em class="property"> = 'xml'</em><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.__format__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.wapiti.parser.WapitiXMLParser.__version__">
+<tt class="descname">__version__</tt><em class="property"> = ['2.3.0']</em><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.__version__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.wapiti.parser.WapitiXMLParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#WapitiXMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize WapitiXMLParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="tools.wapiti.parser.WapitiXMLParser.is_mine">
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#WapitiXMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is a supported Wapiti report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.wapiti.parser.WapitiXMLParser.parse_metadata">
+<tt class="descname">parse_metadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#WapitiXMLParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">NotSupportedVersionError</span></tt> &#8211; if it does not support
+the version of this report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metadata of the report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.wapiti.parser.WapitiXMLParser.parse_report">
+<tt class="descname">parse_report</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#WapitiXMLParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.WapitiXMLParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser">
+<em class="property">class </em><tt class="descclassname">tools.wapiti.parser.</tt><tt class="descname">Wapiti221XMLParser</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#Wapiti221XMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wapiti XML specialized parser.</p>
+<dl class="attribute">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.__tool__">
+<tt class="descname">__tool__</tt><em class="property"> = 'wapiti'</em><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> &#8211; Name of the tool.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.__format__">
+<tt class="descname">__format__</tt><em class="property"> = 'xml'</em><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> &#8211; Format of Wapiti reports it supports.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.__version__">
+<tt class="descname">__version__</tt><em class="property"> = ['2.2.1']</em><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.__version__" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt> &#8211; Wapiti versions it supports.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#Wapiti221XMLParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Wapiti221XMLParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.is_mine">
+<em class="property">classmethod </em><tt class="descname">is_mine</tt><big>(</big><em>pathname</em>, <em>filename='*.xml'</em><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#Wapiti221XMLParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is a supported Wapiti report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.parse_metadata">
+<tt class="descname">parse_metadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#Wapiti221XMLParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">NotSupportedVersionError</span></tt> &#8211; if it does not support
+the version of this report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metadata of the report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.wapiti.parser.Wapiti221XMLParser.parse_report">
+<tt class="descname">parse_report</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/tools/wapiti/parser.html#Wapiti221XMLParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.wapiti.parser.Wapiti221XMLParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.wapiti.signatures">
+<span id="signatures"></span><h2>Signatures<a class="headerlink" href="#module-tools.wapiti.signatures" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Wapiti does not provide ranking for the vulnerabilities it has
+found. This file tries to define a ranking for every vulnerability Wapiti
+might find.</td>
+</tr>
+</tbody>
+</table>
+<dl class="data">
+<dt id="tools.wapiti.signatures.SIGNATURES">
+<tt class="descclassname">tools.wapiti.signatures.</tt><tt class="descname">SIGNATURES</tt><em class="property"> = {'Resource consumption': 2, 'Internal Server Error': 1, 'Command execution': 4, 'Htaccess Bypass': 3, 'SQL Injection': 4, 'Blind SQL Injection': 4, 'Potentially dangerous file': 1, 'Cross Site Scripting': 3, 'Backup file': 1, 'File Handling': 2, 'CRLF Injection': 3, 'CRLF': 3}</em><a class="headerlink" href="#tools.wapiti.signatures.SIGNATURES" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> of the categories with their rank.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wapiti</a><ul>
+<li><a class="reference internal" href="#module-tools.wapiti.parser">Parser</a></li>
+<li><a class="reference internal" href="#module-tools.wapiti.signatures">Signatures</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="w3af.html"
+                        title="previous chapter">W3AF</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tools/wapiti.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="w3af.html" title="W3AF"
+             >previous</a> |</li>
+        <li><a href="../index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
