@@ -79,7 +79,7 @@ class PTP(object):
                 pass
             except NotSupportedVersionError:
                 pass
-        if self.parser:
+        if not hasattr(self.parser, 'stream'):  # Check if instanciated.
             self.parser = self.parser(*args, **kwargs)
 
     def parse(self, *args, **kwargs):
