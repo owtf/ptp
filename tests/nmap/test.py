@@ -13,22 +13,22 @@ __testname__ = 'nmap'
 def run():
     ptp = PTP('nmap')
     print('\ttest parse():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/nmap/6.46'))
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
     ptp = PTP()
     print('\ttest is_mine():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/nmap/6.46'))
         assert ptp.parser.__tool__ == 'nmap'
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)

@@ -102,7 +102,7 @@ def run():
         for output in outputs:
             ptp = PTP('metasploit')
             print('\t\ttest parse():', end=' ')
-            res = 'ok'
+            res = 'OK'
             try:
                 ptp.parse(
                     pathname=os.path.join(
@@ -113,14 +113,14 @@ def run():
                     plugin=plugin)
             except Exception:
                 print(traceback.format_exc())
-                res = 'ko'
+                res = 'FAIL'
             print(res)
 
             print('\t\ttest get_highest_ranking():', end=' ')
-            res = 'ok'
+            res = 'OK'
             try:
                 assert ptp.get_highest_ranking() == outputs[output]
             except Exception:
                 print(traceback.format_exc())
-                res = 'ko'
+                res = 'FAIL'
             print(res)

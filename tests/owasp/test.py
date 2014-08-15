@@ -29,7 +29,7 @@ def run():
         for output in outputs:
             ptp = PTP(test)
             print('\t\ttest parse():', end=' ')
-            res = 'ok'
+            res = 'OK'
             try:
                 ptp.parse(
                     pathname=os.path.join(
@@ -39,12 +39,12 @@ def run():
                     filename=output)
             except Exception:
                 print(traceback.format_exc())
-                res = 'ko'
+                res = 'FAIL'
             print(res)
 
             ptp = PTP()
             print('\t\ttest is_mine():', end=' ')
-            res = 'ok'
+            res = 'OK'
             try:
                 ptp.parse(
                     pathname=os.path.join(
@@ -55,14 +55,14 @@ def run():
                 assert ptp.parser.__tool__ == 'owasp-cm-008'
             except Exception:
                 print(traceback.format_exc())
-                res = 'ko'
+                res = 'FAIL'
             print(res)
 
             print('\t\ttest get_highest_ranking():', end=' ')
-            res = 'ok'
+            res = 'OK'
             try:
                 assert ptp.get_highest_ranking() == outputs[output]
             except Exception:
                 print(traceback.format_exc())
-                res = 'ko'
+                res = 'FAIL'
             print(res)

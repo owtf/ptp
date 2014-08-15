@@ -25,18 +25,18 @@ def run():
     for report, ranking in reports:
         ptp = PTP('dirbuster')
         print('\ttest parse():', end=' ')
-        res = 'ok'
+        res = 'OK'
         try:
             ptp.parse(
                 pathname=os.path.join(os.getcwd(), 'tests/dirbuster/1.0'),
                 filename=report)
         except Exception:
             print(traceback.format_exc())
-            res = 'ko'
+            res = 'FAIL'
         print(res)
         ptp = PTP()
         print('\ttest is_mine():', end=' ')
-        res = 'ok'
+        res = 'OK'
         try:
             ptp.parse(
                 pathname=os.path.join(os.getcwd(), 'tests/dirbuster/1.0'),
@@ -44,13 +44,13 @@ def run():
             assert ptp.parser.__tool__ == 'dirbuster'
         except Exception:
             print(traceback.format_exc())
-            res = 'ko'
+            res = 'FAIL'
         print(res)
         print('\ttest get_highest_ranking():', end=' ')
-        res = 'ok'
+        res = 'OK'
         try:
             assert ptp.get_highest_ranking() == ranking
         except Exception:
             print(traceback.format_exc())
-            res = 'ko'
+            res = 'FAIL'
         print(res)

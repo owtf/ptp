@@ -13,7 +13,7 @@ __testname__ = 'skipfish'
 def run():
     ptp = PTP('skipfish')
     print('\ttest parse():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         ptp.parse(
             pathname=os.path.join(
@@ -22,11 +22,11 @@ def run():
             )
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
     ptp = PTP()
     print('\ttest is_mine():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         ptp.parse(
             pathname=os.path.join(
@@ -36,19 +36,19 @@ def run():
         assert ptp.parser.__tool__ == 'skipfish'
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         assert ptp.get_highest_ranking() == HIGH
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
     ptp = PTP('skipfish')
     print('\ttest parse():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         ptp.parse(
             pathname=os.path.join(
@@ -57,11 +57,11 @@ def run():
             )
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
     ptp = PTP()
     print('\ttest is_mine():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         ptp.parse(
             pathname=os.path.join(
@@ -71,13 +71,13 @@ def run():
         assert ptp.parser.__tool__ == 'skipfish'
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
     print('\ttest get_highest_ranking():', end=' ')
-    res = 'ok'
+    res = 'OK'
     try:
         assert ptp.get_highest_ranking() == MEDIUM
     except Exception:
         print(traceback.format_exc())
-        res = 'ko'
+        res = 'FAIL'
     print(res)
