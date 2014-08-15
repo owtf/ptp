@@ -9,7 +9,7 @@
 from libptp.exceptions import NotSupportedVersionError
 from libptp.constants import UNKNOWN
 from libptp.parser import XMLParser
-from libptp.tools.nmap.signatures import SIGNATURES
+from tools.nmap.signatures import SIGNATURES
 
 
 class NmapXMLParser(XMLParser):

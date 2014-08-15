@@ -7,7 +7,7 @@
 """
 
 from libptp.parser import FileParser
-from libptp.tools.metasploit.signatures import SIGNATURES
+from tools.metasploit.signatures import SIGNATURES
 
 
 class MetasploitParser(FileParser):

@@ -11,7 +11,7 @@ Nmap
 Parser
 ******
 
-.. automodule:: libptp.tools.nmap.parser
+.. automodule:: tools.nmap.parser
 
 .. autoclass:: NmapXMLParser
     :members:

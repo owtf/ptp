@@ -8,7 +8,7 @@
 
 from libptp.constants import UNKNOWN
 from libptp.parser import LineParser
-from libptp.tools.robots.signatures import SIGNATURES
+from tools.robots.signatures import SIGNATURES
 
 
 class RobotsParser(LineParser):

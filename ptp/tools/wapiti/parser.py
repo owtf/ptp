@@ -11,7 +11,7 @@ from lxml.etree import LxmlError
 from libptp.exceptions import NotSupportedVersionError
 from libptp.constants import UNKNOWN
 from libptp.parser import XMLParser
-from libptp.tools.wapiti.signatures import SIGNATURES
+from tools.wapiti.signatures import SIGNATURES
 
 
 class WapitiXMLParser(XMLParser):

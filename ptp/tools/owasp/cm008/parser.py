@@ -10,7 +10,7 @@ import re
 
 from libptp.constants import UNKNOWN
 from libptp.parser import LineParser
-from libptp.tools.owasp.cm008.signatures import SIGNATURES
+from tools.owasp.cm008.signatures import SIGNATURES
 
 
 class OWASPCM008Parser(LineParser):

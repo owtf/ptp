@@ -1,12 +1,12 @@
-Arachni
-#######
+W3AF
+####
 
 Parser
 ******
 
-.. automodule:: libptp.tools.arachni.parser
+.. automodule:: tools.w3af.parser
 
-.. autoclass:: ArachniXMLParser
+.. autoclass:: W3AFXMLParser
     :members:
     :private-members:
     :special-members:

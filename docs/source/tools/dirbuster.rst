@@ -4,7 +4,7 @@ DirBuster
 Parser
 ******
 
-.. automodule:: libptp.tools.dirbuster.parser
+.. automodule:: tools.dirbuster.parser
 
 .. autoclass:: DirbusterParser
     :members:
@@ -18,5 +18,5 @@ Parser
 Signatures
 **********
 
-.. automodule:: libptp.tools.dirbuster.signatures
+.. automodule:: tools.dirbuster.signatures
     :members:

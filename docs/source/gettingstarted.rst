@@ -54,14 +54,31 @@ complex parsing.
 Installation
 ============
 
-:mod:`ptp` provides the :file:`ptp.pip` file which contains the required
-dependencies of the project.
-
-In order to properly configure :mod:`ptp`, the following command should be run:
+In order to properly install :mod:`ptp`, the following command should be run:
 
 .. code-block:: bash
 
-    $ pip install -r ptp.pip
+    $ python setup.py install
+
+==========
+Unit tests
+==========
+
+The :mod:`ptp` module can be tested by running the `run_tests.py` python script
+under the directory `ptp/`.
+
+This script will run every existing unit tests that have been created for the
+module. If an error occurs, the string `FAIL` will be outputted in the
+terminal.
+
+It is possible to specify which unit test to run by specifying a parameter like
+below:
+
+.. code-block:: bash
+
+    $ python run_tests.py arachni
+
+Using the command above, only the unit tests for Arachni will be run.
 
 ============
 Basic usages
@@ -174,7 +191,7 @@ The list of the supported tools can be found like below:
 .. warning::
 
     The current support to Nmap does not provide any ranking yet.
-    Refer to the :doc:`libptp/tools/nmap` section for more information.
+    Refer to the :doc:`tools/nmap` section for more information.
 
 Example:
 

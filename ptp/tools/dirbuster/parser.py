@@ -9,7 +9,7 @@
 import re
 
 from libptp.parser import LineParser
-from libptp.tools.dirbuster.signatures import DIRECTORIES, FILES
+from tools.dirbuster.signatures import DIRECTORIES, FILES
 
 
 class DirbusterParser(LineParser):

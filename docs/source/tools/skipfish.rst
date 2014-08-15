@@ -4,7 +4,7 @@ Skipfish
 Parser
 ******
 
-.. automodule:: libptp.tools.skipfish.parser
+.. automodule:: tools.skipfish.parser
 
 .. autoclass:: SkipfishJSParser
     :members:
