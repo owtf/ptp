@@ -11,7 +11,7 @@ the HTTP methods of a website that are available.
 Parser
 ------
 
-.. automodule:: tools.owasp.cm008.parser
+.. automodule:: ptp.tools.owasp.cm008.parser
 
 .. autoclass:: OWASPCM008Parser
     :members:
@@ -23,5 +23,5 @@ Parser
 Signatures
 ----------
 
-.. automodule:: tools.owasp.cm008.signatures
+.. automodule:: ptp.tools.owasp.cm008.signatures
     :members:

@@ -4,7 +4,7 @@ W3AF
 Parser
 ******
 
-.. automodule:: tools.w3af.parser
+.. automodule:: ptp.tools.w3af.parser
 
 .. autoclass:: W3AFXMLParser
     :members:
