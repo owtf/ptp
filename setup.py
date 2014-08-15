@@ -11,8 +11,9 @@ from setuptools import setup, find_packages
 setup(
     name="PTP",
     version="0.1.0",
-    description="PTP ranks the discoveries listed in security tools.",
+    description="PTP ranks the discoveries listed in security tool reports.",
     author="Tao Sauvage",
+    author_email="sauvage.tao@gmail.com",
     license="BSD",
     keywords="PTP Security Automated Ranking",
     url="http://owtf.github.io/ptp",
