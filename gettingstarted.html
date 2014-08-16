@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome! &mdash; ptp 0.1.0 documentation</title>
+    <title>Welcome! &mdash; ptp 0.1.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.0',
+        VERSION:     '0.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="ptp 0.1.0 documentation" href="index.html" />
+    <link rel="top" title="ptp 0.1.1 documentation" href="index.html" />
     <link rel="next" title="Write our own support" href="contribute.html" />
     <link rel="prev" title="Getting started" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Getting started"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">ptp 0.1.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -97,18 +97,32 @@ the main ones for now.</p>
 </div>
 <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>The first step is to clone the repository of the project:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/owtf/ptp.git
-</pre></div>
-</div>
-<p>Then the script <cite>setup.py</cite> must be run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./setup.py install
+<div class="section" id="using-pip">
+<h2>Using <a class="reference external" href="http://pip.readthedocs.org/en/latest/installing.html">pip</a><a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a> library is available on <a class="reference external" href="https://pypi.python.org/pypi">PyPI</a>
+at the following address: <a class="reference external" href="https://pypi.python.org/pypi/ptp">https://pypi.python.org/pypi/ptp</a>.</p>
+<p>The easiest way to install it is using <a class="reference external" href="http://pip.readthedocs.org/en/latest/installing.html">pip</a>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install ptp
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If an error occurs during the installation process, check your permissions.
-It might be required to run the installation script as root.</p>
+It might be required to run <a class="reference external" href="http://pip.readthedocs.org/en/latest/installing.html">pip</a> as root.</p>
+</div>
+</div>
+<div class="section" id="from-scratch">
+<h2>From scratch<a class="headerlink" href="#from-scratch" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to install the library from its repository. You will then
+be able to use the latest possible version or even try the <a class="reference external" href="https://github.com/owtf/ptp/tree/develop">develop branch</a>.</p>
+<p>The first step is to clone the repository of the project:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/owtf/ptp.git
+</pre></div>
+</div>
+<p>Then run the <cite>setup.py</cite> script:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./setup.py install
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="basic-usages">
@@ -258,7 +272,11 @@ the tool.</p>
 <li><a class="reference internal" href="#the-goals-aimed-by-ptp">The goals aimed by <tt class="docutils literal"><span class="pre">ptp</span></tt></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#using-pip">Using pip</a></li>
+<li><a class="reference internal" href="#from-scratch">From scratch</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#basic-usages">Basic usages</a><ul>
 <li><a class="reference internal" href="#auto-detection-mode">Auto-detection mode</a></li>
 <li><a class="reference internal" href="#explicit-mode">Explicit mode</a></li>
@@ -311,7 +329,7 @@ the tool.</p>
         <li class="right" >
           <a href="index.html" title="Getting started"
              >previous</a> |</li>
-        <li><a href="index.html">ptp 0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">ptp 0.1.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
