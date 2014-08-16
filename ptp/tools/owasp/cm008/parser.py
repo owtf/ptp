@@ -70,9 +70,10 @@ class OWASPCM008Parser(LineParser):
         allowed_methods = [
             line.lstrip('Allow: ').split(', ')
             for line in self.stream
-            if line.startswith('Allow')][0]
+            if line.startswith('Allow')]
         if not allowed_methods:
             return []
+        allowed_methods = allowed_methods[0]
         self.vulns = [
             {'ranking': SIGNATURES.get(method, UNKNOWN)}
             for method in allowed_methods]
