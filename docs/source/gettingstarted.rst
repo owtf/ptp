@@ -54,22 +54,44 @@ complex parsing.
 Installation
 ============
 
+Using `pip <http://pip.readthedocs.org/en/latest/installing.html>`_
+===================================================================
+
+The :mod:`ptp` library is available on `PyPI <https://pypi.python.org/pypi>`_
+at the following address: `https://pypi.python.org/pypi/ptp
+<https://pypi.python.org/pypi/ptp>`_.
+
+The easiest way to install it is using `pip
+<http://pip.readthedocs.org/en/latest/installing.html>`_.
+
+.. code-block:: bash
+
+    $ pip install ptp
+
+.. note::
+
+    If an error occurs during the installation process, check your permissions.
+    It might be required to run `pip
+    <http://pip.readthedocs.org/en/latest/installing.html>`_ as root.
+
+From scratch
+============
+
+It is also possible to install the library from its repository. You will then
+be able to use the latest possible version or even try the `develop branch
+<https://github.com/owtf/ptp/tree/develop>`_.
+
 The first step is to clone the repository of the project:
 
 .. code-block:: bash
 
     $ git clone https://github.com/owtf/ptp.git
 
-Then the script `setup.py` must be run:
+Then run the `setup.py` script:
 
 .. code-block:: bash
 
     $ ./setup.py install
-
-.. note::
-
-    If an error occurs during the installation process, check your permissions.
-    It might be required to run the installation script as root.
 
 ============
 Basic usages
