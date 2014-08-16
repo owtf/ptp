@@ -28,8 +28,8 @@ Installation
 Using `pip <http://pip.readthedocs.org/en/latest/installing.html>`_
 ===================================================================
 
-The :mod:`ptp` library is available on `PyPI <https://pypi.python.org/pypi>`_
-at the following address: `https://pypi.python.org/pypi/ptp
+The `ptp` library is available on `PyPI <https://pypi.python.org/pypi>`_ at the
+following address: `https://pypi.python.org/pypi/ptp
 <https://pypi.python.org/pypi/ptp>`_.
 
 The easiest way to install it is using `pip
