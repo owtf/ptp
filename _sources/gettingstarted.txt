@@ -93,9 +93,9 @@ Then run the `setup.py` script:
 
     $ ./setup.py install
 
-============
-Basic usages
-============
+===========
+Basic usage
+===========
 
 Auto-detection mode
 ===================
