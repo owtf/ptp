@@ -56,7 +56,7 @@ class ArachniXMLParser(XMLParser):
             stream = cls.handle_file(pathname, filename)
         except (ValueError, LxmlError):
             return False
-        if not cls.__tool__ in stream.tag:
+        if cls.__tool__ not in stream.tag:
             return False
         return True
 
