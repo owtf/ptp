@@ -74,7 +74,6 @@ class AbstractParser(object):
                 break
         return founds
 
-
     @classmethod
     def handle_file(cls, pathname='./', filename='*'):
         """Process the report file.
