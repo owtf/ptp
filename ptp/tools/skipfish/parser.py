@@ -74,7 +74,7 @@ class SkipfishJSParser(AbstractParser):
 
         """
         if (not metadatafile.endswith(cls.__format__) or
-                not reportfile.endswith(cls.__format__)) :
+                not reportfile.endswith(cls.__format__)):
             raise ValueError(
                 "This parser only supports '%s' files" % cls.__format__)
         with open(metadatafile, 'r') as f:
@@ -166,7 +166,7 @@ class SkipfishJSParser(AbstractParser):
         REPORT_VAR_NAME = 'issue_samples'
         re_result = self.re_report.findall(self.report_stream)
         report = dict({el[0]: el[1] for el in re_result})
-        if not REPORT_VAR_NAME in report:
+        if REPORT_VAR_NAME not in report:
             raise ReportNotFoundError(
                 'PTP did NOT find issue_samples variable. Is this the '
                 'right file?')

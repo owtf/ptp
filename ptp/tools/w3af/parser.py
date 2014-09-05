@@ -80,7 +80,7 @@ class W3AFXMLParser(XMLParser):
             version = version[0]
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        metadata = {'version': version,}
+        metadata = {'version': version}
         if self.check_version(metadata):
             self.metadata = metadata
         else:
@@ -95,6 +95,6 @@ class W3AFXMLParser(XMLParser):
 
         """
         self.vulns = [
-            {'ranking': self.RANKING_SCALE[vuln.get('severity')],}
+            {'ranking': self.RANKING_SCALE[vuln.get('severity')]}
             for vuln in self.stream.findall('.//vulnerability')]
         return self.vulns
