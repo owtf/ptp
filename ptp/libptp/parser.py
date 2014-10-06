@@ -12,7 +12,6 @@ import re
 import fnmatch
 
 from lxml import etree
-from lxml.etree import LxmlError
 
 
 class AbstractParser(object):
@@ -33,28 +32,30 @@ class AbstractParser(object):
     #: :class:`list` -- Versions it can supports.
     __version__ = None
 
-    def __init__(self, pathname='./', filename='*'):
+    def __init__(self, pathname='./', filename='*', first=True):
         """Initialize :class:`AbstractParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         """
         #: :class:`type` -- i/o stream of the report.
-        self.stream = self.handle_file(pathname, filename)
+        self.stream = self.handle_file(pathname, filename, first=first)
         #: :class:`list` -- List of dict of the results found in the report.
         self.vulns = []
         #: :class:`dict` -- Dict of the metadata found in the report.
         self.metadata = {}
 
     @staticmethod
-    def _recursive_find(pathname='./', file_regex='*', early_break=True):
+    def _recursive_find(pathname='./', file_regex='*', first=True):
         """Retrieve the full path to the report file(s).
 
         :param str pathname: The root directory where to start searching.
         :param re file_regex: The regex that will be matched against all files
             from within `pathname`.
-        :param bool early_break: Stop the search as soon as a file has been
+        :param bool first: Stop the search as soon as a file has been
             matched.
 
         :return: A list of path to the matched files that have been found.
@@ -71,16 +72,19 @@ class AbstractParser(object):
             founds.extend(
                 os.path.join(base, matched_file)
                 for matched_file in matched_files)
-            if founds and early_break:
+            if founds and first:
+                founds = [founds[0]]
                 break
         return founds
 
     @classmethod
-    def handle_file(cls, pathname='./', filename='*'):
+    def handle_file(cls, pathname='./', filename='*', first=True):
         """Process the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
 
         :raises: :class:`NotImplementedError` because this is an abstract
             method.
@@ -149,21 +153,25 @@ class XMLParser(AbstractParser):
     #: str -- XMLParser only supports XML files.
     __format__ = 'xml'
 
-    def __init__(self, pathname='./', filename='*.xml'):
+    def __init__(self, pathname='./', filename='*.xml', first=True):
         """Initialize :class:`XMLParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
 
         """
-        AbstractParser.__init__(self, pathname, filename)
+        AbstractParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def handle_file(cls, pathname='./', filename='*.xml'):
+    def handle_file(cls, pathname='./', filename='*.xml', first=True):
         """Return the root node of the XML file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
         :raises ValueError: if the report file has not the right extension.
         :raises LxmlError: if Lxml cannot parse the XML file.
 
@@ -171,7 +179,7 @@ class XMLParser(AbstractParser):
         :rtype: :class:`lxml.etree._Element`
 
         """
-        fullpath = cls._recursive_find(pathname, filename)
+        fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
             raise ValueError("No report found.")
         fullpath = fullpath[0]
@@ -190,21 +198,25 @@ class FileParser(AbstractParser):
 
     """
 
-    def __init__(self, pathname='./', filename='*'):
+    def __init__(self, pathname='./', filename='*', first=True):
         """Initialize :class:`FileParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
 
         """
-        AbstractParser.__init__(self, pathname, filename)
+        AbstractParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def handle_file(cls, pathname='./', filename='*'):
+    def handle_file(cls, pathname='./', filename='*', first=True):
         """Return a string of the content of the file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
         :raises OSError: if an error occurs when opening/reading the report
             file.
         :raises IOError: if an error occurs when opening/reading the report
@@ -214,7 +226,7 @@ class FileParser(AbstractParser):
         :rtype: :class:`str`
 
         """
-        fullpath = cls._recursive_find(pathname, filename)
+        fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
             raise ValueError("No report found.")
         fullpath = fullpath[0]
@@ -237,21 +249,25 @@ class LineParser(AbstractParser):
 
     """
 
-    def __init__(self, pathname='./', filename='*'):
+    def __init__(self, pathname='./', filename='*', first=True):
         """Initialize :class:`LineParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
 
         """
-        AbstractParser.__init__(self, pathname, filename)
+        AbstractParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def handle_file(cls, pathname='./', filename='*', skip_empty=True):
+    def handle_file(cls, pathname='./', filename='*', skip_empty=True, first=True):
         """Return a list of the lines of the file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been
+            matched.
         :param bool skip_empty: skip the empty lines that can occur in the
             file if `True`, otherwise keep them.
         :raises OSError: if an error occurs when opening/reading the report
@@ -263,11 +279,16 @@ class LineParser(AbstractParser):
         :rtype: :class:`list`
 
         """
-        fullpath = cls._recursive_find(pathname, filename)
+        fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
             raise ValueError("No report found.")
-        fullpath = fullpath[0]
-        with open(fullpath, 'r') as f:
-            if skip_empty:
-                return [line.rstrip('\n') for line in f.readlines() if line.rstrip('\n')]
-            return [line.rstrip('\n') for line in f.readlines()]
+        data = []
+        for current_file in fullpath:
+            with open(current_file, 'r') as f:
+                if skip_empty:
+                    data.extend([
+                        line.rstrip('\n') for line in f.readlines()
+                        if line.rstrip('\n')])
+                else:
+                    data.extend([line.rstrip('\n') for line in f.readlines()])
+        return data

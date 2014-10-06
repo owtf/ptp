@@ -7,8 +7,6 @@
 
 """
 
-import re
-
 from ptp.libptp.constants import UNKNOWN
 from ptp.libptp.parser import LineParser
 from ptp.tools.owasp.cm008.signatures import SIGNATURES
@@ -19,28 +17,32 @@ class OWASPCM008Parser(LineParser):
 
     __tool__ = 'owasp-cm-008'
 
-    def __init__(self, pathname, filename='*.txt'):
+    def __init__(self, pathname, filename='*.txt', first=False):
         """Initialize OWASPCM008Parser.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         """
-        LineParser.__init__(self, pathname, filename)
+        LineParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt'):
+    def is_mine(cls, pathname, filename='*.txt', first=False):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(pathname, filename)
+            stream = cls.handle_file(pathname, filename, first=first)
         except (OSError, IOError, ValueError):
             return False
         if stream and stream[0].startswith('HTTP'):
