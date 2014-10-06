@@ -53,7 +53,7 @@ class PTP(object):
             supported tools list of PTP.
 
         """
-        if tool_name not in self.supported:
+        if tool_name and tool_name not in self.supported:
             raise NotSupportedToolError(
                 "The tool '%s' is not supported by PTP." % tool_name)
         #: :class:`str` -- Name of the tool that generated the report.
