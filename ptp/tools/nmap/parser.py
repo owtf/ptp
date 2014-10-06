@@ -20,28 +20,32 @@ class NmapXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = r'6\.46'
 
-    def __init__(self, pathname, filename='*.xml'):
+    def __init__(self, pathname, filename='*.xml', first=True):
         """Initialize NmapXMLParser.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename)
+        XMLParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml'):
+    def is_mine(cls, pathname, filename='*.xml', first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(pathname, filename)
+            stream = cls.handle_file(pathname, filename, first=first)
         except ValueError:
             return False
         if stream.get('scanner') != cls.__tool__:

@@ -24,28 +24,32 @@ class WapitiXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = r'2\.3\.0'
 
-    def __init__(self, pathname, filename='*.xml'):
+    def __init__(self, pathname, filename='*.xml', first=True):
         """Initialize WapitiXMLParser.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename)
+        XMLParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml'):
+    def is_mine(cls, pathname, filename='*.xml', first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(pathname, filename)
+            stream = cls.handle_file(pathname, filename, first=first)
         except (ValueError, LxmlError):
             return False
         raw_metadata = stream.find('.//report_infos')
@@ -118,28 +122,32 @@ class Wapiti221XMLParser(XMLParser):
     #: :class:`list` -- Wapiti versions it supports.
     __version__ = r'2\.2\.1'
 
-    def __init__(self, pathname, filename='*.xml'):
+    def __init__(self, pathname, filename='*.xml', first=True):
         """Initialize Wapiti221XMLParser.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename)
+        XMLParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml'):
+    def is_mine(cls, pathname, filename='*.xml', first=True):
         """Check if it is a supported Wapiti report.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
-            stream = cls.handle_file(pathname, filename)
+            stream = cls.handle_file(pathname, filename, first=first)
         except (ValueError, LxmlError):
             return False
         raw_metadata = stream.find('.//generatedBy')

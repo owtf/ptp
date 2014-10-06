@@ -17,24 +17,28 @@ class MetasploitParser(FileParser):
     __tool__ = 'metasploit'
     __plugin__ = ''
 
-    def __init__(self, pathname, filename='*.txt', plugin=''):
+    def __init__(self, pathname, filename='*.txt', plugin='', first=True):
         """Initialize MetasploitParser.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         """
         self.__plugin__ = plugin
-        FileParser.__init__(self, pathname, filename)
+        FileParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', plugin=''):
+    def is_mine(cls, pathname, filename='*.txt', plugin='', first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
+        :param bool first: Only process first file (``True``) or each file that
+            matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
