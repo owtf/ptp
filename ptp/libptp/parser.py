@@ -287,8 +287,8 @@ class LineParser(AbstractParser):
             with open(current_file, 'r') as f:
                 if skip_empty:
                     data.extend([
-                        line.rstrip('\n') for line in f.readlines()
-                        if line.rstrip('\n')])
+                        line.rstrip('\n\r') for line in f.readlines()
+                        if line.rstrip('\n\r')])
                 else:
-                    data.extend([line.rstrip('\n') for line in f.readlines()])
+                    data.extend([line.rstrip('\n\r') for line in f.readlines()])
         return data
