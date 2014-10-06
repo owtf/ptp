@@ -21,7 +21,7 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
-    __version__ = ['1.6.0.2', '1.6.0.3']
+    __version__ = r'1\.6\.0\.[2-3]{1}'
 
     HIGH = 'High'
     MEDIUM = 'Medium'

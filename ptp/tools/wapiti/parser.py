@@ -7,6 +7,8 @@
 
 """
 
+import re
+
 from lxml.etree import LxmlError
 
 from ptp.libptp.exceptions import NotSupportedVersionError
@@ -20,7 +22,7 @@ class WapitiXMLParser(XMLParser):
 
     __tool__ = 'wapiti'
     __format__ = 'xml'
-    __version__ = ['2.3.0']
+    __version__ = r'2\.3\.0'
 
     def __init__(self, pathname, filename='*.xml'):
         """Initialize WapitiXMLParser.
@@ -114,7 +116,7 @@ class Wapiti221XMLParser(XMLParser):
     #: :class:`str` -- Format of Wapiti reports it supports.
     __format__ = 'xml'
     #: :class:`list` -- Wapiti versions it supports.
-    __version__ = ['2.2.1']
+    __version__ = r'2\.2\.1'
 
     def __init__(self, pathname, filename='*.xml'):
         """Initialize Wapiti221XMLParser.
@@ -146,7 +148,7 @@ class Wapiti221XMLParser(XMLParser):
         metadata = raw_metadata.get('id')
         if not metadata:
             return False
-        if not metadata.lstrip('Wapiti ') in cls.__version__:
+        if not re.findall(cls.__version__, metadata, re.IGNORECASE):
             return False
         return True
 
@@ -164,7 +166,7 @@ class Wapiti221XMLParser(XMLParser):
         raw_metadata = self.stream.find('.//generatedBy').get('id')
         metadata = {}
         # Only keep the version number
-        metadata['version'] = raw_metadata.lstrip('Wapiti ')
+        metadata['version'] = raw_metadata
         if self.check_version(metadata):
             self.metadata = metadata
         else:

@@ -20,7 +20,7 @@ class SkipfishJSParser(AbstractParser):
 
     __tool__ = 'skipfish'
     __format__ = 'js'
-    __version__ = ['2.10b']
+    __version__ = r'2\.10b'
 
     HIGH = 4
     MEDIUM = 3

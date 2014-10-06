@@ -7,8 +7,9 @@
 
 """
 
+import re
+
 from ptp.libptp.exceptions import NotSupportedVersionError
-from ptp.libptp.constants import UNKNOWN
 from ptp.libptp.parser import XMLParser
 from ptp.tools.nmap.signatures import SIGNATURES
 
@@ -17,7 +18,7 @@ class NmapXMLParser(XMLParser):
 
     __tool__ = 'nmap'
     __format__ = 'xml'
-    __version__ = ['6.46']
+    __version__ = r'6\.46'
 
     def __init__(self, pathname, filename='*.xml'):
         """Initialize NmapXMLParser.
@@ -45,7 +46,7 @@ class NmapXMLParser(XMLParser):
             return False
         if stream.get('scanner') != cls.__tool__:
             return False
-        if not stream.get('version') in cls.__version__:
+        if not re.findall(cls.__version__, stream.get('version'), re.IGNORECASE):
             return False
         return True
 

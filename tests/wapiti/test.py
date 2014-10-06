@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import os
+import re
 import traceback
 
 from ptp import PTP
@@ -28,7 +29,7 @@ def run():
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.3.0'))
         assert ptp.parser.__tool__ == 'wapiti'
-        assert '2.3.0' in ptp.parser.__version__
+        assert re.match(ptp.parser.__version__, '2.3.0', flags=re.IGNORECASE)
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -57,7 +58,7 @@ def run():
         ptp.parse(
             pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
         assert ptp.parser.__tool__ == 'wapiti'
-        assert '2.2.1' in ptp.parser.__version__
+        assert re.match(ptp.parser.__version__, '2.2.1', flags=re.IGNORECASE)
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'

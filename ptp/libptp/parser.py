@@ -8,6 +8,7 @@
 """
 
 import os
+import re
 import fnmatch
 
 from lxml import etree
@@ -110,7 +111,8 @@ class AbstractParser(object):
         :rtype: :class:`bool`
 
         """
-        if metadata[key] in cls.__version__:
+        regex = r'\b' + cls.__version__ + r'\b'
+        if re.findall(regex, metadata[key], re.IGNORECASE):
             return True
         return False
 

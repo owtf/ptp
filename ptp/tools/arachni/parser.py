@@ -19,7 +19,7 @@ class ArachniXMLParser(XMLParser):
 
     __tool__ = 'arachni'
     __format__ = 'xml'
-    __version__ = ['0.4.6', '0.4.7']
+    __version__ = r'0\.4\.[6-7]{1}'
 
     HIGH = 'High'
     MEDIUM = 'Medium'
