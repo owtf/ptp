@@ -7,6 +7,8 @@
 
 """
 
+import re
+
 from lxml.etree import LxmlError
 
 from ptp.libptp import constants
@@ -19,12 +21,15 @@ class ArachniXMLParser(XMLParser):
 
     __tool__ = 'arachni'
     __format__ = 'xml'
-    __version__ = r'0\.4\.[6-7]{1}'
+    __version__ = (
+        r'(^0\.4\.[6-7]{1}$)|'
+        r'(^1\.0$)|'
+        r'(^1\.0\.[1-2]{1}$)')
 
-    HIGH = 'High'
-    MEDIUM = 'Medium'
-    LOW = 'Low'
-    INFO = 'Informational'
+    HIGH = 'high'
+    MEDIUM = 'medium'
+    LOW = 'low'
+    INFO = 'informational'
 
     RANKING_SCALE = {
         HIGH: constants.HIGH,
@@ -60,7 +65,10 @@ class ArachniXMLParser(XMLParser):
             stream = cls.handle_file(pathname, filename, first=first)
         except (ValueError, LxmlError):
             return False
-        if cls.__tool__ not in stream.tag:
+        version = stream.find('.//version')
+        if version is None:
+            return False
+        if not re.findall(cls.__version__, version.text, re.IGNORECASE):
             return False
         return True
 
@@ -93,6 +101,6 @@ class ArachniXMLParser(XMLParser):
 
         """
         self.vulns = [
-            {'ranking': self.RANKING_SCALE[vuln.find('.//severity').text]}
+            {'ranking': self.RANKING_SCALE[vuln.find('.//severity').text.lower()]}
             for vuln in self.stream.find('.//issues')]
         return self.vulns
