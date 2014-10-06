@@ -49,8 +49,13 @@ class PTP(object):
             tool that has generated the target report.
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
+        :raises NotSupportedToolError: if ``tool_name`` is not in the supported
+            tools list of PTP.
 
         """
+        if tool_name not in self.supported:
+            raise NotSupportedToolError(
+                "The tool '%s' is not supported by PTP." % tool_name)
         #: :class:`str` -- Name of the tool that generated the report.
         self.tool_name = tool_name
         #: :class:`libptp.AbstractParser` -- Parser used on the report.
@@ -65,8 +70,6 @@ class PTP(object):
     def _init_parser(self, *args, **kwargs):
         """Find and initialize the parser.
 
-        :param str tool_name: help PTP by specifying the name of the tool that
-            has generated the target report.
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
 
