@@ -130,7 +130,7 @@ class PTP(object):
         .. note::
 
             The ranking starts from `0` to `n` where `n` represents the most
-            critical risk. (See :mod:`libptp.constants`).
+            critical risk. (See :mod:`ptp.libptp.constants`).
 
         """
         if not self.vulns:
