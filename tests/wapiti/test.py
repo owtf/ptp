@@ -12,8 +12,9 @@ __testname__ = 'wapiti'
 
 
 def run():
+    print("\ttesting version 2.3.0")
     ptp = PTP('wapiti')
-    print('\ttest parse():', end=' ')
+    print('\t\ttest parse():', end=' ')
     res = 'OK'
     try:
         ptp.parse(
@@ -23,7 +24,7 @@ def run():
         res = 'FAIL'
     print(res)
     ptp = PTP()
-    print('\ttest is_mine():', end=' ')
+    print('\t\ttest is_mine():', end=' ')
     res = 'OK'
     try:
         ptp.parse(
@@ -34,7 +35,7 @@ def run():
         print(traceback.format_exc())
         res = 'FAIL'
     print(res)
-    print('\ttest get_highest_ranking():', end=' ')
+    print('\t\ttest get_highest_ranking():', end=' ')
     res = 'OK'
     try:
         assert ptp.get_highest_ranking() == MEDIUM
@@ -43,7 +44,8 @@ def run():
         res = 'FAIL'
     print(res)
 
-    print('\ttest parse():', end=' ')
+    print("\ttesting version 2.2.1")
+    print('\t\ttest parse():', end=' ')
     res = 'OK'
     try:
         ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/wapiti/2.2.1'))
@@ -52,7 +54,7 @@ def run():
         res = 'FAIL'
     print(res)
     ptp = PTP()
-    print('\ttest is_mine():', end=' ')
+    print('\t\ttest is_mine():', end=' ')
     res = 'OK'
     try:
         ptp.parse(
@@ -63,7 +65,7 @@ def run():
         print(traceback.format_exc())
         res = 'FAIL'
     print(res)
-    print('\ttest get_highest_ranking():', end=' ')
+    print('\t\ttest get_highest_ranking():', end=' ')
     res = 'OK'
     try:
         # Haha, Wapiti 2.2.1 detects SQL injections that 2.3.0 doesn't.
