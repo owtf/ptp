@@ -49,8 +49,8 @@ class PTP(object):
             tool that has generated the target report.
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
-        :raises NotSupportedToolError: if ``tool_name`` is not in the supported
-            tools list of PTP.
+        :raises: :class:`NotSupportedToolError` if ``tool_name`` is not in the
+            supported tools list of PTP.
 
         """
         if tool_name not in self.supported:
@@ -103,8 +103,8 @@ class PTP(object):
 
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
-        :raises NotSupportedToolError: if the tool that has generated the
-            report is not supported by PTP.
+        :raises: :class:`NotSupportedToolError` if the tool that has generated
+            the report is not supported by PTP.
 
         :return: The list of dictionaries of the results found in the report.
         :rtype: :class:`list`
