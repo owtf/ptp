@@ -4,7 +4,7 @@ Metasploit
 .. note::
 
     Since Metasploit does not force the users to follow a specific syntax when
-    writing a module, :class:`PTP` needs to know which ``plugin`` has
+    writing a module, :class:`ptp.PTP` needs to know which ``plugin`` has
     generated the report in order to find the right signature.
 
 Parser
