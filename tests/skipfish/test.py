@@ -19,7 +19,7 @@ def run():
             pathname=os.path.join(
                 os.getcwd(),
                 'tests/skipfish/2.10b/demo.testfire.net')
-            )
+        )
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -32,7 +32,7 @@ def run():
             pathname=os.path.join(
                 os.getcwd(),
                 'tests/skipfish/2.10b/demo.testfire.net')
-            )
+        )
         assert ptp.parser.__tool__ == 'skipfish'
     except Exception:
         print(traceback.format_exc())
@@ -54,7 +54,7 @@ def run():
             pathname=os.path.join(
                 os.getcwd(),
                 'tests/skipfish/2.10b/local.xss')
-            )
+        )
     except Exception:
         print(traceback.format_exc())
         res = 'FAIL'
@@ -67,7 +67,7 @@ def run():
             pathname=os.path.join(
                 os.getcwd(),
                 'tests/skipfish/2.10b/local.xss')
-            )
+        )
         assert ptp.parser.__tool__ == 'skipfish'
     except Exception:
         print(traceback.format_exc())
