@@ -25,7 +25,7 @@ your python code**, without having to deal with complex parsing.
 Installation
 ============
 
-Using `pip <http://pip.readthedocs.org/en/latest/installing.html>`_
+Using `pip <https://pip.readthedocs.org/en/latest/installing.html>`_
 ===================================================================
 
 The `ptp` library is available on `PyPI <https://pypi.python.org/pypi>`_ at the
@@ -33,7 +33,7 @@ following address: `https://pypi.python.org/pypi/ptp
 <https://pypi.python.org/pypi/ptp>`_.
 
 The easiest way to install it is using `pip
-<http://pip.readthedocs.org/en/latest/installing.html>`_.
+<https://pip.readthedocs.org/en/latest/installing.html>`_.
 
 .. code-block:: bash
 
@@ -43,7 +43,7 @@ The easiest way to install it is using `pip
 
     If an error occurs during the installation process, check your permissions.
     It might be required to run `pip
-    <http://pip.readthedocs.org/en/latest/installing.html>`_ as root.
+    <https://pip.readthedocs.org/en/latest/installing.html>`_ as root.
 
 From scratch
 ============
@@ -84,7 +84,7 @@ Documentation
 =============
 
 The documentation is available online at the following address:
-`http://owtf.github.io/ptp/ <http://owtf.github.io/ptp/>`_.
+`https://owtf.github.io/ptp/ <https://owtf.github.io/ptp/>`_.
 
 It explains how to use the library and even how to contribute. Plus it contains
 the technical documentation of the project.
