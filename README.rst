@@ -83,11 +83,11 @@ Usage
 Documentation
 =============
 
-The ptp's documentation is available online at the following address:
+The documentation is available online at the following address:
 `http://owtf.github.io/ptp/ <http://owtf.github.io/ptp/>`_.
 
-It explained how to use the library and even how to contribute. Plus it
-contains the technical documentation of the project.
+It explains how to use the library and even how to contribute. Plus it contains
+the technical documentation of the project.
 
 ===============
 Current support
