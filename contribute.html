@@ -78,14 +78,16 @@ the file.</p>
 <h2>The skeleton<a class="headerlink" href="#the-skeleton" title="Permalink to this headline">¶</a></h2>
 <p>By convention, the class name must contain the format it parses (in our case
 <cite>XML</cite>).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
 <span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
-    <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0.1&#39;</span><span class="p">]</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="s">r&#39;0\.1&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize MyXMLParser.</span>
@@ -121,7 +123,7 @@ as the root XML tag.</p>
     <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
-    <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0.1&#39;</span><span class="p">]</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="s">r&#39;0\.1&#39;</span>
 
     <span class="c"># Omitted unchanged code</span>
 
@@ -149,7 +151,7 @@ as the root XML tag.</p>
         <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;version&#39;</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="c"># Check if the version is the one this parser supports.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">stream</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">stream</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">)):</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
 </pre></div>
@@ -168,14 +170,16 @@ discoveries that are listed in the report and formats them into a
 </ul>
 <p>In order to keep it simple, we will not detail the implementations of these
 methods for our fake tool.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
 <span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Specialized parser for MyTool.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
-    <span class="n">__version__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;0.1&#39;</span><span class="p">]</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="s">r&#39;0\.1&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize MyXMLParser.</span>
@@ -210,7 +214,7 @@ methods for our fake tool.</p>
         <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;version&#39;</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="c"># Check if the version is the one this parser supports.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">stream</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">stream</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">)):</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
 
