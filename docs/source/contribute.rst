@@ -26,8 +26,8 @@ class from which to inherit.
 
 The :ref:`xmlparser-label` already defines
 :meth:`ptp.libptp.parser.XMLParser.handle_file` for us. This will initialize
-the :attr:`ptp.MyXMLParser.stream` instance variable with a handle on the root
-node of the file.
+the :attr:`MyXMLParser.stream` instance variable with a handle on the root node
+of the file.
 
 The skeleton
 ============
@@ -37,7 +37,7 @@ By convention, the class name must contain the format it parses (in our case
 
 .. code-block:: python
 
-    from libptp.parser import XMLParser
+    from ptp.libptp.parser import XMLParser
 
 
     class MyXMLParser(XMLParser):
@@ -130,9 +130,9 @@ Parsing methods
 Each :ref:`AbstractParser <abstractparser-class-label>` class has to provide
 two methods:
 
-* :meth:`libptp.parser.AbstractParser.parse_metadata` which parses the metadata
-  of the report and formats them into a :class:`dict`.
-* :meth:`libptp.parser.AbstractParser.parse_report` which parses the
+* :meth:`ptp.libptp.parser.AbstractParser.parse_metadata` which parses the
+  metadata of the report and formats them into a :class:`dict`.
+* :meth:`ptp.libptp.parser.AbstractParser.parse_report` which parses the
   discoveries that are listed in the report and formats them into a
   :class:`list` of :class:`dict`.
 
@@ -143,7 +143,7 @@ methods for our fake tool.
 
     import re
 
-    from libptp.parser import XMLParser
+    from ptp.libptp.parser import XMLParser
 
 
     class MyXMLParser(XMLParser):
@@ -206,14 +206,14 @@ Tell :mod:`ptp`
 Now that *MyTool* is supported thanks to our implementation of `MyXMLParser`,
 we only have one more thing to do in order to finish.
 
-We need to update the :attr:`ptp.supported` list attribute by inserting our
+We need to update the :attr:`ptp.PTP.supported` list attribute by inserting our
 `MyXMLParser` inside like shown below:
 
 .. code-block:: python
 
     # Omitted imports
 
-    from tools.mytool.parser import MyXMLParser
+    from ptp.tools.mytool.parser import MyXMLParser
 
     class PTP(object):
 
