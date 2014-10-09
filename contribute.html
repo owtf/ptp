@@ -71,16 +71,14 @@ contained in a tool report, it needs a specialized parser.</p>
 support <em>MyTool</em>&#8216;s XML reports, <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> seems to be the best
 class from which to inherit.</p>
 <p>The <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> already defines
-<tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.XMLParser.handle_file()</span></tt> for us. This will initialize the
-<tt class="xref py py-attr docutils literal"><span class="pre">MyXMLParser.stream</span></tt> instance variable with a handle on the root node of
-the file.</p>
+<a class="reference internal" href="libptp/parser.html#ptp.libptp.parser.XMLParser.handle_file" title="ptp.libptp.parser.XMLParser.handle_file"><tt class="xref py py-meth docutils literal"><span class="pre">ptp.libptp.parser.XMLParser.handle_file()</span></tt></a> for us. This will initialize
+the <tt class="xref py py-attr docutils literal"><span class="pre">ptp.MyXMLParser.stream</span></tt> instance variable with a handle on the root
+node of the file.</p>
 <div class="section" id="the-skeleton">
 <h2>The skeleton<a class="headerlink" href="#the-skeleton" title="Permalink to this headline">¶</a></h2>
 <p>By convention, the class name must contain the format it parses (in our case
 <cite>XML</cite>).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
-
-<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
 <span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
@@ -89,14 +87,16 @@ the file.</p>
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="s">r&#39;0\.1&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize MyXMLParser.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>
+<span class="sd">        :param bool first: Only process first file (``True``) or each file</span>
+<span class="sd">            that matched (``False``).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We added a couple of class attributes in order to give some information
@@ -128,18 +128,20 @@ as the root XML tag.</p>
     <span class="c"># Omitted unchanged code</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported MyTool report.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>
+<span class="sd">        :param bool first: Only process first file (``True``) or each file</span>
+<span class="sd">            that matched (``False``).</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
             <span class="c"># If an error occurs when trying to open the file, then the</span>
             <span class="c"># parser cannot deal with it.</span>
@@ -181,28 +183,32 @@ methods for our fake tool.</p>
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;mytool&#39;</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="s">r&#39;0\.1&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize MyXMLParser.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>
+<span class="sd">        :param bool first: Only process first file (``True``) or each file</span>
+<span class="sd">            that matched (``False``).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it is a supported MyTool report.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>
+<span class="sd">        :param bool first: Only process first file (``True``) or each file</span>
+<span class="sd">            that matched (``False``).</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
             <span class="c"># If an error occurs when trying to open the file, then the</span>
             <span class="c"># parser cannot deal with it.</span>
@@ -245,7 +251,7 @@ we only have one more thing to do in order to finish.</p>
 
         <span class="c"># Omitted supported tools.</span>
 
-        <span class="s">&#39;w3af&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">W3AFReport</span><span class="p">],</span>
+        <span class="s">&#39;w3af&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">W3AFXMLParser</span><span class="p">],</span>
 
         <span class="c"># Omitted supported tools.</span>
 

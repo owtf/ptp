@@ -25,9 +25,9 @@ support *MyTool*'s XML reports, :ref:`xmlparser-label` seems to be the best
 class from which to inherit.
 
 The :ref:`xmlparser-label` already defines
-:meth:`libptp.parser.XMLParser.handle_file` for us. This will initialize the
-:attr:`MyXMLParser.stream` instance variable with a handle on the root node of
-the file.
+:meth:`ptp.libptp.parser.XMLParser.handle_file` for us. This will initialize
+the :attr:`ptp.MyXMLParser.stream` instance variable with a handle on the root
+node of the file.
 
 The skeleton
 ============
@@ -36,8 +36,6 @@ By convention, the class name must contain the format it parses (in our case
 `XML`).
 
 .. code-block:: python
-
-    import re
 
     from libptp.parser import XMLParser
 
@@ -48,14 +46,16 @@ By convention, the class name must contain the format it parses (in our case
         __tool__ = 'mytool'
         __version__ = r'0\.1'
 
-        def __init__(self, pathname, filename='*.xml'):
+        def __init__(self, pathname, filename='*.xml', first=True):
             """Initialize MyXMLParser.
 
             :param str pathname: Path to the report directory.
             :param str filename: Regex matching the report file.
+            :param bool first: Only process first file (``True``) or each file
+                that matched (``False``).
 
             """
-            XMLParser.__init__(self, pathname, filename)
+            XMLParser.__init__(self, pathname, filename, first=first)
 
 We added a couple of class attributes in order to give some information
 about what tool is parsed by our class and the supported versions.
@@ -95,18 +95,20 @@ Therefore, our :meth:`is_mine` function is:
         # Omitted unchanged code
 
         @classmethod
-        def is_mine(cls, pathname, filename='*.xml'):
+        def is_mine(cls, pathname, filename='*.xml', first=True):
             """Check if it is a supported MyTool report.
 
             :param str pathname: Path to the report directory.
             :param str filename: Regex matching the report file.
+            :param bool first: Only process first file (``True``) or each file
+                that matched (``False``).
 
             :return: `True` if it supports the report, `False` otherwise.
             :rtype: :class:`bool`
 
             """
             try:
-                stream = cls.handle_file(pathname, filename)
+                stream = cls.handle_file(pathname, filename, first=first)
             except (ValueError, LxmlError):
                 # If an error occurs when trying to open the file, then the
                 # parser cannot deal with it.
@@ -150,28 +152,32 @@ methods for our fake tool.
         __tool__ = 'mytool'
         __version__ = r'0\.1'
 
-        def __init__(self, pathname, filename='*.xml'):
+        def __init__(self, pathname, filename='*.xml', first=True):
             """Initialize MyXMLParser.
 
             :param str pathname: Path to the report directory.
             :param str filename: Regex matching the report file.
+            :param bool first: Only process first file (``True``) or each file
+                that matched (``False``).
 
             """
-            XMLParser.__init__(self, pathname, filename)
+            XMLParser.__init__(self, pathname, filename, first=first)
 
         @classmethod
-        def is_mine(cls, pathname, filename='*.xml'):
+        def is_mine(cls, pathname, filename='*.xml', first=True):
             """Check if it is a supported MyTool report.
 
             :param str pathname: Path to the report directory.
             :param str filename: Regex matching the report file.
+            :param bool first: Only process first file (``True``) or each file
+                that matched (``False``).
 
             :return: `True` if it supports the report, `False` otherwise.
             :rtype: :class:`bool`
 
             """
             try:
-                stream = cls.handle_file(pathname, filename)
+                stream = cls.handle_file(pathname, filename, first=first)
             except (ValueError, LxmlError):
                 # If an error occurs when trying to open the file, then the
                 # parser cannot deal with it.
@@ -217,7 +223,7 @@ We need to update the :attr:`ptp.supported` list attribute by inserting our
 
             # Omitted supported tools.
 
-            'w3af': [W3AFReport],
+            'w3af': [W3AFXMLParser],
 
             # Omitted supported tools.
 
