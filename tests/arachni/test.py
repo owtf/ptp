@@ -40,7 +40,7 @@ def run():
         print('\t\ttest is_mine():', end=' ')
         res = 'OK'
         try:
-            ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/%s' % version))
+            ptp.parse(pathname=os.path.join(os.getcwd(), '%s/%s' % (TESTPATH, version)))
             assert ptp.parser.__tool__ == 'arachni'
         except Exception:
             print(traceback.format_exc())
@@ -50,7 +50,7 @@ def run():
         print('\t\ttest parse():', end=' ')
         res = 'OK'
         try:
-            ptp.parse(pathname=os.path.join(os.getcwd(), 'tests/arachni/%s' % version))
+            ptp.parse(pathname=os.path.join(os.getcwd(), '%s/%s' % (TESTPATH, version)))
         except Exception:
             print(traceback.format_exc())
             res = 'FAIL'
@@ -67,7 +67,7 @@ def run():
             res = 'OK'
             try:
                 ptp.parse(
-                    pathname=os.path.join(os.getcwd(), 'tests/arachni/%s' % version),
+                    pathname=os.path.join(os.getcwd(), '%s/%s' % (TESTPATH, version)),
                     filename=testfile)
                 assert ptp.parser.__tool__ == 'arachni'
             except Exception:
@@ -78,7 +78,7 @@ def run():
             res = 'OK'
             try:
                 ptp.parse(
-                    pathname=os.path.join(os.getcwd(), 'tests/arachni/%s' % version),
+                    pathname=os.path.join(os.getcwd(), '%s/%s' % (TESTPATH, version)),
                     filename=testfile)
             except Exception:
                 print(traceback.format_exc())

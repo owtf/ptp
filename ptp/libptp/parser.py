@@ -115,8 +115,7 @@ class AbstractParser(object):
         :rtype: :class:`bool`
 
         """
-        regex = r'\b' + cls.__version__ + r'\b'
-        if re.findall(regex, metadata[key], re.IGNORECASE):
+        if re.findall(cls.__version__, metadata[key], re.IGNORECASE):
             return True
         return False
 

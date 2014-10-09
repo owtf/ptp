@@ -21,7 +21,9 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
-    __version__ = r'1\.6\.0\.[2-3]{1}'
+    __version__ = r'1\.6(\.0\.[1-5]{1})?'
+
+    _re_version = re.compile(r'Version: (\S*)\s')
 
     HIGH = 'High'
     MEDIUM = 'Medium'
@@ -44,7 +46,6 @@ class W3AFXMLParser(XMLParser):
 
         """
         XMLParser.__init__(self, pathname, filename, first=first)
-        self.re_version = re.compile(r'Version: (\S*)\s')
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', first=True):
@@ -63,7 +64,15 @@ class W3AFXMLParser(XMLParser):
             stream = cls.handle_file(pathname, filename, first=first)
         except (ValueError, LxmlError):
             return False
-        if stream.find('.//w3af-version') is None:
+        version = stream.find('.//w3af-version')
+        if version is None:
+            return False
+        version = cls._re_version.findall(version.text)
+        if not version:
+            return False
+        if len(version) >= 1:  # In case we found several version numbers.
+            version = version[0]
+        if not re.findall(cls.__version__, version, re.IGNORECASE):
             return False
         return True
 
@@ -79,7 +88,7 @@ class W3AFXMLParser(XMLParser):
         """
         raw_metadata = self.stream.find('.//w3af-version').text
         # Find the version of w3af.
-        version = self.re_version.findall(raw_metadata)
+        version = self._re_version.findall(raw_metadata)
         if len(version) >= 1:  # In case we found several version numbers.
             version = version[0]
         # Reconstruct the metadata
