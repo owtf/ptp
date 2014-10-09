@@ -37,6 +37,8 @@ By convention, the class name must contain the format it parses (in our case
 
 .. code-block:: python
 
+    import re
+
     from libptp.parser import XMLParser
 
 
@@ -44,7 +46,7 @@ By convention, the class name must contain the format it parses (in our case
         """Specialized parser for MyTool."""
 
         __tool__ = 'mytool'
-        __version__ = ['0.1']
+        __version__ = r'0\.1'
 
         def __init__(self, pathname, filename='*.xml'):
             """Initialize MyXMLParser.
@@ -88,7 +90,7 @@ Therefore, our :meth:`is_mine` function is:
         """Specialized parser for MyTool."""
 
         __tool__ = 'mytool'
-        __version__ = ['0.1']
+        __version__ = r'0\.1'
 
         # Omitted unchanged code
 
@@ -116,7 +118,7 @@ Therefore, our :meth:`is_mine` function is:
             if not 'version' in stream:
                 return False
             # Check if the version is the one this parser supports.
-            if not stream.get('version') in cls.__version__:
+            if not re.findall(cls.__version__, stream.get('version')):
                 return False
             return True
 
@@ -137,6 +139,8 @@ methods for our fake tool.
 
 .. code-block:: python
 
+    import re
+
     from libptp.parser import XMLParser
 
 
@@ -144,7 +148,7 @@ methods for our fake tool.
         """Specialized parser for MyTool."""
 
         __tool__ = 'mytool'
-        __version__ = ['0.1']
+        __version__ = r'0\.1'
 
         def __init__(self, pathname, filename='*.xml'):
             """Initialize MyXMLParser.
@@ -179,7 +183,7 @@ methods for our fake tool.
             if not 'version' in stream:
                 return False
             # Check if the version is the one this parser supports.
-            if not stream.get('version') in cls.__version__:
+            if not re.findall(cls.__version__, stream.get('version')):
                 return False
             return True
 
