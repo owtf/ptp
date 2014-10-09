@@ -93,7 +93,7 @@ the technical documentation of the project.
 Current support
 ===============
 
-+ arachni (0.4.6, 0.4.7, 1.0, 1.0.1, 1.0.2) (XML report)
++ arachni (0.4.6 to 1.0.3) (XML report)
 + dirbuster (1.0-RC1)
 + metasploit
 + owasp
