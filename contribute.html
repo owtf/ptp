@@ -72,13 +72,13 @@ support <em>MyTool</em>&#8216;s XML reports, <a class="reference internal" href=
 class from which to inherit.</p>
 <p>The <a class="reference internal" href="libptp/parser.html#xmlparser-label"><em>XMLParser</em></a> already defines
 <a class="reference internal" href="libptp/parser.html#ptp.libptp.parser.XMLParser.handle_file" title="ptp.libptp.parser.XMLParser.handle_file"><tt class="xref py py-meth docutils literal"><span class="pre">ptp.libptp.parser.XMLParser.handle_file()</span></tt></a> for us. This will initialize
-the <tt class="xref py py-attr docutils literal"><span class="pre">ptp.MyXMLParser.stream</span></tt> instance variable with a handle on the root
-node of the file.</p>
+the <tt class="xref py py-attr docutils literal"><span class="pre">MyXMLParser.stream</span></tt> instance variable with a handle on the root node
+of the file.</p>
 <div class="section" id="the-skeleton">
 <h2>The skeleton<a class="headerlink" href="#the-skeleton" title="Permalink to this headline">¶</a></h2>
 <p>By convention, the class name must contain the format it parses (in our case
 <cite>XML</cite>).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">ptp.libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
 <span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
@@ -164,9 +164,9 @@ as the root XML tag.</p>
 <p>Each <a class="reference internal" href="libptp/parser.html#abstractparser-class-label"><em>AbstractParser</em></a> class has to provide
 two methods:</p>
 <ul class="simple">
-<li><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.AbstractParser.parse_metadata()</span></tt> which parses the metadata
-of the report and formats them into a <a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</li>
-<li><tt class="xref py py-meth docutils literal"><span class="pre">libptp.parser.AbstractParser.parse_report()</span></tt> which parses the
+<li><a class="reference internal" href="libptp/parser.html#ptp.libptp.parser.AbstractParser.parse_metadata" title="ptp.libptp.parser.AbstractParser.parse_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">ptp.libptp.parser.AbstractParser.parse_metadata()</span></tt></a> which parses the
+metadata of the report and formats them into a <a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</li>
+<li><a class="reference internal" href="libptp/parser.html#ptp.libptp.parser.AbstractParser.parse_report" title="ptp.libptp.parser.AbstractParser.parse_report"><tt class="xref py py-meth docutils literal"><span class="pre">ptp.libptp.parser.AbstractParser.parse_report()</span></tt></a> which parses the
 discoveries that are listed in the report and formats them into a
 <a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></a> of <a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</li>
 </ul>
@@ -174,7 +174,7 @@ discoveries that are listed in the report and formats them into a
 methods for our fake tool.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">from</span> <span class="nn">libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
 
 
 <span class="k">class</span> <span class="nc">MyXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
@@ -237,11 +237,11 @@ methods for our fake tool.</p>
 <h1>Tell <a class="reference internal" href="ptp.html#module-ptp" title="ptp"><tt class="xref py py-mod docutils literal"><span class="pre">ptp</span></tt></a><a class="headerlink" href="#tell-ptp" title="Permalink to this headline">¶</a></h1>
 <p>Now that <em>MyTool</em> is supported thanks to our implementation of <cite>MyXMLParser</cite>,
 we only have one more thing to do in order to finish.</p>
-<p>We need to update the <tt class="xref py py-attr docutils literal"><span class="pre">ptp.supported</span></tt> list attribute by inserting our
+<p>We need to update the <a class="reference internal" href="ptp.html#ptp.PTP.supported" title="ptp.PTP.supported"><tt class="xref py py-attr docutils literal"><span class="pre">ptp.PTP.supported</span></tt></a> list attribute by inserting our
 <cite>MyXMLParser</cite> inside like shown below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Omitted imports</span>
 
-<span class="kn">from</span> <span class="nn">tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyXMLParser</span>
+<span class="kn">from</span> <span class="nn">ptp.tools.mytool.parser</span> <span class="kn">import</span> <span class="n">MyXMLParser</span>
 
 <span class="k">class</span> <span class="nc">PTP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
