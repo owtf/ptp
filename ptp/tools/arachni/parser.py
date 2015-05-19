@@ -23,7 +23,7 @@ class ArachniXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = (
         r'(^0\.4\.[6-7]{1}$)|'
-        r'(^1\.0(\.[1-4]{1})?$)')
+        r'(^1\.0(\.[1-5]{1})?$)')
 
     HIGH = 'high'
     MEDIUM = 'medium'
