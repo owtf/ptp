@@ -34,6 +34,9 @@ TESTFILES = {
     '1.0.6': {
         'local.site.xml': LOW,
         'local2.site.xml': HIGH},
+    '1.1': {
+        'local.site.xml': LOW,
+        'local2.site.xml': HIGH},
 }
 
 
