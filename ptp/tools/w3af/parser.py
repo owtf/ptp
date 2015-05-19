@@ -21,7 +21,9 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
-    __version__ = r'1\.6(\.0\.[1-5]{1})?'
+    __version__ = (
+        r'(1\.6(\.0\.[1-5]{1})?)|'
+        r'(1\.6\.45)')
 
     _re_version = re.compile(r'Version: (\S*)\s')
 
