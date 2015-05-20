@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="PTP",
-    version="0.2.0",
+    version="0.3.0",
     description="PTP ranks the discoveries listed in security tool reports.",
     author="Tao Sauvage",
     author_email="sauvage.tao@gmail.com",
