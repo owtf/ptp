@@ -99,5 +99,5 @@ Current support
 + owasp
 + robots.txt
 + skipfish (2.10b)
-+ w3af (1.6 to 1.6.50) (XML report)
++ w3af (1.6 to 1.6.51) (XML report)
 + wapiti (2.2.1, 2.3.0) (XML report)

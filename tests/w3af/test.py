@@ -30,6 +30,9 @@ TESTFILES = {
         'local2.site.xml': HIGH},
     '1.6.50': {
         'local.site.xml': MEDIUM,
+        'local2.site.xml': HIGH},
+    '1.6.51': {
+        'local.site.xml': MEDIUM,
         'local2.site.xml': HIGH}
 }
 
