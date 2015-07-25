@@ -65,9 +65,14 @@ class AbstractParser(object):
         founds = []
         for base, _, files in os.walk(pathname):
             matched_files = fnmatch.filter(files, file_regex)
-            founds.extend(
-                os.path.join(base, matched_file)
-                for matched_file in matched_files)
+            try:
+                is_str = isinstance(files, basestring)  # Python 2.x.
+            except NameError:
+                is_str = isinstance(files, str)  # Python 3.x.
+            if is_str and matched_files:  # Only one file has been found (str).
+                founds.append(os.path.join(base, files))
+            else:  # Several files have been found (list).
+                founds.extend(os.path.join(base, matched_file) for matched_file in matched_files)
             if founds and first:
                 founds = [founds[0]]
                 break
