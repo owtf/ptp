@@ -29,7 +29,7 @@ class AbstractParser(object):
     #: :class:`str` -- Format of reports it supports.
     __format__ = None
     #: :class:`list` -- Versions it can supports.
-    __version__ = None
+    __version__ = ''
 
     def __init__(self, pathname='./', filename='*', first=True):
         """Initialize :class:`AbstractParser`.
@@ -111,8 +111,12 @@ class AbstractParser(object):
         :rtype: :class:`bool`
 
         """
-        if re.findall(cls.__version__, metadata[key], re.IGNORECASE):
-            return True
+        try:
+            found = re.findall(cls.__version__, metadata[key], re.IGNORECASE)
+            if filter(None, found):  # Is there a non-empty result from re.findall?
+                return True
+        except KeyError:
+            pass
         return False
 
     def parse_metadata(self):
