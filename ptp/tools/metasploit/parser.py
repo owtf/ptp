@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool Metasploit.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool Metasploit.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -23,8 +22,7 @@ class MetasploitParser(FileParser):
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         self.__plugin__ = plugin
@@ -37,8 +35,7 @@ class MetasploitParser(FileParser):
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`

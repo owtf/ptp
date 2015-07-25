@@ -1,8 +1,7 @@
 """
 
-:synopsis: Metasploit does not provide ranking for the vulnerabilities it has
-    found. This file tries to define a ranking for every Metasploit's modules
-    discoveries it might find.
+:synopsis: Metasploit does not provide ranking for the vulnerabilities it has found. This file tries to define a
+    ranking for every Metasploit's modules discoveries it might find.
 
 """
 
@@ -211,5 +210,4 @@ SIGNATURES = {
     'exploit/windows/ssh/freeftpd_key_exchange': {
         'Trying target': HIGH},
     'exploit/windows/ssh/freesshd_key_exchange': {
-        'Trying target': HIGH},
-}
+        'Trying target': HIGH}}

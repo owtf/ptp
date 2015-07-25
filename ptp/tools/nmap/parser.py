@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool Nmap.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool Nmap.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -25,8 +24,7 @@ class NmapXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         XMLParser.__init__(self, pathname, filename, first=first)
@@ -37,8 +35,7 @@ class NmapXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -60,8 +57,7 @@ class NmapXMLParser(XMLParser):
         :return: The metadatas of the report.
         :rtype: dict
 
-        :raises: :class:`NotSupportedVersionError` -- if it does not support
-            the version of this report.
+        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.
 
         """
         # Find the metadata of Nmap.
@@ -69,8 +65,7 @@ class NmapXMLParser(XMLParser):
         if self.check_version(metadata):
             self.metadata = metadata
         else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of Nmap.')
+            raise NotSupportedVersionError('PTP does NOT support this version of Nmap.')
 
     def parse_report(self):
         """Parse the results of the report.

@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    robots.txt files.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the robots.txt files.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -23,8 +22,7 @@ class RobotsParser(LineParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         LineParser.__init__(self, pathname, filename, first=first)
@@ -35,8 +33,7 @@ class RobotsParser(LineParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -67,10 +64,7 @@ class RobotsParser(LineParser):
         :rtype: :class:`list`
 
         """
-        disallowed_entries = [
-            line.lstrip('Disallow: ')
-            for line in self.stream
-            if line.startswith('Disallow')]
+        disallowed_entries = [line.lstrip('Disallow: ') for line in self.stream if line.startswith('Disallow')]
         if not disallowed_entries:
             return []
         self.vulns = [

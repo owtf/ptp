@@ -1,7 +1,6 @@
 """
 
-:synopsis: Define the basic :mod:`parser` classes that will parse the
-    data from the report file.
+:synopsis: Define the basic :mod:`parser` classes that will parse the data from the report file.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -20,8 +19,8 @@ class AbstractParser(object):
 
     .. note::
 
-        This class will be extended for each pentesting tool. That way, each
-        tool will add its own parsing specificities.
+        This class will be extended for each pentesting tool. That way, each tool will add its own parsing
+        specificities.
 
     """
 
@@ -37,8 +36,7 @@ class AbstractParser(object):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         #: :class:`type` -- i/o stream of the report.
@@ -53,10 +51,8 @@ class AbstractParser(object):
         """Retrieve the full path to the report file(s).
 
         :param str pathname: The root directory where to start searching.
-        :param re file_regex: The regex that will be matched against all files
-            from within `pathname`.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
+        :param re file_regex: The regex that will be matched against all files from within `pathname`.
+        :param bool first: Stop the search as soon as a file has been matched.
 
         :return: A list of path to the matched files that have been found.
         :rtype: :class:`list`
@@ -83,26 +79,21 @@ class AbstractParser(object):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
+        :param bool first: Stop the search as soon as a file has been matched.
 
-        :raises: :class:`NotImplementedError` because this is an abstract
-            method.
+        :raises: :class:`NotImplementedError` because this is an abstract method.
 
         """
-        raise NotImplementedError(
-            '`handle_file` function MUST be define for each parser.')
+        raise NotImplementedError('`handle_file` function MUST be defined for each parser.')
 
     @classmethod
     def is_mine(cls):
         """Check if it can handle the report file.
 
-        :raises: :class:`NotImplementedError` because this is an abstract
-            method.
+        :raises: :class:`NotImplementedError` because this is an abstract method.
 
         """
-        raise NotImplementedError(
-            '`is_mine` function MUST be define for each parser.')
+        raise NotImplementedError('`is_mine` function MUST be defined for each parser.')
 
     @classmethod
     def check_version(cls, metadata, key='version'):
@@ -122,30 +113,25 @@ class AbstractParser(object):
     def parse_metadata(self):
         """Parse the metadata of a report.
 
-        :raises: :class:`NotImplementedError` because this is an abstract
-            method.
+        :raises: :class:`NotImplementedError` because this is an abstract method.
 
         """
-        raise NotImplementedError(
-            '`parse_metadata` function MUST be define for each parser.')
+        raise NotImplementedError('`parse_metadata` function MUST be defined for each parser.')
 
     def parse_report(self):
         """Parse the results of a report file.
 
-        :raises: :class:`NotImplementedError` because this is an abstract
-            method.
+        :raises: :class:`NotImplementedError` because this is an abstract method.
 
         """
-        raise NotImplementedError(
-            '`parse_report` function MUST be define for each parser.')
+        raise NotImplementedError('`parse_report` function MUST be defined for each parser.')
 
 
 class XMLParser(AbstractParser):
 
     """Specialized parser for XML files.
 
-    Define the special :func:`handle_file` function in order to process the XML
-    report file.
+    Define the special :func:`handle_file` function in order to process the XML report file.
 
     """
 
@@ -157,8 +143,7 @@ class XMLParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
+        :param bool first: Stop the search as soon as a file has been matched.
 
         """
         AbstractParser.__init__(self, pathname, filename, first=first)
@@ -169,8 +154,8 @@ class XMLParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
+        :param bool first: Stop the search as soon as a file has been matched.
+
         :raises ValueError: if the report file has not the right extension.
         :raises LxmlError: if Lxml cannot parse the XML file.
 
@@ -183,8 +168,7 @@ class XMLParser(AbstractParser):
             raise ValueError("No report found.")
         fullpath = fullpath[0]
         if not fullpath.endswith(cls.__format__):
-            raise ValueError(
-                "This parser only supports '%s' files" % cls.__format__)
+            raise ValueError("This parser only supports '%s' files" % cls.__format__)
         return etree.parse(fullpath).getroot()
 
 
@@ -192,8 +176,7 @@ class FileParser(AbstractParser):
 
     """Specialized parser for generic report file(s).
 
-    Define the special :func:`handle_file` function in order to process the
-    generic report file.
+    Define the special :func:`handle_file` function in order to process the generic report file.
 
     """
 
@@ -202,8 +185,7 @@ class FileParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
+        :param bool first: Stop the search as soon as a file has been matched.
 
         """
         AbstractParser.__init__(self, pathname, filename, first=first)
@@ -214,12 +196,10 @@ class FileParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
-        :raises OSError: if an error occurs when opening/reading the report
-            file.
-        :raises IOError: if an error occurs when opening/reading the report
-            file.
+        :param bool first: Stop the search as soon as a file has been matched.
+
+        :raises OSError: if an error occurs when opening/reading the report file.
+        :raises IOError: if an error occurs when opening/reading the report file.
 
         :return: all the data from the file.
         :rtype: :class:`str`
@@ -238,13 +218,12 @@ class FileParser(AbstractParser):
 class LineParser(AbstractParser):
     """Specialized parser for generic report files.
 
-    Define the special :func:`handle_file` function in order to process the
-    generic report file.
+    Define the special :func:`handle_file` function in order to process the generic report file.
 
     .. note::
 
-        Contrary to :class:`FileParser`, this class reads the file line by line
-        and return a :class:`list`, instead of a :class:`str`.
+        Contrary to :class:`FileParser`, this class reads the file line by line and return a :class:`list`, instead of
+        a :class:`str`.
 
     """
 
@@ -253,8 +232,7 @@ class LineParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
+        :param bool first: Stop the search as soon as a file has been matched.
 
         """
         AbstractParser.__init__(self, pathname, filename, first=first)
@@ -265,14 +243,11 @@ class LineParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been
-            matched.
-        :param bool skip_empty: skip the empty lines that can occur in the
-            file if `True`, otherwise keep them.
-        :raises OSError: if an error occurs when opening/reading the report
-            file.
-        :raises IOError: if an error occurs when opening/reading the report
-            file.
+        :param bool first: Stop the search as soon as a file has been matched.
+        :param bool skip_empty: skip the empty lines that can occur in the file if `True`, otherwise keep them.
+
+        :raises OSError: if an error occurs when opening/reading the report file.
+        :raises IOError: if an error occurs when opening/reading the report file.
 
         :return: all the data from the file, line by line.
         :rtype: :class:`list`

@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool Arachni.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool Arachni.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -42,8 +41,7 @@ class ArachniXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         XMLParser.__init__(self, pathname, filename, first=first)
@@ -54,8 +52,7 @@ class ArachniXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -75,8 +72,7 @@ class ArachniXMLParser(XMLParser):
     def parse_metadata(self):
         """Parse the metadata of the report.
 
-        :raises: :class:`NotSupportedVersionError` -- if it does not support
-            the version of this report.
+        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.
 
         :return: The metadata of the report.
         :rtype: dict
@@ -90,8 +86,7 @@ class ArachniXMLParser(XMLParser):
         if self.check_version(self.metadata):
             return self.metadata
         else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of Arachni.')
+            raise NotSupportedVersionError('PTP does NOT support this version of Arachni.')
 
     def parse_report(self):
         """Parse the results of the report.

@@ -1,8 +1,7 @@
 """
 
-:synopsis: Wapiti does not provide ranking for the vulnerabilities it has
-    found. This file tries to define a ranking for every vulnerability Wapiti
-    might find.
+:synopsis: Wapiti does not provide ranking for the vulnerabilities it has found. This file tries to define a ranking
+    for every vulnerability Wapiti might find.
 
 """
 
@@ -30,5 +29,4 @@ SIGNATURES = {
     # Informational ranked vulnerabilities
     'Backup file': INFO,
     'Potentially dangerous file': INFO,  # TODO: Is this higher than INFO?
-    'Internal Server Error': INFO,
-}
+    'Internal Server Error': INFO}

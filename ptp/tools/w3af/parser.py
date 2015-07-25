@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool W3AF.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool W3AF.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -43,8 +42,7 @@ class W3AFXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         XMLParser.__init__(self, pathname, filename, first=first)
@@ -55,8 +53,7 @@ class W3AFXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -81,8 +78,7 @@ class W3AFXMLParser(XMLParser):
     def parse_metadata(self):
         """Parse the metadata of the report.
 
-        :raises: :class:`NotSupportedVersionError` -- if it does not support
-            the version of this report.
+        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.
 
         :return: The metadata of the report.
         :rtype: dict
@@ -99,8 +95,7 @@ class W3AFXMLParser(XMLParser):
         if self.check_version(metadata):
             self.metadata = metadata
         else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of W3AF.')
+            raise NotSupportedVersionError('PTP does NOT support this version of W3AF.')
 
     def parse_report(self):
         """Parse the results of the report.

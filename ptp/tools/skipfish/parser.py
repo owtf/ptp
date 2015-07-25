@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool Skipfish.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool Skipfish.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -54,10 +53,8 @@ class SkipfishJSParser(AbstractParser):
         reportfile = reportfile[0]
         self.metadata_stream, self.report_stream = self.handle_file(
             metadatafile, reportfile)
-        self.re_metadata = re.compile(
-            r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
-        self.re_report = re.compile(
-            r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
+        self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
+        self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
     @classmethod
     def handle_file(cls, metadatafile, reportfile):
@@ -73,10 +70,8 @@ class SkipfishJSParser(AbstractParser):
         :rtype: :class:`tuple`
 
         """
-        if (not metadatafile.endswith(cls.__format__) or
-                not reportfile.endswith(cls.__format__)):
-            raise ValueError(
-                "This parser only supports '%s' files" % cls.__format__)
+        if not metadatafile.endswith(cls.__format__) or not reportfile.endswith(cls.__format__):
+            raise ValueError("This parser only supports '%s' files" % cls.__format__)
         with open(metadatafile, 'r') as f:
             metadata_stream = f.read()
         with open(reportfile, 'r') as f:
@@ -102,9 +97,7 @@ class SkipfishJSParser(AbstractParser):
             return False
         reportfile = reportfile[0]
         try:
-            metadata_stream, report_stream = cls.handle_file(
-                metadatafile,
-                reportfile)
+            metadata_stream, report_stream = cls.handle_file(metadatafile, reportfile)
         except (OSError, IOError, ValueError):
             return False
         return True
@@ -112,16 +105,14 @@ class SkipfishJSParser(AbstractParser):
     def parse_metadata(self):
         """Retrieve the metadata of the report.
 
-        :raises: :class:`NotSupportedVersionError` -- if it does not support
-            this version of the report.
+        :raises: :class:`NotSupportedVersionError` -- if it does not support this version of the report.
 
         :return: Dictionary containing the metadatas.
         :rtype: :class:`dict`
 
         .. note::
 
-            In skipfish the metadata are saved into the summary.js file as
-            follow:
+            In skipfish the metadata are saved into the summary.js file as follow:
 
             .. code-block:: js
 
@@ -133,26 +124,23 @@ class SkipfishJSParser(AbstractParser):
         """
         re_result = self.re_metadata.findall(self.metadata_stream)
         metadata = dict({el[0]: el[1] for el in re_result})
-        # Check if the version if the good one
+        # Check if the version if the good one.
         if self.check_version(metadata, key='sf_version'):
             return metadata
         else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of Skipfish.')
+            raise NotSupportedVersionError('PTP does NOT support this version of Skipfish.')
 
     def parse_report(self):
         """Retrieve the results from the report.
 
-        :raises: :class:`ReportNotFoundError` -- if the report file was not
-            found.
+        :raises: :class:`ReportNotFoundError` -- if the report file was not found.
 
         :return: List of dicts where each one represents a discovery.
         :rtype: :class:`list`
 
         .. note::
 
-            Example of retrieved data after conversion (i.e. `raw_report`)
-            using the module :mod:`ast`:
+            Example of retrieved data after conversion (i.e. `raw_report`) using the module :mod:`ast`:
 
             .. code-block:: js
 
@@ -167,11 +155,8 @@ class SkipfishJSParser(AbstractParser):
         re_result = self.re_report.findall(self.report_stream)
         report = dict({el[0]: el[1] for el in re_result})
         if REPORT_VAR_NAME not in report:
-            raise ReportNotFoundError(
-                'PTP did NOT find issue_samples variable. Is this the '
-                'right file?')
-        # We now have a raw version of the Skipfish report as a list of
-        # dict.
+            raise ReportNotFoundError('PTP did NOT find issue_samples variable. Is this the correct file?')
+        # We now have a raw version of the Skipfish report as a list of dict.
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln['severity']]}
             for vuln in ast.literal_eval(report[REPORT_VAR_NAME])]
