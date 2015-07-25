@@ -55,7 +55,7 @@ class AbstractParser(object):
         :param bool first: Stop the search as soon as a file has been matched.
 
         :return: A list of path to the matched files that have been found.
-        :rtype: :class:`list`
+        :rtype: list
 
         .. note::
 
@@ -108,7 +108,7 @@ class AbstractParser(object):
         :param str key: The :attr:`metadata` key containing the version value.
 
         :return: `True` if it can parse the report, `False` otherwise.
-        :rtype: :class:`bool`
+        :rtype: bool
 
         """
         try:
@@ -122,7 +122,7 @@ class AbstractParser(object):
     def parse_metadata(self):
         """Parse the metadata of a report.
 
-        :raises: :class:`NotImplementedError` because this is an abstract method.
+        :raises: NotImplementedError because this is an abstract method.
 
         """
         raise NotImplementedError('`parse_metadata` function MUST be defined for each parser.')
@@ -130,7 +130,7 @@ class AbstractParser(object):
     def parse_report(self):
         """Parse the results of a report file.
 
-        :raises: :class:`NotImplementedError` because this is an abstract method.
+        :raises: NotImplementedError because this is an abstract method.
 
         """
         raise NotImplementedError('`parse_report` function MUST be defined for each parser.')
@@ -210,8 +210,8 @@ class FileParser(AbstractParser):
         :raises OSError: if an error occurs when opening/reading the report file.
         :raises IOError: if an error occurs when opening/reading the report file.
 
-        :return: all the data from the file.
-        :rtype: :class:`str`
+        :return: data from the file.
+        :rtype: str
 
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
@@ -259,7 +259,7 @@ class LineParser(AbstractParser):
         :raises IOError: if an error occurs when opening/reading the report file.
 
         :return: all the data from the file, line by line.
-        :rtype: :class:`list`
+        :rtype: list
 
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
@@ -269,9 +269,7 @@ class LineParser(AbstractParser):
         for current_file in fullpath:
             with open(current_file, 'r') as f:
                 if skip_empty:
-                    data.extend([
-                        line.rstrip('\n\r') for line in f.readlines()
-                        if line.rstrip('\n\r')])
+                    data.extend([line.rstrip('\n\r') for line in f.readlines() if line.rstrip('\n\r')])
                 else:
                     data.extend([line.rstrip('\n\r') for line in f.readlines()])
         return data

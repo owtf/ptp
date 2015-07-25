@@ -48,7 +48,9 @@ class PTP(object):
         :param str tool_name: help :mod:`ptp` by specifying the name of the tool that has generated the target report.
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
-        :raises: :class:`NotSupportedToolError` if ``tool_name`` is not in the supported tools list of PTP.
+
+        :raises: :class:`ptp.libptp.exceptions.NotSupportedToolError` when ``tool_name`` is not in the PTP's supported
+            tools list.
 
         """
         if tool_name and tool_name not in self.supported:
@@ -99,10 +101,11 @@ class PTP(object):
 
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
+
         :raises: :class:`NotSupportedToolError` if the tool that has generated the report is not supported by PTP.
 
         :return: The list of dictionaries of the results found in the report.
-        :rtype: :class:`list`
+        :rtype: list
 
         """
         if self.parser is None:
@@ -119,7 +122,7 @@ class PTP(object):
         """Return the highest ranking of the report.
 
         :return: the risk id of the highest ranked vulnerability referenced in the report.
-        :rtype: :class:`int`
+        :rtype: int
 
         .. note::
 
