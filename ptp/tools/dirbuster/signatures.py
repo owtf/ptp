@@ -8,7 +8,7 @@
 """
 
 
-from ptp.libptp.constants import HIGH, MEDIUM, LOW, INFO
+from ptp.libptp.constants import HIGH, LOW, INFO
 
 
 # TODO: Complete the directory signatures database.

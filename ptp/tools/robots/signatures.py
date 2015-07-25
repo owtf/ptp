@@ -2,6 +2,8 @@
 
 :synopsis: Robots.txt might contains interesting Disallow entries. This file tries to define a ranking for them.
 
+.. moduleauthor:: Tao Sauvage
+
 """
 
 

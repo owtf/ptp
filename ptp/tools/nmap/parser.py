@@ -10,7 +10,6 @@ import re
 
 from ptp.libptp.exceptions import NotSupportedVersionError
 from ptp.libptp.parser import XMLParser
-from ptp.tools.nmap.signatures import SIGNATURES
 
 
 class NmapXMLParser(XMLParser):
@@ -80,4 +79,4 @@ class NmapXMLParser(XMLParser):
         """
         # TODO: Parse Nmap result
         ports = self.stream.findall('.//port')
-        return []
+        return ports
