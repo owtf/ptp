@@ -165,8 +165,9 @@ class XMLParser(AbstractParser):
         :param str filename: Regex matching the report file.
         :param bool first: Stop the search as soon as a file has been matched.
 
-        :raises ValueError: if the report file has not the right extension.
-        :raises LxmlError: if Lxml cannot parse the XML file.
+        :raises IOError: when the report file cannot be found.
+        :raises TypeError: when the report file has not the right extension.
+        :raises :class:`lxml.etree.XMLSyntaxError`: when Lxml cannot parse the XML file.
 
         :return: handle on the root node element from the XML file.
         :rtype: :class:`lxml.etree._Element`
@@ -174,10 +175,10 @@ class XMLParser(AbstractParser):
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
-            raise ValueError("No report found.")
+            raise IOError("Report matching '%s' cannot be found." % filename)
         fullpath = fullpath[0]
         if not fullpath.endswith(cls.__format__):
-            raise ValueError("This parser only supports '%s' files" % cls.__format__)
+            raise TypeError("This parser only supports '%s' files" % cls.__format__)
         return etree.parse(fullpath).getroot()
 
 
@@ -207,8 +208,8 @@ class FileParser(AbstractParser):
         :param str filename: Regex matching the report file.
         :param bool first: Stop the search as soon as a file has been matched.
 
-        :raises OSError: if an error occurs when opening/reading the report file.
-        :raises IOError: if an error occurs when opening/reading the report file.
+        :raises IOError: when the report file cannot be found or an error occurs when opening/reading.
+        :raises OSError: when an error occurs when opening/reading the report file.
 
         :return: data from the file.
         :rtype: str
@@ -216,7 +217,7 @@ class FileParser(AbstractParser):
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
-            raise ValueError("No report found.")
+            raise IOError("Report matching '%s' cannot be found." % filename)
         fullpath = fullpath[0]
         data = ''
         with open(fullpath, 'r') as f:
@@ -255,8 +256,8 @@ class LineParser(AbstractParser):
         :param bool first: Stop the search as soon as a file has been matched.
         :param bool skip_empty: skip the empty lines that can occur in the file if `True`, otherwise keep them.
 
-        :raises OSError: if an error occurs when opening/reading the report file.
-        :raises IOError: if an error occurs when opening/reading the report file.
+        :raises IOError: when the report file cannot be found or an error occurs when opening/reading.
+        :raises OSError: when an error occurs when opening/reading the report file.
 
         :return: all the data from the file, line by line.
         :rtype: list
@@ -264,7 +265,7 @@ class LineParser(AbstractParser):
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
-            raise ValueError("No report found.")
+            raise IOError("Report matching '%s' cannot be found." % filename)
         data = []
         for current_file in fullpath:
             with open(current_file, 'r') as f:

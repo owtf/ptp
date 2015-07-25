@@ -8,7 +8,7 @@
 
 import re
 
-from lxml.etree import LxmlError
+from lxml.etree import XMLSyntaxError
 
 from ptp.libptp.exceptions import NotSupportedVersionError
 from ptp.libptp.constants import UNKNOWN
@@ -47,7 +47,7 @@ class WapitiXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (ValueError, LxmlError):
+        except (IOError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
@@ -139,7 +139,7 @@ class Wapiti221XMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (ValueError, LxmlError):
+        except (IOError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//generatedBy')
         if raw_metadata is None:

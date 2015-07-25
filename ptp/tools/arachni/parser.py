@@ -8,7 +8,7 @@
 
 import re
 
-from lxml.etree import LxmlError
+from lxml.etree import XMLSyntaxError
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
@@ -60,7 +60,7 @@ class ArachniXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (ValueError, LxmlError):
+        except (IOError, XMLSyntaxError):
             return False
         version = stream.find('.//version')
         if version is None:
