@@ -132,4 +132,4 @@ class PTP(object):
         """
         if not self.vulns:
             return UNKNOWN
-        return max(RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
+        return max(RANKING_SCALE.get(vuln.get('ranking'), UNKNOWN) for vuln in self.vulns)
