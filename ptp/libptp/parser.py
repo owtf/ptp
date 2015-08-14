@@ -112,8 +112,8 @@ class AbstractParser(object):
 
         """
         try:
-            found = re.findall(cls.__version__, metadata[key], re.IGNORECASE)
-            if filter(None, found):  # Is there a non-empty result from re.findall?
+            # Is there a non-empty result from re.findall?
+            if list(filter(None, re.findall(cls.__version__, metadata[key], re.IGNORECASE))):
                 return True
         except KeyError:
             pass
