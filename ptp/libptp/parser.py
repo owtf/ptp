@@ -111,6 +111,8 @@ class AbstractParser(object):
         :param dict metadata: The metadata in which to find the version.
         :param str key: The :attr:`metadata` key containing the version value.
 
+        :raises: KeyError when `metadata` has no key `key`.
+
         :return: `True` if it can parse the report, `False` otherwise.
         :rtype: :class:`bool`
 
