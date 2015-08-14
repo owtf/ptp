@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool OWASP-CM-008.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool OWASP-CM-008.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -22,8 +21,7 @@ class OWASPCM008Parser(LineParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         LineParser.__init__(self, pathname, filename, first=first)
@@ -34,8 +32,7 @@ class OWASPCM008Parser(LineParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -56,10 +53,7 @@ class OWASPCM008Parser(LineParser):
         :rtype: dict
 
         """
-        self.metadata = {
-            'date': line.lstrip('Date: ')
-            for line in self.stream
-            if line.startswith('Date')}
+        self.metadata = {'date': line.lstrip('Date: ') for line in self.stream if line.startswith('Date')}
         return self.metadata
 
     def parse_report(self):

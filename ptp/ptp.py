@@ -45,17 +45,16 @@ class PTP(object):
     def __init__(self, tool_name='', *args, **kwargs):
         """Initialize :class:`PTP`.
 
-        :param str tool_name: help :mod:`ptp` by specifying the name of the
-            tool that has generated the target report.
+        :param str tool_name: help :mod:`ptp` by specifying the name of the tool that has generated the target report.
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
-        :raises: :class:`NotSupportedToolError` if ``tool_name`` is not in the
-            supported tools list of PTP.
+
+        :raises: :class:`ptp.libptp.exceptions.NotSupportedToolError` when ``tool_name`` is not in the PTP's supported
+            tools list.
 
         """
         if tool_name and tool_name not in self.supported:
-            raise NotSupportedToolError(
-                "The tool '%s' is not supported by PTP." % tool_name)
+            raise NotSupportedToolError("The tool '%s' is not supported by PTP." % tool_name)
         #: :class:`str` -- Name of the tool that generated the report.
         self.tool_name = tool_name
         #: :class:`libptp.AbstractParser` -- Parser used on the report.
@@ -75,8 +74,7 @@ class PTP(object):
 
         """
         if not self.tool_name:
-            # Since no tool name has been specified by the user, try to
-            # automatically detect it.
+            # Since no tool name has been specified by the user, try to automatically detect it.
             try:
                 supported = self.supported.itervalues()
             except AttributeError:  # Python3 then.
@@ -103,11 +101,11 @@ class PTP(object):
 
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
-        :raises: :class:`NotSupportedToolError` if the tool that has generated
-            the report is not supported by PTP.
+
+        :raises: :class:`NotSupportedToolError` if the tool that has generated the report is not supported by PTP.
 
         :return: The list of dictionaries of the results found in the report.
-        :rtype: :class:`list`
+        :rtype: list
 
         """
         if self.parser is None:
@@ -123,17 +121,15 @@ class PTP(object):
     def get_highest_ranking(self):
         """Return the highest ranking of the report.
 
-        :return: the risk id of the highest ranked vulnerability referenced in
-            the report.
-        :rtype: :class:`int`
+        :return: the risk id of the highest ranked vulnerability referenced in the report.
+        :rtype: int
 
         .. note::
 
-            The ranking starts from `0` to `n` where `n` represents the most
-            critical risk. (See :mod:`ptp.libptp.constants`).
+            The ranking starts from `0` to `n` where `n` represents the most critical risk.
+            (See :mod:`ptp.libptp.constants`).
 
         """
         if not self.vulns:
             return UNKNOWN
-        return max(
-            RANKING_SCALE.get(vuln.get('ranking')) for vuln in self.vulns)
+        return max(RANKING_SCALE.get(vuln.get('ranking'), UNKNOWN) for vuln in self.vulns)

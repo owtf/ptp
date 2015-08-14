@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool Wapiti.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool Wapiti.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -9,7 +8,7 @@
 
 import re
 
-from lxml.etree import LxmlError
+from lxml.etree import XMLSyntaxError
 
 from ptp.libptp.exceptions import NotSupportedVersionError
 from ptp.libptp.constants import UNKNOWN
@@ -29,8 +28,7 @@ class WapitiXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         XMLParser.__init__(self, pathname, filename, first=first)
@@ -41,8 +39,7 @@ class WapitiXMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -50,7 +47,7 @@ class WapitiXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (ValueError, LxmlError):
+        except (IOError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
@@ -65,8 +62,7 @@ class WapitiXMLParser(XMLParser):
     def parse_metadata(self):
         """Parse the metadata of the report.
 
-        :raises: :class:`NotSupportedVersionError` -- if it does not support
-            the version of this report.
+        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.
 
         :return: The metadata of the report.
         :rtype: dict
@@ -77,13 +73,11 @@ class WapitiXMLParser(XMLParser):
         # Reconstruct the metadata
         metadata = {el.get('name'): el.text for el in raw_metadata}
         # Only keep the version number
-        metadata['generatorVersion'] = metadata['generatorVersion'].lstrip(
-            'Wapiti ')
+        metadata['generatorVersion'] = metadata['generatorVersion'].lstrip('Wapiti ')
         if self.check_version(metadata, key='generatorVersion'):
             self.metadata = metadata
         else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of Wapiti.')
+            raise NotSupportedVersionError('PTP does NOT support this version of Wapiti.')
 
     def parse_report(self):
         """Parse the results of the report.
@@ -102,8 +96,7 @@ class WapitiXMLParser(XMLParser):
                 pass
             # Ensure that there are 'entry' sub-sections that represent the
             # actual discoveries/vulnerabilities.
-            if (len(entries.findall('.//entry')) and
-                    category.get('name') in SIGNATURES):
+            if len(entries.findall('.//entry')) and category.get('name') in SIGNATURES:
                 vulns.append({
                     'name': category.get('name'),
                     'ranking': SIGNATURES.get(category.get('name'), UNKNOWN),
@@ -127,8 +120,7 @@ class Wapiti221XMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         XMLParser.__init__(self, pathname, filename, first=first)
@@ -139,8 +131,7 @@ class Wapiti221XMLParser(XMLParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -148,7 +139,7 @@ class Wapiti221XMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (ValueError, LxmlError):
+        except (IOError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//generatedBy')
         if raw_metadata is None:
@@ -163,8 +154,7 @@ class Wapiti221XMLParser(XMLParser):
     def parse_metadata(self):
         """Parse the metadata of the report.
 
-        :raises: :class:`NotSupportedVersionError` -- if it does not support
-            the version of this report.
+        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.
 
         :return: The metadata of the report.
         :rtype: dict
@@ -178,8 +168,7 @@ class Wapiti221XMLParser(XMLParser):
         if self.check_version(metadata):
             self.metadata = metadata
         else:
-            raise NotSupportedVersionError(
-                'PTP does NOT support this version of Wapiti.')
+            raise NotSupportedVersionError('PTP does NOT support this version of Wapiti.')
 
     def parse_report(self):
         """Parse the results of the report.
@@ -196,10 +185,8 @@ class Wapiti221XMLParser(XMLParser):
             entries = category.find('.//bugList')
             if not len(entries):
                 pass
-            # Ensure that there are 'entry' sub-sections that represent the
-            # actual discoveries/vulnerabilities.
-            if (len(entries.findall('.//bug')) and
-                    category.get('name') in SIGNATURES):
+            # Ensure that there are 'entry' sub-sections that represent the actual discoveries/vulnerabilities.
+            if len(entries.findall('.//bug')) and category.get('name') in SIGNATURES:
                 vulns.append({
                     'name': category.get('name'),
                     'ranking': SIGNATURES.get(category.get('name'), UNKNOWN),

@@ -1,15 +1,14 @@
 """
 
-:synopsis: DirBuster does not provide ranking for the vulnerabilities it has
-    found. This file tries to define a ranking for every DirBuster's
-    discoveries it might find.
+:synopsis: DirBuster does not provide ranking for the vulnerabilities it has found. This file tries to define a ranking
+    for every DirBuster's discoveries it might find.
 
 .. moduleauthor:: Tao Sauvage
 
 """
 
 
-from ptp.libptp.constants import HIGH, MEDIUM, LOW, INFO
+from ptp.libptp.constants import HIGH, LOW, INFO
 
 
 # TODO: Complete the directory signatures database.
@@ -19,8 +18,7 @@ DIRECTORIES = {
     r'.*/admin/.*': LOW,
     r'.*/conf/server.xml/.*': LOW,
     r'.*/phpmyadmin/.*': LOW,
-    r'.*/phpMyAdmin/.*': LOW,
-}
+    r'.*/phpMyAdmin/.*': LOW}
 
 
 # TODO: Complete the files signatures database.
@@ -48,5 +46,4 @@ FILES = {
 
     r'.*/server-info': INFO,
     r'.*/server-status': INFO,
-    r'.*/status': INFO,
-}
+    r'.*/status': INFO}

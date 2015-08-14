@@ -9,13 +9,13 @@ on the most likely weak areas of a web application or network first, which will
 be valuable to efficiently use the remaining time in a penetration assessment.
 
 Instead of evaluating every plugins run by OWASP - OWTF and defining the
-rankings for each of them, thanks to `ptp`, the user will be able to focus
-on the ones that have been ranked with the highest risks. The user is then able
-to confirm or override the automated rankings since we estimate that she/he is
-the only one that can accurately detect the false positives.
+rankings for each of them, thanks to `ptp`, the user will be able to focus on
+the ones that have been ranked with the highest risks. The user is then able to
+confirm or override the automated rankings since we estimate that she/he is the
+only one that can accurately detect the false positives.
 
-When developing the automated ranking system, `ptp`'s main goal was joined
-with a secondary one.
+When developing the automated ranking system, `ptp`'s main goal was joined with
+a secondary one.
 
 Apart from its main feature which is **ranking the results from security tools
 reports**, it also provides an **unified way to reuse these reports directly in
@@ -25,8 +25,8 @@ your python code**, without having to deal with complex parsing.
 Installation
 ============
 
-Using `pip <https://pip.readthedocs.org/en/latest/installing.html>`_
-===================================================================
+Using pip
+=========
 
 The `ptp` library is available on `PyPI <https://pypi.python.org/pypi>`_ at the
 following address: `https://pypi.python.org/pypi/ptp
@@ -99,5 +99,5 @@ Current support
 + owasp
 + robots.txt
 + skipfish (2.10b)
-+ w3af (1.6 to 1.6.45) (XML report)
++ w3af (1.6 to 1.6.51) (XML report)
 + wapiti (2.2.1, 2.3.0) (XML report)

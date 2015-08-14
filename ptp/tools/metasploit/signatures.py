@@ -1,8 +1,9 @@
 """
 
-:synopsis: Metasploit does not provide ranking for the vulnerabilities it has
-    found. This file tries to define a ranking for every Metasploit's modules
-    discoveries it might find.
+:synopsis: Metasploit does not provide ranking for the vulnerabilities it has found. This file tries to define a
+    ranking for every Metasploit's modules discoveries it might find.
+
+.. moduleauthor:: Tao Sauvage
 
 """
 
@@ -62,12 +63,11 @@ SIGNATURES = {
         'SUCCESSFUL LOGIN': HIGH},
     'auxiliary/scanner/snmp/snmp_enumusers': {
         'Found Users': LOW},
-    # FIXME: when the connection is refused, the report contains the following
-    # string: "The unit tests of metasploit are not complete." which matches
-    # the " - " signature string.
-    #'auxiliary/scanner/snmp/snmp_enumshares': {
-    #    ' - ': LOW,
-    #    },
+    # FIXME: when the connection is refused, the report contains the following string: "The unit tests of metasploit
+    # are not complete." which matches the " - " signature string.
+    # 'auxiliary/scanner/snmp/snmp_enumshares': {
+    #     ' - ': LOW,
+    #     },
     'auxiliary/scanner/snmp/snmp_enum': {
         ', Connected.': INFO},
     'auxiliary/scanner/snmp/aix_version': {
@@ -211,5 +211,4 @@ SIGNATURES = {
     'exploit/windows/ssh/freeftpd_key_exchange': {
         'Trying target': HIGH},
     'exploit/windows/ssh/freesshd_key_exchange': {
-        'Trying target': HIGH},
-}
+        'Trying target': HIGH}}

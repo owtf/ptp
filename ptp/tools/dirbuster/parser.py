@@ -1,7 +1,6 @@
 """
 
-:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the
-    tool DirBuster.
+:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool DirBuster.
 
 .. moduleauthor:: Tao Sauvage
 
@@ -34,8 +33,7 @@ class DirbusterParser(LineParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
         LineParser.__init__(self, pathname, filename, first=first)
@@ -46,8 +44,7 @@ class DirbusterParser(LineParser):
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that
-            matched (``False``).
+        :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -105,10 +102,7 @@ class DirbusterParser(LineParser):
             except AttributeError:  # Python3
                 signatures = signatures.items()
             for signature, ranking in signatures:
-                matched = [
-                    True
-                    for disco in discoveries[type_disco]
-                    if re.match(signature, disco)]
+                matched = [True for disco in discoveries[type_disco] if re.match(signature, disco)]
                 if True in matched:
                     vulns.extend([{'ranking': ranking}])
         self.vulns = vulns

@@ -19,5 +19,4 @@ MEDIUM = 3
 HIGH = 4
 
 #: :class:`dict`: :mod:`ptp`'s scale of the ranking values.
-RANKING_SCALE = {
-    HIGH: HIGH, MEDIUM: MEDIUM, LOW: LOW, INFO: INFO, UNKNOWN: UNKNOWN}
+RANKING_SCALE = {HIGH: HIGH, MEDIUM: MEDIUM, LOW: LOW, INFO: INFO, UNKNOWN: UNKNOWN}
