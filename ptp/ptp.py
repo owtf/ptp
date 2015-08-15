@@ -6,6 +6,8 @@
 
 """
 
+import warnings
+
 from .libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
 from .libptp.constants import UNKNOWN, RANKING_SCALE
 from .tools.arachni.parser import ArachniXMLParser
@@ -118,7 +120,8 @@ class PTP(object):
         self.vulns = self.parser.parse_report()
         return self.vulns
 
-    def get_highest_ranking(self):
+    @property
+    def highest_ranking(self):
         """Return the highest ranking of the report.
 
         :return: the risk id of the highest ranked vulnerability referenced in the report.
@@ -133,3 +136,9 @@ class PTP(object):
         if not self.vulns:
             return UNKNOWN
         return max(RANKING_SCALE.get(vuln.get('ranking'), UNKNOWN) for vuln in self.vulns)
+
+    def get_highest_ranking(self):
+        warnings.warn(
+            "get_highest_ranking will be removed in the next release. Use PTP.highest_ranking property instead.",
+            DeprecationWarning)
+        return self.highest_ranking
