@@ -61,7 +61,7 @@ class W3AFXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, XMLSyntaxError):
+        except (IOError, TypeError, XMLSyntaxError):
             return False
         version = stream.find('.//w3af-version')
         if version is None:

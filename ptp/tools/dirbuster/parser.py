@@ -52,7 +52,7 @@ class DirbusterParser(LineParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (OSError, IOError, ValueError):
+        except (OSError, IOError):
             return False
         if stream and re.match(cls._re_version, stream[0]):
             return True

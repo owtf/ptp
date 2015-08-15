@@ -8,6 +8,8 @@
 
 import re
 
+from lxml.etree import XMLSyntaxError
+
 from ptp.libptp.exceptions import NotSupportedVersionError
 from ptp.libptp.parser import XMLParser
 
@@ -42,7 +44,7 @@ class NmapXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except ValueError:
+        except (IOError, TypeError, XMLSyntaxError):
             return False
         if stream.get('scanner') != cls.__tool__:
             return False

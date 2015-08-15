@@ -41,7 +41,7 @@ class RobotsParser(LineParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (OSError, IOError, ValueError):
+        except (OSError, IOError):
             return False
         if stream and stream[0].startswith(('User-agent:', 'Disallow:', 'Allow:')):
             return True
