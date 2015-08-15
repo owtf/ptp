@@ -59,7 +59,7 @@ class SkipfishJSParser(AbstractParser):
 
         :param str metadatafile: Path to the metadata file.
         :param str reportfile: Path to the report file.
-        :raises ValueError: if the files have not the right extension.
+        :raises TypeError: if the files have not the right extension.
         :raises OSError: if an error occurs when reading the files.
         :raises IOError: if an error occurs when reading the files.
 
@@ -68,7 +68,7 @@ class SkipfishJSParser(AbstractParser):
 
         """
         if not metadatafile.endswith(cls.__format__) or not reportfile.endswith(cls.__format__):
-            raise ValueError("This parser only supports '%s' files" % cls.__format__)
+            raise TypeError("This parser only supports '%s' files" % cls.__format__)
         with open(metadatafile, 'r') as f:
             metadata_stream = f.read()
         with open(reportfile, 'r') as f:
@@ -95,7 +95,7 @@ class SkipfishJSParser(AbstractParser):
         reportfile = reportfile[0]
         try:
             metadata_stream, report_stream = cls.handle_file(metadatafile, reportfile)
-        except (OSError, IOError, ValueError):
+        except (OSError, IOError, TypeError):
             return False
         return True
 

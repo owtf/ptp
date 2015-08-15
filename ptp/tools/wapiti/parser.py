@@ -47,7 +47,7 @@ class WapitiXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, XMLSyntaxError):
+        except (IOError, TypeError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:

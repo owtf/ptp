@@ -60,7 +60,7 @@ class ArachniXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, XMLSyntaxError):
+        except (IOError, TypeError, XMLSyntaxError):
             return False
         version = stream.find('.//version')
         if version is None:
