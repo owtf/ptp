@@ -44,15 +44,12 @@ class SkipfishJSParser(AbstractParser):
 
         """
         metadatafile = self._recursive_find(pathname, self._metadatafile)
-        if not metadatafile:
-            return False
-        metadatafile = metadatafile[0]
+        if metadatafile:
+            metadatafile = metadatafile[0]
         reportfile = self._recursive_find(pathname, self._reportfile)
-        if not reportfile:
-            return False
-        reportfile = reportfile[0]
-        self.metadata_stream, self.report_stream = self.handle_file(
-            metadatafile, reportfile)
+        if reportfile:
+            reportfile = reportfile[0]
+        self.metadata_stream, self.report_stream = self.handle_file(metadatafile, reportfile)
         self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
         self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
