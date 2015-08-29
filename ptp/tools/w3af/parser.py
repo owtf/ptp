@@ -96,6 +96,7 @@ class W3AFXMLParser(XMLParser):
             self.metadata = metadata
         else:
             raise NotSupportedVersionError('PTP does NOT support this version of W3AF.')
+        return self.metadata
 
     def parse_report(self):
         """Parse the results of the report.
