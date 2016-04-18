@@ -1,9 +1,0 @@
-[*] 220 xxx.xxx.xx ESMTP Postfix (Debian/GNU)
-[*] Domain Name: xxx.xx
-[+] 00.00.00.00:25 - Found user: ROOT
-[+] 00.00.00.00:25 - Found user: backup
-[+] 00.00.00.00:25 - Found user: bin
-[+] 00.00.00.00:25 - Found user: daemon
-[-] Error: Connection reset by peer
-[*] Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed

@@ -1,4 +1,0 @@
-[*] Instance Name: nil
-[+] 192.168.10.201:1433 - Saving mssql.hashes = sa:0100200cc22f7f2e44121e4c9d2496cbb8d0c73faf4bec054fbc7f2e44121e4c9d2496cbb8d0c73faf4bec054fbc
-[*] Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed

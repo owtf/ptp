@@ -1,3 +1,0 @@
-[+] 172.72.5.141 Found Users: Administrator, Guest, HelpAssistant, IUSR_PLAYGROUND1, IWAM_PLAYGROUND1, SUPPORT_388945a0, playground 
-[*] Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed

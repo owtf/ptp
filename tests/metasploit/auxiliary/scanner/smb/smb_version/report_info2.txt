@@ -1,3 +1,0 @@
-[*] 192.168.1.4:445 is running Windows 7 Home Premium (Build 7601) (language: Unknown) (name:MATU) (domain:VIRTUAL)
-[*] 192.168.1.10:445 is running Windows XP Service Pack 3 (language: Spanish) (name:ANIMAL) (domain:ANIMAL)
-[*] 192.168.1.15:445 is running Unix Samba 3.4.7 (language: Unknown) (name:BT) (domain:BT)

@@ -1,3 +1,0 @@
-[*] bbb.bbb.bbb.bbb:21 Anonymous READ/WRITE (220 Welcome to my FTP Server)
-[*] Scanned 5045 of 8192 hosts (060% complete)
-[*] Auxiliary module execution completed

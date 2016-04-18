@@ -1,9 +1,0 @@
-User-agent: *
-Disallow: /search
-Disallow: /sdch
-Disallow: /groups
-Disallow: /images
-Disallow: /admin
-Disallow: /catalogs
-Allow: /catalogs/about
-Allow: /catalogs/p?

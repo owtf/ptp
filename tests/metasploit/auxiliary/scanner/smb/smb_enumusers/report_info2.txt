@@ -1,7 +1,0 @@
-[*] 192.168.1.161 XEN-XP-SP2-BARE [  ] 
-[*] 192.168.1.154 METASPLOITABLE [ games, nobody, bind, proxy, syslog, user, www-data, root, news, postgres, bin, mail, distccd, proftpd, dhcp, daemon, sshd, man, lp, mysql, gnats, libuuid, backup, msfadmin, telnetd, sys, klog, postfix, service, list, irc, ftp, tomcat55, sync, uucp ] ( LockoutTries=0 PasswordMin=5 )
-[*] Scanned 05 of 16 hosts (031% complete)
-[*] Scanned 12 of 16 hosts (075% complete)
-[*] Scanned 15 of 16 hosts (093% complete)
-[*] Scanned 16 of 16 hosts (100% complete)
-[*] Auxiliary module execution completed

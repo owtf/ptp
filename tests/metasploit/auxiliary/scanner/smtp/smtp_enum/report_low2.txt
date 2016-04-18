@@ -1,4 +1,0 @@
-[*] 192.168.1.103:25 Banner: 220 metasploitable.localdomain ESMTP Postfix (Ubuntu)
-[+] 192.168.1.103:25 Users found: , backup, bin, daemon, distccd, ftp, games, gnats, irc, libuuid, list, lp, mail, man, news, nobody, postgres, postmaster, proxy, service, sshd, sync, sys, syslog, user, uucp, www-data
-[*] Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed

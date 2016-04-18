@@ -1,3 +1,0 @@
-[*] 192.168.1.5 Open X Server (The X.Org Foundation)
-[*] Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed
