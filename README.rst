@@ -2,6 +2,9 @@
 What is PTP?
 ============
 
+.. image:: https://travis-ci.org/owtf/ptp.svg?branch=develop
+    :target: https://travis-ci.org/owtf/ptp
+
 The primary goal of ptp (Pentester's Tools Parser) is to enhance `OWASP - OWTF
 project <https://www.owasp.org/index.php/OWASP_OWTF>`_ in order to provide an
 automated ranking for each plugin. This will allow the user to focus attention
