@@ -149,10 +149,10 @@ can use the following function:
 
 .. code-block:: pycon
 
-    >>> myptp.get_highest_ranking()
+    >>> myptp.highest_ranking
     4
     >>> from libptp.constants import HIGH
-    >>> myptp.get_highest_ranking() == HIGH
+    >>> myptp.highest_ranking == HIGH
     True
 
 .. note::

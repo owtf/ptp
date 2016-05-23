@@ -80,7 +80,7 @@ Usage
     if __name__ == '__main__':
         ptp = PTP()
         ptp.parse('path/to/the/report/directory')
-        print('Highest severity:', ptp.get_highest_ranking())
+        print('Highest severity:', ptp.highest_ranking)
 
 =============
 Documentation
