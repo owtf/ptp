@@ -44,7 +44,7 @@ class PTP(object):
         'owasp-cm-008': [OWASPCM008Parser],
         'robots': [RobotsParser]}
 
-    def __init__(self, tool_name='', *args, **kwargs):
+    def __init__(self, tool_name='', cumulative=False, *args, **kwargs):
         """Initialize :class:`PTP`.
 
         :param str tool_name: help :mod:`ptp` by specifying the name of the tool that has generated the target report.
@@ -65,8 +65,13 @@ class PTP(object):
         self.vulns = []
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
+        # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
+        self.cumulative = cumulative
+        #
+        self.Init = False
         if args or kwargs:
             self._init_parser(*args, **kwargs)
+            self.Init = True
 
     def _init_parser(self, *args, **kwargs):
         """Find and initialize the parser.
@@ -84,7 +89,6 @@ class PTP(object):
         else:
             supported = [self.supported.get(self.tool_name)]
         supported = [parser for parsers in supported for parser in parsers]
-
         for parser in supported:
             try:
                 if parser.is_mine(*args, **kwargs):
@@ -110,14 +114,18 @@ class PTP(object):
         :rtype: list
 
         """
-        if self.parser is None:
+        if not self.Init:
+            self.parser = None
             self._init_parser(*args, **kwargs)
         if self.parser is None:
             raise NotSupportedToolError('This tool is not supported by PTP.')
         # Instantiate the report class.
         self.tool_name = self.parser.__tool__
         self.metadata = self.parser.parse_metadata()
-        self.vulns = self.parser.parse_report()
+        if self.cumulative:
+            self.vulns.append(self.parser.parse_report())
+        else:
+            self.vulns = self.parser.parse_report()
         return self.vulns
 
     @property
