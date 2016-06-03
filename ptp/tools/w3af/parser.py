@@ -12,7 +12,7 @@ from lxml.etree import XMLSyntaxError
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
-from ptp.libptp.parser import XMLParser
+from ptp.libptp.parser import XMLParser, FileParser
 
 
 class W3AFXMLParser(XMLParser):
@@ -20,11 +20,18 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
+    __httpfile_format__ = "*.http.txt"
     __version__ = (
         r'(1\.6(\.0\.[1-5]{1})?)|'
         r'(1\.6\.([45,46,49,50,51]{1})?)')
 
     _re_version = re.compile(r'Version: (\S*)\s')
+    _re_transaction = re.compile(r"(?<=={30}Request )[0-9]+ .*?={9}\n(.*?)(?=\n={70})", re.S)
+    _re_request = re.compile(r"(^.*?)\n==.*?(?=={20}Response )", re.S)
+    _re_response = re.compile(r"(?<=={40}Response )[0-9]+ .*?={9}\n(\w.*)", re.S)
+    _re_reponse_header = re.compile(r".*?content-type: .*?\n", re.S)
+    _re_response_body = re.compile(r"(?<=content-type: )(.*?\n)(.*)", re.S)
+    _re_response_status_code = re.compile(r"(?<=HTTP/\w.\w )(.*)")
 
     HIGH = 'High'
     MEDIUM = 'Medium'
@@ -36,16 +43,6 @@ class W3AFXMLParser(XMLParser):
         MEDIUM: constants.MEDIUM,
         LOW: constants.LOW,
         INFO: constants.INFO}
-
-    def __init__(self, pathname, filename='*.xml', first=True):
-        """Initialize W3AFXMLParser.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that matched (``False``).
-
-        """
-        XMLParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', first=True):

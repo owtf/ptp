@@ -10,6 +10,7 @@ import os
 import re
 import fnmatch
 
+import json
 from lxml import etree
 
 
@@ -31,20 +32,25 @@ class AbstractParser(object):
     #: :class:`list` -- Versions it can supports.
     __version__ = ''
 
-    def __init__(self, pathname='./', filename='*', first=True):
+    def __init__(self, pathname='./', filename='*', full_parse=True, first=True):
         """Initialize :class:`AbstractParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool full_parse: Fully parse the report instead of only the rankings.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
+        #: :class:`str` -- Path to the report directory.
+        self.pathname = pathname
         #: :class:`type` -- i/o stream of the report.
         self.stream = self.handle_file(pathname, filename, first=first)
         #: :class:`list` -- List of dict of the results found in the report.
         self.vulns = []
         #: :class:`dict` -- Dict of the metadata found in the report.
         self.metadata = {}
+        #: :class:`bool` -- Should fully parse the report or not.
+        self.full_parse = full_parse
 
     @staticmethod
     def _recursive_find(pathname='./', file_regex='*', first=True):
@@ -147,15 +153,9 @@ class XMLParser(AbstractParser):
     #: str -- XMLParser only supports XML files.
     __format__ = 'xml'
 
-    def __init__(self, pathname='./', filename='*.xml', first=True):
-        """Initialize :class:`XMLParser`.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been matched.
-
-        """
-        AbstractParser.__init__(self, pathname, filename, first=first)
+    def __init__(self, pathname='./', filename='*.xml', **kwargs):
+        """Initialize :class:`XMLParser`."""
+        AbstractParser.__init__(self, pathname, filename, **kwargs)
 
     @classmethod
     def handle_file(cls, pathname='./', filename='*.xml', first=True):
@@ -190,16 +190,6 @@ class FileParser(AbstractParser):
 
     """
 
-    def __init__(self, pathname='./', filename='*', first=True):
-        """Initialize :class:`FileParser`.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been matched.
-
-        """
-        AbstractParser.__init__(self, pathname, filename, first=first)
-
     @classmethod
     def handle_file(cls, pathname='./', filename='*', first=True):
         """Return a string of the content of the file.
@@ -226,6 +216,7 @@ class FileParser(AbstractParser):
 
 
 class LineParser(AbstractParser):
+
     """Specialized parser for generic report files.
 
     Define the special :func:`handle_file` function in order to process the generic report file.
@@ -236,16 +227,6 @@ class LineParser(AbstractParser):
         a :class:`str`.
 
     """
-
-    def __init__(self, pathname='./', filename='*', first=True):
-        """Initialize :class:`LineParser`.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Stop the search as soon as a file has been matched.
-
-        """
-        AbstractParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
     def handle_file(cls, pathname='./', filename='*', skip_empty=True, first=True):
@@ -274,3 +255,41 @@ class LineParser(AbstractParser):
                 else:
                     data.extend([line.rstrip('\n\r') for line in f.readlines()])
         return data
+
+
+class JSONParser(AbstractParser):
+
+    """Specialized parser for JSON files.
+
+    Define the special :func:`handle_file` function in order to process the JSON report file.
+
+    """
+
+    #: str -- JSONParser only supports json files.
+    __format__ = 'json'
+
+    def __init__(self, filename='*.json', **kwargs):
+        """Initialize :class:`JSONParser`."""
+        AbstractParser.__init__(self, filename, **kwargs)
+
+    @classmethod
+    def handle_file(cls, pathname='./', filename='*.json', first=True):
+        """Return the dict of the JSON file.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been matched.
+
+        :raises IOError: when the report file cannot be found.
+        :raises TypeError: when the report file has not the right extension.
+        :raises :class:`simplejson.scanner.JSONDecodeError`: when simplejson cannot parse the JSON file.
+
+        """
+        fullpath = cls._recursive_find(pathname, filename, first=first)
+        if not len(fullpath):
+            raise IOError("Report matching '%s' cannot be found." % filename)
+        fullpath = fullpath[0]
+        if not fullpath.endswith(cls.__format__):
+            raise TypeError("This parser only supports '%s' files" % cls.__format__)
+        with open(fullpath, 'r') as data:
+            return json.load(data)

@@ -1,12 +1,13 @@
 # -*- coding: UTF-8 -*-
 import mock
+import json
 import unittest
 
 from lxml import etree
-from hamcrest import assert_that, has_entry, has_item, has_items, is_not
+from hamcrest import assert_that, has_entry, has_item, has_items, is_not, equal_to
 
 from ptp.libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
-from ptp.tools.arachni.parser import ArachniXMLParser
+from ptp.tools.arachni.parser import ArachniXMLParser, ArachniJSONParser
 
 
 def lxml_etree_parse(string):
@@ -366,3 +367,48 @@ class TestArachniXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': UNKNOWN}])))
             assert_that(report, is_not(has_item([{'ranking': INFO}])))
             assert_that(report, is_not(has_item([{'ranking': MEDIUM}])))
+        # Arachni version 1.2.1
+        from .arachni_reports_1_2_1 import report_high
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+            ArachniXMLParser.__format__ = ''
+            my_arachni = ArachniXMLParser('foo', 'bar', first=True)
+            report = my_arachni.parse_report()
+            assert_that(report, has_items(*[{'ranking': INFO}] * 6))
+            assert_that(report, has_item(*[{'ranking': MEDIUM}]))
+            assert_that(report, has_item(*[{'ranking': LOW}]))
+            assert_that(report, has_item(*[{'ranking': HIGH}]))
+            assert_that(report, is_not(has_item([{'ranking': UNKNOWN}])))
+            assert_that(10, equal_to(len(report)))
+            assert_that(10, equal_to(len(report[-1]['transactions'])))
+
+class TestArachniJSONParser(unittest.TestCase):
+	###
+    # ArachniJSONParser.parse_metadata()
+    ###
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
+    def test_parser_arachni_xml_is_mine(self, mock_handle):
+        # Arachni version 1.2.1
+        from .arachni_json_reports_1_2_1 import report_high
+        my_arachni = ArachniJSONParser(None)
+        my_arachni.stream = json.loads(report_high)
+        report = my_arachni.parse_metadata()
+        assert_that(report, has_entry("version", "1.2.1"))
+
+    ###
+    # ArachniJSONParser.parse_report
+    ###
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
+    def test_parser_skipfish_parse_report(self, mock_handle):
+    	# Arachni version 1.2.1
+        from .arachni_json_reports_1_2_1 import report_high
+        my_arachni = ArachniJSONParser(None)
+        my_arachni.__http_parse__ = True
+        my_arachni.stream = json.loads(report_high)
+        report = my_arachni.parse_report()
+        assert_that(report, has_items(*[{'ranking': INFO}] * 6))
+        assert_that(report, has_item(*[{'ranking': MEDIUM}]))
+        assert_that(report, has_item(*[{'ranking': LOW}]))
+        assert_that(report, has_item(*[{'ranking': HIGH}]))
+        assert_that(report, is_not(has_item([{'ranking': UNKNOWN}])))
+        assert_that(10, equal_to(len(report)))
+        assert_that(10, equal_to(len(report[-1]['transactions'])))

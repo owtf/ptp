@@ -11,7 +11,7 @@ import warnings
 
 from .libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
 from .libptp.constants import UNKNOWN, RANKING_SCALE
-from .tools.arachni.parser import ArachniXMLParser
+from .tools.arachni.parser import ArachniXMLParser, ArachniJSONParser
 from .tools.skipfish.parser import SkipfishJSParser
 from .tools.w3af.parser import W3AFXMLParser
 from .tools.wapiti.parser import WapitiXMLParser, Wapiti221XMLParser
@@ -20,6 +20,8 @@ from .tools.dirbuster.parser import DirbusterParser
 from .tools.nmap.parser import NmapXMLParser
 from .tools.owasp.cm008.parser import OWASPCM008Parser
 from .tools.robots.parser import RobotsParser
+from .tools.burpsuite.parser import BurpXMLParser
+from .tools.hoppy.parser import HoppyParser
 
 
 class PTP(object):
@@ -35,7 +37,7 @@ class PTP(object):
 
     #: :class:`dict` -- Supported tools and their parser(s).
     supported = {
-        'arachni': [ArachniXMLParser],
+        'arachni': [ArachniXMLParser, ArachniJSONParser],
         'skipfish': [SkipfishJSParser],
         'w3af': [W3AFXMLParser],
         'wapiti': [WapitiXMLParser, Wapiti221XMLParser],
@@ -43,7 +45,9 @@ class PTP(object):
         'dirbuster': [DirbusterParser],
         'nmap': [NmapXMLParser],
         'owasp-cm-008': [OWASPCM008Parser],
-        'robots': [RobotsParser]}
+        'robots': [RobotsParser],
+        'burpsuite': [BurpXMLParser],
+        'hoppy': [HoppyParser]}
 
     def __init__(self, tool_name='', *args, **kwargs):
         """Initialize :class:`PTP`.
@@ -66,8 +70,17 @@ class PTP(object):
         self.vulns = []
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
+        # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
+        if "cumulative" in kwargs:
+            self.cumulative = kwargs.pop('cumulative')
+        else:
+            self.cumulative = False
+
+        self.parser_initialized = False
         if args or kwargs:
             self._init_parser(*args, **kwargs)
+            if self.parser is not None:
+                self.parser_initialized = True
 
     def _init_parser(self, *args, **kwargs):
         """Find and initialize the parser.
@@ -88,7 +101,6 @@ class PTP(object):
         else:
             supported = [self.supported.get(self.tool_name)]
         supported = [parser for parsers in supported for parser in parsers]
-
         for parser in supported:
             try:
                 if parser.is_mine(*args, **kwargs):
@@ -98,8 +110,7 @@ class PTP(object):
                 pass
             except NotSupportedVersionError:
                 pass
-
-        # Check if instanciated.
+        # Check if instantiated.
         if self.parser and not hasattr(self.parser, 'stream'):
             self.parser = self.parser(*args, **kwargs)
 
@@ -115,15 +126,23 @@ class PTP(object):
         :rtype: list
 
         """
-        if self.parser is None:
-            self._init_parser(*args, **kwargs)
+        if not self.parser_initialized:
+            if self.parser is None:
+                self._init_parser(*args, **kwargs)
+            else:
+                # It can happen user has intialised self.parser to a different parser of his own
+                self.parser.__init__(*args, **kwargs)
         if self.parser is None:
             sys.stderr.write("No parser matched `ToolParser(%s, %s)`\n\n" % (args, kwargs))
             raise NotSupportedToolError('This tool is not supported by PTP.')
         # Instantiate the report class.
         self.tool_name = self.parser.__tool__
         self.metadata = self.parser.parse_metadata()
-        self.vulns = self.parser.parse_report()
+
+        if self.cumulative:
+            self.vulns.append(self.parser.parse_report())
+        else:
+            self.vulns = self.parser.parse_report()
         return self.vulns
 
     @property

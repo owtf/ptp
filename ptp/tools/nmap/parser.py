@@ -17,18 +17,7 @@ from ptp.libptp.parser import XMLParser
 class NmapXMLParser(XMLParser):
 
     __tool__ = 'nmap'
-    __format__ = 'xml'
     __version__ = r'6\.46'
-
-    def __init__(self, pathname, filename='*.xml', first=True):
-        """Initialize NmapXMLParser.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that matched (``False``).
-
-        """
-        XMLParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', first=True):

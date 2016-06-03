@@ -17,18 +17,8 @@ class RobotsParser(LineParser):
     __tool__ = 'robots'
     __format__ = 'txt'
 
-    def __init__(self, pathname, filename='*.txt', first=True):
-        """Initialize RobotsParser.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that matched (``False``).
-
-        """
-        LineParser.__init__(self, pathname, filename, first=first)
-
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', first=True):
+    def is_mine(cls, pathname, filename='*', first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -43,7 +33,7 @@ class RobotsParser(LineParser):
 
         """
         stream = cls.handle_file(pathname, filename, first=first)
-        if stream and stream[0].startswith(('User-agent:', 'Disallow:', 'Allow:')):
+        if stream and stream[0].startswith(('User-agent:', 'Disallow:', 'Allow:')):  # FIXME: Weak check here...
             return True
         return False
 

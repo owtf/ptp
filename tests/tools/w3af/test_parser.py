@@ -3,7 +3,7 @@ import mock
 import unittest
 
 from lxml import etree
-from hamcrest import assert_that, has_entry, has_item, has_items, is_not
+from hamcrest import assert_that, has_entry, has_item, has_items, is_not, equal_to
 
 from ptp.libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 from ptp.libptp.exceptions import NotSupportedVersionError

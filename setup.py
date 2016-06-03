@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="PTP",
-    version="0.3.0",
+    version="0.4.0",
     description="PTP ranks the discoveries listed in security tool reports.",
     author="Tao Sauvage",
     author_email="sauvage.tao@gmail.com",
@@ -19,5 +19,5 @@ setup(
     url="http://owtf.github.io/ptp",
     packages=find_packages(exclude=['docs']),
     use_2to3=True,
-    install_requires=["lxml"],
+    install_requires=["lxml", "js2py"],
 )

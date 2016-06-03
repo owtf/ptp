@@ -16,18 +16,8 @@ class OWASPCM008Parser(LineParser):
 
     __tool__ = 'owasp-cm-008'
 
-    def __init__(self, pathname, filename='*.txt', first=False):
-        """Initialize OWASPCM008Parser.
-
-        :param str pathname: Path to the report directory.
-        :param str filename: Regex matching the report file.
-        :param bool first: Only process first file (``True``) or each file that matched (``False``).
-
-        """
-        LineParser.__init__(self, pathname, filename, first=first)
-
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', first=False):
+    def is_mine(cls, pathname, filename='*', first=False):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -42,7 +32,7 @@ class OWASPCM008Parser(LineParser):
 
         """
         stream = cls.handle_file(pathname, filename, first=first)
-        if stream and stream[0].startswith('HTTP'):
+        if stream and stream[0].startswith('HTTP'):  # FIXME: Weak check here...
             return True
         return False
 
