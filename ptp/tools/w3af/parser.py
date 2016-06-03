@@ -20,11 +20,15 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
+    __httpfile_format__ = "*.http.txt"
     __version__ = (
         r'(1\.6(\.0\.[1-5]{1})?)|'
         r'(1\.6\.([45,46,49,50,51]{1})?)')
 
     _re_version = re.compile(r'Version: (\S*)\s')
+    _re_transaction = re.compile(r"(?<=={30}Request )[0-9]+ .*?={9}\n(.*?)(?=\n={70})", re.S)
+    _re_request = re.compile(r"(^\w.*?)\n==.*?(?=={20}Response )", re.S)
+    _re_response = re.compile(r"(?<=={40}Response )[0-9]+ .*?={9}\n(\w.*)\n", re.S)
 
     HIGH = 'High'
     MEDIUM = 'Medium'
@@ -59,6 +63,7 @@ class W3AFXMLParser(XMLParser):
         :rtype: :class:`bool`
 
         """
+        cls.pathname = pathname # pathname is used later so making it accessible
         try:
             stream = cls.handle_file(pathname, filename, first=first)
         except (IOError, TypeError, XMLSyntaxError):
@@ -98,7 +103,23 @@ class W3AFXMLParser(XMLParser):
             raise NotSupportedVersionError('PTP does NOT support this version of W3AF.')
         return self.metadata
 
-    def parse_report(self):
+    def parse_http(self, raw_transdata):
+        """Parse the captured http transactions of the report.
+
+        :return: List of dicts where each one has a request and response.
+        :rtype: :class:`list`
+
+        """
+        data = []
+        transactions = self._re_transaction.findall(raw_transdata)
+        for count, transaction in enumerate(transactions):
+            data.append({
+                'request': self._re_request.findall(transaction),
+                'response': self._re_response.findall(transaction)
+                })
+        return data
+
+    def parse_report(self, full_parse):
         """Parse the results of the report.
 
         :return: List of dicts where each one represents a discovery.
@@ -108,4 +129,12 @@ class W3AFXMLParser(XMLParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln.get('severity')]}
             for vuln in self.stream.findall('.//vulnerability')]
+        if full_parse:
+            transfile = self._recursive_find(self.pathname, '*.http.txt')
+            if len(transfile):
+                self.raw_transdata = open(str(transfile[0]), 'r').read()
+                self.data = self.parse_http(self.raw_transdata)
+                return self.vulns, self.data
+            else:
+                print "no *.http.txt file found but you can still have rankings from the report"
         return self.vulns
