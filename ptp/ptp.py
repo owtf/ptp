@@ -65,8 +65,16 @@ class PTP(object):
         self.vulns = []
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
+        # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
+        if kwargs.has_key("cumulative"):
+            self.cumulative = kwargs.pop('cumulative')
+        else:
+            self.cumulative = False
+        #
+        self.Init = False
         if args or kwargs:
             self._init_parser(*args, **kwargs)
+            self.Init = True
 
     def _init_parser(self, *args, **kwargs):
         """Find and initialize the parser.
@@ -84,7 +92,6 @@ class PTP(object):
         else:
             supported = [self.supported.get(self.tool_name)]
         supported = [parser for parsers in supported for parser in parsers]
-
         for parser in supported:
             try:
                 if parser.is_mine(*args, **kwargs):
@@ -94,7 +101,7 @@ class PTP(object):
                 pass
             except NotSupportedVersionError:
                 pass
-        # Check if instanciated.
+        # Check if instantiated.
         if self.parser and not hasattr(self.parser, 'stream'):
             self.parser = self.parser(*args, **kwargs)
 
@@ -110,14 +117,19 @@ class PTP(object):
         :rtype: list
 
         """
-        if self.parser is None:
+        if not self.Init:
+            self.parser = None
             self._init_parser(*args, **kwargs)
         if self.parser is None:
             raise NotSupportedToolError('This tool is not supported by PTP.')
         # Instantiate the report class.
         self.tool_name = self.parser.__tool__
         self.metadata = self.parser.parse_metadata()
-        self.vulns = self.parser.parse_report()
+
+        if self.cumulative:
+            self.vulns.append(self.parser.parse_report())
+        else:
+            self.vulns = self.parser.parse_report()
         return self.vulns
 
     @property
