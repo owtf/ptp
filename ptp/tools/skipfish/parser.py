@@ -7,7 +7,9 @@
 """
 
 import re
+import os
 import ast
+import js2py
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
@@ -48,10 +50,12 @@ class SkipfishJSParser(AbstractParser):
             metadatafile = metadatafile[0]
         reportfile = self._recursive_find(pathname, self._reportfile)
         if reportfile:
+            self.dirname = os.walk(pathname).next()[0]
             reportfile = reportfile[0]
         self.metadata_stream, self.report_stream = self.handle_file(metadatafile, reportfile)
+        self.re_var_pattern = re.compile(r"var\s+(?P<variables>[a-zA-Z_0-9]+)\s+(?==)")
         self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
-        self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
+        #self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
     @classmethod
     def handle_file(cls, metadatafile, reportfile):
@@ -127,7 +131,31 @@ class SkipfishJSParser(AbstractParser):
         else:
             raise NotSupportedVersionError('PTP does NOT support this version of Skipfish.')
 
-    def parse_report(self):
+    def get_data(self, dir_list):
+        """ Retrieve list of directories found in samples.js file. From all the directories, it reads request.dat
+        and response.dat file and return a list of dict resquests and responses.
+
+        :raises: IOError -- specifying in which directory it doesn't find request.dat/response.dat file and
+        default its value to NOT_FOUND
+        """
+        data = []
+        for dirs in dir_list:
+            try:
+                req_data = open(dirs['dir']+'/request.dat', 'r')
+                req = req_data.read()
+            except IOError:
+                print "request.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND"
+                req = 'NOT_FOUND'
+            try:
+                res_data = open(dirs['dir']+'/response.dat', 'r')
+                res = res_data.read()
+            except IOError:
+                print "response.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND"
+                res = 'NOT_FOUND'
+            data.append({'request':req, 'response':res})
+        return data
+
+    def parse_report(self, full_parse):
         """Retrieve the results from the report.
 
         :raises: :class:`ReportNotFoundError` -- if the report file was not found.
@@ -149,12 +177,34 @@ class SkipfishJSParser(AbstractParser):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        re_result = self.re_report.findall(self.report_stream)
-        report = dict({el[0]: el[1] for el in re_result})
-        if REPORT_VAR_NAME not in report:
+        #re_result = self.re_report.findall(self.report_stream)
+        #report = dict({el[0]: el[1] for el in re_result})
+        variables = self.re_var_pattern.findall(self.report_stream)
+        split_data = self.report_stream.split(";")
+        js_data = [data for data in split_data if data is not None]
+        py_data = []
+        format_data = {} # final python dict after converting js to py
+        dirs = [] # list of directories of all urls
+        # converting js to py to make it simple to process
+        for data in js_data:
+            if js2py.eval_js(data) is not None:
+                py_data.append(js2py.eval_js(data))
+
+        # mapping variable to its content
+        for i in range(len(py_data)):
+            format_data[variables[i]] = py_data[i]
+
+        if REPORT_VAR_NAME not in variables:
             raise ReportNotFoundError('PTP did NOT find issue_samples variable. Is this the correct file?')
         # We now have a raw version of the Skipfish report as a list of dict.
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln['severity']]}
-            for vuln in ast.literal_eval(report[REPORT_VAR_NAME])]
+            for vuln in format_data[REPORT_VAR_NAME]]
+        if full_parse:
+            for var in variables:
+                for item in format_data[var]:
+                    for sample in item['samples']:
+                        dirs.append({'url':sample['url'], 'dir':self.dirname+'/'+sample['dir']})
+            self.data = self.get_data(dirs)
+            return self.vulns, self.data
         return self.vulns

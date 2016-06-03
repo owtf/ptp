@@ -71,7 +71,7 @@ class PTP(object):
         else:
             self.full_parse = None
         #: :class:`list` -- Tools which support full_parse
-        self.full_parse_tools = ['w3af']
+        self.full_parse_tools = ['w3af', 'skipfish']
         # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
         if kwargs.has_key("cumulative"):
             self.cumulative = kwargs.pop('cumulative')
