@@ -65,6 +65,13 @@ class PTP(object):
         self.vulns = []
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
+        # Check for full_parse
+        if kwargs.has_key("full_parse"):
+            self.full_parse = kwargs.pop('full_parse')
+        else:
+            self.full_parse = None
+        #: :class:`list` -- Tools which support full_parse
+        self.full_parse_tools = []
         # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
         if kwargs.has_key("cumulative"):
             self.cumulative = kwargs.pop('cumulative')
@@ -117,6 +124,13 @@ class PTP(object):
         :rtype: list
 
         """
+        # setting full_parse parameter
+        full_parse = True
+        if kwargs.has_key('full_parse'):
+            full_parse = kwargs.pop("full_parse")
+        if self.full_parse is not None:
+            full_parse = self.full_parse
+
         if not self.Init:
             self.parser = None
             self._init_parser(*args, **kwargs)
@@ -127,9 +141,15 @@ class PTP(object):
         self.metadata = self.parser.parse_metadata()
 
         if self.cumulative:
-            self.vulns.append(self.parser.parse_report())
+            if self.tool_name in self.full_parse_tools:
+                self.vulns.append(self.parser.parse_report(full_parse))
+            else:
+                self.vulns.append(self.parser.parse_report())
         else:
-            self.vulns = self.parser.parse_report()
+            if self.tool_name in self.full_parse_tools:
+                self.vulns = self.parser.parse_report(full_parse)
+            else:
+                self.vulns = self.parser.parse_report()
         return self.vulns
 
     @property
