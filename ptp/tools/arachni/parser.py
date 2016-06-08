@@ -90,7 +90,27 @@ class ArachniJSONParser(JSONParser):
         else:
             raise NotSupportedVersionError('PTP does NOT support this version of Arachni.')
 
-    def parse_report(self):
+    def get_data(self, issues):
+        """JSON file itself contains all requests and responses just needed to parse it correctly
+        That is what this function does and return a list of dicts. HTTP traffic is divided into following fields
+        * request
+        * response status code
+        * response headers
+        * response body
+        """
+        data = []
+        for issue in issues:
+            for variation in issue['variations']:
+                # using max() function to get empty string if request body is None
+                data.append({
+                    'request': variation['request']['headers_string']+max(variation['request']['body'], '')+'\n',
+                    'response status code': variation['response']['code'],
+                    'response headers': variation['response']['headers_string'],
+                    'response body': variation['response']['body']
+                })
+        return data
+
+    def parse_report(self, full_parse):
         """Parse the results of the report.
 
         :return: List of dicts where each one represents a discovery.
@@ -100,4 +120,8 @@ class ArachniJSONParser(JSONParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln['severity'].lower()]}
             for vuln in self.stream['issues']]
+
+        if full_parse:
+            self.data = self.get_data(self.stream['issues'])
+            return self.vulns, self.data
         return self.vulns
