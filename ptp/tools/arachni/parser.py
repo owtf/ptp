@@ -12,10 +12,10 @@ from lxml.etree import XMLSyntaxError
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
-from ptp.libptp.parser import XMLParser
+from ptp.libptp.parser import JSONParser
 
 
-class ArachniXMLParser(XMLParser):
+class ArachniJSONParser(JSONParser):
     """Arachni XML specialized parser."""
 
     __tool__ = 'arachni'
@@ -23,7 +23,8 @@ class ArachniXMLParser(XMLParser):
     __version__ = (
         r'(^0\.4\.[6-7]{1}$)|'
         r'(^1\.0(\.[1-6]{1})?$)|'
-        r'(^1\.1$)')
+        r'(^1\.1$)|'
+        r'(^1\.2\.1)')
 
     HIGH = 'high'
     MEDIUM = 'medium'
@@ -36,7 +37,7 @@ class ArachniXMLParser(XMLParser):
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, pathname, filename='*.xml', first=True):
+    def __init__(self, pathname, filename='*.json', first=True):
         """Initialize ArachniXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -44,10 +45,10 @@ class ArachniXMLParser(XMLParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename, first=first)
+        JSONParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.json', first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -62,10 +63,11 @@ class ArachniXMLParser(XMLParser):
             stream = cls.handle_file(pathname, filename, first=first)
         except (IOError, TypeError, XMLSyntaxError):
             return False
-        version = stream.find('.//version')
-        if version is None:
+        if stream.has_key('version'):
+            version = stream['version']
+        else:
             return False
-        if not re.findall(cls.__version__, version.text, re.IGNORECASE):
+        if not re.findall(cls.__version__, version, re.IGNORECASE):
             return False
         return True
 
@@ -79,10 +81,10 @@ class ArachniXMLParser(XMLParser):
 
         """
         # Find the version of Arachni.
-        version = self.stream.find('.//version')
+        version = self.stream['version']
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        self.metadata = {version.tag: version.text}
+        self.metadata = {'version': version}
         if self.check_version(self.metadata):
             return self.metadata
         else:
@@ -96,6 +98,6 @@ class ArachniXMLParser(XMLParser):
 
         """
         self.vulns = [
-            {'ranking': self.RANKING_SCALE[vuln.find('.//severity').text.lower()]}
-            for vuln in self.stream.find('.//issues')]
+            {'ranking': self.RANKING_SCALE[vuln['severity'].lower()]}
+            for vuln in self.stream['issues']]
         return self.vulns

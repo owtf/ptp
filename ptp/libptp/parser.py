@@ -11,6 +11,7 @@ import re
 import fnmatch
 
 from lxml import etree
+import simplejson as json
 
 
 class AbstractParser(object):
@@ -274,3 +275,42 @@ class LineParser(AbstractParser):
                 else:
                     data.extend([line.rstrip('\n\r') for line in f.readlines()])
         return data
+
+class JSONParser(AbstractParser):
+
+    """Specialized parser for JSON files.
+
+    Define the special :func:`handle_file` function in order to process the JSON report file.
+
+    """
+    __format__ = 'json'
+
+    def __init__(self, pathname='./', filename='*.json', first=True):
+        """Initialize :class:`JSONParser`.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been matched.
+
+        """
+        AbstractParser.__init__(self, pathname, filename, first=first)
+
+    @classmethod
+    def handle_file(cls, pathname='./', filename='*.json', first=True):
+        """Return the dict of the JSON file.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been matched.
+
+        :raises IOError: when the report file cannot be found.
+        :raises TypeError: when the report file has not the right extension.
+        :raises :class:`simplejson.scanner.JSONDecodeError`: when simplejson cannot parse the JSON file.
+
+        """
+        fullpath = cls._recursive_find(pathname, filename, first=first)
+        if not len(fullpath):
+            raise IOError("Report matching '%s' cannot be found." % filename)
+        fullpath = fullpath[0]
+        data = open(fullpath, 'r')
+        return json.load(data)
