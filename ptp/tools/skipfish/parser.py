@@ -55,6 +55,7 @@ class SkipfishJSParser(AbstractParser):
         self.metadata_stream, self.report_stream = self.handle_file(metadatafile, reportfile)
         self.re_var_pattern = re.compile(r"var\s+(?P<variables>[a-zA-Z_0-9]+)\s+(?==)")
         self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
+        self._re_reponse_status_code = re.compile(r"^HTTP.*?\/\d\.\d (\d+) .")
         #self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
     @classmethod
@@ -142,17 +143,24 @@ class SkipfishJSParser(AbstractParser):
         for dirs in dir_list:
             try:
                 req_data = open(dirs['dir']+'/request.dat', 'r')
-                req = req_data.read()
+                request = req_data.read()
             except IOError:
                 print "request.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND"
-                req = 'NOT_FOUND'
+                request = "NOT_FOUND"
             try:
                 res_data = open(dirs['dir']+'/response.dat', 'r')
-                res = res_data.read()
+                response = res_data.read()
+                response_status_code = self._re_reponse_status_code.findall(response)[0]
+                response_header, response_body = response.split('\n\n', 1)
             except IOError:
                 print "response.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND"
-                res = 'NOT_FOUND'
-            data.append({'request':req, 'response':res})
+                response_body = response_header = response_status_code = "NOT_FOUND"
+            data.append({
+                'request':request,
+                'response_status_code': response_status_code,
+                'response_header': response_header,
+                'response_body': response_body
+            })
         return data
 
     def parse_report(self, full_parse):

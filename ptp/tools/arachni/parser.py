@@ -104,9 +104,9 @@ class ArachniJSONParser(JSONParser):
                 # using max() function to get empty string if request body is None
                 data.append({
                     'request': variation['request']['headers_string']+max(variation['request']['body'], '')+'\n',
-                    'response status code': variation['response']['code'],
-                    'response headers': variation['response']['headers_string'],
-                    'response body': variation['response']['body']
+                    'response_status_code': variation['response']['code'],
+                    'response_header': variation['response']['headers_string'],
+                    'response_body': variation['response']['body']
                 })
         return data
 

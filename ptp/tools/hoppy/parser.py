@@ -53,7 +53,7 @@ class HoppyParser(FileParser):
         cls.pathname = pathname # pathname is used later so making it accessible
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, TypeError, XMLSyntaxError):
+        except (IOError, TypeError):
             return False
         version = cls._re_version.findall(stream)
         if not version:

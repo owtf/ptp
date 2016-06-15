@@ -94,15 +94,20 @@ class BurpXMLParser(XMLParser):
         else:
             base64 = True
         for item in self.stream.findall('.//item'):
+            response_status_code = item.find('status').text
+            if base64:
+                request = item.find('request').text.decode('base64')
+                response = item.find('response').text.decode('base64')
+            else:
+                request = item.find('request').text
+                response = item.find('response').text
+            response_headers, response_body = response.split('\r\n\r\n', 1)
             data.append({
-                'request': item.find('request').text,
-                'response status code': item.find('status').text,
-                'response': item.find('response').text
+                'request': request,
+                'response_status_code': response_status_code,
+                'response_header': response_headers,
+                'response_body': response_body
                 })
-        if base64:
-            for item in data:
-                item['request'] = item['request'].decode('base64')
-                item['response'] = item['response'].decode('base64')
         return data
 
 
