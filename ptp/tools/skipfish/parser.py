@@ -81,6 +81,9 @@ class SkipfishJSParser(AbstractParser):
 
         :param str pathname: Path to the report directory.
 
+        :raises IOError: when the report file cannot be found.
+        :raises OSError: when the report file cannot be found.
+
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
@@ -95,7 +98,7 @@ class SkipfishJSParser(AbstractParser):
         reportfile = reportfile[0]
         try:
             metadata_stream, report_stream = cls.handle_file(metadatafile, reportfile)
-        except (OSError, IOError, TypeError):
+        except TypeError:
             return False
         return True
 

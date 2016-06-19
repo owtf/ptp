@@ -54,13 +54,16 @@ class ArachniXMLParser(XMLParser):
         :param str filename: Regex matching the report file.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
+        :raises IOError: when the report file cannot be found.
+        :raises OSError: when the report file cannot be found.
+
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, TypeError, XMLSyntaxError):
+        except (TypeError, XMLSyntaxError):
             return False
         version = stream.find('.//version')
         if version is None:

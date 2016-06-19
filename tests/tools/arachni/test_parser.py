@@ -93,7 +93,8 @@ class TestArachniXMLParser(unittest.TestCase):
             ArachniXMLParser.__format__ = ''
             self.assertTrue(ArachniXMLParser.is_mine('foo', 'bar', first=True))
 
-    def test_parser_arachni_xml_is_not_mine(self):
+    @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
+    def test_parser_arachni_xml_is_not_mine(self, mock_lxml_etree_parse):
         with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=['foo.bar']):
             ArachniXMLParser.__format__ = ''
             self.assertFalse(ArachniXMLParser.is_mine('foo', 'bar', first=True))

@@ -32,11 +32,13 @@ class TestRobotsParser(unittest.TestCase):
 
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=IOError)
     def test_parser_robots_is_mine_ioerror(self, mock_handle):
-        self.assertFalse(RobotsParser.is_mine('foo.bar'))
+        with self.assertRaises(IOError):
+            RobotsParser.is_mine('foo.bar')
 
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=OSError)
     def test_parser_robots_is_mine_oserror(self, mock_handle):
-        self.assertFalse(RobotsParser.is_mine('foo.bar'))
+        with self.assertRaises(OSError):
+            RobotsParser.is_mine('foo.bar')
 
     ###
     # RobotsParser.parse_metadata
