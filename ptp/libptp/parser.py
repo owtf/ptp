@@ -176,7 +176,7 @@ class XMLParser(AbstractParser):
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
         if not len(fullpath):
-            raise IOError("Report matching '%s' cannot be found." % filename)
+            raise IOError("Report matching '%s' cannot be found." % os.path.join(pathname, filename))
         fullpath = fullpath[0]
         if not fullpath.endswith(cls.__format__):
             raise TypeError("This parser only supports '%s' files" % cls.__format__)

@@ -6,6 +6,7 @@
 
 """
 
+import sys
 import warnings
 
 from .libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
@@ -93,6 +94,9 @@ class PTP(object):
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
 
+        :raises IOError: when the report file cannot be found.
+        :raises OSError: when the report file cannot be found.
+
         """
         if not self.tool_name:
             # Since no tool name has been specified by the user, try to automatically detect it.
@@ -112,7 +116,8 @@ class PTP(object):
                 pass
             except NotSupportedVersionError:
                 pass
-        # Check if instantiated.
+
+        # Check if instanciated.
         if self.parser and not hasattr(self.parser, 'stream'):
             self.parser = self.parser(*args, **kwargs)
 
@@ -139,6 +144,7 @@ class PTP(object):
             self.parser = None
             self._init_parser(*args, **kwargs)
         if self.parser is None:
+            sys.stderr.write("No parser matched `ToolParser(%s, %s)`\n\n" % (args, kwargs))
             raise NotSupportedToolError('This tool is not supported by PTP.')
         # Instantiate the report class.
         self.tool_name = self.parser.__tool__

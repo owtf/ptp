@@ -34,14 +34,14 @@ class OWASPCM008Parser(LineParser):
         :param str filename: Regex matching the report file.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
+        :raises IOError: when the report file cannot be found.
+        :raises OSError: when the report file cannot be found.
+
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
-        try:
-            stream = cls.handle_file(pathname, filename, first=first)
-        except (OSError, IOError):
-            return False
+        stream = cls.handle_file(pathname, filename, first=first)
         if stream and stream[0].startswith('HTTP'):
             return True
         return False

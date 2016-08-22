@@ -39,12 +39,14 @@ class TestOWASPCM008Parser(unittest.TestCase):
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=OSError)
     def test_parser_owasp_cm008_is_mine_oserror(self, mock_handle):
         OWASPCM008Parser.__format__ = ''
-        self.assertFalse(OWASPCM008Parser.is_mine('foo.bar'))
+        with self.assertRaises(OSError):
+            OWASPCM008Parser.is_mine('foo.bar')
 
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=IOError)
     def test_parser_owasp_cm008_is_mine_ioerror(self, mock_handle):
         OWASPCM008Parser.__format__ = ''
-        self.assertFalse(OWASPCM008Parser.is_mine('foo.bar'))
+        with self.assertRaises(IOError):
+            OWASPCM008Parser.is_mine('foo.bar')
 
     ###
     # OWASPCM008Parser.parse_metadata
