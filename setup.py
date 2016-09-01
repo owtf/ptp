@@ -19,5 +19,5 @@ setup(
     url="http://owtf.github.io/ptp",
     packages=find_packages(exclude=['docs']),
     use_2to3=True,
-    install_requires=["lxml"],
+    install_requires=["lxml", "js2py"],
 )

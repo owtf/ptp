@@ -71,22 +71,22 @@ class PTP(object):
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
         # Check for full_parse
-        if kwargs.has_key("full_parse"):
+        if "full_parse" in kwargs:
             self.full_parse = kwargs.pop('full_parse')
         else:
             self.full_parse = None
         #: :class:`list` -- Tools which support full_parse
         self.full_parse_tools = ['w3af', 'skipfish', 'arachni']
         # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
-        if kwargs.has_key("cumulative"):
+        if "cumulative" in kwargs:
             self.cumulative = kwargs.pop('cumulative')
         else:
             self.cumulative = False
         #
-        self.Init = False
+        self.init = False
         if args or kwargs:
             self._init_parser(*args, **kwargs)
-            self.Init = True
+            self.init = True
 
     def _init_parser(self, *args, **kwargs):
         """Find and initialize the parser.
@@ -135,12 +135,12 @@ class PTP(object):
         """
         # setting full_parse parameter
         full_parse = True
-        if kwargs.has_key('full_parse'):
+        if "full_parse" in kwargs:
             full_parse = kwargs.pop("full_parse")
         if self.full_parse is not None:
             full_parse = self.full_parse
 
-        if not self.Init:
+        if not self.init:
             self.parser = None
             self._init_parser(*args, **kwargs)
         if self.parser is None:

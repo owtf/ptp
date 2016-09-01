@@ -24,7 +24,7 @@ class ArachniJSONParser(JSONParser):
         r'(^0\.4\.[6-7]{1}$)|'
         r'(^1\.0(\.[1-6]{1})?$)|'
         r'(^1\.1$)|'
-        r'(^1\.2\.1)')
+        r'(^1\.2\.1$)')
 
     HIGH = 'high'
     MEDIUM = 'medium'
@@ -94,19 +94,21 @@ class ArachniJSONParser(JSONParser):
             raise NotSupportedVersionError('PTP does NOT support this version of Arachni.')
 
     def get_data(self, issues):
-        """JSON file itself contains all requests and responses just needed to parse it correctly
+        """JSON file itself contains all requests and responses just needed to parse it correctly.
+
         That is what this function does and return a list of dicts. HTTP traffic is divided into following fields
         * request
         * response status code
         * response headers
         * response body
+
         """
         data = []
         for issue in issues:
             for variation in issue['variations']:
                 # using max() function to get empty string if request body is None
                 data.append({
-                    'request': variation['request']['headers_string']+max(variation['request']['body'], '')+'\n',
+                    'request': variation['request']['headers_string'] + max(variation['request']['body'], '') + '\n',
                     'response_status_code': variation['response']['code'],
                     'response_header': variation['response']['headers_string'],
                     'response_body': variation['response']['body']

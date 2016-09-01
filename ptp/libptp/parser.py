@@ -10,8 +10,8 @@ import os
 import re
 import fnmatch
 
+import json
 from lxml import etree
-import simplejson as json
 
 
 class AbstractParser(object):
@@ -276,6 +276,7 @@ class LineParser(AbstractParser):
                     data.extend([line.rstrip('\n\r') for line in f.readlines()])
         return data
 
+
 class JSONParser(AbstractParser):
 
     """Specialized parser for JSON files.
@@ -312,5 +313,5 @@ class JSONParser(AbstractParser):
         if not len(fullpath):
             raise IOError("Report matching '%s' cannot be found." % filename)
         fullpath = fullpath[0]
-        data = open(fullpath, 'r')
-        return json.load(data)
+        with open(fullpath, 'r') as data:
+            return json.load(data)

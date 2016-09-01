@@ -12,7 +12,7 @@ from lxml.etree import XMLSyntaxError
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
-from ptp.libptp.parser import XMLParser
+from ptp.libptp.parser import XMLParser, FileParser
 
 
 class W3AFXMLParser(XMLParser):
@@ -27,7 +27,7 @@ class W3AFXMLParser(XMLParser):
 
     _re_version = re.compile(r'Version: (\S*)\s')
     _re_transaction = re.compile(r"(?<=={30}Request )[0-9]+ .*?={9}\n(.*?)(?=\n={70})", re.S)
-    _re_request = re.compile(r"(^\w.*?)\n==.*?(?=={20}Response )", re.S)
+    _re_request = re.compile(r"(^.*?)\n==.*?(?=={20}Response )", re.S)
     _re_response = re.compile(r"(?<=={40}Response )[0-9]+ .*?={9}\n(\w.*)", re.S)
     _re_reponse_header = re.compile(r".*?content-type: .*?\n", re.S)
     _re_response_body = re.compile(r"(?<=content-type: )(.*?\n)(.*)", re.S)
@@ -121,14 +121,12 @@ class W3AFXMLParser(XMLParser):
         for count, transaction in enumerate(transactions):
             response = self._re_response.findall(transaction)[0] + '\n'
             response_header = self._re_reponse_header.search(response).group()
-            response_status_code = self._re_response_status_code.search(response_header).group()
-            response_body = self._re_response_body.search(response).group(2)
             data.append({
-                'request': self._re_request.findall(transaction),
-                'response_status_code': response_status_code,
+                'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
+                'response_status_code': self._re_response_status_code.search(response_header).group(),
                 'response_header': response_header,
-                'response_body': response_body               
-                })
+                'response_body': self._re_response_body.search(response).group(2)
+            })
         return data
 
     def parse_report(self, full_parse):
@@ -142,11 +140,6 @@ class W3AFXMLParser(XMLParser):
             {'ranking': self.RANKING_SCALE[vuln.get('severity')]}
             for vuln in self.stream.findall('.//vulnerability')]
         if full_parse:
-            transfile = self._recursive_find(self.pathname, '*.http.txt')
-            if len(transfile):
-                self.raw_transdata = open(str(transfile[0]), 'r').read()
-                self.data = self.parse_http(self.raw_transdata)
-                return self.vulns, self.data
-            else:
-                print "no *.http.txt file found but you can still have rankings from the report"
+            self.data = self.parse_http(FileParser.handle_file(self.pathname, '*.http.txt'))
+            return self.vulns, self.data
         return self.vulns

@@ -56,7 +56,6 @@ class SkipfishJSParser(AbstractParser):
         self.re_var_pattern = re.compile(r"var\s+(?P<variables>[a-zA-Z_0-9]+)\s+(?==)")
         self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
         self._re_reponse_status_code = re.compile(r"^HTTP.*?\/\d\.\d (\d+) .")
-        #self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
 
     @classmethod
     def handle_file(cls, metadatafile, reportfile):
@@ -145,18 +144,18 @@ class SkipfishJSParser(AbstractParser):
         data = []
         for dirs in dir_list:
             try:
-                req_data = open(dirs['dir']+'/request.dat', 'r')
-                request = req_data.read()
+                with open(dirs['dir']+'/request.dat', 'r') as req_data:
+                    request = req_data.read()
             except IOError:
-                print "request.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND"
+                print("request.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND")
                 request = "NOT_FOUND"
             try:
-                res_data = open(dirs['dir']+'/response.dat', 'r')
-                response = res_data.read()
-                response_status_code = self._re_reponse_status_code.findall(response)[0]
-                response_header, response_body = response.split('\n\n', 1)
+                with open(dirs['dir']+'/response.dat', 'r') as res_data:
+                    response = res_data.read()
+                    response_status_code = self._re_reponse_status_code.findall(response)[0]
+                    response_header, response_body = response.split('\n\n', 1)
             except IOError:
-                print "response.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND"
+                print("response.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND")
                 response_body = response_header = response_status_code = "NOT_FOUND"
             data.append({
                 'request':request,
@@ -188,20 +187,19 @@ class SkipfishJSParser(AbstractParser):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        #re_result = self.re_report.findall(self.report_stream)
-        #report = dict({el[0]: el[1] for el in re_result})
         variables = self.re_var_pattern.findall(self.report_stream)
         split_data = self.report_stream.split(";")
         js_data = [data for data in split_data if data is not None]
         py_data = []
-        format_data = {} # final python dict after converting js to py
-        dirs = [] # list of directories of all urls
-        # converting js to py to make it simple to process
+        format_data = {} # Final python dict after converting js to py
+        dirs = [] # List of directories of all urls
+        # Converting js to py to make it simple to process
         for data in js_data:
-            if js2py.eval_js(data) is not None:
-                py_data.append(js2py.eval_js(data))
+            temp_data = js2py.eval_js(data)
+            if temp_data is not None:
+                py_data.append(temp_data)
 
-        # mapping variable to its content
+        # Mapping variable to its content
         for i in range(len(py_data)):
             format_data[variables[i]] = py_data[i]
 

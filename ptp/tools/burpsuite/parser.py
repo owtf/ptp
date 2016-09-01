@@ -20,8 +20,7 @@ class BurpXMLParser(XMLParser):
 
     __tool__ = 'burpsuite'
     __httpfile_format__ = "*.xml"
-    __version__ = (r'1\.6\.\d+') # TODO: check for different versions, checked only for version 1.6.30
-
+    __version__ = (r'1\.6\.30') # TODO: check for different versions, checked only for version 1.6.30
 
     def __init__(self, pathname, filename='*.xml', first=True):
         """Initialize BurpXMLParser.
@@ -47,9 +46,12 @@ class BurpXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, TypeError, XMLSyntaxError):
+        except (TypeError, XMLSyntaxError):
             return False
-        version = stream.attrib['burpVersion']
+        try:
+            version = stream.attrib['burpVersion']
+        except(KeyError):
+            return False
         if version is None:
             return False
         if not re.findall(cls.__version__, version, re.IGNORECASE):
@@ -107,7 +109,7 @@ class BurpXMLParser(XMLParser):
                 'response_status_code': response_status_code,
                 'response_header': response_headers,
                 'response_body': response_body
-                })
+            })
         return data
 
 

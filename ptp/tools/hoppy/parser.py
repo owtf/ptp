@@ -18,8 +18,7 @@ class HoppyParser(FileParser):
     __tool__ = 'hoppy'
     __format__ = 'text'
     __httpfile_format__ = "*.spider"
-    __version__ = (
-        r'(1\.8\.\d+)') # TODO: check for other version, checked only for 1.8.1
+    __version__ = (r'(1\.8\.1)') # TODO: check for other version, checked only for 1.8.1
 
     _re_version = re.compile(r"\D{3} \S+ (\d\.\d+\.\d+) \S")
     _re_transaction = re.compile(r"(?<=We Sent:)\n.*?(\S+ /.*?)\n(?=\n\t\D{3} Parsed Response:)", re.S)
@@ -50,10 +49,10 @@ class HoppyParser(FileParser):
         :rtype: :class:`bool`
 
         """
-        cls.pathname = pathname # pathname is used later so making it accessible
+        cls.pathname = pathname
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, TypeError):
+        except (TypeError):
             return False
         version = cls._re_version.findall(stream)
         if not version:
@@ -96,16 +95,13 @@ class HoppyParser(FileParser):
         for count, transaction in enumerate(transactions):
             response = self._re_response.search(transaction).group().strip() + '\n\n'
             status_code = self._re_response_status_code.findall(response)
-            status_code = status_code[0].strip() + '\n'
             parsed_response = self._re_response_parse.findall(response)
-            response_headers = parsed_response[0][0].strip() + '\n\n'
-            response_body = parsed_response[0][1].strip() + '\n\n'
             data.append({
                 'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
-                'response_status_code': status_code,
-                'response_header': response_headers,
-                'response_body': response_body
-                })
+                'response_status_code': status_code[0].strip() + '\n',
+                'response_header': parsed_response[0][0].strip() + '\n\n',
+                'response_body': parsed_response[0][1].strip() + '\n\n'
+            })
         return data
 
     def parse_report(self):
