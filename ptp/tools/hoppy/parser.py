@@ -27,7 +27,7 @@ class HoppyParser(FileParser):
     _re_response_status_code = re.compile(r"(?<=HTTP/\w.\w )(.*)")
     _re_response_parse = re.compile(r"(?P<headers>HTTP.*?)\n(?=\r\n)(?P<body>.*)", re.S)
 
-    def __init__(self, pathname, filename='*.spider', first=True):
+    def __init__(self, pathname, filename='*.spider', http_parse=False, first=True):
         """Initialize HoppyParser.
 
         :param str pathname: Path to the report directory.
@@ -38,7 +38,7 @@ class HoppyParser(FileParser):
         FileParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.summary', first=True):
+    def is_mine(cls, pathname, filename='*.summary', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -111,5 +111,6 @@ class HoppyParser(FileParser):
         :rtype: :class:`list`
 
         """
-        self.data = self.parse_http()
+        self.data = []
+        self.data.append({'transactions': self.parse_http()})
         return self.data

@@ -39,12 +39,13 @@ class SkipfishJSParser(AbstractParser):
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
 
-    def __init__(self, pathname):
+    def __init__(self, pathname, http_parse=False):
         """Initialize ArachniXMLParser.
 
         :param str pathname: Path to the report directory.
 
         """
+        AbstractParser.__http_parse__ = http_parse
         metadatafile = self._recursive_find(pathname, self._metadatafile)
         if metadatafile:
             metadatafile = metadatafile[0]
@@ -80,7 +81,7 @@ class SkipfishJSParser(AbstractParser):
         return (metadata_stream, report_stream)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, pathname, http_parse=False):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -165,7 +166,7 @@ class SkipfishJSParser(AbstractParser):
             })
         return data
 
-    def parse_report(self, full_parse):
+    def parse_report(self):
         """Retrieve the results from the report.
 
         :raises: :class:`ReportNotFoundError` -- if the report file was not found.
@@ -209,11 +210,10 @@ class SkipfishJSParser(AbstractParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln['severity']]}
             for vuln in format_data[REPORT_VAR_NAME]]
-        if full_parse:
+        if self.__http_parse__:
             for var in variables:
                 for item in format_data[var]:
                     for sample in item['samples']:
                         dirs.append({'url':sample['url'], 'dir':self.dirname+'/'+sample['dir']})
-            self.data = self.get_data(dirs)
-            return self.vulns, self.data
+            self.vulns.append({'transactions': self.get_data(dirs)})
         return self.vulns

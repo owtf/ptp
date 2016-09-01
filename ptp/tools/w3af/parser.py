@@ -44,7 +44,7 @@ class W3AFXMLParser(XMLParser):
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, pathname, filename='*.xml', first=True):
+    def __init__(self, pathname, filename='*.xml', http_parse=False, first=True):
         """Initialize W3AFXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -52,10 +52,10 @@ class W3AFXMLParser(XMLParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename, first=first)
+        XMLParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -129,7 +129,7 @@ class W3AFXMLParser(XMLParser):
             })
         return data
 
-    def parse_report(self, full_parse):
+    def parse_report(self):
         """Parse the results of the report.
 
         :return: List of dicts where each one represents a discovery.
@@ -139,7 +139,6 @@ class W3AFXMLParser(XMLParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln.get('severity')]}
             for vuln in self.stream.findall('.//vulnerability')]
-        if full_parse:
-            self.data = self.parse_http(FileParser.handle_file(self.pathname, '*.http.txt'))
-            return self.vulns, self.data
+        if self.__http_parse__:
+            self.vulns.append({'transactions': self.parse_http(FileParser.handle_file(self.pathname, '*.http.txt'))})
         return self.vulns

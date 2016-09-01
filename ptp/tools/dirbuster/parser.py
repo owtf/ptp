@@ -28,18 +28,20 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Regex matching DirBuster files status code.
     _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) responce:$"
 
-    def __init__(self, pathname, filename='DirBuster-Report*', first=True):
+    def __init__(self, pathname, filename='DirBuster-Report*', http_parse=False, first=True):
         """Initialize DirbusterParser.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
+        HTTP parsing not implemented
+
         """
         LineParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='DirBuster-Report*', first=True):
+    def is_mine(cls, pathname, filename='DirBuster-Report*', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -73,6 +75,8 @@ class DirbusterParser(LineParser):
 
         :return: List of dicts where each one represents a vuln.
         :rtype: :class:`list`
+
+        http parsing is not implemented
 
         """
         # Retrieve the results from the report.

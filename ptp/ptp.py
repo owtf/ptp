@@ -70,23 +70,19 @@ class PTP(object):
         self.vulns = []
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
-        # Check for full_parse
-        if "full_parse" in kwargs:
-            self.full_parse = kwargs.pop('full_parse')
-        else:
-            self.full_parse = None
-        #: :class:`list` -- Tools which support full_parse
-        self.full_parse_tools = ['w3af', 'skipfish', 'arachni']
+        #: :class:`list` -- Tools which support http_parse
+        self.http_parse_tools = ['w3af', 'skipfish', 'arachni']
         # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
         if "cumulative" in kwargs:
             self.cumulative = kwargs.pop('cumulative')
         else:
             self.cumulative = False
-        #
+
         self.init = False
         if args or kwargs:
             self._init_parser(*args, **kwargs)
-            self.init = True
+            if self.parser is not None:
+                self.init = True
 
     def _init_parser(self, *args, **kwargs):
         """Find and initialize the parser.
@@ -133,16 +129,12 @@ class PTP(object):
         :rtype: list
 
         """
-        # setting full_parse parameter
-        full_parse = True
-        if "full_parse" in kwargs:
-            full_parse = kwargs.pop("full_parse")
-        if self.full_parse is not None:
-            full_parse = self.full_parse
-
         if not self.init:
-            self.parser = None
-            self._init_parser(*args, **kwargs)
+            if self.parser is None:
+                self._init_parser(*args, **kwargs)
+            else:
+                #It can happen user has intialised self.parser to a different parser of his own
+                self.parser.__init__(*args, **kwargs)
         if self.parser is None:
             sys.stderr.write("No parser matched `ToolParser(%s, %s)`\n\n" % (args, kwargs))
             raise NotSupportedToolError('This tool is not supported by PTP.')
@@ -151,15 +143,9 @@ class PTP(object):
         self.metadata = self.parser.parse_metadata()
 
         if self.cumulative:
-            if self.tool_name in self.full_parse_tools:
-                self.vulns.append(self.parser.parse_report(full_parse))
-            else:
-                self.vulns.append(self.parser.parse_report())
+            self.vulns.append(self.parser.parse_report())
         else:
-            if self.tool_name in self.full_parse_tools:
-                self.vulns = self.parser.parse_report(full_parse)
-            else:
-                self.vulns = self.parser.parse_report()
+            self.vulns = self.parser.parse_report()
         return self.vulns
 
     @property

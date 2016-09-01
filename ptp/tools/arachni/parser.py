@@ -37,7 +37,7 @@ class ArachniJSONParser(JSONParser):
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, pathname, filename='*.json', first=True):
+    def __init__(self, pathname, filename='*.json', http_parse=False, first=True):
         """Initialize ArachniXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -45,10 +45,10 @@ class ArachniJSONParser(JSONParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        JSONParser.__init__(self, pathname, filename, first=first)
+        JSONParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.json', first=True):
+    def is_mine(cls, pathname, filename='*.json', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -115,7 +115,7 @@ class ArachniJSONParser(JSONParser):
                 })
         return data
 
-    def parse_report(self, full_parse):
+    def parse_report(self):
         """Parse the results of the report.
 
         :return: List of dicts where each one represents a discovery.
@@ -126,7 +126,7 @@ class ArachniJSONParser(JSONParser):
             {'ranking': self.RANKING_SCALE[vuln['severity'].lower()]}
             for vuln in self.stream['issues']]
 
-        if full_parse:
-            self.data = self.get_data(self.stream['issues'])
-            return self.vulns, self.data
+        if self.__http_parse__:
+            self.vulns.append({'transactions': self.get_data(self.stream['issues'])})
+            return self.vulns
         return self.vulns

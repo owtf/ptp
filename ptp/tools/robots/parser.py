@@ -17,7 +17,7 @@ class RobotsParser(LineParser):
     __tool__ = 'robots'
     __format__ = 'txt'
 
-    def __init__(self, pathname, filename='*.txt', first=True):
+    def __init__(self, pathname, filename='*.txt', http_parse=False, first=True):
         """Initialize RobotsParser.
 
         :param str pathname: Path to the report directory.
@@ -28,7 +28,7 @@ class RobotsParser(LineParser):
         LineParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', first=True):
+    def is_mine(cls, pathname, filename='*.txt', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
