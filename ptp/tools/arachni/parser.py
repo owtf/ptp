@@ -12,10 +12,10 @@ from lxml.etree import XMLSyntaxError
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
-from ptp.libptp.parser import JSONParser
+from ptp.libptp.parser import XMLParser
 
 
-class ArachniJSONParser(JSONParser):
+class ArachniXMLParser(XMLParser):
     """Arachni XML specialized parser."""
 
     __tool__ = 'arachni'
@@ -23,8 +23,7 @@ class ArachniJSONParser(JSONParser):
     __version__ = (
         r'(^0\.4\.[6-7]{1}$)|'
         r'(^1\.0(\.[1-6]{1})?$)|'
-        r'(^1\.1$)|'
-        r'(^1\.2\.1$)')
+        r'(^1\.1$)')
 
     HIGH = 'high'
     MEDIUM = 'medium'
@@ -37,7 +36,7 @@ class ArachniJSONParser(JSONParser):
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, pathname, filename='*.json', http_parse=False, first=True):
+    def __init__(self, pathname, filename='*.xml', first=True):
         """Initialize ArachniXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -45,10 +44,10 @@ class ArachniJSONParser(JSONParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        JSONParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
+        XMLParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.json', http_parse=False, first=True):
+    def is_mine(cls, pathname, filename='*.xml', first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -66,11 +65,10 @@ class ArachniJSONParser(JSONParser):
             stream = cls.handle_file(pathname, filename, first=first)
         except (TypeError, XMLSyntaxError):
             return False
-        if stream.has_key('version'):
-            version = stream['version']
-        else:
+        version = stream.find('.//version')
+        if version is None:
             return False
-        if not re.findall(cls.__version__, version, re.IGNORECASE):
+        if not re.findall(cls.__version__, version.text, re.IGNORECASE):
             return False
         return True
 
@@ -84,36 +82,14 @@ class ArachniJSONParser(JSONParser):
 
         """
         # Find the version of Arachni.
-        version = self.stream['version']
+        version = self.stream.find('.//version')
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        self.metadata = {'version': version}
+        self.metadata = {version.tag: version.text}
         if self.check_version(self.metadata):
             return self.metadata
         else:
             raise NotSupportedVersionError('PTP does NOT support this version of Arachni.')
-
-    def get_data(self, issues):
-        """JSON file itself contains all requests and responses just needed to parse it correctly.
-
-        That is what this function does and return a list of dicts. HTTP traffic is divided into following fields
-        * request
-        * response status code
-        * response headers
-        * response body
-
-        """
-        data = []
-        for issue in issues:
-            for variation in issue['variations']:
-                # using max() function to get empty string if request body is None
-                data.append({
-                    'request': variation['request']['headers_string'] + max(variation['request']['body'], '') + '\n',
-                    'response_status_code': variation['response']['code'],
-                    'response_header': variation['response']['headers_string'],
-                    'response_body': variation['response']['body']
-                })
-        return data
 
     def parse_report(self):
         """Parse the results of the report.
@@ -123,10 +99,6 @@ class ArachniJSONParser(JSONParser):
 
         """
         self.vulns = [
-            {'ranking': self.RANKING_SCALE[vuln['severity'].lower()]}
-            for vuln in self.stream['issues']]
-
-        if self.__http_parse__:
-            self.vulns.append({'transactions': self.get_data(self.stream['issues'])})
-            return self.vulns
+            {'ranking': self.RANKING_SCALE[vuln.find('.//severity').text.lower()]}
+            for vuln in self.stream.find('.//issues')]
         return self.vulns
