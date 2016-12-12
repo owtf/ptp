@@ -99,7 +99,7 @@ class HoppyParser(FileParser):
             data.append({
                 'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
                 'response_status_code': status_code[0].strip() + '\n',
-                'response_header': parsed_response[0][0].strip() + '\n\n',
+                'response_headers': parsed_response[0][0].strip() + '\n\n',
                 'response_body': parsed_response[0][1].strip() + '\n\n'
             })
         return data

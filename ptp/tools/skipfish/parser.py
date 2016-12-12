@@ -162,7 +162,7 @@ class SkipfishJSParser(AbstractParser):
             data.append({
                 'request':request,
                 'response_status_code': response_status_code,
-                'response_header': response_header,
+                'response_headers': response_header,
                 'response_body': response_body
             })
         return data

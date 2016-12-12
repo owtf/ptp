@@ -108,9 +108,10 @@ class ArachniXMLParser(XMLParser):
         for i in range(len(tree)):
             t_req = tree[i][1]
             t_res = tree[i][2]
-            # using max() function to get empty string if request body is None
+            temp = t_req.find('.//body').text
+            temp_body = '' if temp is None else temp
             data.append({
-                'request': t_req.find('.//raw').text + max(t_req.find('.//body').text, '') + '\n',
+                'request': t_req.find('.//raw').text + temp_body + '\n',
                 'response_status_code': t_res.find('.//code').text,
                 'response_headers': t_res.find('.//raw_headers').text.strip(),
                 'response_body': t_res.find('.//body').text.strip()
@@ -218,9 +219,9 @@ class ArachniJSONParser(JSONParser):
         data = []
         for issue in issues:
             for variation in issue['variations']:
-                # using max() function to get empty string if request body is None
+                temp_body = '' if variation['request']['body'] is None else variation['request']['body']
                 data.append({
-                    'request': variation['request']['headers_string'] + max(variation['request']['body'], '') + '\n',
+                    'request': variation['request']['headers_string'] + temp_body + '\n',
                     'response_status_code': variation['response']['code'],
                     'response_header': variation['response']['headers_string'],
                     'response_body': variation['response']['body']

@@ -107,7 +107,7 @@ class BurpXMLParser(XMLParser):
             data.append({
                 'request': request,
                 'response_status_code': response_status_code,
-                'response_header': response_headers,
+                'response_headers': response_headers,
                 'response_body': response_body
             })
         return data

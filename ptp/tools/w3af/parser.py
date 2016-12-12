@@ -124,7 +124,7 @@ class W3AFXMLParser(XMLParser):
             data.append({
                 'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
                 'response_status_code': self._re_response_status_code.search(response_header).group(),
-                'response_header': response_header,
+                'response_headers': response_header,
                 'response_body': self._re_response_body.search(response).group(2)
             })
         return data
