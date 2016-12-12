@@ -38,6 +38,7 @@ class SkipfishJSParser(AbstractParser):
 
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
+    dirname = ''
 
     def __init__(self, pathname, http_parse=False):
         """Initialize ArachniXMLParser.
