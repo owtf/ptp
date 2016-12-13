@@ -10,6 +10,7 @@ import os
 import re
 import fnmatch
 
+import json
 from lxml import etree
 
 
@@ -30,8 +31,10 @@ class AbstractParser(object):
     __format__ = None
     #: :class:`list` -- Versions it can supports.
     __version__ = ''
+    #: :class:`str` -- HTTP parsing.
+    __http_parse__ = False
 
-    def __init__(self, pathname='./', filename='*', first=True):
+    def __init__(self, pathname='./', filename='*', http_parse=False, first=True):
         """Initialize :class:`AbstractParser`.
 
         :param str pathname: Path to the report directory.
@@ -45,6 +48,8 @@ class AbstractParser(object):
         self.vulns = []
         #: :class:`dict` -- Dict of the metadata found in the report.
         self.metadata = {}
+        #: :class:`str` -- Name of the tool.
+        self.__http_parse__ = http_parse
 
     @staticmethod
     def _recursive_find(pathname='./', file_regex='*', first=True):
@@ -147,7 +152,7 @@ class XMLParser(AbstractParser):
     #: str -- XMLParser only supports XML files.
     __format__ = 'xml'
 
-    def __init__(self, pathname='./', filename='*.xml', first=True):
+    def __init__(self, pathname='./', filename='*.xml', http_parse=False, first=True):
         """Initialize :class:`XMLParser`.
 
         :param str pathname: Path to the report directory.
@@ -155,7 +160,7 @@ class XMLParser(AbstractParser):
         :param bool first: Stop the search as soon as a file has been matched.
 
         """
-        AbstractParser.__init__(self, pathname, filename, first=first)
+        AbstractParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
     def handle_file(cls, pathname='./', filename='*.xml', first=True):
@@ -198,7 +203,7 @@ class FileParser(AbstractParser):
         :param bool first: Stop the search as soon as a file has been matched.
 
         """
-        AbstractParser.__init__(self, pathname, filename, first=first)
+        AbstractParser.__init__(self, pathname, filename, http_parse=False, first=first)
 
     @classmethod
     def handle_file(cls, pathname='./', filename='*', first=True):
@@ -245,7 +250,7 @@ class LineParser(AbstractParser):
         :param bool first: Stop the search as soon as a file has been matched.
 
         """
-        AbstractParser.__init__(self, pathname, filename, first=first)
+        AbstractParser.__init__(self, pathname, filename, http_parse=False, first=first)
 
     @classmethod
     def handle_file(cls, pathname='./', filename='*', skip_empty=True, first=True):
@@ -274,3 +279,43 @@ class LineParser(AbstractParser):
                 else:
                     data.extend([line.rstrip('\n\r') for line in f.readlines()])
         return data
+
+
+class JSONParser(AbstractParser):
+
+    """Specialized parser for JSON files.
+
+    Define the special :func:`handle_file` function in order to process the JSON report file.
+
+    """
+    __format__ = 'json'
+
+    def __init__(self, pathname='./', filename='*.json', http_parse=False, first=True):
+        """Initialize :class:`JSONParser`.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been matched.
+
+        """
+        AbstractParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
+
+    @classmethod
+    def handle_file(cls, pathname='./', filename='*.json', first=True):
+        """Return the dict of the JSON file.
+
+        :param str pathname: Path to the report directory.
+        :param str filename: Regex matching the report file.
+        :param bool first: Stop the search as soon as a file has been matched.
+
+        :raises IOError: when the report file cannot be found.
+        :raises TypeError: when the report file has not the right extension.
+        :raises :class:`simplejson.scanner.JSONDecodeError`: when simplejson cannot parse the JSON file.
+
+        """
+        fullpath = cls._recursive_find(pathname, filename, first=first)
+        if not len(fullpath):
+            raise IOError("Report matching '%s' cannot be found." % filename)
+        fullpath = fullpath[0]
+        with open(fullpath, 'r') as data:
+            return json.load(data)

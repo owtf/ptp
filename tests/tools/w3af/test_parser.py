@@ -3,7 +3,7 @@ import mock
 import unittest
 
 from lxml import etree
-from hamcrest import assert_that, has_entry, has_item, has_items, is_not
+from hamcrest import assert_that, has_entry, has_item, has_items, is_not, equal_to
 
 from ptp.libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 from ptp.libptp.exceptions import NotSupportedVersionError
@@ -362,3 +362,6 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': INFO}])))
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
+            from .w3af_http_reports_1_6_51 import http_report
+            report  = my_w3af.parse_http(http_report)
+            assert_that(36, equal_to(len(report)))

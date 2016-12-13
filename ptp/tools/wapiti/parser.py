@@ -23,7 +23,7 @@ class WapitiXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = r'2\.3\.0'
 
-    def __init__(self, pathname, filename='*.xml', first=True):
+    def __init__(self, pathname, filename='*.xml', http_parse=False, first=True):
         """Initialize WapitiXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -31,10 +31,10 @@ class WapitiXMLParser(XMLParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename, first=first)
+        XMLParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -118,7 +118,7 @@ class Wapiti221XMLParser(XMLParser):
     #: :class:`list` -- Wapiti versions it supports.
     __version__ = r'2\.2\.1'
 
-    def __init__(self, pathname, filename='*.xml', first=True):
+    def __init__(self, pathname, filename='*.xml', http_parse=False, first=True):
         """Initialize Wapiti221XMLParser.
 
         :param str pathname: Path to the report directory.
@@ -126,10 +126,10 @@ class Wapiti221XMLParser(XMLParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename, first=first)
+        XMLParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', http_parse=False, first=True):
         """Check if it is a supported Wapiti report.
 
         :param str pathname: Path to the report directory.

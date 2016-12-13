@@ -20,7 +20,7 @@ class NmapXMLParser(XMLParser):
     __format__ = 'xml'
     __version__ = r'6\.46'
 
-    def __init__(self, pathname, filename='*.xml', first=True):
+    def __init__(self, pathname, filename='*.xml', http_parse=False, first=True):
         """Initialize NmapXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -28,10 +28,10 @@ class NmapXMLParser(XMLParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename, first=first)
+        XMLParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.

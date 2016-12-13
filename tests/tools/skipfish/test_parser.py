@@ -2,7 +2,7 @@
 import mock
 import unittest
 
-from hamcrest import assert_that, has_entries, has_item, has_items, is_not
+from hamcrest import assert_that, has_entries, has_item, has_items, is_not, equal_to
 
 from ptp.libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
 from ptp.tools.skipfish.parser import SkipfishJSParser
@@ -46,9 +46,11 @@ class TestSkipfishJSParser(unittest.TestCase):
         assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .skipfish_reports_2_10_b import report_high_samples
         my_skipfish = SkipfishJSParser(None)
+        my_skipfish.__http_parse__ = True
         my_skipfish.report_stream = report_high_samples
         report = my_skipfish.parse_report()
         assert_that(report, has_items(*[{'ranking': INFO}] * 18))
         assert_that(report, has_items(*[{'ranking': LOW}] * 2))
         assert_that(report, has_items(*[{'ranking': MEDIUM}] * 5))
         assert_that(report, has_items(*[{'ranking': HIGH}] * 1))
+        assert_that(389, equal_to(len(report[-1]['transactions'])))

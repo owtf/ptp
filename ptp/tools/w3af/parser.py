@@ -12,7 +12,7 @@ from lxml.etree import XMLSyntaxError
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
-from ptp.libptp.parser import XMLParser
+from ptp.libptp.parser import XMLParser, FileParser
 
 
 class W3AFXMLParser(XMLParser):
@@ -20,11 +20,18 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
+    __httpfile_format__ = "*.http.txt"
     __version__ = (
         r'(1\.6(\.0\.[1-5]{1})?)|'
         r'(1\.6\.([45,46,49,50,51]{1})?)')
 
     _re_version = re.compile(r'Version: (\S*)\s')
+    _re_transaction = re.compile(r"(?<=={30}Request )[0-9]+ .*?={9}\n(.*?)(?=\n={70})", re.S)
+    _re_request = re.compile(r"(^.*?)\n==.*?(?=={20}Response )", re.S)
+    _re_response = re.compile(r"(?<=={40}Response )[0-9]+ .*?={9}\n(\w.*)", re.S)
+    _re_reponse_header = re.compile(r".*?content-type: .*?\n", re.S)
+    _re_response_body = re.compile(r"(?<=content-type: )(.*?\n)(.*)", re.S)
+    _re_response_status_code = re.compile(r"(?<=HTTP/\w.\w )(.*)")
 
     HIGH = 'High'
     MEDIUM = 'Medium'
@@ -37,7 +44,7 @@ class W3AFXMLParser(XMLParser):
         LOW: constants.LOW,
         INFO: constants.INFO}
 
-    def __init__(self, pathname, filename='*.xml', first=True):
+    def __init__(self, pathname, filename='*.xml', http_parse=False, first=True):
         """Initialize W3AFXMLParser.
 
         :param str pathname: Path to the report directory.
@@ -45,10 +52,10 @@ class W3AFXMLParser(XMLParser):
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
-        XMLParser.__init__(self, pathname, filename, first=first)
+        XMLParser.__init__(self, pathname, filename, http_parse=http_parse, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', http_parse=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -62,6 +69,7 @@ class W3AFXMLParser(XMLParser):
         :rtype: :class:`bool`
 
         """
+        cls.pathname = pathname # pathname is used later so making it accessible
         try:
             stream = cls.handle_file(pathname, filename, first=first)
         except (TypeError, XMLSyntaxError):
@@ -101,6 +109,26 @@ class W3AFXMLParser(XMLParser):
             raise NotSupportedVersionError('PTP does NOT support this version of W3AF.')
         return self.metadata
 
+    def parse_http(self, raw_transdata):
+        """Parse the captured http transactions of the report.
+
+        :return: List of dicts where each one has a request and response.
+        :rtype: :class:`list`
+
+        """
+        data = []
+        transactions = self._re_transaction.findall(raw_transdata)
+        for count, transaction in enumerate(transactions):
+            response = self._re_response.findall(transaction)[0] + '\n'
+            response_header = self._re_reponse_header.search(response).group()
+            data.append({
+                'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
+                'response_status_code': self._re_response_status_code.search(response_header).group(),
+                'response_headers': response_header,
+                'response_body': self._re_response_body.search(response).group(2)
+            })
+        return data
+
     def parse_report(self):
         """Parse the results of the report.
 
@@ -111,4 +139,6 @@ class W3AFXMLParser(XMLParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln.get('severity')]}
             for vuln in self.stream.findall('.//vulnerability')]
+        if self.__http_parse__:
+            self.vulns.append({'transactions': self.parse_http(FileParser.handle_file(self.pathname, '*.http.txt'))})
         return self.vulns

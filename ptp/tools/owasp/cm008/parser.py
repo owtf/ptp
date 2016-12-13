@@ -16,7 +16,7 @@ class OWASPCM008Parser(LineParser):
 
     __tool__ = 'owasp-cm-008'
 
-    def __init__(self, pathname, filename='*.txt', first=False):
+    def __init__(self, pathname, filename='*.txt', http_parse=False, first=False):
         """Initialize OWASPCM008Parser.
 
         :param str pathname: Path to the report directory.
@@ -27,7 +27,7 @@ class OWASPCM008Parser(LineParser):
         LineParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', first=False):
+    def is_mine(cls, pathname, filename='*.txt', http_parse=False, first=False):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.

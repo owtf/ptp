@@ -7,7 +7,9 @@
 """
 
 import re
+import os
 import ast
+import js2py
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
@@ -36,22 +38,26 @@ class SkipfishJSParser(AbstractParser):
 
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
+    dirname = ''
 
-    def __init__(self, pathname):
+    def __init__(self, pathname, http_parse=False):
         """Initialize ArachniXMLParser.
 
         :param str pathname: Path to the report directory.
 
         """
+        AbstractParser.__http_parse__ = http_parse
         metadatafile = self._recursive_find(pathname, self._metadatafile)
         if metadatafile:
             metadatafile = metadatafile[0]
         reportfile = self._recursive_find(pathname, self._reportfile)
         if reportfile:
+            self.dirname = os.walk(pathname).next()[0]
             reportfile = reportfile[0]
         self.metadata_stream, self.report_stream = self.handle_file(metadatafile, reportfile)
+        self.re_var_pattern = re.compile(r"var\s+(?P<variables>[a-zA-Z_0-9]+)\s+(?==)")
         self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
-        self.re_report = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+([^;]*);")
+        self._re_reponse_status_code = re.compile(r"^HTTP.*?\/\d\.\d (\d+) .")
 
     @classmethod
     def handle_file(cls, metadatafile, reportfile):
@@ -76,7 +82,7 @@ class SkipfishJSParser(AbstractParser):
         return (metadata_stream, report_stream)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, pathname, http_parse=False):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
@@ -130,6 +136,37 @@ class SkipfishJSParser(AbstractParser):
         else:
             raise NotSupportedVersionError('PTP does NOT support this version of Skipfish.')
 
+    def get_data(self, dir_list):
+        """ Retrieve list of directories found in samples.js file. From all the directories, it reads request.dat
+        and response.dat file and return a list of dict resquests and responses.
+
+        :raises: IOError -- specifying in which directory it doesn't find request.dat/response.dat file and
+        default its value to NOT_FOUND
+        """
+        data = []
+        for dirs in dir_list:
+            try:
+                with open(dirs['dir']+'/request.dat', 'r') as req_data:
+                    request = req_data.read()
+            except IOError:
+                print("request.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND")
+                request = "NOT_FOUND"
+            try:
+                with open(dirs['dir']+'/response.dat', 'r') as res_data:
+                    response = res_data.read()
+                    response_status_code = self._re_reponse_status_code.findall(response)[0]
+                    response_header, response_body = response.split('\n\n', 1)
+            except IOError:
+                print("response.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND")
+                response_body = response_header = response_status_code = "NOT_FOUND"
+            data.append({
+                'request':request,
+                'response_status_code': response_status_code,
+                'response_headers': response_header,
+                'response_body': response_body
+            })
+        return data
+
     def parse_report(self):
         """Retrieve the results from the report.
 
@@ -152,12 +189,32 @@ class SkipfishJSParser(AbstractParser):
 
         """
         REPORT_VAR_NAME = 'issue_samples'
-        re_result = self.re_report.findall(self.report_stream)
-        report = dict({el[0]: el[1] for el in re_result})
-        if REPORT_VAR_NAME not in report:
+        variables = self.re_var_pattern.findall(self.report_stream)
+        split_data = self.report_stream.split(";")
+        js_data = [data for data in split_data if data is not None]
+        py_data = []
+        format_data = {} # Final python dict after converting js to py
+        dirs = [] # List of directories of all urls
+        # Converting js to py to make it simple to process
+        for data in js_data:
+            temp_data = js2py.eval_js(data)
+            if temp_data is not None:
+                py_data.append(temp_data)
+
+        # Mapping variable to its content
+        for i in range(len(py_data)):
+            format_data[variables[i]] = py_data[i]
+
+        if REPORT_VAR_NAME not in variables:
             raise ReportNotFoundError('PTP did NOT find issue_samples variable. Is this the correct file?')
         # We now have a raw version of the Skipfish report as a list of dict.
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln['severity']]}
-            for vuln in ast.literal_eval(report[REPORT_VAR_NAME])]
+            for vuln in format_data[REPORT_VAR_NAME]]
+        if self.__http_parse__:
+            for var in variables:
+                for item in format_data[var]:
+                    for sample in item['samples']:
+                        dirs.append({'url':sample['url'], 'dir':self.dirname+'/'+sample['dir']})
+            self.vulns.append({'transactions': self.get_data(dirs)})
         return self.vulns
