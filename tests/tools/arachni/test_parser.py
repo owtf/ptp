@@ -382,7 +382,7 @@ class TestArachniXMLParser(unittest.TestCase):
             assert_that(10, equal_to(len(report[-1]['transactions'])))
 
 class TestArachniJSONParser(unittest.TestCase):
-	###
+    ###
     # ArachniJSONParser.parse_metadata()
     ###
     @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
@@ -399,10 +399,9 @@ class TestArachniJSONParser(unittest.TestCase):
     ###
     @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
     def test_parser_skipfish_parse_report(self, mock_handle):
-    	# Arachni version 1.2.1
+    # Arachni version 1.2.1
         from .arachni_json_reports_1_2_1 import report_high
         my_arachni = ArachniJSONParser(None)
-        my_arachni.__http_parse__ = True
         my_arachni.stream = json.loads(report_high)
         report = my_arachni.parse_report()
         assert_that(report, has_items(*[{'ranking': INFO}] * 6))
