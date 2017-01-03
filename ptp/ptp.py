@@ -140,7 +140,7 @@ class PTP(object):
         self.metadata = self.parser.parse_metadata()
 
         if self.cumulative:
-            self.vulns.append(self.parser.parse_report())
+            self.vulns.extend(self.parser.parse_report())
         else:
             self.vulns = self.parser.parse_report()
         return self.vulns
