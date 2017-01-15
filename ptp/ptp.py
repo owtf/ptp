@@ -79,9 +79,6 @@ class PTP(object):
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
 
-        :raises IOError: when the report file cannot be found.
-        :raises OSError: when the report file cannot be found.
-
         """
         if self._auto:
             if not self.tool_name:
