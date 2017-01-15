@@ -96,11 +96,13 @@ the technical documentation of the project.
 Current support
 ===============
 
-+ arachni (0.4.6 to 1.1) (XML report)
++ arachni (0.4.6 to 1.4) (XML and JSON report)
++ burpsuite (1.6.30) (XML report)
 + dirbuster (1.0-RC1)
++ hoppy (1.8.1)
 + metasploit
 + owasp
 + robots.txt
 + skipfish (2.10b)
-+ w3af (1.6 to 1.6.51) (XML report)
++ w3af (1.6 to 1.6.54) (XML report)
 + wapiti (2.2.1, 2.3.0) (XML report)
