@@ -49,12 +49,11 @@ class PTP(object):
         'burpsuite': [BurpXMLParser],
         'hoppy': [HoppyParser]}
 
-    def __init__(self, tool_name='', *args, **kwargs):
+    def __init__(self, tool_name='', cumulative=False):
         """Initialize :class:`PTP`.
 
         :param str tool_name: help :mod:`ptp` by specifying the name of the tool that has generated the target report.
-        :param list \*args: Arguments that are needed by the parser.
-        :param dict \*\*kwargs: Arguments that are needed by the parser.
+        :param bool cumulative: `True` to cumulate the vulns across multiple tools. `False` to reset them.
 
         :raises: :class:`ptp.libptp.exceptions.NotSupportedToolError` when ``tool_name`` is not in the PTP's supported
             tools list.
@@ -65,25 +64,18 @@ class PTP(object):
         #: :class:`str` -- Name of the tool that generated the report.
         self.tool_name = tool_name
         #: :class:`libptp.AbstractParser` -- Parser used on the report.
-        self.parser = None
+        self._parser = None
         #: :class:`list` -- Vulnerabilities that are listed in the report.
         self.vulns = []
         #: :class:`dict` -- Metadata from the report.
         self.metadata = {}
-        # Cumulative is a paramater to check if user want vulns to be re-intialised for each report ot not
-        if "cumulative" in kwargs:
-            self.cumulative = kwargs.pop('cumulative')
-        else:
-            self.cumulative = False
-
-        self.parser_initialized = False
-        if args or kwargs:
-            self._init_parser(*args, **kwargs)
-            if self.parser is not None:
-                self.parser_initialized = True
+        #: :class:`bool` -- Check if user wants vulns to be re-intialised for each run ot not.
+        self.cumulative = cumulative
+        #: :class:`bool` -- Parser is chosen automatically.
+        self._auto = True
 
     def _init_parser(self, *args, **kwargs):
-        """Find and initialize the parser.
+        """Find and initialize the parser automatically.
 
         :param list \*args: Arguments that are needed by the parser.
         :param dict \*\*kwargs: Arguments that are needed by the parser.
@@ -92,27 +84,30 @@ class PTP(object):
         :raises OSError: when the report file cannot be found.
 
         """
-        if not self.tool_name:
-            # Since no tool name has been specified by the user, try to automatically detect it.
-            try:
-                supported = self.supported.itervalues()
-            except AttributeError:  # Python3 then.
-                supported = self.supported.values()
-        else:
-            supported = [self.supported.get(self.tool_name)]
-        supported = [parser for parsers in supported for parser in parsers]
-        for parser in supported:
-            try:
-                if parser.is_mine(*args, **kwargs):
-                    self.parser = parser
-                    break
-            except TypeError:
-                pass
-            except NotSupportedVersionError:
-                pass
+        if self._auto:
+            if not self.tool_name:
+                # Since no tool name has been specified by the user, try all parsers.
+                try:
+                    supported = self.supported.itervalues()
+                except AttributeError:  # Python3 then.
+                    supported = self.supported.values()
+            else:
+                supported = [self.supported.get(self.tool_name)]
+            supported = [parser for parsers in supported for parser in parsers]
+            for parser in supported:
+                try:
+                    if parser.is_mine(*args, **kwargs):
+                        self._parser = parser
+                        break
+                except TypeError:  # Mismatch in terms of arguments, therefore must not be the correct parser.
+                    pass
+                except NotSupportedVersionError:  # Mismatch in terms of supported version.
+                    pass
+                except (IOError, OSError):  # Mismatch in terms of report files.
+                    pass
         # Check if instantiated.
-        if self.parser and not hasattr(self.parser, 'stream'):
-            self.parser = self.parser(*args, **kwargs)
+        if self._parser and not hasattr(self._parser, 'stream'):
+            self._parser = self._parser(*args, **kwargs)
 
     def parse(self, *args, **kwargs):
         """Parse a tool report.
@@ -126,23 +121,19 @@ class PTP(object):
         :rtype: list
 
         """
-        if not self.parser_initialized:
-            if self.parser is None:
-                self._init_parser(*args, **kwargs)
-            else:
-                # It can happen user has intialised self.parser to a different parser of his own
-                self.parser.__init__(*args, **kwargs)
-        if self.parser is None:
+        # Ensure that parser is properly initialized.
+        self._init_parser(*args, **kwargs)
+        # PTP could not automatically detect the parser or manually initialize it.
+        if self._parser is None:
             sys.stderr.write("No parser matched `ToolParser(%s, %s)`\n\n" % (args, kwargs))
             raise NotSupportedToolError('This tool is not supported by PTP.')
-        # Instantiate the report class.
-        self.tool_name = self.parser.__tool__
-        self.metadata = self.parser.parse_metadata()
 
+        self.tool_name = self._parser.__tool__
+        self.metadata = self._parser.parse_metadata()
         if self.cumulative:
-            self.vulns.extend(self.parser.parse_report())
+            self.vulns.extend(self._parser.parse_report())
         else:
-            self.vulns = self.parser.parse_report()
+            self.vulns = self._parser.parse_report()
         return self.vulns
 
     @property
@@ -161,6 +152,16 @@ class PTP(object):
         if not self.vulns:
             return UNKNOWN
         return max(RANKING_SCALE.get(vuln.get('ranking'), UNKNOWN) for vuln in self.vulns)
+
+    @property
+    def parser(self):
+        return self._parser
+
+    @parser.setter
+    def parser(self, parser):
+        """Set the parser that will be used by PTP, while keeping internal state consistent."""
+        self._auto = False  # Manual mode
+        self._parser = parser
 
     def get_highest_ranking(self):
         warnings.warn(
