@@ -17,6 +17,9 @@ class RobotsParser(LineParser):
     __tool__ = 'robots'
     __format__ = 'txt'
 
+    def __init__(self, pathname, filename='*robots.txt', light=False, first=True):
+        LineParser.__init__(self, pathname, filename, light=light, first=first)
+
     @classmethod
     def is_mine(cls, pathname, filename='*robots.txt', light=False, first=True):
         """Check if it can handle the report file.
