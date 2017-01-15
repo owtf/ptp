@@ -282,7 +282,7 @@ class JSONParser(AbstractParser):
 
         :raises IOError: when the report file cannot be found.
         :raises TypeError: when the report file has not the right extension.
-        :raises :class:`simplejson.scanner.JSONDecodeError`: when simplejson cannot parse the JSON file.
+        :raises :class:`json.decoder.JSONDecodeError`: when json cannot parse the JSON file.
 
         """
         fullpath = cls._recursive_find(pathname, filename, first=first)
