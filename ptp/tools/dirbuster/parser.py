@@ -28,7 +28,7 @@ class DirbusterParser(LineParser):
     #: :class:`str` -- Regex matching DirBuster files status code.
     _re_file_status = r"^Files found with a (?P<status>[0-9]{3}) responce:$"
 
-    def __init__(self, pathname, filename='DirBuster-Report*', first=True):
+    def __init__(self, pathname, filename='DirBuster-Report*', light=False, first=True):
         """Initialize DirbusterParser.
 
         :param str pathname: Path to the report directory.
