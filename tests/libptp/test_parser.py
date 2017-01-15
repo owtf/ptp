@@ -3,7 +3,7 @@ import os
 import mock
 import unittest
 
-from ptp.libptp.parser import AbstractParser, XMLParser, FileParser, LineParser
+from ptp.libptp.parser import AbstractParser, XMLParser, FileParser, LineParser, JSONParser
 
 from sys import version_info
 if version_info.major == 2:
@@ -198,3 +198,34 @@ class TestLibptpLineParser(unittest.TestCase):
         data = LineParser.handle_file(pathname='/tmp/', filename='test_ptp_open', skip_empty=True)
         self.assertIsInstance(data, list)
         self.assertTrue(data == ['The cake is a lie!', 'The cake is a lie!'])
+
+
+class TestLibptpJSONParser(unittest.TestCase):
+
+    ###
+    # JSON.handle_file
+    ###
+    @mock.patch('ptp.libptp.parser.JSONParser._recursive_find', return_value=[])
+    def test_parser_json_handle_file_no_file(self, mock_recursive_find):
+        with self.assertRaises(IOError):
+            JSONParser.handle_file('/dev/null')
+
+    @mock.patch('ptp.libptp.parser.JSONParser._recursive_find', return_value=['test.txt'])
+    def test_parser_json_handle_file_wrong_extension(self, mock_recursive_find):
+        JSONParser.__format__ = '.json'
+        with self.assertRaises(TypeError):
+            JSONParser.handle_file('/dev/null')
+
+    @mock.patch('ptp.libptp.parser.JSONParser._recursive_find', return_value=['test.json'])
+    def test_parser_json_handle_file_invalid_json(self, mock_recursive_find):
+        JSONParser.__format__ = '.json'
+        with mock.patch.object(builtins, 'open', mock.mock_open(read_data='The cake is a lie!\nThe cake is a lie!')):
+            with self.assertRaises(ValueError):
+                JSONParser.handle_file('/dev/null')
+
+    @mock.patch('ptp.libptp.parser.JSONParser._recursive_find', return_value=['test.json'])
+    def test_parser_json_handle_file_valid_json(self, mock_recursive_find):
+        JSONParser.__format__ = '.json'
+        with mock.patch.object(builtins, 'open', mock.mock_open(read_data='{"test": true}')):
+            data = JSONParser.handle_file('/dev/null')
+            self.assertTrue(data == {'test': True})
