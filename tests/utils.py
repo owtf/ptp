@@ -1,4 +1,5 @@
 from ptp.libptp import constants
+from ptp.libptp.exceptions import NotSupportedVersionError
 
 
 class MockParser(object):
@@ -8,11 +9,33 @@ class MockParser(object):
     def __init__(self):
         self.stream = ''
 
+    @classmethod
+    def is_mine(cls, *args, **kwargs):
+        return True
+
     def parse_metadata(self):
         return {}
 
     def parse_report(self):
         return []
+
+
+class MockParserVersionNotSupported(MockParser):
+
+    __tool__ = 'mock_invalid_version'
+
+    @classmethod
+    def is_mine(cls, *args, **kwargs):
+        raise NotSupportedVersionError('PTP does NOT support this version of mock_invalid_version.')
+
+
+class MockParserIOError(MockParser):
+
+    __tool__ = 'mock_ioerror'
+
+    @classmethod
+    def is_mine(cls, *args, **kwargs):
+        raise IOError
 
 
 class MockParserInfo(MockParser):

@@ -4,13 +4,19 @@ import unittest
 from hamcrest import assert_that, has_item, is_not, equal_to
 
 from ptp.libptp import constants
-from ptp.libptp.exceptions import NotSupportedToolError
+from ptp.libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
 from ptp import PTP
 
-from .utils import MockParser, MockParserInfo, MockParserHigh, MockParserLight
+from .utils import *
 
 
 class TestPTP(unittest.TestCase):
+
+    def setUp(self):
+        self.ori_supported = PTP.supported
+
+    def tearDown(self):
+        PTP.supported = self.ori_supported
 
     ###
     # PTP.__init__
@@ -34,6 +40,24 @@ class TestPTP(unittest.TestCase):
     ###
     def test_ptp_init_parser_no_tool(self):
         my_ptp = PTP()
+        my_ptp._init_parser()
+        self.assertIsNone(my_ptp.parser)
+
+    def test_ptp_init_parser_tool(self):
+        PTP.supported = {'mock': [MockParser]}
+        my_ptp = PTP(tool_name='mock')
+        my_ptp._init_parser()
+        self.assertTrue(my_ptp.parser is not None)
+
+    def test_ptp_init_parser_tool_version_not_supported(self):
+        PTP.supported = {'mock': [MockParserVersionNotSupported]}
+        my_ptp = PTP(tool_name='mock')
+        my_ptp._init_parser()
+        self.assertIsNone(my_ptp.parser)
+
+    def test_ptp_init_parser_tool_ioerror(self):
+        PTP.supported = {'mock': [MockParserIOError]}
+        my_ptp = PTP(tool_name='mock')
         my_ptp._init_parser()
         self.assertIsNone(my_ptp.parser)
 
