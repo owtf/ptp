@@ -9,7 +9,7 @@ install2:
 	python2 ./setup.py install
 
 check:
-	nosetests -v -d --with-coverage --cover-package=ptp
+	nosetests -v -d --cover-erase --with-coverage --cover-package=ptp
 
 check2:
-	nosetests2 -v -d --with-coverage --cover-package=ptp
+	nosetests2 -v -d --cover-erase --with-coverage --cover-package=ptp
