@@ -103,6 +103,11 @@ class TestW3AFXMLParser(unittest.TestCase):
         with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             self.assertFalse(W3AFXMLParser.is_mine('foo', 'bar', first=True))
+        # W3AF report without version specified
+        from .w3af_reports_invalid import report_no_version
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_no_version]):
+            W3AFXMLParser.__format__ = ''
+            self.assertTrue(W3AFXMLParser.is_mine('foo', 'bar', first=True) == False)
 
     @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
     def test_parser_w3af_xml_is_mine_unsupported_version(self, mock_lxml_etree_parse):
