@@ -35,7 +35,7 @@ class HoppyParser(FileParser):
         FileParser.__init__(self, pathname, filename, **kwargs)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.spider', light=False, first=True):
+    def is_mine(cls, pathname, filename='*.summary', light=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
