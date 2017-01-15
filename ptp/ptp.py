@@ -7,7 +7,6 @@
 """
 
 import sys
-import warnings
 
 from .libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
 from .libptp.constants import UNKNOWN, RANKING_SCALE
@@ -71,7 +70,7 @@ class PTP(object):
         self.metadata = {}
         #: :class:`bool` -- Check if user wants vulns to be re-intialised for each run ot not.
         self.cumulative = cumulative
-        #: :class:`bool` -- Parser is chosen automatically.
+        # Parser was chosen automatically.
         self._auto = True
 
     def _init_parser(self, *args, **kwargs):
@@ -162,9 +161,3 @@ class PTP(object):
         """Set the parser that will be used by PTP, while keeping internal state consistent."""
         self._auto = False  # Manual mode
         self._parser = parser
-
-    def get_highest_ranking(self):
-        warnings.warn(
-            "get_highest_ranking will be removed in the next release. Use PTP.highest_ranking property instead.",
-            DeprecationWarning)
-        return self.highest_ranking
