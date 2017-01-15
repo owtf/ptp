@@ -7,7 +7,7 @@ from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedToolError
 from ptp import PTP
 
-from .utils import MockParser, MockParserInfo, MockParserHigh
+from .utils import MockParser, MockParserInfo, MockParserHigh, MockParserLight
 
 
 class TestPTP(unittest.TestCase):
@@ -133,6 +133,9 @@ class TestPTP(unittest.TestCase):
             {'ranking': constants.MEDIUM}, {'ranking': constants.HIGH}]
         self.assertTrue(my_ptp.highest_ranking == constants.HIGH)
 
+    ###
+    # PTP cumulative option
+    ###
     def test_ptp_cumulative_parsing(self):
         my_ptp = PTP(cumulative=True)
         my_ptp.parser = MockParserInfo()  # Tool 1, first run
@@ -158,3 +161,23 @@ class TestPTP(unittest.TestCase):
         assert_that(1, equal_to(len(report)))
         assert_that(report, has_item({'ranking': constants.HIGH}))
         assert_that(report, is_not(has_item({'ranking': constants.INFO})))
+
+    ###
+    # PTP light option
+    ###
+    def test_ptp_light_parsing(self):
+        my_ptp = PTP()
+        my_ptp.parser = MockParserLight
+        report = my_ptp.parse(light=True)
+        assert_that(0, equal_to(len(report)))  # In light mode, the mock parser has no findings.
+
+    def test_ptp_no_light_parsing(self):
+        my_ptp = PTP()
+        my_ptp.parser = MockParserLight
+        report = my_ptp.parse(light=False)
+        assert_that(1, equal_to(len(report)))
+        vuln = report[0]
+        # In heavy parsing mode, there is a finding with UNKNOWN ranking that will contain all the transactions that
+        # could not be assigned to other vuln when parsing the report
+        self.assertTrue('ranking' in vuln and vuln['ranking'] == constants.UNKNOWN)
+        self.assertTrue('transactions' in vuln and len(vuln['transactions']))
