@@ -80,29 +80,35 @@ class TestPTP(unittest.TestCase):
     ###
     # PTP.get_highest_ranking
     ###
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_no_vuln(self):
         self.assertTrue(PTP().get_highest_ranking() == constants.UNKNOWN)
 
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_vuln_with_no_ranking(self):
         my_ptp = PTP()
         my_ptp.vulns = [{'foo': 'bar'}]
         self.assertTrue(my_ptp.get_highest_ranking() == constants.UNKNOWN)
 
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_unknown_vuln(self):
         my_ptp = PTP()
         my_ptp.vulns = [{'ranking': constants.UNKNOWN}]
         self.assertTrue(my_ptp.get_highest_ranking() == constants.UNKNOWN)
 
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_info_vuln(self):
         my_ptp = PTP()
         my_ptp.vulns = [{'ranking': constants.UNKNOWN}, {'ranking': constants.INFO}]
         self.assertTrue(my_ptp.get_highest_ranking() == constants.INFO)
 
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_low_vuln(self):
         my_ptp = PTP()
         my_ptp.vulns = [{'ranking': constants.UNKNOWN}, {'ranking': constants.INFO}, {'ranking': constants.LOW}]
         self.assertTrue(my_ptp.get_highest_ranking() == constants.LOW)
 
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_medium_vuln(self):
         my_ptp = PTP()
         my_ptp.vulns = [
@@ -110,6 +116,7 @@ class TestPTP(unittest.TestCase):
             {'ranking': constants.MEDIUM}]
         self.assertTrue(my_ptp.get_highest_ranking() == constants.MEDIUM)
 
+    @unittest.skip('removed since 0.4.0. keeping in case it needs to be reverted.')
     def test_ptp_get_highest_ranking_high_vuln(self):
         my_ptp = PTP()
         my_ptp.vulns = [
