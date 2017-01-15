@@ -22,11 +22,12 @@ class BurpXMLParser(XMLParser):
     __version__ = r'1\.6\.30'  # TODO: Check for different versions, checked only for version 1.6.30
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', light=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.

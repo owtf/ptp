@@ -18,11 +18,12 @@ class RobotsParser(LineParser):
     __format__ = 'txt'
 
     @classmethod
-    def is_mine(cls, pathname, filename='*', first=True):
+    def is_mine(cls, pathname, filename='*', light=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :raises IOError: when the report file cannot be found.

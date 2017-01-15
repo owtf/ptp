@@ -29,12 +29,13 @@ class MetasploitParser(FileParser):
         FileParser.__init__(self, pathname, filename, first=first)
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.txt', plugin='', first=True):
+    def is_mine(cls, pathname, filename='*.txt', plugin='', light=True, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
         :param str plugin: Name of the plugin that generated the report.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.

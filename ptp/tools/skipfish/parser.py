@@ -40,14 +40,14 @@ class SkipfishJSParser(AbstractParser):
     _metadatafile = 'summary.js'
     dirname = ''
 
-    def __init__(self, pathname, full_parse=True):
+    def __init__(self, pathname, light=False):
         """Initialize Skipfish JS parser.
 
         :param str pathname: Path to the report directory.
-        :param bool full_parse: Fully parse the report instead of only the rankings.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
 
         """
-        self.full_parse = full_parse
+        self.light = light
         metadatafile = self._recursive_find(pathname, self._metadatafile)
         if metadatafile:
             metadatafile = metadatafile[0]
@@ -83,10 +83,11 @@ class SkipfishJSParser(AbstractParser):
         return (metadata_stream, report_stream)
 
     @classmethod
-    def is_mine(cls, pathname):
+    def is_mine(cls, pathname, light=False):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
 
         :raises IOError: when the report file cannot be found.
         :raises OSError: when the report file cannot be found.
@@ -212,7 +213,7 @@ class SkipfishJSParser(AbstractParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln['severity']]}
             for vuln in format_data[REPORT_VAR_NAME]]
-        if self.full_parse:
+        if not self.light:
             for var in variables:
                 for item in format_data[var]:
                     for sample in item['samples']:

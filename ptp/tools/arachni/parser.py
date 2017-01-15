@@ -38,11 +38,12 @@ class ArachniXMLParser(XMLParser):
         INFO: constants.INFO}
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', light=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :raises IOError: when the report file cannot be found.
@@ -119,7 +120,7 @@ class ArachniXMLParser(XMLParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln.find('.//severity').text.lower()]}
             for vuln in self.stream.find('.//issues')]
-        if self.full_parse:
+        if not self.light:
             temp = []
             for record in self.stream.xpath('//variations//variation//referring_page'):
                 temp.append(record.getchildren())
@@ -146,11 +147,12 @@ class ArachniJSONParser(JSONParser):
         INFO: constants.INFO}
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.json', first=True):
+    def is_mine(cls, pathname, filename='*.json', light=False, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.
@@ -220,6 +222,6 @@ class ArachniJSONParser(JSONParser):
 
         """
         self.vulns = [{'ranking': self.RANKING_SCALE[vuln['severity'].lower()]} for vuln in self.stream['issues']]
-        if self.full_parse:
+        if not self.light:
             self.vulns.append({'transactions': self._parse_report_full(self.stream['issues'])})
         return self.vulns

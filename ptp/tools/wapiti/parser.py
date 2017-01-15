@@ -24,15 +24,13 @@ class WapitiXMLParser(XMLParser):
     __version__ = r'2\.3\.0'
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', light=True, first=True):
         """Check if it can handle the report file.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
-
-        :raises IOError: when the report file cannot be found.
-        :raises OSError: when the report file cannot be found.
 
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
@@ -40,7 +38,7 @@ class WapitiXMLParser(XMLParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (TypeError, XMLSyntaxError):
+        except (IOError, OSError, TypeError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
@@ -109,11 +107,12 @@ class Wapiti221XMLParser(XMLParser):
     __version__ = r'2\.2\.1'
 
     @classmethod
-    def is_mine(cls, pathname, filename='*.xml', first=True):
+    def is_mine(cls, pathname, filename='*.xml', light=True, first=True):
         """Check if it is a supported Wapiti report.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         :return: `True` if it supports the report, `False` otherwise.

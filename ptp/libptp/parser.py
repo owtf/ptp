@@ -32,12 +32,12 @@ class AbstractParser(object):
     #: :class:`list` -- Versions it can supports.
     __version__ = ''
 
-    def __init__(self, pathname='./', filename='*', full_parse=True, first=True):
+    def __init__(self, pathname='./', filename='*', light=False, first=True):
         """Initialize :class:`AbstractParser`.
 
         :param str pathname: Path to the report directory.
         :param str filename: Regex matching the report file.
-        :param bool full_parse: Fully parse the report instead of only the rankings.
+        :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
         """
@@ -50,7 +50,7 @@ class AbstractParser(object):
         #: :class:`dict` -- Dict of the metadata found in the report.
         self.metadata = {}
         #: :class:`bool` -- Should fully parse the report or not.
-        self.full_parse = full_parse
+        self.light = light
 
     @staticmethod
     def _recursive_find(pathname='./', file_regex='*', first=True):
