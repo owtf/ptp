@@ -167,7 +167,7 @@ class XMLParser(AbstractParser):
 
         :raises IOError: when the report file cannot be found.
         :raises TypeError: when the report file has not the right extension.
-        :raises :class:`lxml.etree.XMLSyntaxError`: when Lxml cannot parse the XML file.
+        :raises lxml.etree.XMLSyntaxError: when Lxml cannot parse the XML file.
 
         :return: handle on the root node element from the XML file.
         :rtype: :class:`lxml.etree._Element`

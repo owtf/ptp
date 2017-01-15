@@ -139,11 +139,11 @@ class SkipfishJSParser(AbstractParser):
             raise NotSupportedVersionError('PTP does NOT support this version of Skipfish.')
 
     def _parse_report_full(self, dir_list):
-        """Retrieve list of directories found in samples.js file. From all the directories, it reads request.dat
-        and response.dat file and return a list of dict resquests and responses.
+        """Parse HTTP requests from directories listed in the samples.js file.
 
-        :raises: IOError -- specifying in which directory it doesn't find request.dat/response.dat file and
-        default its value to NOT_FOUND
+        From all the directories, it reads request.dat and response.dat file and return a list of dict resquests and
+        responses.
+
         """
         data = []
         for dirs in dir_list:
