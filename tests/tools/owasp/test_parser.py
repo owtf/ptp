@@ -22,13 +22,10 @@ class TestOWASPCM008Parser(unittest.TestCase):
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file)
     def test_parser_owasp_cm008_is_mine(self, mock_handle):
         from .owasp_cm008_reports import report_low
-        OWASPCM008Parser.__format__ = ''
         self.assertTrue(OWASPCM008Parser.is_mine(report_low))
         from .owasp_cm008_reports import report_medium
-        OWASPCM008Parser.__format__ = ''
         self.assertTrue(OWASPCM008Parser.is_mine(report_medium))
         from .owasp_cm008_reports import report_high
-        OWASPCM008Parser.__format__ = ''
         self.assertTrue(OWASPCM008Parser.is_mine(report_high))
 
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file)
@@ -54,7 +51,6 @@ class TestOWASPCM008Parser(unittest.TestCase):
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file)
     def test_parser_owasp_cm008_parse_metadata(self, mock_handle):
         from .owasp_cm008_reports import report_low
-        OWASPCM008Parser.__format__ = ''
         my_cm008 = OWASPCM008Parser(report_low)
         assert_that(my_cm008.parse_metadata(), has_entry('date', 'Tue, 12 Aug 2014 20:26:16 GMT'))
         from .owasp_cm008_reports import report_medium
@@ -70,7 +66,6 @@ class TestOWASPCM008Parser(unittest.TestCase):
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file)
     def test_parser_owasp_cm008_parse_report(self, mock_handle):
         from .owasp_cm008_reports import report_low
-        OWASPCM008Parser.__format__ = ''
         my_cm008 = OWASPCM008Parser(report_low)
         report = my_cm008.parse_report()
         assert_that(report, has_items(*[{'ranking': UNKNOWN}] * 2))
@@ -94,3 +89,9 @@ class TestOWASPCM008Parser(unittest.TestCase):
         assert_that(report, has_items(*[{'ranking': HIGH}] * 1))
         assert_that(report, is_not(has_item([{'ranking': INFO}])))
         assert_that(report, is_not(has_item([{'ranking': MEDIUM}])))
+
+    @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file)
+    def test_parser_owasp_cm008_parse_report_no_allow_methods(self, mock_handle):
+        from .owasp_cm008_reports import report_no_allow
+        my_cm008 = OWASPCM008Parser(report_no_allow)
+        self.assertTrue(my_cm008.parse_report() == [])
