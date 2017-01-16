@@ -139,7 +139,7 @@ class W3AFXMLParser(XMLParser):
                 self.vulns.append({
                     'ranking': constants.UNKNOWN,
                     'transactions': self._parse_report_full(FileParser.handle_file(self.pathname, self.__httpfile_format__))})
-            except OSError:
-                # There is not additional file referencing the HTTP requests. We silently pass.
+            except (OSError, IOError):
+                # There is no additional file referencing the HTTP requests. We silently pass.
                 pass
         return self.vulns
