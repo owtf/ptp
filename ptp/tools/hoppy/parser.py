@@ -16,7 +16,7 @@ class HoppyParser(FileParser):
     """Hoppy specialized parser."""
 
     __tool__ = 'hoppy'
-    __version__ = r'1\.8\.1'  # TODO: check for other version, checked only for 1.8.1
+    __version__ = r'1\.[0-9]+(\.[0-9]+)?'
 
     _re_version = re.compile(r"\D{3} \S+ (\d\.\d+\.\d+) \S")
     _re_transaction = re.compile(r"(?<=We Sent:)\n.*?(\S+ /.*?)\n(?=\n\t\D{3} Parsed Response:)", re.S)

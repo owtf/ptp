@@ -21,9 +21,7 @@ class W3AFXMLParser(XMLParser):
     __tool__ = 'w3af'
     __format__ = 'xml'
     __httpfile_format__ = "*.http.txt"
-    __version__ = (
-        r'(1\.6(\.0\.[1-5]{1})?)|'
-        r'(1\.6\.([45,46,49,50,51,52,54]{1})?)')
+    __version__ = r'1\.[0-9]+(\.[0-9]+)?'
 
     _re_version = re.compile(r'Version: (\S*)\s')
     _re_transaction = re.compile(r"(?<=={30}Request )[0-9]+ .*?={9}\n(.*?)(?=\n={70})", re.S)

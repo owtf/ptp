@@ -21,14 +21,8 @@ class ArachniXMLParser(XMLParser):
     __tool__ = 'arachni'
     __format__ = 'xml'
     __version__ = (
-        r'(^0\.4\.[6-7]{1}$)|'
-        r'(^1\.0(\.[1-6]{1})?$)|'
-        r'(^1\.1$)|'
-        r'(^1\.2\.1$)|'
-        r'(^1\.3$)|'
-        r'(^1\.3.1$)|'
-        r'(^1\.3.2$)|'
-        r'(^1\.4$)')
+        r'(^0\.4\.[0-9]+$)|'
+        r'(^1\.[0-9]+(\.[0-9]+)?$)')
 
     HIGH = 'high'
     MEDIUM = 'medium'
@@ -137,7 +131,7 @@ class ArachniJSONParser(JSONParser):
 
     __tool__ = 'arachni'
     __format__ = 'xml'
-    __version__ = (r'(^1\.2\.1$)')
+    __version__ = r'(^1\.[0-9]+(\.[0-9]+)?$)'
 
     HIGH = 'high'
     MEDIUM = 'medium'

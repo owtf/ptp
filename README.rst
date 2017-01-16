@@ -42,11 +42,8 @@ The easiest way to install it is using `pip
 
     $ pip install ptp
 
-.. note::
-
-    If an error occurs during the installation process, check your permissions.
-    It might be required to run `pip
-    <https://pip.readthedocs.org/en/latest/installing.html>`_ as root.
+*Note*: If an error occurs during the installation process, check your permissions. It might be required to run `pip
+<https://pip.readthedocs.org/en/latest/installing.html>`_ as root.
 
 From scratch
 ============
@@ -61,11 +58,11 @@ The first step is to clone the repository of the project:
 
     $ git clone https://github.com/owtf/ptp.git
 
-Then run the `setup.py` script:
+Then use the Makefile command:
 
 .. code-block:: bash
 
-    $ ./setup.py install
+    $ make install
 
 =====
 Usage
@@ -96,13 +93,20 @@ the technical documentation of the project.
 Current support
 ===============
 
-+ arachni (0.4.6 to 1.4) (XML and JSON report)
-+ burpsuite (1.6.30) (XML report)
++ arachni (0.4.x to 1.x) (XML and JSON report)
++ burpsuite (1.x.x) (XML report)
 + dirbuster (1.0-RC1)
-+ hoppy (1.8.1)
++ hoppy (1.x.x)
 + metasploit
 + owasp
 + robots.txt
 + skipfish (2.10b)
-+ w3af (1.6 to 1.6.54) (XML report)
-+ wapiti (2.2.1, 2.3.0) (XML report)
++ w3af (1.x.x) (XML report)
++ wapiti (2.x.x) (XML report)
+
+
+*Warning*: PTP relies on the fact that the supported tools are following `semantic version <http://semver.org/>`_
+(except observed otherwise). In other words, when the supported tools increment their MINOR version and/or their PATCH
+version, they do not break compatibility with the previous version. Based on that fact, PTP supposes that it supports
+all version of a tool, as long as the MAJOR version has not been incremented (or an issue is created to report a broken
+support). We might change our mind if it appears that the supported tools keep breaking their backward-compatibility.

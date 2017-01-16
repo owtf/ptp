@@ -21,7 +21,7 @@ class WapitiXMLParser(XMLParser):
 
     __tool__ = 'wapiti'
     __format__ = 'xml'
-    __version__ = r'2\.3\.0'
+    __version__ = r'2\.3(\.[0-9]+)?'
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', light=True, first=True):
@@ -104,7 +104,7 @@ class Wapiti221XMLParser(XMLParser):
     #: :class:`str` -- Format of Wapiti reports it supports.
     __format__ = 'xml'
     #: :class:`list` -- Wapiti versions it supports.
-    __version__ = r'2\.2\.1'
+    __version__ = r'2\.2(\.[0-9]+)?'
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', light=True, first=True):

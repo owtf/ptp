@@ -50,6 +50,16 @@ complex parsing.
     tests. But :mod:`ptp` is in its early development phase and only supports
     the main ones for now.
 
+.. warning::
+
+    PTP relies on the fact that the supported tools are following `semantic version <http://semver.org/>`_ (except
+    observed otherwise). In other words, when the supported tools increment their MINOR version and/or their PATCH
+    version, they do not break compatibility with the previous version.
+
+    Based on that fact, PTP supposes that it supports all version of a tool, as long as the MAJOR version has not been
+    incremented (or an issue is created to report a broken support). We might change our mind if it appears that the
+    supported tools keep breaking their backward-compatibility.
+
 ============
 Installation
 ============
