@@ -20,8 +20,8 @@ class W3AFXMLParser(XMLParser):
 
     __tool__ = 'w3af'
     __format__ = 'xml'
-    __httpfile_format__ = "*.http.txt"
     __version__ = r'1\.[0-9]+(\.[0-9]+)?'
+    __httpfile_format__ = "*.http.txt"
 
     _re_version = re.compile(r'Version: (\S*)\s')
     _re_transaction = re.compile(r"(?<=={30}Request )[0-9]+ .*?={9}\n(.*?)(?=\n={70})", re.S)
@@ -41,6 +41,10 @@ class W3AFXMLParser(XMLParser):
         MEDIUM: constants.MEDIUM,
         LOW: constants.LOW,
         INFO: constants.INFO}
+
+    def __init__(self, pathname, filename='*.xml', light=False, first=True):
+        self.pathname = pathname  # Keep a copy of the working directory for HTTP requests parsing.
+        XMLParser.__init__(self, pathname=pathname, filename=filename, light=light, first=first)
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', light=False, first=True):
@@ -97,6 +101,29 @@ class W3AFXMLParser(XMLParser):
             raise NotSupportedVersionError('PTP does NOT support this version of W3AF.')
         return self.metadata
 
+    def _parse_report_full(self, raw_transactions):
+        """Parse the captured http transactions of the report.
+
+        :param str raw_transactions: HTTP transactions logged by w3af
+
+        :return: List of dicts where each one has a request and response.
+        :rtype: :class:`list`
+
+        """
+        data = []
+        transactions = self._re_transaction.findall(raw_transactions)
+        for count, transaction in enumerate(transactions):
+            response = self._re_response.findall(transaction)[0] + '\n'
+            response_header = self._re_reponse_header.search(response).group()
+            # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
+            data.append({
+                'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
+                'status_code': self._re_response_status_code.search(response_header).group(),
+                'headers': response_header,
+                'body': self._re_response_body.search(response).group(2)
+            })
+        return data
+
     def parse_report(self):
         """Parse the results of the report.
 
@@ -107,4 +134,12 @@ class W3AFXMLParser(XMLParser):
         self.vulns = [
             {'ranking': self.RANKING_SCALE[vuln.get('severity')]}
             for vuln in self.stream.findall('.//vulnerability')]
+        if not self.light:
+            try:
+                self.vulns.append({
+                    'ranking': constants.UNKNOWN,
+                    'transactions': self._parse_report_full(FileParser.handle_file(self.pathname, self.__httpfile_format__))})
+            except OSError:
+                # There is not additional file referencing the HTTP requests. We silently pass.
+                pass
         return self.vulns

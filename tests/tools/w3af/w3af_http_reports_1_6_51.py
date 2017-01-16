@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-http_report = r"""
+report_http = r"""
 ========================================Request 1 - Wed Apr 13 07:59:01 2016 ========================================
 GET http://127.0.0.1/ HTTP/1.1
 Accept-encoding: gzip, deflate

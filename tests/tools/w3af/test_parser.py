@@ -221,7 +221,7 @@ class TestW3AFXMLParser(unittest.TestCase):
     def test_parser_arachni_xml_parse_report(self, mock_lxml_etree_parse):
         # W3AF version 1.6.0.2
         from .w3af_reports_1_6_0_2 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -232,7 +232,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': INFO}])))
         # W3AF version 1.6.0.3
         from .w3af_reports_1_6_0_3 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -242,7 +242,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .w3af_reports_1_6_0_3 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -253,7 +253,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
         # W3AF version 1.6.0.5
         from .w3af_reports_1_6_0_5 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -263,7 +263,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .w3af_reports_1_6_0_5 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -274,7 +274,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
         # W3AF version 1.6.45
         from .w3af_reports_1_6_45 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -284,7 +284,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .w3af_reports_1_6_45 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -295,7 +295,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
         # W3AF version 1.6.46
         from .w3af_reports_1_6_46 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -305,7 +305,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .w3af_reports_1_6_46 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -316,7 +316,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
         # W3AF version 1.6.49
         from .w3af_reports_1_6_49 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -326,7 +326,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .w3af_reports_1_6_49 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -337,7 +337,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
         # W3AF version 1.6.50
         from .w3af_reports_1_6_50 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -347,7 +347,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
         from .w3af_reports_1_6_50 import report_high
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_high]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -358,7 +358,7 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
         # W3AF version 1.6.51
         from .w3af_reports_1_6_51 import report_medium
-        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_medium]):
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
             W3AFXMLParser.__format__ = ''
             my_w3af = W3AFXMLParser('foo', 'bar', first=True)
             report = my_w3af.parse_report()
@@ -367,3 +367,23 @@ class TestW3AFXMLParser(unittest.TestCase):
             assert_that(report, is_not(has_item([{'ranking': INFO}])))
             assert_that(report, is_not(has_item([{'ranking': LOW}])))
             assert_that(report, is_not(has_item([{'ranking': HIGH}])))
+
+    ###
+    # ArachniXMLParser._parse_report_full
+    ###
+    @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
+    def test_parser_arachni_xml_parse_report_http(self, mock_lxml_etree_parse):
+        from .w3af_http_reports_1_6_51 import report_http
+        from .w3af_reports_1_6_51 import report_medium
+        with mock.patch('ptp.libptp.parser.XMLParser._recursive_find', return_value=[report_medium]):
+            # W3AF version 1.6.51 with HTTP report
+            W3AFXMLParser.__format__ = ''
+            my_w3af = W3AFXMLParser('foo', 'bar', first=True)
+            transactions = my_w3af._parse_report_full(report_http)
+            # XML parsing should be OK since tested just above so we only check HTTP transactions.
+            self.assertTrue(transactions and len(transactions))  # Not empty and contain at least one element
+            transaction = transactions[0]  # Only check one transaction.
+            self.assertTrue(transaction.get('request', False))
+            self.assertTrue(transaction.get('status_code', False))
+            self.assertTrue(transaction.get('headers', False))
+            self.assertTrue(transaction.get('body', False))
