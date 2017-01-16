@@ -151,7 +151,6 @@ class SkipfishJSParser(AbstractParser):
                 with open(dirs['dir']+'/request.dat', 'r') as req_data:
                     request = req_data.read()
             except IOError:
-                print("request.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND")
                 request = "NOT_FOUND"
             try:
                 with open(dirs['dir']+'/response.dat', 'r') as res_data:
@@ -159,13 +158,13 @@ class SkipfishJSParser(AbstractParser):
                     response_status_code = self._re_reponse_status_code.findall(response)[0]
                     response_header, response_body = response.split('\n\n', 1)
             except IOError:
-                print("response.dat file not found in "+dirs['dir']+" defaulting it NOT_FOUND")
                 response_body = response_header = response_status_code = "NOT_FOUND"
+            # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
             data.append({
                 'request':request,
-                'response_status_code': response_status_code,
-                'response_headers': response_header,
-                'response_body': response_body
+                'status_code': response_status_code,
+                'headers': response_header,
+                'body': response_body
             })
         return data
 

@@ -100,11 +100,12 @@ class ArachniXMLParser(XMLParser):
             t_res = tree[i][2]
             temp = t_req.find('.//body').text
             temp_body = '' if temp is None else temp
+            # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
             data.append({
                 'request': t_req.find('.//raw').text + temp_body + '\n',
-                'response_status_code': t_res.find('.//code').text,
-                'response_headers': t_res.find('.//raw_headers').text.strip(),
-                'response_body': t_res.find('.//body').text.strip()
+                'status_code': t_res.find('.//code').text,
+                'headers': t_res.find('.//raw_headers').text.strip(),
+                'body': t_res.find('.//body').text.strip()
             })
         return data
 
@@ -204,11 +205,12 @@ class ArachniJSONParser(JSONParser):
         for issue in issues:
             for variation in issue['variations']:
                 temp_body = '' if variation['request']['body'] is None else variation['request']['body']
+                # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
                 data.append({
                     'request': variation['request']['headers_string'] + temp_body + '\n',
-                    'response_status_code': variation['response']['code'],
-                    'response_header': variation['response']['headers_string'],
-                    'response_body': variation['response']['body']
+                    'status_code': variation['response']['code'],
+                    'header': variation['response']['headers_string'],
+                    'body': variation['response']['body']
                 })
         return data
 

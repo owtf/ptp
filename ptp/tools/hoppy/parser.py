@@ -96,11 +96,12 @@ class HoppyParser(FileParser):
             response = self._re_response.search(transaction).group().strip() + '\n\n'
             status_code = self._re_response_status_code.findall(response)
             parsed_response = self._re_response_parse.findall(response)
+            # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
             data.append({
                 'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
-                'response_status_code': status_code[0].strip() + '\n',
-                'response_headers': parsed_response[0][0].strip() + '\n\n',
-                'response_body': parsed_response[0][1].strip() + '\n\n'
+                'status_code': status_code[0].strip() + '\n',
+                'headers': parsed_response[0][0].strip() + '\n\n',
+                'body': parsed_response[0][1].strip() + '\n\n'
             })
         self.data.append({'ranking': constants.UNKOWN, 'transactions': data})
         return self.data

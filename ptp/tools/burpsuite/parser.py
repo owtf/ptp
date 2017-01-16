@@ -94,11 +94,12 @@ class BurpXMLParser(XMLParser):
                 request = item.find('request').text
                 response = item.find('response').text
             response_headers, response_body = response.split('\r\n\r\n', 1)
+            # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
             data.append({
                 'request': request,
-                'response_status_code': response_status_code,
-                'response_headers': response_headers,
-                'response_body': response_body
+                'status_code': response_status_code,
+                'headers': response_headers,
+                'body': response_body
             })
         self.data.append({'ranking': constants.UNKNOWN, 'transactions': data})
         return self.data
