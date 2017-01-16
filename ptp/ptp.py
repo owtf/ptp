@@ -121,8 +121,7 @@ class PTP(object):
         self._init_parser(*args, **kwargs)
         # PTP could not automatically detect the parser or manually initialize it.
         if self._parser is None:
-            sys.stderr.write("No parser matched `ToolParser(%s, %s)`\n\n" % (args, kwargs))
-            raise NotSupportedToolError('This tool is not supported by PTP.')
+            raise NotSupportedToolError('This tool is not supported by PTP. No parser matched `ToolParser(%s, %s)`\n\n' % (args, kwargs))
 
         self.tool_name = self._parser.__tool__
         self.metadata = self._parser.parse_metadata()
