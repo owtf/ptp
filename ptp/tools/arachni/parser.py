@@ -122,7 +122,7 @@ class ArachniXMLParser(XMLParser):
             temp = []
             for record in self.stream.xpath('//variations//variation//referring_page'):
                 temp.append(record.getchildren())
-            self.vulns.append({'transactions': self._parse_report_full(temp)})
+            self.vulns.append({'ranking': constants.UNKNOWN, 'transactions': self._parse_report_full(temp)})
         return self.vulns
 
 
@@ -221,5 +221,5 @@ class ArachniJSONParser(JSONParser):
         """
         self.vulns = [{'ranking': self.RANKING_SCALE[vuln['severity'].lower()]} for vuln in self.stream['issues']]
         if not self.light:
-            self.vulns.append({'transactions': self._parse_report_full(self.stream['issues'])})
+            self.vulns.append({'ranking': constants.UNKNOWN, 'transactions': self._parse_report_full(self.stream['issues'])})
         return self.vulns

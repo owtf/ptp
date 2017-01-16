@@ -8,6 +8,7 @@
 
 import re
 
+from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError
 from ptp.libptp.parser import FileParser
 
@@ -101,5 +102,5 @@ class HoppyParser(FileParser):
                 'response_headers': parsed_response[0][0].strip() + '\n\n',
                 'response_body': parsed_response[0][1].strip() + '\n\n'
             })
-        self.data.append({'transactions': data})
+        self.data.append({'ranking': constants.UNKOWN, 'transactions': data})
         return self.data

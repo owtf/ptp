@@ -218,5 +218,5 @@ class SkipfishJSParser(AbstractParser):
                 for item in format_data[var]:
                     for sample in item['samples']:
                         dirs.append({'url':sample['url'], 'dir':self.dirname+'/'+sample['dir']})
-            self.vulns.append({'transactions': self._parse_report_full(dirs)})
+            self.vulns.append({'ranking': constants.UNKNOWN, 'transactions': self._parse_report_full(dirs)})
         return self.vulns

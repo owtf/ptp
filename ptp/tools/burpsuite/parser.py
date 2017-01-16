@@ -100,5 +100,5 @@ class BurpXMLParser(XMLParser):
                 'response_headers': response_headers,
                 'response_body': response_body
             })
-        self.data.append({'transactions': data})
+        self.data.append({'ranking': constants.UNKNOWN, 'transactions': data})
         return self.data
