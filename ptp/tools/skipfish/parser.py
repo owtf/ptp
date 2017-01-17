@@ -13,7 +13,7 @@ import js2py
 
 from ptp.libptp import constants
 from ptp.libptp.exceptions import NotSupportedVersionError, ReportNotFoundError
-from ptp.libptp.parser import AbstractParser
+from ptp.libptp.parser import AbstractParser, FileParser
 
 
 class SkipfishJSParser(AbstractParser):
@@ -38,7 +38,6 @@ class SkipfishJSParser(AbstractParser):
 
     _reportfile = 'samples.js'
     _metadatafile = 'summary.js'
-    dirname = ''
 
     def __init__(self, pathname, light=False):
         """Initialize Skipfish JS parser.
@@ -47,14 +46,15 @@ class SkipfishJSParser(AbstractParser):
         :param bool light: `True` to only parse the ranking of the findings from the report.
 
         """
+        self.search_directory = ''
         self.light = light
         metadatafile = self._recursive_find(pathname, self._metadatafile)
         if metadatafile:
-            metadatafile = metadatafile[0]
+            metadatafile = metadatafile[0]  # Only keep first instance (in case multiple match)
         reportfile = self._recursive_find(pathname, self._reportfile)
         if reportfile:
-            self.dirname = os.walk(pathname).next()[0]
-            reportfile = reportfile[0]
+            self.search_directory = pathname
+            reportfile = reportfile[0]  # Only keep first instance (in case multiple match)
         self.metadata_stream, self.report_stream = self.handle_file(metadatafile, reportfile)
         self.re_var_pattern = re.compile(r"var\s+(?P<variables>[a-zA-Z_0-9]+)\s+(?==)")
         self.re_metadata = re.compile(r"var\s+([a-zA-Z_0-9]+)\s+=\s+'{0,1}([^;']*)'{0,1};")
@@ -76,10 +76,8 @@ class SkipfishJSParser(AbstractParser):
         """
         if not metadatafile.endswith(cls.__format__) or not reportfile.endswith(cls.__format__):
             raise TypeError("This parser only supports '%s' files" % cls.__format__)
-        with open(metadatafile, 'r') as f:
-            metadata_stream = f.read()
-        with open(reportfile, 'r') as f:
-            report_stream = f.read()
+        metadata_stream = FileParser.handle_file(metadatafile)
+        report_stream = FileParser.handle_file(reportfile)
         return (metadata_stream, report_stream)
 
     @classmethod
@@ -135,8 +133,7 @@ class SkipfishJSParser(AbstractParser):
         # Check if the version if the good one.
         if self.check_version(metadata, key='sf_version'):
             return metadata
-        else:
-            raise NotSupportedVersionError('PTP does NOT support this version of Skipfish.')
+        raise NotSupportedVersionError('PTP does NOT support this version of Skipfish.')
 
     def _parse_report_full(self, dir_list):
         """Parse HTTP requests from directories listed in the samples.js file.
@@ -216,6 +213,6 @@ class SkipfishJSParser(AbstractParser):
             for var in variables:
                 for item in format_data[var]:
                     for sample in item['samples']:
-                        dirs.append({'url':sample['url'], 'dir':self.dirname+'/'+sample['dir']})
+                        dirs.append({'url': sample['url'], 'dir': os.path.join(self.search_directory, sample['dir'])})
             self.vulns.append({'ranking': constants.UNKNOWN, 'transactions': self._parse_report_full(dirs)})
         return self.vulns
