@@ -76,10 +76,9 @@ class ArachniXMLParser(XMLParser):
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
         self.metadata = {version.tag: version.text}
-        if self.check_version(self.metadata):
-            return self.metadata
-        else:
+        if not self.check_version(self.metadata):
             raise NotSupportedVersionError('PTP does NOT support this version of Arachni.')
+        return self.metadata
 
     def _parse_report_full(self, tree):
         """Parse Arachni XML reports to extract additional information.
@@ -183,10 +182,9 @@ class ArachniJSONParser(JSONParser):
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
         self.metadata = {'version': version}
-        if self.check_version(self.metadata):
-            return self.metadata
-        else:
+        if not self.check_version(self.metadata):
             raise NotSupportedVersionError('PTP does NOT support this version of Arachni.')
+        return self.metadata
 
     def _parse_report_full(self, issues):
         """Parse Arachni JSON reports to extract additional information.
