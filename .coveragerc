@@ -3,3 +3,5 @@ show_missing = True
 exclude_lines =
     # Don't report Abstract methods
     raise NotImplementedError
+    # Don't report Python2.x/Python3 missing NameError
+    except NameError:
