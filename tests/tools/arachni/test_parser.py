@@ -7,11 +7,16 @@ from lxml import etree
 from hamcrest import assert_that, has_entry, has_item, has_items, is_not, equal_to
 
 from ptp.libptp.constants import UNKNOWN, INFO, LOW, MEDIUM, HIGH
+from ptp.libptp.exceptions import NotSupportedVersionError
 from ptp.tools.arachni.parser import ArachniXMLParser, ArachniJSONParser
 
 
 def lxml_etree_parse(string):
     return etree.fromstring(string).getroottree()
+
+
+def handle_json_file(string, *args, **kwargs):
+    return json.loads(string)
 
 
 class TestArachniXMLParser(unittest.TestCase):
@@ -93,10 +98,31 @@ class TestArachniXMLParser(unittest.TestCase):
         with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
             ArachniXMLParser.__format__ = ''
             self.assertTrue(ArachniXMLParser.is_mine('foo', 'bar', first=True))
+        # Arachni version 1.2.1
+        from .arachni_reports_1_2_1 import report_high
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[report_high]):
+            ArachniXMLParser.__format__ = ''
+            self.assertTrue(ArachniXMLParser.is_mine('foo', 'bar', first=True))
 
     @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
     def test_parser_arachni_xml_is_not_mine(self, mock_lxml_etree_parse):
         with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=['foo.bar']):
+            ArachniXMLParser.__format__ = ''
+            self.assertFalse(ArachniXMLParser.is_mine('foo', 'bar', first=True))
+
+    @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
+    def test_parser_arachni_xml_is_mine_but_no_version(self, mock_lxml_etree_parse):
+        from .arachni_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('<version>', '<notversionanymore>').replace('</version>', '</notversionanymore>')
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[stripped_report]):
+            ArachniXMLParser.__format__ = ''
+            self.assertFalse(ArachniXMLParser.is_mine('foo', 'bar', first=True))
+
+    @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
+    def test_parser_arachni_xml_is_mine_but_unsupported_version(self, mock_lxml_etree_parse):
+        from .arachni_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('<version>1.2.1</version>', '<version>INVALIDVERSIONNEVERWILLITHAPPEN</version>')
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[stripped_report]):
             ArachniXMLParser.__format__ = ''
             self.assertFalse(ArachniXMLParser.is_mine('foo', 'bar', first=True))
 
@@ -193,6 +219,16 @@ class TestArachniXMLParser(unittest.TestCase):
             ArachniXMLParser.__format__ = ''
             my_arachni = ArachniXMLParser('foo', 'bar', first=True)
             assert_that(my_arachni.parse_metadata(), has_entry('version', '1.1'))
+
+    @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
+    def test_parser_arachni_xml_parse_metadata_unsupported_version(self, mock_lxml_etree_parse):
+        from .arachni_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('<version>1.2.1</version>', '<version>INVALIDVERSIONNEVERWILLITHAPPEN</version>')
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[stripped_report]):
+            ArachniXMLParser.__format__ = ''
+            my_arachni = ArachniXMLParser('foo', 'bar', first=True)
+            with self.assertRaises(NotSupportedVersionError):
+                my_arachni.parse_metadata()
 
     ###
     # ArachniXMLParser.parse_report
@@ -382,11 +418,41 @@ class TestArachniXMLParser(unittest.TestCase):
             assert_that(10, equal_to(len(report[-1]['transactions'])))
 
 class TestArachniJSONParser(unittest.TestCase):
+
+    ###
+    # ArachniJSONParser.is_mine
+    ###
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', side_effect=handle_json_file)
+    def test_parser_arachni_json_is_mine(self, mock_handle):
+        # Arachni version 1.2.1
+        from .arachni_json_reports_1_2_1 import report_high
+        ArachniJSONParser.__format__ = ''
+        self.assertTrue(ArachniJSONParser.is_mine(report_high, first=True))
+
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', side_effect=handle_json_file)
+    def test_parser_arachni_json_is_not_mine(self, mock_handle):
+        ArachniJSONParser.__format__ = ''
+        self.assertFalse(ArachniJSONParser.is_mine('foo', first=True))
+
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', side_effect=handle_json_file)
+    def test_parser_arachni_json_is_mine_but_no_version(self, mock_handle):
+        from .arachni_json_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('"version"', '"notversionanymore"')
+        ArachniJSONParser.__format__ = ''
+        self.assertFalse(ArachniJSONParser.is_mine(stripped_report, first=True))
+
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', side_effect=handle_json_file)
+    def test_parser_arachni_json_is_mine_but_unsupported_version(self, mock_handle):
+        from .arachni_json_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('"version" : "1.2.1"', '"version" : "INVALIDVERSIONNEVERWILLITHAPPEN"')
+        ArachniJSONParser.__format__ = ''
+        self.assertFalse(ArachniJSONParser.is_mine(stripped_report, first=True))
+
     ###
     # ArachniJSONParser.parse_metadata()
     ###
     @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
-    def test_parser_arachni_xml_is_mine(self, mock_handle):
+    def test_parser_arachni_json_parse_metadata(self, mock_handle):
         # Arachni version 1.2.1
         from .arachni_json_reports_1_2_1 import report_high
         my_arachni = ArachniJSONParser(None)
@@ -394,12 +460,32 @@ class TestArachniJSONParser(unittest.TestCase):
         report = my_arachni.parse_metadata()
         assert_that(report, has_entry("version", "1.2.1"))
 
+    @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
+    def test_parser_arachni_json_parse_metadata_unsupported_version(self, mock_handle):
+        from .arachni_json_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('"version" : "1.2.1"', '"version" : "INVALIDVERSIONNEVERWILLITHAPPEN"')
+        ArachniJSONParser.__format__ = ''
+        my_arachni = ArachniJSONParser(None)
+        my_arachni.stream = json.loads(stripped_report)
+        with self.assertRaises(NotSupportedVersionError):
+            my_arachni.parse_metadata()
+
+    @mock.patch('lxml.etree.parse', side_effect=lxml_etree_parse)
+    def test_parser_arachni_xml_parse_metadata_unsupported_version(self, mock_lxml_etree_parse):
+        from .arachni_reports_1_2_1 import report_high
+        stripped_report = report_high.replace('<version>1.2.1</version>', '<version>INVALIDVERSIONNEVERWILLITHAPPEN</version>')
+        with mock.patch('ptp.libptp.parser.AbstractParser._recursive_find', return_value=[stripped_report]):
+            ArachniXMLParser.__format__ = ''
+            my_arachni = ArachniXMLParser('foo', 'bar', first=True)
+            with self.assertRaises(NotSupportedVersionError):
+                my_arachni.parse_metadata()
+
     ###
     # ArachniJSONParser.parse_report
     ###
     @mock.patch('ptp.libptp.parser.JSONParser.handle_file', return_value={})
-    def test_parser_skipfish_parse_report(self, mock_handle):
-    # Arachni version 1.2.1
+    def test_parser_arachni_json_parse_report(self, mock_handle):
+        # Arachni version 1.2.1
         from .arachni_json_reports_1_2_1 import report_high
         my_arachni = ArachniJSONParser(None)
         my_arachni.stream = json.loads(report_high)
