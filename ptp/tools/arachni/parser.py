@@ -160,7 +160,7 @@ class ArachniJSONParser(JSONParser):
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (TypeError, XMLSyntaxError):
+        except (TypeError, ValueError):
             return False
         if 'version' in stream:
             version = stream['version']
