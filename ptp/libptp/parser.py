@@ -268,10 +268,6 @@ class JSONParser(AbstractParser):
     #: str -- JSONParser only supports json files.
     __format__ = 'json'
 
-    def __init__(self, filename='*.json', **kwargs):
-        """Initialize :class:`JSONParser`."""
-        AbstractParser.__init__(self, filename, **kwargs)
-
     @classmethod
     def handle_file(cls, pathname='./', filename='*.json', first=True):
         """Return the dict of the JSON file.
