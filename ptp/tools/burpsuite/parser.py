@@ -19,7 +19,7 @@ class BurpXMLParser(XMLParser):
     """BurpSuite XML specialized parser."""
 
     __tool__ = 'burpsuite'
-    __version__ = r'1\.[0-9]+(\.[0-9]+)?'
+    __version__ = r'1\.[0-9]+[\.[0-9]+]?'
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', light=False, first=True):
