@@ -7,6 +7,7 @@
 """
 
 import re
+import base64
 
 from lxml.etree import XMLSyntaxError
 
@@ -19,7 +20,7 @@ class BurpXMLParser(XMLParser):
     """BurpSuite XML specialized parser."""
 
     __tool__ = 'burpsuite'
-    __version__ = r'1\.[0-9]+(\.[0-9]+)?'
+    __version__ = r'1\.[0-9]+[\.[0-9]+]?'
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', light=False, first=True):
@@ -82,14 +83,14 @@ class BurpXMLParser(XMLParser):
         data = []
         # TODO: maybe a better way to get base64 value
         if self.stream.find('.//request').attrib['base64'] == 'false':
-            base64 = False
+            is_base64 = False
         else:
-            base64 = True
+            is_base64 = True
         for item in self.stream.findall('.//item'):
             response_status_code = item.find('status').text
-            if base64:
-                request = item.find('request').text.decode('base64')
-                response = item.find('response').text.decode('base64')
+            if is_base64:
+                request = base64.b64decode(item.find('request').text).decode('utf-8')
+                response = base64.b64decode(item.find('response').text).decode('utf-8')
             else:
                 request = item.find('request').text
                 response = item.find('response').text
