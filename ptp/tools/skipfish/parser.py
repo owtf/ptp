@@ -8,7 +8,6 @@
 
 import re
 import os
-import ast
 import js2py
 
 from ptp.libptp import constants
@@ -145,12 +144,12 @@ class SkipfishJSParser(AbstractParser):
         data = []
         for dirs in dir_list:
             try:
-                with open(dirs['dir']+'/request.dat', 'r') as req_data:
+                with open(os.path.join(dirs['dir'], 'request.dat'), 'r') as req_data:
                     request = req_data.read()
             except IOError:
                 request = "NOT_FOUND"
             try:
-                with open(dirs['dir']+'/response.dat', 'r') as res_data:
+                with open(os.path.join(dirs['dir'], 'response.dat'), 'r') as res_data:
                     response = res_data.read()
                     response_status_code = self._re_reponse_status_code.findall(response)[0]
                     response_header, response_body = response.split('\n\n', 1)
@@ -158,7 +157,7 @@ class SkipfishJSParser(AbstractParser):
                 response_body = response_header = response_status_code = "NOT_FOUND"
             # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
             data.append({
-                'request':request,
+                'request': request,
                 'status_code': response_status_code,
                 'headers': response_header,
                 'body': response_body
@@ -191,8 +190,8 @@ class SkipfishJSParser(AbstractParser):
         split_data = self.report_stream.split(";")
         js_data = [data for data in split_data if data is not None]
         py_data = []
-        format_data = {} # Final python dict after converting js to py
-        dirs = [] # List of directories of all urls
+        format_data = {}  # Final python dict after converting js to py
+        dirs = []  # List of directories of all urls
         # Converting js to py to make it simple to process
         for data in js_data:
             temp_data = js2py.eval_js(data)

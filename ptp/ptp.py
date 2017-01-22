@@ -6,8 +6,6 @@
 
 """
 
-import sys
-
 from .libptp.exceptions import NotSupportedToolError, NotSupportedVersionError
 from .libptp.constants import UNKNOWN, RANKING_SCALE
 from .tools.arachni.parser import ArachniXMLParser, ArachniJSONParser
