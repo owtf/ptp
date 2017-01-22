@@ -39,11 +39,8 @@ class BurpXMLParser(XMLParser):
             stream = cls.handle_file(pathname, filename, first=first)
         except (TypeError, XMLSyntaxError):
             return False
-        try:
-            version = stream.attrib['burpVersion']
-        except(KeyError):
-            return False
-        if version is None:
+        version = stream.attrib['burpVersion']
+        if not version:
             return False
         if not re.findall(cls.__version__, version, re.IGNORECASE):
             return False
@@ -59,13 +56,9 @@ class BurpXMLParser(XMLParser):
 
         """
         raw_metadata = self.stream.attrib['burpVersion']
-        # Find the version of BurpSuite.
-        version = re.findall(self.__version__, raw_metadata, re.IGNORECASE)
-        if len(version) >= 1:  # In case we found several version numbers.
-            version = version[0]
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
-        metadata = {'version': version}
+        metadata = {'version': raw_metadata}
         if self.check_version(metadata):
             self.metadata = metadata
         else:
