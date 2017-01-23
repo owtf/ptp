@@ -66,8 +66,13 @@ class DirbusterParser(LineParser):
         :rtype: dict
 
         """
-        # TODO: Properly retrieve the metadata.
-        return {}
+        metadata = {}
+        if len(self.stream):
+            version = re.match(self._re_version, self.stream[0])
+            if version:
+                metadata['version'] = version.group('version')
+        self.metadata = metadata
+        return metadata
 
     def parse_report(self):
         """Parser the results of a DirBuster report.

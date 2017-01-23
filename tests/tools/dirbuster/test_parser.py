@@ -38,19 +38,20 @@ class TestDirbusterParser(unittest.TestCase):
     ###
     # DirbusterParser.parse_metadata
     ###
-    @unittest.skip('since metadata are not extracted from dirbuster reports yet')
     def test_parser_dirbuster_parse_metadata(self):
         # Dirbuster 1.0-RC1
         from .dirbuster_reports import report_low
         with mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file):
             DirbusterParser.__format__ = ''
             my_dirbuster = DirbusterParser(report_low)
-            my_dirbuster.parse_metadata()
+            metadata = my_dirbuster.parse_metadata()
+            self.assertTrue(metadata.get('version', '') == '1.0-RC1')
         from .dirbuster_reports import report_high
         with mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file):
             DirbusterParser.__format__ = ''
             my_dirbuster = DirbusterParser(report_high)
-            my_dirbuster.parse_metadata()
+            metadata = my_dirbuster.parse_metadata()
+            self.assertTrue(metadata.get('version', '') == '1.0-RC1')
 
     ###
     # DirbusterParser.parse_report
