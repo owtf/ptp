@@ -21,7 +21,7 @@ class WapitiXMLParser(XMLParser):
 
     __tool__ = 'wapiti'
     __format__ = 'xml'
-    __version__ = r'2\.3(\.[0-9]+)?'
+    __version__ = r'^\D*(2\.3(\.[0-9]+)?)$'
 
     @classmethod
     def is_mine(cls, pathname, filename='*.xml', light=True, first=True):
@@ -32,13 +32,16 @@ class WapitiXMLParser(XMLParser):
         :param bool light: `True` to only parse the ranking of the findings from the report.
         :param bool first: Only process first file (``True``) or each file that matched (``False``).
 
+        :raises IOError: when the report file cannot be found.
+        :raises OSError: when the report file cannot be found.
+
         :return: `True` if it supports the report, `False` otherwise.
         :rtype: :class:`bool`
 
         """
         try:
             stream = cls.handle_file(pathname, filename, first=first)
-        except (IOError, OSError, TypeError, XMLSyntaxError):
+        except (TypeError, XMLSyntaxError):
             return False
         raw_metadata = stream.find('.//report_infos')
         if raw_metadata is None:
@@ -46,7 +49,9 @@ class WapitiXMLParser(XMLParser):
         metadata = {el.get('name'): el.text for el in raw_metadata}
         if not metadata:
             return False
-        if metadata['generatorName'].lower() != cls.__tool__:
+        if metadata.get('generatorName', '').lower() != cls.__tool__:
+            return False
+        if not re.match(cls.__version__, metadata.get('generatorVersion', '')):
             return False
         return True
 
@@ -65,10 +70,10 @@ class WapitiXMLParser(XMLParser):
         metadata = {el.get('name'): el.text for el in raw_metadata}
         # Only keep the version number
         metadata['generatorVersion'] = metadata['generatorVersion'].lstrip('Wapiti ')
-        if self.check_version(metadata, key='generatorVersion'):
-            self.metadata = metadata
-        else:
+        if not self.check_version(metadata, key='generatorVersion'):
             raise NotSupportedVersionError('PTP does NOT support this version of Wapiti.')
+        self.metadata = metadata
+        return metadata
 
     def parse_report(self):
         """Parse the results of the report.
