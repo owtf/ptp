@@ -17,10 +17,10 @@ SIGNATURES = {
     'SQL Injection': HIGH,
     'Blind SQL Injection': HIGH,
     'Command execution': HIGH,
+    'Cross Site Scripting': HIGH,
 
     # Medium ranked vulnerabilities
     'Htaccess Bypass': MEDIUM,
-    'Cross Site Scripting': MEDIUM,
     'CRLF Injection': MEDIUM,
     'CRLF': MEDIUM,
 
