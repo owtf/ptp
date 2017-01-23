@@ -43,7 +43,6 @@ class TestRobotsParser(unittest.TestCase):
     ###
     # RobotsParser.parse_metadata
     ###
-    @unittest.skip('since metadata are not extracted from robots files yet')
     @mock.patch('ptp.libptp.parser.LineParser.handle_file', side_effect=handle_file)
     def test_parser_robots_parse_metadata(self, mock_handle):
         from .robots_reports import report_info

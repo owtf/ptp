@@ -48,8 +48,7 @@ class RobotsParser(LineParser):
         :rtype: dict
 
         """
-        # TODO: Properly retrieve the metadata.
-        return {}
+        return {}  # No metadata to retrieve in robots.txt
 
     def parse_report(self):
         """Parser the results of a Robots.txt report.
