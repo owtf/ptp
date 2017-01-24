@@ -47,8 +47,6 @@ class WapitiXMLParser(XMLParser):
         if raw_metadata is None:
             return False
         metadata = {el.get('name'): el.text for el in raw_metadata}
-        if not metadata:
-            return False
         if metadata.get('generatorName', '').lower() != cls.__tool__:
             return False
         if not re.match(cls.__version__, metadata.get('generatorVersion', '')):
@@ -132,8 +130,6 @@ class Wapiti221XMLParser(XMLParser):
         if raw_metadata is None:
             return False
         metadata = raw_metadata.get('id')
-        if not metadata:
-            return False
         if not re.findall(cls.__version__, metadata, re.IGNORECASE):
             return False
         return True
@@ -152,10 +148,10 @@ class Wapiti221XMLParser(XMLParser):
         metadata = {}
         # Only keep the version number
         metadata['version'] = raw_metadata
-        if self.check_version(metadata):
-            self.metadata = metadata
-        else:
+        if not self.check_version(metadata):
             raise NotSupportedVersionError('PTP does NOT support this version of Wapiti.')
+        self.metadata = metadata
+        return self.metadata
 
     def parse_report(self):
         """Parse the results of the report.
@@ -165,8 +161,6 @@ class Wapiti221XMLParser(XMLParser):
 
         """
         section_vuln = self.stream.find('.//bugTypeList')
-        if section_vuln is None:
-            return []
         vulns = []
         for category in section_vuln.findall('.//bugType'):
             entries = category.find('.//bugList')
