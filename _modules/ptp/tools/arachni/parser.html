@@ -176,7 +176,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">ArachniJSONParser</span><span class="p">(</span><span class="n">JSONParser</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniJSONParser"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniJSONParser">[docs]</a><span class="k">class</span> <span class="nc">ArachniJSONParser</span><span class="p">(</span><span class="n">JSONParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Arachni XML specialized parser.&quot;&quot;&quot;</span>
 
     <span class="n">__tool__</span> <span class="o">=</span> <span class="s1">&#39;arachni&#39;</span>
@@ -195,7 +195,7 @@
         <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.json&#39;</span><span class="p">,</span> <span class="n">light</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniJSONParser.is_mine"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniJSONParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.json&#39;</span><span class="p">,</span> <span class="n">light</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -217,9 +217,9 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
 
-    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniJSONParser.parse_metadata"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniJSONParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the metadata of the report.</span>
 
 <span class="sd">        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.</span>
@@ -234,9 +234,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">version</span><span class="p">}</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NotSupportedVersionError</span><span class="p">(</span><span class="s1">&#39;PTP does NOT support this version of Arachni.&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span></div>
 
-    <span class="k">def</span> <span class="nf">_parse_report_full</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">issues</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniJSONParser._parse_report_full"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniJSONParser._parse_report_full">[docs]</a>    <span class="k">def</span> <span class="nf">_parse_report_full</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">issues</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse Arachni JSON reports to extract additional information.</span>
 
 <span class="sd">        Arachni HTTP traffic is divided into following fields:</span>
@@ -260,9 +260,9 @@
                     <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;headers_string&#39;</span><span class="p">],</span>
                     <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
                 <span class="p">})</span>
-        <span class="k">return</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span></div>
 
-    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniJSONParser.parse_report"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniJSONParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the results of the report.</span>
 
 <span class="sd">        :return: List of dicts where each one represents a discovery.</span>
@@ -272,7 +272,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">RANKING_SCALE</span><span class="p">[</span><span class="n">vuln</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]}</span> <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;issues&#39;</span><span class="p">]]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s1">&#39;transactions&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_report_full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;issues&#39;</span><span class="p">])})</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span></div></div>
 </pre></div>
 
           </div>

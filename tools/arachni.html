@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DirBuster" href="dirbuster.html" />
+    <link rel="next" title="BurpSuite" href="burpsuite.html" />
     <link rel="prev" title="Constants" href="../libptp/constants.html" /> 
   </head>
   <body role="document">
@@ -40,7 +40,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="dirbuster.html" title="DirBuster"
+          <a href="burpsuite.html" title="BurpSuite"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../libptp/constants.html" title="Constants"
@@ -179,6 +179,113 @@
 
 </dd></dl>
 
+<dl class="class">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser">
+<em class="property">class </em><code class="descclassname">ptp.tools.arachni.parser.</code><code class="descname">ArachniJSONParser</code><span class="sig-paren">(</span><em>pathname='./'</em>, <em>filename='*'</em>, <em>light=False</em>, <em>first=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/arachni/parser.html#ArachniJSONParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arachni XML specialized parser.</p>
+<dl class="attribute">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser.__tool__">
+<code class="descname">__tool__</code><em class="property"> = 'arachni'</em><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser.__format__">
+<code class="descname">__format__</code><em class="property"> = 'xml'</em><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser.__format__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser.__version__">
+<code class="descname">__version__</code><em class="property"> = '(^1\\.[0-9]+(\\.[0-9]+)?$)'</em><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser.__version__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser._parse_report_full">
+<code class="descname">_parse_report_full</code><span class="sig-paren">(</span><em>issues</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/arachni/parser.html#ArachniJSONParser._parse_report_full"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser._parse_report_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Arachni JSON reports to extract additional information.</p>
+<dl class="docutils">
+<dt>Arachni HTTP traffic is divided into following fields:</dt>
+<dd><ul class="first last simple">
+<li>request</li>
+<li>response status code</li>
+<li>response headers</li>
+<li>response body</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each entry is the HTTP traffic generated for the issue.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser.is_mine">
+<em class="property">classmethod </em><code class="descname">is_mine</code><span class="sig-paren">(</span><em>pathname</em>, <em>filename='*.json'</em>, <em>light=False</em>, <em>first=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/arachni/parser.html#ArachniJSONParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it can handle the report file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Regex matching the report file.</li>
+<li><strong>light</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <cite>True</cite> to only parse the ranking of the findings from the report.</li>
+<li><strong>first</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Only process first file (<code class="docutils literal"><span class="pre">True</span></code>) or each file that matched (<code class="docutils literal"><span class="pre">False</span></code>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser.parse_metadata">
+<code class="descname">parse_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/arachni/parser.html#ArachniJSONParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">NotSupportedVersionError</span></code> &#8211; if it does not support the version of this report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metadata of the report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.arachni.parser.ArachniJSONParser.parse_report">
+<code class="descname">parse_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/arachni/parser.html#ArachniJSONParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.arachni.parser.ArachniJSONParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -200,8 +307,8 @@
   <p class="topless"><a href="../libptp/constants.html"
                         title="previous chapter">Constants</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="dirbuster.html"
-                        title="next chapter">DirBuster</a></p>
+  <p class="topless"><a href="burpsuite.html"
+                        title="next chapter">BurpSuite</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -233,7 +340,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="dirbuster.html" title="DirBuster"
+          <a href="burpsuite.html" title="BurpSuite"
              >next</a> |</li>
         <li class="right" >
           <a href="../libptp/constants.html" title="Constants"

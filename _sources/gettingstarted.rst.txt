@@ -258,10 +258,9 @@ Example of running all tests:
     nosetests -v -d --cover-erase --with-coverage --cover-package=ptp
     test_constants_high (tests.libptp.test_constants.TestLibptpConstants) ... ok
     test_constants_info (tests.libptp.test_constants.TestLibptpConstants) ... ok
-    test_constants_low (tests.libptp.test_constants.TestLibptpConstants) ... ok
     # [ omitted ]
-    test_ptp_no_light_parsing (tests.test_ptp.TestPTP) ... ok
     test_ptp_parse_mock_parser (tests.test_ptp.TestPTP) ... ok
+    test_ptp_parse_no_tool (tests.test_ptp.TestPTP) ... ok
 
     Name                                  Stmts   Miss  Cover   Missing
     -------------------------------------------------------------------
@@ -269,18 +268,17 @@ Example of running all tests:
     ptp/libptp.py                             0      0   100%
     ptp/libptp/constants.py                   6      0   100%
     ptp/libptp/exceptions.py                  8      0   100%
-    ptp/libptp/parser.py                     95      0   100%
-    ptp/ptp.py                               71      0   100%
+    ptp/libptp/parser.py                     91      0   100%
+    ptp/ptp.py                               64      0   100%
     ptp/tools.py                              0      0   100%
     ptp/tools/arachni.py                      0      0   100%
-    ptp/tools/arachni/parser.py              88     14    84%   62, 64, 84, 162-172, 190
+    ptp/tools/arachni/parser.py              88      0   100%
     ptp/tools/burpsuite.py                    0      0   100%
-    ptp/tools/burpsuite/parser.py            50     38    24%   37-49, 60-72, 81-104
+    ptp/tools/burpsuite/parser.py            45      3    93%   79, 88-89
     ptp/tools/dirbuster.py                    0      0   100%
-    ptp/tools/dirbuster/parser.py            51      1    98%   70
+    ptp/tools/dirbuster/parser.py            57      0   100%
     ptp/tools/dirbuster/signatures.py         3      0   100%
     ptp/tools/hoppy.py                        0      0   100%
-    ptp/tools/hoppy/parser.py                49     32    35%   35, 50-63, 75-80, 89-105
     ptp/tools/metasploit.py                   0      0   100%
     ptp/tools/metasploit/parser.py           22     12    45%   28-29, 46-48, 58, 67-76
     ptp/tools/metasploit/signatures.py        2      0   100%
@@ -291,18 +289,18 @@ Example of running all tests:
     ptp/tools/owasp/cm008/parser.py          20      0   100%
     ptp/tools/owasp/cm008/signatures.py       2      0   100%
     ptp/tools/robots.py                       0      0   100%
-    ptp/tools/robots/parser.py               22      1    95%   52
+    ptp/tools/robots/parser.py               22      0   100%
     ptp/tools/robots/signatures.py            2      0   100%
     ptp/tools/skipfish.py                     0      0   100%
-    ptp/tools/skipfish/parser.py            105     29    72%   53, 56-57, 77-83, 99-111, 139, 152, 158-160, 211
+    ptp/tools/skipfish/parser.py            100      5    95%   148, 153-155, 206
     ptp/tools/w3af.py                         0      0   100%
-    ptp/tools/w3af/parser.py                 52      0   100%
+    ptp/tools/w3af/parser.py                 68      0   100%
     ptp/tools/wapiti.py                       0      0   100%
-    ptp/tools/wapiti/parser.py               82     60    27%   39-51, 63-71, 80-96, 122-134, 146-153, 162-177
+    ptp/tools/wapiti/parser.py               80      0   100%
     ptp/tools/wapiti/signatures.py            2      0   100%
     -------------------------------------------------------------------
-    TOTAL                                   759    202    73%
+    TOTAL                                   709     35    95%
     ----------------------------------------------------------------------
-    Ran 93 tests in 3.116s
+    Ran 137 tests in 3.562s
 
-    OK (SKIP=2)
+    OK (SKIP=7)

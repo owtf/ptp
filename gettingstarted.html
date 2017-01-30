@@ -263,10 +263,9 @@ dependencies for running the unit tests suites such as <cite>nosetest</cite>, <c
 nosetests -v -d --cover-erase --with-coverage --cover-package<span class="o">=</span>ptp
 test_constants_high <span class="o">(</span>tests.libptp.test_constants.TestLibptpConstants<span class="o">)</span> ... ok
 test_constants_info <span class="o">(</span>tests.libptp.test_constants.TestLibptpConstants<span class="o">)</span> ... ok
-test_constants_low <span class="o">(</span>tests.libptp.test_constants.TestLibptpConstants<span class="o">)</span> ... ok
 <span class="c1"># [ omitted ]</span>
-test_ptp_no_light_parsing <span class="o">(</span>tests.test_ptp.TestPTP<span class="o">)</span> ... ok
 test_ptp_parse_mock_parser <span class="o">(</span>tests.test_ptp.TestPTP<span class="o">)</span> ... ok
+test_ptp_parse_no_tool <span class="o">(</span>tests.test_ptp.TestPTP<span class="o">)</span> ... ok
 
 Name                                  Stmts   Miss  Cover   Missing
 -------------------------------------------------------------------
@@ -274,18 +273,17 @@ ptp.py                                    <span class="m">1</span>      <span cl
 ptp/libptp.py                             <span class="m">0</span>      <span class="m">0</span>   100%
 ptp/libptp/constants.py                   <span class="m">6</span>      <span class="m">0</span>   100%
 ptp/libptp/exceptions.py                  <span class="m">8</span>      <span class="m">0</span>   100%
-ptp/libptp/parser.py                     <span class="m">95</span>      <span class="m">0</span>   100%
-ptp/ptp.py                               <span class="m">71</span>      <span class="m">0</span>   100%
+ptp/libptp/parser.py                     <span class="m">91</span>      <span class="m">0</span>   100%
+ptp/ptp.py                               <span class="m">64</span>      <span class="m">0</span>   100%
 ptp/tools.py                              <span class="m">0</span>      <span class="m">0</span>   100%
 ptp/tools/arachni.py                      <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/arachni/parser.py              <span class="m">88</span>     <span class="m">14</span>    84%   62, 64, 84, 162-172, 190
+ptp/tools/arachni/parser.py              <span class="m">88</span>      <span class="m">0</span>   100%
 ptp/tools/burpsuite.py                    <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/burpsuite/parser.py            <span class="m">50</span>     <span class="m">38</span>    24%   37-49, 60-72, 81-104
+ptp/tools/burpsuite/parser.py            <span class="m">45</span>      <span class="m">3</span>    93%   79, 88-89
 ptp/tools/dirbuster.py                    <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/dirbuster/parser.py            <span class="m">51</span>      <span class="m">1</span>    98%   70
+ptp/tools/dirbuster/parser.py            <span class="m">57</span>      <span class="m">0</span>   100%
 ptp/tools/dirbuster/signatures.py         <span class="m">3</span>      <span class="m">0</span>   100%
 ptp/tools/hoppy.py                        <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/hoppy/parser.py                <span class="m">49</span>     <span class="m">32</span>    35%   35, 50-63, 75-80, 89-105
 ptp/tools/metasploit.py                   <span class="m">0</span>      <span class="m">0</span>   100%
 ptp/tools/metasploit/parser.py           <span class="m">22</span>     <span class="m">12</span>    45%   28-29, 46-48, 58, 67-76
 ptp/tools/metasploit/signatures.py        <span class="m">2</span>      <span class="m">0</span>   100%
@@ -296,21 +294,21 @@ ptp/tools/owasp/cm008.py                  <span class="m">0</span>      <span cl
 ptp/tools/owasp/cm008/parser.py          <span class="m">20</span>      <span class="m">0</span>   100%
 ptp/tools/owasp/cm008/signatures.py       <span class="m">2</span>      <span class="m">0</span>   100%
 ptp/tools/robots.py                       <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/robots/parser.py               <span class="m">22</span>      <span class="m">1</span>    95%   52
+ptp/tools/robots/parser.py               <span class="m">22</span>      <span class="m">0</span>   100%
 ptp/tools/robots/signatures.py            <span class="m">2</span>      <span class="m">0</span>   100%
 ptp/tools/skipfish.py                     <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/skipfish/parser.py            <span class="m">105</span>     <span class="m">29</span>    72%   53, 56-57, 77-83, 99-111, 139, 152, 158-160, 211
+ptp/tools/skipfish/parser.py            <span class="m">100</span>      <span class="m">5</span>    95%   148, 153-155, 206
 ptp/tools/w3af.py                         <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/w3af/parser.py                 <span class="m">52</span>      <span class="m">0</span>   100%
+ptp/tools/w3af/parser.py                 <span class="m">68</span>      <span class="m">0</span>   100%
 ptp/tools/wapiti.py                       <span class="m">0</span>      <span class="m">0</span>   100%
-ptp/tools/wapiti/parser.py               <span class="m">82</span>     <span class="m">60</span>    27%   39-51, 63-71, 80-96, 122-134, 146-153, 162-177
+ptp/tools/wapiti/parser.py               <span class="m">80</span>      <span class="m">0</span>   100%
 ptp/tools/wapiti/signatures.py            <span class="m">2</span>      <span class="m">0</span>   100%
 -------------------------------------------------------------------
-TOTAL                                   <span class="m">759</span>    <span class="m">202</span>    73%
+TOTAL                                   <span class="m">709</span>     <span class="m">35</span>    95%
 ----------------------------------------------------------------------
-Ran <span class="m">93</span> tests in 3.116s
+Ran <span class="m">137</span> tests in 3.562s
 
-OK <span class="o">(</span><span class="nv">SKIP</span><span class="o">=</span>2<span class="o">)</span>
+OK <span class="o">(</span><span class="nv">SKIP</span><span class="o">=</span>7<span class="o">)</span>
 </pre></div>
 </div>
 </div>
