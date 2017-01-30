@@ -75,8 +75,10 @@ class SkipfishJSParser(AbstractParser):
         """
         if not metadatafile.endswith(cls.__format__) or not reportfile.endswith(cls.__format__):
             raise TypeError("This parser only supports '%s' files" % cls.__format__)
-        metadata_stream = FileParser.handle_file(metadatafile)
-        report_stream = FileParser.handle_file(reportfile)
+        pathname, filename = os.path.split(metadatafile)
+        metadata_stream = FileParser.handle_file(pathname=pathname, filename=filename)
+        pathname, filename = os.path.split(reportfile)
+        report_stream = FileParser.handle_file(pathname=pathname, filename=filename)
         return (metadata_stream, report_stream)
 
     @classmethod
