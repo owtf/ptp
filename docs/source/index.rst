@@ -32,6 +32,7 @@ Documentation
     tools/arachni
     tools/burpsuite
     tools/dirbuster
+    tools/hoppy
     tools/metasploit
     tools/nmap
     tools/owasp
