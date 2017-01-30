@@ -30,6 +30,7 @@ Documentation
     libptp/exceptions
     libptp/constants
     tools/arachni
+    tools/burpsuite
     tools/dirbuster
     tools/metasploit
     tools/nmap
