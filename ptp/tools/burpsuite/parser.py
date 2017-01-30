@@ -39,7 +39,7 @@ class BurpXMLParser(XMLParser):
             stream = cls.handle_file(pathname, filename, first=first)
         except (TypeError, XMLSyntaxError):
             return False
-        version = stream.attrib['burpVersion']
+        version = stream.attrib.get('burpVersion', '')
         if not version:
             return False
         if not re.findall(cls.__version__, version, re.IGNORECASE):
@@ -55,7 +55,7 @@ class BurpXMLParser(XMLParser):
         :rtype: dict
 
         """
-        raw_metadata = self.stream.attrib['burpVersion']
+        raw_metadata = self.stream.attrib.get('burpVersion', '')
         # Reconstruct the metadata
         # TODO: Retrieve the other metadata likes the date, etc.
         metadata = {'version': raw_metadata}
