@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>ptp.tools.arachni.parser &mdash; ptp 0.3.0 documentation</title>
+    <title>ptp.tools.arachni.parser &#8212; ptp 0.4.0 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,17 +14,18 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '0.3.0',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="ptp 0.3.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" /> 
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -36,8 +37,8 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">ptp 0.3.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">ptp 0.4.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -47,10 +48,9 @@
           <div class="body" role="main">
             
   <h1>Source code for ptp.tools.arachni.parser</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the</span>
-<span class="sd">    tool Arachni.</span>
+<span class="sd">:synopsis: Specialized :class:`ptp.libptp.parser.AbstractParser` classes for the tool Arachni.</span>
 
 <span class="sd">.. moduleauthor:: Tao Sauvage</span>
 
@@ -58,27 +58,26 @@
 
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">LxmlError</span>
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="k">import</span> <span class="n">XMLSyntaxError</span>
 
-<span class="kn">from</span> <span class="nn">ptp.libptp</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">ptp.libptp.exceptions</span> <span class="kn">import</span> <span class="n">NotSupportedVersionError</span>
-<span class="kn">from</span> <span class="nn">ptp.libptp.parser</span> <span class="kn">import</span> <span class="n">XMLParser</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp</span> <span class="k">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp.exceptions</span> <span class="k">import</span> <span class="n">NotSupportedVersionError</span>
+<span class="kn">from</span> <span class="nn">ptp.libptp.parser</span> <span class="k">import</span> <span class="n">XMLParser</span><span class="p">,</span> <span class="n">JSONParser</span>
 
 
 <div class="viewcode-block" id="ArachniXMLParser"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser">[docs]</a><span class="k">class</span> <span class="nc">ArachniXMLParser</span><span class="p">(</span><span class="n">XMLParser</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Arachni XML specialized parser.&quot;&quot;&quot;</span>
 
-    <span class="n">__tool__</span> <span class="o">=</span> <span class="s">&#39;arachni&#39;</span>
-    <span class="n">__format__</span> <span class="o">=</span> <span class="s">&#39;xml&#39;</span>
+    <span class="n">__tool__</span> <span class="o">=</span> <span class="s1">&#39;arachni&#39;</span>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s">r&#39;(^0\.4\.[6-7]{1}$)|&#39;</span>
-        <span class="s">r&#39;(^1\.0(\.[1-6]{1})?$)|&#39;</span>
-        <span class="s">r&#39;(^1\.1$)&#39;</span><span class="p">)</span>
+        <span class="s1">r&#39;(^0\.4\.[0-9]+$)|&#39;</span>
+        <span class="s1">r&#39;(^1\.[0-9]+(\.[0-9]+)?$)&#39;</span><span class="p">)</span>
 
-    <span class="n">HIGH</span> <span class="o">=</span> <span class="s">&#39;high&#39;</span>
-    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="s">&#39;medium&#39;</span>
-    <span class="n">LOW</span> <span class="o">=</span> <span class="s">&#39;low&#39;</span>
-    <span class="n">INFO</span> <span class="o">=</span> <span class="s">&#39;informational&#39;</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="s1">&#39;high&#39;</span>
+    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="s1">&#39;medium&#39;</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="s1">&#39;low&#39;</span>
+    <span class="n">INFO</span> <span class="o">=</span> <span class="s1">&#39;informational&#39;</span>
 
     <span class="n">RANKING_SCALE</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">HIGH</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
@@ -86,25 +85,17 @@
         <span class="n">LOW</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
         <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
 
-<div class="viewcode-block" id="ArachniXMLParser.__init__"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize ArachniXMLParser.</span>
-
-<span class="sd">        :param str pathname: Path to the report directory.</span>
-<span class="sd">        :param str filename: Regex matching the report file.</span>
-<span class="sd">        :param bool first: Only process first file (``True``) or each file that</span>
-<span class="sd">            matched (``False``).</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">XMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
-</div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ArachniXMLParser.is_mine"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="ArachniXMLParser.is_mine"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">light</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
 <span class="sd">        :param str filename: Regex matching the report file.</span>
-<span class="sd">        :param bool first: Only process first file (``True``) or each file that</span>
-<span class="sd">            matched (``False``).</span>
+<span class="sd">        :param bool light: `True` to only parse the ranking of the findings from the report.</span>
+<span class="sd">        :param bool first: Only process first file (``True``) or each file that matched (``False``).</span>
+
+<span class="sd">        :raises IOError: when the report file cannot be found.</span>
+<span class="sd">        :raises OSError: when the report file cannot be found.</span>
 
 <span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
 <span class="sd">        :rtype: :class:`bool`</span>
@@ -112,36 +103,61 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">LxmlError</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//version&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">XMLSyntaxError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//version&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">version</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="bp">True</span>
-</div>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
 <div class="viewcode-block" id="ArachniXMLParser.parse_metadata"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.parse_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the metadata of the report.</span>
 
-<span class="sd">        :raises: :class:`NotSupportedVersionError` -- if it does not support</span>
-<span class="sd">            the version of this report.</span>
+<span class="sd">        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.</span>
 
 <span class="sd">        :return: The metadata of the report.</span>
 <span class="sd">        :rtype: dict</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Find the version of Arachni.</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//version&#39;</span><span class="p">)</span>
-        <span class="c"># Reconstruct the metadata</span>
-        <span class="c"># TODO: Retrieve the other metadata likes the date, etc.</span>
+        <span class="c1"># Find the version of Arachni.</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//version&#39;</span><span class="p">)</span>
+        <span class="c1"># Reconstruct the metadata</span>
+        <span class="c1"># TODO: Retrieve the other metadata likes the date, etc.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="n">version</span><span class="o">.</span><span class="n">tag</span><span class="p">:</span> <span class="n">version</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NotSupportedVersionError</span><span class="p">(</span>
-                <span class="s">&#39;PTP does NOT support this version of Arachni.&#39;</span><span class="p">)</span>
-</div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">NotSupportedVersionError</span><span class="p">(</span><span class="s1">&#39;PTP does NOT support this version of Arachni.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span></div>
+
+<div class="viewcode-block" id="ArachniXMLParser._parse_report_full"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser._parse_report_full">[docs]</a>    <span class="k">def</span> <span class="nf">_parse_report_full</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse Arachni XML reports to extract additional information.</span>
+
+<span class="sd">        Arachni HTTP traffic is divided into following fields:</span>
+<span class="sd">            * request</span>
+<span class="sd">            * response status code</span>
+<span class="sd">            * response headers</span>
+<span class="sd">            * response body</span>
+
+<span class="sd">        :return: List of dicts where each entry is the HTTP traffic generated for the issue.</span>
+<span class="sd">        :rtype: :class:`list`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)):</span>
+            <span class="n">t_req</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">t_res</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">t_req</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">temp_body</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">temp</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">temp</span>
+            <span class="c1"># Somehow follow naming conventions from http://docs.python-requests.org/en/master/</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">t_req</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//raw&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">+</span> <span class="n">temp_body</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">t_res</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//code&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                <span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="n">t_res</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//raw_headers&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">t_res</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="p">})</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
 <div class="viewcode-block" id="ArachniXMLParser.parse_report"><a class="viewcode-back" href="../../../../tools/arachni.html#ptp.tools.arachni.parser.ArachniXMLParser.parse_report">[docs]</a>    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the results of the report.</span>
 
@@ -150,9 +166,113 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">{</span><span class="s">&#39;ranking&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">RANKING_SCALE</span><span class="p">[</span><span class="n">vuln</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//severity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()]}</span>
-            <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.//issues&#39;</span><span class="p">)]</span>
+            <span class="p">{</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">RANKING_SCALE</span><span class="p">[</span><span class="n">vuln</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//severity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()]}</span>
+            <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;.//issues&#39;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//variations//variation//referring_page&#39;</span><span class="p">):</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">getchildren</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s1">&#39;transactions&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_report_full</span><span class="p">(</span><span class="n">temp</span><span class="p">)})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">ArachniJSONParser</span><span class="p">(</span><span class="n">JSONParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Arachni XML specialized parser.&quot;&quot;&quot;</span>
+
+    <span class="n">__tool__</span> <span class="o">=</span> <span class="s1">&#39;arachni&#39;</span>
+    <span class="n">__format__</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="s1">r&#39;(^1\.[0-9]+(\.[0-9]+)?$)&#39;</span>
+
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="s1">&#39;high&#39;</span>
+    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="s1">&#39;medium&#39;</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="s1">&#39;low&#39;</span>
+    <span class="n">INFO</span> <span class="o">=</span> <span class="s1">&#39;informational&#39;</span>
+
+    <span class="n">RANKING_SCALE</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">HIGH</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        <span class="n">MEDIUM</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        <span class="n">LOW</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="n">INFO</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">INFO</span><span class="p">}</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.json&#39;</span><span class="p">,</span> <span class="n">light</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
+
+<span class="sd">        :param str pathname: Path to the report directory.</span>
+<span class="sd">        :param str filename: Regex matching the report file.</span>
+<span class="sd">        :param bool light: `True` to only parse the ranking of the findings from the report.</span>
+<span class="sd">        :param bool first: Only process first file (``True``) or each file that matched (``False``).</span>
+
+<span class="sd">        :return: `True` if it supports the report, `False` otherwise.</span>
+<span class="sd">        :rtype: :class:`bool`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">handle_file</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="s1">&#39;version&#39;</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">parse_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the metadata of the report.</span>
+
+<span class="sd">        :raises: :class:`NotSupportedVersionError` -- if it does not support the version of this report.</span>
+<span class="sd">        :return: The metadata of the report.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Find the version of Arachni.</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+        <span class="c1"># Reconstruct the metadata</span>
+        <span class="c1"># TODO: Retrieve the other metadata likes the date, etc.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">version</span><span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">NotSupportedVersionError</span><span class="p">(</span><span class="s1">&#39;PTP does NOT support this version of Arachni.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span>
+
+    <span class="k">def</span> <span class="nf">_parse_report_full</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">issues</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse Arachni JSON reports to extract additional information.</span>
+
+<span class="sd">        Arachni HTTP traffic is divided into following fields:</span>
+<span class="sd">            * request</span>
+<span class="sd">            * response status code</span>
+<span class="sd">            * response headers</span>
+<span class="sd">            * response body</span>
+
+<span class="sd">        :return: List of dicts where each entry is the HTTP traffic generated for the issue.</span>
+<span class="sd">        :rtype: :class:`list`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">issues</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">issue</span><span class="p">[</span><span class="s1">&#39;variations&#39;</span><span class="p">]:</span>
+                <span class="n">temp_body</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
+                <span class="c1"># Somehow follow naming conventions from http://docs.python-requests.org/en/master/</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">][</span><span class="s1">&#39;headers_string&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">temp_body</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;code&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;headers_string&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">variation</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
+                <span class="p">})</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">parse_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse the results of the report.</span>
+
+<span class="sd">        :return: List of dicts where each one represents a discovery.</span>
+<span class="sd">        :rtype: :class:`list`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">RANKING_SCALE</span><span class="p">[</span><span class="n">vuln</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]}</span> <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;issues&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s1">&#39;transactions&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_report_full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="s1">&#39;issues&#39;</span><span class="p">])})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vulns</span>
 </pre></div>
 
           </div>
@@ -163,14 +283,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -186,13 +303,13 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">ptp 0.3.0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">ptp 0.4.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014, Tao Sauvage.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2014, Tao Sauvage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

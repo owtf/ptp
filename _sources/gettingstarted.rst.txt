@@ -50,6 +50,12 @@ complex parsing.
     tests. But :mod:`ptp` is in its early development phase and only supports
     the main ones for now.
 
+.. warning::
+
+    Since v0.4, PTP relies on the fact that the supported tools are following `semantic version <http://semver.org/>`_
+    (except observed otherwise). In other words, as long as the tool doesn't update its MAJOR version, PTP will assume
+    that it can parse its report, reducing the maintenance cost on our side.
+
 ============
 Installation
 ============
@@ -87,11 +93,11 @@ The first step is to clone the repository of the project:
 
     $ git clone https://github.com/owtf/ptp.git
 
-Then run the `setup.py` script:
+Then use the Makefile command:
 
 .. code-block:: bash
 
-    $ ./setup.py install
+    $ make install
 
 ===========
 Basic usage
@@ -118,8 +124,8 @@ Example:
 .. code-block:: pycon
 
     >>> from ptp import PTP
-    >>> myptp = PTP(pathname='my/directory', filename='my_report')
-    >>> myptp.parse()
+    >>> myptp = PTP()
+    >>> myptp.parse(pathname='my/directory', filename='my_report')
     [{'ranking': 4}, ..., {'ranking': 3}, ..., {'ranking': 1}]
 
 .. note::
@@ -131,8 +137,8 @@ Example:
     For instance, we could have done:
 
     >>> from ptp import PTP
-    >>> myptp = PTP(pathname='my/directory')
-    >>> myptp.parse()
+    >>> myptp = PTP()
+    >>> myptp.parse(pathname='my/directory')
     [{'ranking': 4}, ..., {'ranking': 3}, ..., {'ranking': 1}]
 
     Be careful though, when omitting the `filename` parameter, :mod:`ptp` will
@@ -142,17 +148,18 @@ Example:
     In order to force :mod:`ptp` to process each file that has been found, the
     parameter ``first`` must be set to ``False`` like below:
 
-    >>> myptp = PTP(pathname='my/directory', first=False)
+    >>> myptp = PTP()
+    >>> myptp.parse(pathname='my/directory', first=False)
 
 If we are only looking for the highest risk that is listed in the report, we
 can use the following function:
 
 .. code-block:: pycon
 
-    >>> myptp.get_highest_ranking()
+    >>> myptp.highest_ranking
     4
     >>> from libptp.constants import HIGH
-    >>> myptp.get_highest_ranking() == HIGH
+    >>> myptp.highest_ranking == HIGH
     True
 
 .. note::
@@ -232,29 +239,70 @@ And the metadata thanks to the :attr:`ptp.PTP.metadata` attribute.
 Unit tests
 ==========
 
-The :mod:`ptp` module can be tested by running the `run_tests.py` python
-script.
+The :mod:`ptp` module can be tested by running following command:
 
 .. code-block:: bash
 
-    $ ./run_tests.py
+    $ make check
 
 .. note::
 
-    Make sure the ``./setup.py install`` has been successful before running the
-    script.
+    Make sure that ``make install`` has been successful before running the script. Plus, there are additional
+    dependencies for running the unit tests suites such as `nosetest`, `coverage`, `mock` and `pyhamcrest`
 
-This script will run every existing unit tests that have been created for the
-module. If an error occurs, the string `FAIL` will be outputted in the
-terminal.
+Example of running all tests:
 
-.. note::
+.. code-block:: bash
 
-    It is possible to specify which unit test to run by specifying the name of
-    the tool.
+    make check
+    nosetests -v -d --cover-erase --with-coverage --cover-package=ptp
+    test_constants_high (tests.libptp.test_constants.TestLibptpConstants) ... ok
+    test_constants_info (tests.libptp.test_constants.TestLibptpConstants) ... ok
+    test_constants_low (tests.libptp.test_constants.TestLibptpConstants) ... ok
+    # [ omitted ]
+    test_ptp_no_light_parsing (tests.test_ptp.TestPTP) ... ok
+    test_ptp_parse_mock_parser (tests.test_ptp.TestPTP) ... ok
 
-    .. code-block:: bash
+    Name                                  Stmts   Miss  Cover   Missing
+    -------------------------------------------------------------------
+    ptp.py                                    1      0   100%
+    ptp/libptp.py                             0      0   100%
+    ptp/libptp/constants.py                   6      0   100%
+    ptp/libptp/exceptions.py                  8      0   100%
+    ptp/libptp/parser.py                     95      0   100%
+    ptp/ptp.py                               71      0   100%
+    ptp/tools.py                              0      0   100%
+    ptp/tools/arachni.py                      0      0   100%
+    ptp/tools/arachni/parser.py              88     14    84%   62, 64, 84, 162-172, 190
+    ptp/tools/burpsuite.py                    0      0   100%
+    ptp/tools/burpsuite/parser.py            50     38    24%   37-49, 60-72, 81-104
+    ptp/tools/dirbuster.py                    0      0   100%
+    ptp/tools/dirbuster/parser.py            51      1    98%   70
+    ptp/tools/dirbuster/signatures.py         3      0   100%
+    ptp/tools/hoppy.py                        0      0   100%
+    ptp/tools/hoppy/parser.py                49     32    35%   35, 50-63, 75-80, 89-105
+    ptp/tools/metasploit.py                   0      0   100%
+    ptp/tools/metasploit/parser.py           22     12    45%   28-29, 46-48, 58, 67-76
+    ptp/tools/metasploit/signatures.py        2      0   100%
+    ptp/tools/nmap.py                         0      0   100%
+    ptp/tools/nmap/parser.py                 26     15    42%   38-46, 58-62, 76-77
+    ptp/tools/owasp.py                        0      0   100%
+    ptp/tools/owasp/cm008.py                  0      0   100%
+    ptp/tools/owasp/cm008/parser.py          20      0   100%
+    ptp/tools/owasp/cm008/signatures.py       2      0   100%
+    ptp/tools/robots.py                       0      0   100%
+    ptp/tools/robots/parser.py               22      1    95%   52
+    ptp/tools/robots/signatures.py            2      0   100%
+    ptp/tools/skipfish.py                     0      0   100%
+    ptp/tools/skipfish/parser.py            105     29    72%   53, 56-57, 77-83, 99-111, 139, 152, 158-160, 211
+    ptp/tools/w3af.py                         0      0   100%
+    ptp/tools/w3af/parser.py                 52      0   100%
+    ptp/tools/wapiti.py                       0      0   100%
+    ptp/tools/wapiti/parser.py               82     60    27%   39-51, 63-71, 80-96, 122-134, 146-153, 162-177
+    ptp/tools/wapiti/signatures.py            2      0   100%
+    -------------------------------------------------------------------
+    TOTAL                                   759    202    73%
+    ----------------------------------------------------------------------
+    Ran 93 tests in 3.116s
 
-        $ ./run_tests.py arachni
-
-    Using the command above only runs the unit tests for Arachni.
+    OK (SKIP=2)
