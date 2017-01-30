@@ -96,7 +96,6 @@ Current support
 + arachni (0.4.x to 1.x) (XML and JSON report)
 + burpsuite (1.x.x) (XML report)
 + dirbuster (1.0-RC1)
-+ hoppy (1.x.x)
 + metasploit
 + owasp
 + robots.txt

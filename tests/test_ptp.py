@@ -28,7 +28,7 @@ class TestPTP(unittest.TestCase):
     def test_ptp_init_supported_tools(self):
         tool_names = [
             'arachni', 'skipfish', 'w3af', 'wapiti', 'metasploit', 'dirbuster', 'nmap', 'owasp-cm-008', 'robots',
-            'burpsuite', 'hoppy']
+            'burpsuite']
         for tool_name in tool_names:
             self.assertTrue(PTP(tool_name=tool_name).tool_name == tool_name)
 

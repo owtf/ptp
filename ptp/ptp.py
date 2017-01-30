@@ -18,7 +18,6 @@ from .tools.nmap.parser import NmapXMLParser
 from .tools.owasp.cm008.parser import OWASPCM008Parser
 from .tools.robots.parser import RobotsParser
 from .tools.burpsuite.parser import BurpXMLParser
-from .tools.hoppy.parser import HoppyParser
 
 
 class PTP(object):
@@ -43,8 +42,7 @@ class PTP(object):
         'nmap': [NmapXMLParser],
         'owasp-cm-008': [OWASPCM008Parser],
         'robots': [RobotsParser],
-        'burpsuite': [BurpXMLParser],
-        'hoppy': [HoppyParser]}
+        'burpsuite': [BurpXMLParser]}
 
     def __init__(self, tool_name='', cumulative=False):
         """Initialize :class:`PTP`.
