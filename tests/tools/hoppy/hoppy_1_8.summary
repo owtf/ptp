@@ -1,0 +1,1011 @@
+
+[+] hoppy 1.8.1 run @ Tue Jan 24 04:57:34 2017:
+
+	[+] hoppy -h https://example.com -t 60 -o ./http-methods -k ./response-keywords -F ./hoppy.conf -S /root/Desktop/hoppy2 -vvv -4
+
+[+] Configuring Test Environment
+
+	[+] Saving Attack data to /root/Desktop/hoppy2.attack.1
+
+	[+] Saving Summary data to /root/Desktop/hoppy2.summary.1
+
+	[+] Saving Spider data to /root/Desktop/hoppy2.spider.1
+
+	[+] Setup complete :-)
+
+[+] Initialising Connection
+
+	[+] Test host example.com resolves to 93.184.216.34
+
+	[+] Testing SSL Connection to example.com:443 - OK Data Recieved
+
+[+] Beginning spider with '/' and '/images/dummy.txt' as start points:
+
+		/domains/
+
+	[+] Spider Completed :-)
+
+	[+] Found 1 directories for testing
+
+[+] Testing https://example.com:443 [93.184.216.34] with /images/dummy.txt as webDAV location
+
+
+[+] Testing Invalid Method request on /images/dummy.txt
+.
+[+] Testing Options request on /images/dummy.txt
+.
+[+] Testing Options request on /images/dummy.txt
+.
+[+] Testing Invalid Method request on /images/dummy.txt
+.
+[+] Testing Options request on /images/dummy.txt
+.
+[+] Testing Invalid Method request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Options request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+
+[+] Testing Options request on /images/dummy.txt
+..
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Options request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info /domains request on /images/dummy.txt
+.
+[+] Testing Info /domains request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info /d%c0%afomains request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info /d%c0%afomains request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+
+[+] Testing Info request on /images/dummy.txt
+..
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing IIS Trace request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing IIS Trace request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing IIS Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Track request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing IIS Trace request on /images/dummy.txt
+.
+[+] Testing Trace request on /images/dummy.txt
+.
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing Debug request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing IIS Trace request on /images/dummy.txt
+.
+[+] Testing IIS Trace request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Debug request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Delete /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing Lock request on /images/dummy.txt
+.
+[+] Testing Debug request on /images/dummy.txt
+.
+[+] Testing Lock request on /images/dummy.txt
+.
+[+] Testing Lock request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Lock request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Lock request on /images/dummy.txt
+.
+[+] Testing Lock request on /images/dummy.txt
+.
+[+] Testing Delete /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing unLock request on /images/dummy.txt
+.
+[+] Testing Delete /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing unLock request on /images/dummy.txt
+.
+[+] Testing unLock request on /images/dummy.txt
+.
+[+] Testing unLock request on /images/dummy.txt
+.
+[+] Testing Move request on /images/dummy.txt
+.
+[+] Testing mkcol request on /images/dummy.txt
+.
+[+] Testing mkcol request on /images/dummy.txt
+.
+[+] Testing unLock request on /images/dummy.txt
+.
+[+] Testing Delete /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing Delete /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing Delete /images/dummy.txt.put request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing unLock request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Propfind /images/ request on /images/dummy.txt
+.
+[+] Testing Propfind /images/ request on /images/dummy.txt
+.
+[+] Testing Propfind /images/ request on /images/dummy.txt
+.
+[+] Testing Propfind /images/ request on /images/dummy.txt
+.
+[+] Testing mkcol request on /images/dummy.txt
+.
+[+] Testing Propfind / request on /images/dummy.txt
+.
+[+] Testing Propfind / request on /images/dummy.txt
+.
+[+] Testing Move request on /images/dummy.txt
+.
+[+] Testing Copy request on /images/dummy.txt
+.
+[+] Testing Move request on /images/dummy.txt
+.
+[+] Testing Propfind /images request on /images/dummy.txt
+.
+[+] Testing Propfind /images request on /images/dummy.txt
+.
+[+] Testing Propfind /images request on /images/dummy.txt
+.
+[+] Testing Propfind /images request on /images/dummy.txt
+.
+[+] Testing Propfind / request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing Basic Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing NTLM Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing Digest Auth request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+!
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+!
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+!
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+!
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+!
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing Propfind /images/dummy.txt request on /images/dummy.txt
+!
+[+] Testing Propfind /images/dummy.txt request on /images/dummy.txt
+!
+[+] Testing Propfind /images/ request on /images/dummy.txt
+!
+[+] Testing .printer request on /images/dummy.txt
+.
+[+] Testing .printer request on /images/dummy.txt
+.
+[+] Testing Proppatch /images/ request on /images/dummy.txt
+!
+[+] Testing Proppatch /images/dummy.txt request on /images/dummy.txt
+.
+[+] Testing Proppatch /images/ request on /images/dummy.txt
+!
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing .printer request on /images/dummy.txt
+.
+[+] Testing .idq request on /images/dummy.txt
+.
+[+] Testing Proppatch /images/dummy.txt request on /images/dummy.txt
+!
+[+] Testing Proppatch /images/dummy.txt request on /images/dummy.txt
+!
+[+] Testing Propfind /images/ request on /images/dummy.txt
+.
+[+] Testing .idq request on /images/dummy.txt
+.
+[+] Testing .htr request on /images/dummy.txt
+.
+[+] Testing .idq request on /images/dummy.txt
+.
+[+] Testing .htw request on /images/dummy.txt
+.
+[+] Testing .idc request on /images/dummy.txt
+.
+[+] Testing .htw request on /images/dummy.txt
+.
+[+] Testing .ida request on /images/dummy.txt
+.
+[+] Testing Propfind /images/ request on /images/dummy.txt
+!
+[+] Testing .htr request on /images/dummy.txt
+.
+[+] Testing .htr request on /images/dummy.txt
+.
+[+] Testing .shtm request on /images/dummy.txt
+.
+[+] Testing .htw request on /images/dummy.txt
+.
+[+] Testing .shtml request on /images/dummy.txt
+.
+[+] Testing Frontpage Config Inf request on /images/dummy.txt
+.
+[+] Testing .stm request on /images/dummy.txt
+.
+[+] Testing Frontpage Config Inf request on /images/dummy.txt
+.
+[+] Testing .shtm request on /images/dummy.txt
+.
+[+] Testing .shtml request on /images/dummy.txt
+.
+[+] Testing Frontpage Config Inf request on /images/dummy.txt
+.
+[+] Testing .idc request on /images/dummy.txt
+.
+[+] Testing .stm request on /images/dummy.txt
+.
+[+] Testing Frontpage shtml.dll request on /images/dummy.txt
+.
+[+] Testing .shtm request on /images/dummy.txt
+.
+[+] Testing Frontpage shtml.dll request on /images/dummy.txt
+.
+[+] Testing .stm request on /images/dummy.txt
+.
+[+] Testing Frontpage Post Inf request on /images/dummy.txt
+.
+[+] Testing Frontpage Post Inf request on /images/dummy.txt
+.
+[+] Testing Frontpage shtml.dll request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (bin) request on /images/dummy.txt
+.
+[+] Testing Frontpage Post Inf request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (pvt) request on /images/dummy.txt
+.
+[+] Testing .ida request on /images/dummy.txt
+.
+[+] Testing .ida request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (bin) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (pvt) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (cnf) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (log) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (cnf) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (log) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (cnf) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (log) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (bin) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (script) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (txt) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (script) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (txt) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (txt) request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (script) request on /images/dummy.txt
+.
+[+] Testing MultiViews Check request on /images/dummy.txt
+.
+[+] Testing Expect Header XSS request on /images/dummy.txt
+.
+[+] Testing Frontpage dir (pvt) request on /images/dummy.txt
+.
+[+] Testing MultiViews Check request on /images/dummy.txt
+.
+[+] Testing MultiViews Check request on /images/dummy.txt
+.
+[+] Testing Expect Header XSS request on /images/dummy.txt
+.
+[+] Testing .idc request on /images/dummy.txt
+.
+[+] Testing Expect Header XSS request on /images/dummy.txt
+.
+[+] Testing 413 XSS request on /images/dummy.txt
+.
+[+] Testing Expect Header XSS request on /images/dummy.txt
+.
+[+] Testing 413 XSS request on /images/dummy.txt
+.
+[+] Testing Expect Header XSS request on /images/dummy.txt
+.
+[+] Testing Proxy Connect request on /images/dummy.txt
+.
+[+] Testing Expect Header XSS request on /images/dummy.txt
+.
+[+] Testing Proxy request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing IIS Cookie Test request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing 413 XSS request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing crossdomain.xml request on /images/dummy.txt
+.
+[+] Testing Robots.txt request on /images/dummy.txt
+.
+[+] Testing crossdomain.xml request on /images/dummy.txt
+.
+[+] Testing Robots.txt request on /images/dummy.txt
+.
+[+] Testing Robots.txt request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing phpinfo request on /images/dummy.txt
+.
+[+] Testing crossdomain.xml request on /images/dummy.txt
+.
+[+] Testing webDavDELETE on /domains/dnehoppy.html request on /images/dummy.txt
+.
+[+] Testing webDavDELETE on /d%c0%afomains/dnehoppy.html request on /images/dummy.txt
+.
+[+] Testing webDavDELETE on /domains/dnehoppy.html request on /images/dummy.txt
+.
+[+] Testing webDavDELETE on /d%c0%afomains/dnehoppy.html request on /images/dummy.txt
+.
+[+] Testing webDavDELETE on /domains/dnehoppy.html request on /images/dummy.txt
+.
+[+] Testing Put /images/dummy.txt.put request on /images/dummy.txt
+!
+[+] Testing .shtml request on /images/dummy.txt
+.
+[+] Testing webDav on /domains request on /images/dummy.txt
+.
+[+] Testing webDav on /d%c0%afomains request on /images/dummy.txt
+.
+[+] Testing webDav on /domains request on /images/dummy.txt
+.
+[+] Testing webDav on /d%c0%afomains request on /images/dummy.txt
+.
+[+] Testing Propfind /images/dummy.txt request on /images/dummy.txt
+!
+[+] Testing webDavDELETE on /d%c0%afomains/dnehoppy.html request on /images/dummy.txt
+.
+[+] Testing Proppatch /images/ request on /images/dummy.txt
+!
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing webDav on /d%c0%afomains request on /images/dummy.txt
+.
+[+] Testing Propfind request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing tomcat manager request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing Propfind request on /images/dummy.txt
+.
+[+] Testing Info request on /images/dummy.txt
+.
+[+] Testing tomcat manager request on /images/dummy.txt
+.
+[+] Testing tomcat admin request on /images/dummy.txt
+.
+[+] Testing tomcat manager request on /images/dummy.txt
+.
+[+] Testing Frontpage Anon Login request on /images/dummy.txt
+!
+[+] Testing tomcat admin request on /images/dummy.txt
+.
+[+] Testing Frontpage Anon Login request on /images/dummy.txt
+!
+[+] Testing Frontpage Anon Login request on /images/dummy.txt
+!
+[+] Testing tomcat admin request on /images/dummy.txt
+.
+[+] Testing Frontpage Anon Login request on /images/dummy.txt
+!
+[+] Testing Frontpage Anon Login request on /images/dummy.txt
+!
+[+] Testing JBoss JMX-Server request on /images/dummy.txt
+.
+[+] Testing JBoss JMX-Server request on /images/dummy.txt
+.
+[+] Testing Frontpage Anon Login request on /images/dummy.txt
+!
+[+] Testing JBoss JMX-Server request on /images/dummy.txt
+.
+[+] Testing Frontpage leakage request on /images/dummy.txt
+!
+[+] Testing Frontpage leakage request on /images/dummy.txt
+.
+[+] Testing Frontpage leakage request on /images/dummy.txt
+!
+[+] Testing webDav on /domains request on /images/dummy.txt
+.
+[+] Testing webDavPUT on /domains request on /images/dummy.txt
+!
+[+] Testing webDavPUT on /domains request on /images/dummy.txt
+!
+[+] Testing webDavPUT on /d%c0%afomains request on /images/dummy.txt
+!
+[+] Testing webDavPUT on /d%c0%afomains request on /images/dummy.txt
+!
+[+] Testing webDavPUT on /d%c0%afomains request on /images/dummy.txt
+!
+[+] Testing webDavPUT on /domains request on /images/dummy.txt
+!
+
+[+] Summary of Findings
+
+	[+] Method Responses:
+
+		.htr                      -	 HTTP/1.1 404 Not Found
+		.htw                      -	 HTTP/1.1 404 Not Found
+		.ida                      -	 HTTP/1.1 404 Not Found
+		.idc                      -	 HTTP/1.1 404 Not Found
+		.idq                      -	 HTTP/1.1 404 Not Found
+		.printer                  -	 HTTP/1.1 404 Not Found
+		.shtm                     -	 HTTP/1.1 404 Not Found
+		.shtml                    -	 HTTP/1.1 404 Not Found
+		.stm                      -	 HTTP/1.1 404 Not Found
+		413 XSS                   -	 HTTP/1.0 501 Not Implemented
+		Basic Auth                -	 HTTP/1.1 404 Not Found
+		Copy                      -	 HTTP/1.1 404 Not Found
+		Copy                      -	 HTTP/1.1 405 Method Not Allowed
+		Debug                     -	 HTTP/1.0 404 Not Found
+		Debug                     -	 HTTP/1.0 405 Method Not Allowed
+		Delete /images/dummy.txt.put -	 HTTP/1.1 404 Not Found
+		Delete /images/dummy.txt.put -	 HTTP/1.1 405 Method Not Allowed
+		Digest Auth               -	 HTTP/1.1 200 OK
+		Digest Auth               -	 HTTP/1.1 404 Not Found
+		Expect Header XSS         -	 HTTP/1.1 417 Expectation Failed
+		Frontpage Anon Login      -	 HTTP/1.1 000 This Test Falied!
+		Frontpage Anon Login      -	 HTTP/1.1 100 Continue
+		Frontpage Anon Login      -	 HTTP/1.1 404 Not Found
+		Frontpage Config Inf      -	 HTTP/1.1 404 Not Found
+		Frontpage Post Inf        -	 HTTP/1.1 404 Not Found
+		Frontpage dir (bin)       -	 HTTP/1.1 404 Not Found
+		Frontpage dir (cnf)       -	 HTTP/1.1 404 Not Found
+		Frontpage dir (log)       -	 HTTP/1.1 404 Not Found
+		Frontpage dir (pvt)       -	 HTTP/1.1 404 Not Found
+		Frontpage dir (script)    -	 HTTP/1.1 404 Not Found
+		Frontpage dir (txt)       -	 HTTP/1.1 404 Not Found
+		Frontpage leakage         -	 HTTP/1.1 000 This Test Falied!
+		Frontpage leakage         -	 HTTP/1.1 100 Continue
+		Frontpage leakage         -	 HTTP/1.1 502 Bad Gateway
+		Frontpage shtml.dll       -	 HTTP/1.1 404 Not Found
+		IIS Cookie Test           -	 HTTP/1.1 200 OK
+		IIS Cookie Test           -	 HTTP/1.1 404 Not Found
+		IIS Trace                 -	 HTTP/1.1 404 Not Found
+		Info /d%c0%afomains       -	 HTTP/1.0 404 Not Found
+		Info /d%c0%afomains       -	 HTTP/1.0 501 Not Implemented
+		Info /domains             -	 HTTP/1.0 404 Not Found
+		Info /domains             -	 HTTP/1.0 501 Not Implemented
+		Info                      -	 HTTP/1.0 200 OK
+		Info                      -	 HTTP/1.0 404 Not Found
+		Info                      -	 HTTP/1.0 501 Not Implemented
+		Info                      -	 HTTP/1.1 200 OK
+		Info                      -	 HTTP/1.1 400 Bad Request
+		Info                      -	 HTTP/1.1 404 Not Found
+		Invalid Method            -	 HTTP/1.0 501 Not Implemented
+		JBoss JMX-Server          -	 HTTP/1.1 404 Not Found
+		Lock                      -	 HTTP/1.1 404 Not Found
+		Lock                      -	 HTTP/1.1 405 Method Not Allowed
+		Move                      -	 HTTP/1.1 404 Not Found
+		Move                      -	 HTTP/1.1 405 Method Not Allowed
+		MultiViews Check          -	 HTTP/1.1 404 Not Found
+		NTLM Auth                 -	 HTTP/1.1 200 OK
+		NTLM Auth                 -	 HTTP/1.1 404 Not Found
+		Options                   -	 HTTP/1.1 200 OK
+		Propfind /                -	 HTTP/1.1 405 Method Not Allowed
+		Propfind /images          -	 HTTP/1.1 404 Not Found
+		Propfind /images          -	 HTTP/1.1 405 Method Not Allowed
+		Propfind /images/         -	 HTTP/1.1 000 This Test Falied!
+		Propfind /images/         -	 HTTP/1.1 100 Continue
+		Propfind /images/         -	 HTTP/1.1 404 Not Found
+		Propfind /images/         -	 HTTP/1.1 405 Method Not Allowed
+		Propfind /images/dummy.txt -	 HTTP/1.1 000 This Test Falied!
+		Propfind /images/dummy.txt -	 HTTP/1.1 100 Continue
+		Propfind /images/dummy.txt -	 HTTP/1.1 404 Not Found
+		Propfind                  -	 HTTP/1.1 404 Not Found
+		Proppatch /images/        -	 HTTP/1.1 000 This Test Falied!
+		Proppatch /images/        -	 HTTP/1.1 100 Continue
+		Proppatch /images/        -	 HTTP/1.1 404 Not Found
+		Proppatch /images/dummy.txt -	 HTTP/1.1 000 This Test Falied!
+		Proppatch /images/dummy.txt -	 HTTP/1.1 100 Continue
+		Proppatch /images/dummy.txt -	 HTTP/1.1 404 Not Found
+		Proxy Connect             -	 HTTP/1.1 400 Bad Request
+		Proxy                     -	 HTTP/1.1 400 Bad Request
+		Put /images/dummy.txt.put -	 HTTP/1.1 000 This Test Falied!
+		Put /images/dummy.txt.put -	 HTTP/1.1 100 Continue
+		Put /images/dummy.txt.put -	 HTTP/1.1 404 Not Found
+		Robots.txt                -	 HTTP/1.1 404 Not Found
+		Trace                     -	 HTTP/1.0 400 Bad Request
+		Trace                     -	 HTTP/1.0 505 HTTP Version Not Supported
+		Trace                     -	 HTTP/1.1 404 Not Found
+		Trace                     -	 HTTP/1.1 405 Method Not Allowed
+		Track                     -	 HTTP/1.0 501 Not Implemented
+		crossdomain.xml           -	 HTTP/1.1 200 OK
+		crossdomain.xml           -	 HTTP/1.1 404 Not Found
+		mkcol                     -	 HTTP/1.1 404 Not Found
+		mkcol                     -	 HTTP/1.1 405 Method Not Allowed
+		phpinfo                   -	 HTTP/1.1 404 Not Found
+		tomcat admin              -	 HTTP/1.1 404 Not Found
+		tomcat manager            -	 HTTP/1.1 404 Not Found
+		unLock                    -	 HTTP/1.1 404 Not Found
+		unLock                    -	 HTTP/1.1 405 Method Not Allowed
+		webDav on /d%c0%afomains  -	 HTTP/1.1 404 Not Found
+		webDav on /d%c0%afomains  -	 HTTP/1.1 405 Method Not Allowed
+		webDav on /domains        -	 HTTP/1.1 404 Not Found
+		webDav on /domains        -	 HTTP/1.1 405 Method Not Allowed
+		webDavDELETE on /d%c0%afomains/dnehoppy.html -	 HTTP/1.1 404 Not Found
+		webDavDELETE on /d%c0%afomains/dnehoppy.html -	 HTTP/1.1 405 Method Not Allowed
+		webDavDELETE on /domains/dnehoppy.html -	 HTTP/1.1 404 Not Found
+		webDavDELETE on /domains/dnehoppy.html -	 HTTP/1.1 405 Method Not Allowed
+		webDavPUT on /d%c0%afomains -	 HTTP/1.1 000 This Test Falied!
+		webDavPUT on /d%c0%afomains -	 HTTP/1.1 100 Continue
+		webDavPUT on /d%c0%afomains -	 HTTP/1.1 404 Not Found
+		webDavPUT on /domains     -	 HTTP/1.1 000 This Test Falied!
+		webDavPUT on /domains     -	 HTTP/1.1 100 Continue
+		webDavPUT on /domains     -	 HTTP/1.1 404 Not Found
+
+	[+] Interesting Method Responses:
+
+		crossdomain.xml           -	 HTTP/1.1 200 OK
+
+	[+] Information Leakage:
+
+		[32mAllow[0;0m: OPTIONS, GET, HEAD, POST
+		[32mEtag:[0;0m "359670651"
+		[32mEtag:[0;0m "359670651+gzip+ident"
+		[32mServer:[0;0m ECS (cpm/F845)
+		[32mServer:[0;0m ECS (cpm/F84B)
+		[32mServer:[0;0m ECS (cpm/F853)
+		[32mServer:[0;0m ECS (cpm/F858)
+		[32mServer:[0;0m ECS (cpm/F85A)
+		[32mServer:[0;0m ECS (cpm/F8D9)
+		[32mServer:[0;0m ECS (cpm/F8DC)
+		[32mServer:[0;0m ECS (cpm/F8DE)
+		[32mServer:[0;0m ECS (cpm/F8DF)
+		[32mServer:[0;0m ECS (cpm/F984)
+		[32mServer:[0;0m ECS (cpm/F988)
+		[32mServer:[0;0m ECS (cpm/F989)
+		[32mServer:[0;0m ECS (cpm/F98A)
+		[32mServer:[0;0m ECS (cpm/F995)
+		[32mServer:[0;0m ECS (cpm/F99A)
+		[32mServer:[0;0m ECS (cpm/F9A2)
+		[32mServer:[0;0m ECS (cpm/F9A4)
+		[32mServer:[0;0m ECS (cpm/F9A8)
+		[32mServer:[0;0m ECS (cpm/F9B0)
+		[32mServer:[0;0m ECS (cpm/F9B5)
+		[32mServer:[0;0m ECS (cpm/F9B6)
+		[32mServer:[0;0m ECS (cpm/F9BB)
+		[32mServer:[0;0m ECS (cpm/F9BF)
+		[32mServer:[0;0m ECS (cpm/F9C2)
+		[32mServer:[0;0m ECS (cpm/F9C3)
+		[32mServer:[0;0m ECS (cpm/F9C5)
+		[32mServer:[0;0m ECS (cpm/F9C7)
+		[32mServer:[0;0m ECS (cpm/F9C8)
+		[32mServer:[0;0m ECS (cpm/F9CA)
+		[32mServer:[0;0m ECS (cpm/F9CF)
+		[32mServer:[0;0m ECS (cpm/F9D0)
+		[32mServer:[0;0m ECS (cpm/F9D4)
+		[32mServer:[0;0m ECS (cpm/F9D6)
+		[32mServer:[0;0m ECS (cpm/F9D7)
+		[32mServer:[0;0m ECS (cpm/F9E2)
+		[32mServer:[0;0m ECS (cpm/F9E4)
+		[32mServer:[0;0m ECS (cpm/F9E5)
+		[32mServer:[0;0m ECS (cpm/F9E8)
+		[32mServer:[0;0m ECS (cpm/F9EC)
+		[32mServer:[0;0m ECS (cpm/F9ED)
+		[32mServer:[0;0m ECS (cpm/F9EF)
+		[32mServer:[0;0m ECS (cpm/F9F7)
+		[32mServer:[0;0m ECS (cpm/F9F8)
+		[32mServer:[0;0m ECS (cpm/F9FA)
+		[32mServer:[0;0m ECS (cpm/F9FB)
+		[32mServer:[0;0m ECS (oxr/83CA)
+		[32mServer:[0;0m ECSF (cpm/F84A)
+		[32mServer:[0;0m ECSF (cpm/F84B)
+		[32mServer:[0;0m ECSF (cpm/F852)
+		[32mServer:[0;0m ECSF (cpm/F853)
+		[32mServer:[0;0m ECSF (cpm/F857)
+		[32mServer:[0;0m ECSF (cpm/F859)
+		[32mServer:[0;0m ECSF (cpm/F8DC)
+		[32mServer:[0;0m ECSF (cpm/F8DD)
+		[32mServer:[0;0m ECSF (cpm/F8DE)
+		[32mServer:[0;0m ECSF (cpm/F985)
+		[32mServer:[0;0m ECSF (cpm/F988)
+		[32mServer:[0;0m ECSF (cpm/F98F)
+		[32mServer:[0;0m ECSF (cpm/F991)
+		[32mServer:[0;0m ECSF (cpm/F993)
+		[32mServer:[0;0m ECSF (cpm/F995)
+		[32mServer:[0;0m ECSF (cpm/F998)
+		[32mServer:[0;0m ECSF (cpm/F99D)
+		[32mServer:[0;0m ECSF (cpm/F9A2)
+		[32mServer:[0;0m ECSF (cpm/F9A3)
+		[32mServer:[0;0m ECSF (cpm/F9A6)
+		[32mServer:[0;0m ECSF (cpm/F9A8)
+		[32mServer:[0;0m ECSF (cpm/F9AD)
+		[32mServer:[0;0m ECSF (cpm/F9AF)
+		[32mServer:[0;0m ECSF (cpm/F9B4)
+		[32mServer:[0;0m ECSF (cpm/F9B7)
+		[32mServer:[0;0m ECSF (cpm/F9BC)
+		[32mServer:[0;0m ECSF (cpm/F9BD)
+		[32mServer:[0;0m ECSF (cpm/F9BE)
+		[32mServer:[0;0m ECSF (cpm/F9BF)
+		[32mServer:[0;0m ECSF (cpm/F9C0)
+		[32mServer:[0;0m ECSF (cpm/F9C1)
+		[32mServer:[0;0m ECSF (cpm/F9C3)
+		[32mServer:[0;0m ECSF (cpm/F9C8)
+		[32mServer:[0;0m ECSF (cpm/F9C9)
+		[32mServer:[0;0m ECSF (cpm/F9CA)
+		[32mServer:[0;0m ECSF (cpm/F9CC)
+		[32mServer:[0;0m ECSF (cpm/F9D0)
+		[32mServer:[0;0m ECSF (cpm/F9D3)
+		[32mServer:[0;0m ECSF (cpm/F9D6)
+		[32mServer:[0;0m ECSF (cpm/F9E1)
+		[32mServer:[0;0m ECSF (cpm/F9E2)
+		[32mServer:[0;0m ECSF (cpm/F9E6)
+		[32mServer:[0;0m ECSF (cpm/F9E8)
+		[32mServer:[0;0m ECSF (cpm/F9E9)
+		[32mServer:[0;0m ECSF (cpm/F9EA)
+		[32mServer:[0;0m ECSF (cpm/F9F2)
+		[32mServer:[0;0m ECSF (cpm/F9F3)
+		[32mServer:[0;0m ECSF (cpm/F9F5)
+		[32mServer:[0;0m ECSF (cpm/F9F9)
+		[32mServer:[0;0m ECSF (cpm/F9FA)
+		[32mServer:[0;0m ECSF (cpm/F9FB)
+		[32mServer:[0;0m EOS (lax004/280C)
+		[32mServer:[0;0m EOS (lax004/2816)
+		[32mServer:[0;0m EOS (lax004/2821)
+		[32mServer:[0;0m EOS (lax004/45C0)
+		[32mVary[0;0m: Accept-Encoding
+
+	[+] Extracted Data:
+
+		crossdomain.xml:		 <[32mallow-access-from[0;0m domain="*" />
+
