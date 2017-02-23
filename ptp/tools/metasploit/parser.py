@@ -16,7 +16,7 @@ class MetasploitParser(FileParser):
     __tool__ = 'metasploit'
     __plugin__ = ''
 
-    def __init__(self, pathname, filename='*.txt', plugin='', first=True):
+    def __init__(self, pathname, filename='*.txt', plugin='', light=True, first=True):
         """Initialize MetasploitParser.
 
         :param str pathname: Path to the report directory.
