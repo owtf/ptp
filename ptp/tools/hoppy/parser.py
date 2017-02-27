@@ -103,5 +103,5 @@ class HoppyParser(FileParser):
                 'headers': parsed_response[0][0].strip() + '\n\n',
                 'body': parsed_response[0][1].strip() + '\n\n'
             })
-        self.data.append({'ranking': constants.UNKOWN, 'transactions': data})
+        self.data.append({'ranking': constants.UNKNOWN, 'transactions': data})
         return self.data
