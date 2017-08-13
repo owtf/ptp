@@ -34,6 +34,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="libptp/parser.html" title="Basic Parsers"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -48,8 +51,137 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="ptp">
-<h1>PTP<a class="headerlink" href="#ptp" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-ptp">
+<span id="ptp"></span><h1>PTP<a class="headerlink" href="#module-ptp" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ptp.PTP">
+<em class="property">class </em><code class="descclassname">ptp.</code><code class="descname">PTP</code><span class="sig-paren">(</span><em>tool_name=''</em>, <em>cumulative=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ptp/ptp.html#PTP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#ptp.PTP" title="ptp.PTP"><code class="xref py py-class docutils literal"><span class="pre">PTP</span></code></a> class exposing <a class="reference internal" href="#module-ptp" title="ptp"><code class="xref py py-mod docutils literal"><span class="pre">ptp</span></code></a>’s public API.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ptp</span> <span class="o">=</span> <span class="n">PTP</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;my/path&#39;</span><span class="p">)</span>
+<span class="n">ptp</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="ptp.PTP.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>tool_name=''</em>, <em>cumulative=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ptp/ptp.html#PTP.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize <a class="reference internal" href="#ptp.PTP" title="ptp.PTP"><code class="xref py py-class docutils literal"><span class="pre">PTP</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tool_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – help <a class="reference internal" href="#module-ptp" title="ptp"><code class="xref py py-mod docutils literal"><span class="pre">ptp</span></code></a> by specifying the name of the tool that has generated the target report.</li>
+<li><strong>cumulative</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – <cite>True</cite> to cumulate the vulns across multiple tools. <cite>False</cite> to reset them.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="libptp/exceptions.html#ptp.libptp.exceptions.NotSupportedToolError" title="ptp.libptp.exceptions.NotSupportedToolError"><code class="xref py py-class docutils literal"><span class="pre">ptp.libptp.exceptions.NotSupportedToolError</span></code></a> when <code class="docutils literal"><span class="pre">tool_name</span></code> is not in the PTP’s supported
+tools list.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.PTP._init_parser">
+<code class="descname">_init_parser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ptp/ptp.html#PTP._init_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP._init_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find and initialize the parser automatically.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> (<em>list</em>) – Arguments that are needed by the parser.</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – Arguments that are needed by the parser.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.cumulative">
+<code class="descname">cumulative</code><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.cumulative" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></a> – Check if user wants vulns to be re-intialised for each run ot not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.highest_ranking">
+<code class="descname">highest_ranking</code><a class="headerlink" href="#ptp.PTP.highest_ranking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the highest ranking of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the risk id of the highest ranked vulnerability referenced in the report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The ranking starts from <cite>0</cite> to <cite>n</cite> where <cite>n</cite> represents the most critical risk.
+(See <a class="reference internal" href="libptp/constants.html#module-ptp.libptp.constants" title="ptp.libptp.constants"><code class="xref py py-mod docutils literal"><span class="pre">ptp.libptp.constants</span></code></a>).</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.metadata">
+<code class="descname">metadata</code><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a> – Metadata from the report.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.PTP.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ptp/ptp.html#PTP.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.PTP.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a tool report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>*args</strong> (<em>list</em>) – Arguments that are needed by the parser.</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – Arguments that are needed by the parser.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-class docutils literal"><span class="pre">NotSupportedToolError</span></code> if the tool that has generated the report is not supported by PTP.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The list of dictionaries of the results found in the report.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.supported">
+<code class="descname">supported</code><em class="property"> = {'arachni': [&lt;class 'ptp.tools.arachni.parser.ArachniXMLParser'&gt;, &lt;class 'ptp.tools.arachni.parser.ArachniJSONParser'&gt;], 'skipfish': [&lt;class 'ptp.tools.skipfish.parser.SkipfishJSParser'&gt;], 'w3af': [&lt;class 'ptp.tools.w3af.parser.W3AFXMLParser'&gt;], 'wapiti': [&lt;class 'ptp.tools.wapiti.parser.WapitiXMLParser'&gt;, &lt;class 'ptp.tools.wapiti.parser.Wapiti221XMLParser'&gt;], 'metasploit': [&lt;class 'ptp.tools.metasploit.parser.MetasploitParser'&gt;], 'dirbuster': [&lt;class 'ptp.tools.dirbuster.parser.DirbusterParser'&gt;], 'nmap': [&lt;class 'ptp.tools.nmap.parser.NmapXMLParser'&gt;], 'owasp-cm-008': [&lt;class 'ptp.tools.owasp.cm008.parser.OWASPCM008Parser'&gt;], 'robots': [&lt;class 'ptp.tools.robots.parser.RobotsParser'&gt;], 'burpsuite': [&lt;class 'ptp.tools.burpsuite.parser.BurpXMLParser'&gt;], 'hoppy': [&lt;class 'ptp.tools.hoppy.parser.HoppyParser'&gt;]}</em><a class="headerlink" href="#ptp.PTP.supported" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a> – Supported tools and their parser(s).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.tool_name">
+<code class="descname">tool_name</code><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.tool_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">str</span></code></a> – Name of the tool that generated the report.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.PTP.vulns">
+<code class="descname">vulns</code><em class="property"> = None</em><a class="headerlink" href="#ptp.PTP.vulns" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal"><span class="pre">list</span></code> – Vulnerabilities that are listed in the report.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -91,6 +223,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="libptp/parser.html" title="Basic Parsers"
              >next</a> |</li>

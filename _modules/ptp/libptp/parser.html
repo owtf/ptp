@@ -1,20 +1,17 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>ptp.libptp.parser &#8212; ptp 0.4.0 documentation</title>
-    
+    <title>ptp.libptp.parser &#8212; ptp 0.4.2 documentation</title>
     <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.4.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -27,7 +24,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +34,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">ptp 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ptp 0.4.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -78,7 +75,7 @@
     <span class="c1">#: :class:`str` -- Name of the tool.</span>
     <span class="n">__tool__</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: :class:`str` -- Format of reports it supports.</span>
-    <span class="n">__format__</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="fm">__format__</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#: :class:`list` -- Versions it can supports.</span>
     <span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
@@ -102,8 +99,8 @@
         <span class="c1">#: :class:`bool` -- Should fully parse the report or not.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">light</span> <span class="o">=</span> <span class="n">light</span></div>
 
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="AbstractParser._recursive_find"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser._recursive_find">[docs]</a>    <span class="k">def</span> <span class="nf">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">file_regex</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractParser._recursive_find"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser._recursive_find">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">file_regex</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Retrieve the full path to the report file(s).</span>
 
 <span class="sd">        :param str pathname: The root directory where to start searching.</span>
@@ -134,8 +131,8 @@
                 <span class="k">break</span>
         <span class="k">return</span> <span class="n">founds</span></div>
 
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="AbstractParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser.handle_file">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Process the report file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -147,8 +144,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;`handle_file` function MUST be defined for each parser.&#39;</span><span class="p">)</span></div>
 
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="AbstractParser.is_mine"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser.is_mine">[docs]</a>    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractParser.is_mine"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser.is_mine">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">is_mine</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check if it can handle the report file.</span>
 
 <span class="sd">        :raises: :class:`NotImplementedError` because this is an abstract method.</span>
@@ -156,8 +153,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;`is_mine` function MUST be defined for each parser.&#39;</span><span class="p">)</span></div>
 
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="AbstractParser.check_version"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser.check_version">[docs]</a>    <span class="k">def</span> <span class="nf">check_version</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractParser.check_version"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.AbstractParser.check_version">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">check_version</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks the version in the metadata against the supported one(s).</span>
 
 <span class="sd">        :param dict metadata: The metadata in which to find the version.</span>
@@ -169,7 +166,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Is there a non-empty result from re.findall?</span>
-            <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))):</span>
+            <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">))):</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span>
@@ -201,14 +198,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#: str -- XMLParser only supports XML files.</span>
-    <span class="n">__format__</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span>
+    <span class="fm">__format__</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span>
 
 <div class="viewcode-block" id="XMLParser.__init__"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.XMLParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.xml&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize :class:`XMLParser`.&quot;&quot;&quot;</span>
-        <span class="n">AbstractParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">AbstractParser</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="XMLParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.XMLParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="XMLParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.XMLParser.handle_file">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.xml&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the root node of the XML file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -223,12 +220,12 @@
 <span class="sd">        :rtype: :class:`lxml.etree._Element`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Report matching &#39;</span><span class="si">%s</span><span class="s2">&#39; cannot be found.&quot;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
         <span class="n">fullpath</span> <span class="o">=</span> <span class="n">fullpath</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__format__</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;This parser only supports &#39;</span><span class="si">%s</span><span class="s2">&#39; files&quot;</span> <span class="o">%</span> <span class="n">cls</span><span class="o">.</span><span class="n">__format__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="fm">__format__</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;This parser only supports &#39;</span><span class="si">%s</span><span class="s2">&#39; files&quot;</span> <span class="o">%</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__format__</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span></div></div>
 
 
@@ -240,8 +237,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="FileParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.FileParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="FileParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.FileParser.handle_file">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a string of the content of the file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -255,7 +252,7 @@
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Report matching &#39;</span><span class="si">%s</span><span class="s2">&#39; cannot be found.&quot;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">fullpath</span> <span class="o">=</span> <span class="n">fullpath</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -278,8 +275,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="LineParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.LineParser.handle_file">[docs]</a>    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">skip_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="LineParser.handle_file"><a class="viewcode-back" href="../../../libptp/parser.html#ptp.libptp.parser.LineParser.handle_file">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">skip_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a list of the lines of the file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -294,7 +291,7 @@
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Report matching &#39;</span><span class="si">%s</span><span class="s2">&#39; cannot be found.&quot;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -316,10 +313,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#: str -- JSONParser only supports json files.</span>
-    <span class="n">__format__</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span>
+    <span class="fm">__format__</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.json&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pathname</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;*.json&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the dict of the JSON file.</span>
 
 <span class="sd">        :param str pathname: Path to the report directory.</span>
@@ -331,12 +328,12 @@
 <span class="sd">        :raises ValueError: when json cannot parse the JSON file.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_recursive_find</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Report matching &#39;</span><span class="si">%s</span><span class="s2">&#39; cannot be found.&quot;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">fullpath</span> <span class="o">=</span> <span class="n">fullpath</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__format__</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;This parser only supports &#39;</span><span class="si">%s</span><span class="s2">&#39; files&quot;</span> <span class="o">%</span> <span class="n">cls</span><span class="o">.</span><span class="n">__format__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="fm">__format__</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;This parser only supports &#39;</span><span class="si">%s</span><span class="s2">&#39; files&quot;</span> <span class="o">%</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__format__</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
@@ -369,13 +366,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">ptp 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ptp 0.4.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, Tao Sauvage.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

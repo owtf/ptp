@@ -34,6 +34,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="w3af.html" title="W3AF"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -50,8 +53,181 @@
             
   <div class="section" id="skipfish">
 <h1>Skipfish<a class="headerlink" href="#skipfish" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="parser">
-<h2>Parser<a class="headerlink" href="#parser" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-ptp.tools.skipfish.parser">
+<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-ptp.tools.skipfish.parser" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized <a class="reference internal" href="../libptp/parser.html#ptp.libptp.parser.AbstractParser" title="ptp.libptp.parser.AbstractParser"><code class="xref py py-class docutils literal"><span class="pre">ptp.libptp.parser.AbstractParser</span></code></a> classes for the tool Skipfish.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser">
+<em class="property">class </em><code class="descclassname">ptp.tools.skipfish.parser.</code><code class="descname">SkipfishJSParser</code><span class="sig-paren">(</span><em>pathname</em>, <em>light=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skipfish JS specialized parser.</p>
+<dl class="attribute">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.__tool__">
+<code class="descname">__tool__</code><em class="property"> = 'skipfish'</em><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.__format__">
+<code class="descname">__format__</code><em class="property"> = 'js'</em><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.__format__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.__version__">
+<code class="descname">__version__</code><em class="property"> = '2\\.10b'</em><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.__version__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>pathname</em>, <em>light=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Skipfish JS parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Path to the report directory.</li>
+<li><strong>light</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – <cite>True</cite> to only parse the ranking of the findings from the report.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser._parse_report_full">
+<code class="descname">_parse_report_full</code><span class="sig-paren">(</span><em>dir_list</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser._parse_report_full"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser._parse_report_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse HTTP requests from directories listed in the samples.js file.</p>
+<p>From all the directories, it reads request.dat and response.dat file and return a list of dict resquests and
+responses.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.handle_file">
+<em class="property">classmethod </em><code class="descname">handle_file</code><span class="sig-paren">(</span><em>metadatafile</em>, <em>reportfile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser.handle_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.handle_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the two report files of the Skipfish report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>metadatafile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Path to the metadata file.</li>
+<li><strong>reportfile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Path to the report file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
+<li><strong>TypeError</strong> – if the files have not the right extension.</li>
+<li><strong>OSError</strong> – if an error occurs when reading the files.</li>
+<li><strong>IOError</strong> – if an error occurs when reading the files.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Both metadata and report files’ contents.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.is_mine">
+<em class="property">classmethod </em><code class="descname">is_mine</code><span class="sig-paren">(</span><em>pathname</em>, <em>light=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it can handle the report file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Path to the report directory.</li>
+<li><strong>light</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – <cite>True</cite> to only parse the ranking of the findings from the report.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first simple">
+<li><strong>IOError</strong> – when the report file cannot be found.</li>
+<li><strong>OSError</strong> – when the report file cannot be found.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.parse_metadata">
+<code class="descname">parse_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">NotSupportedVersionError</span></code> – if it does not support this version of the report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary containing the metadatas.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In skipfish the metadata are saved into the summary.js file as follow:</p>
+<div class="last highlight-js"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">sf_version</span> <span class="o">=</span> <span class="nx">version</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">scan_date</span>  <span class="o">=</span> <span class="nx">date</span><span class="o">&lt;</span><span class="s1">&#39;Ddd Mmm d hh:mm:ss yyyy&#39;</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">scan_seed</span>  <span class="o">=</span> <span class="nx">scan</span> <span class="nx">seed</span><span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span>
+<span class="kd">var</span> <span class="nx">scan_ms</span>    <span class="o">=</span> <span class="nx">elapsed</span> <span class="nx">time</span> <span class="k">in</span> <span class="nx">ms</span><span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.skipfish.parser.SkipfishJSParser.parse_report">
+<code class="descname">parse_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/skipfish/parser.html#SkipfishJSParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.skipfish.parser.SkipfishJSParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the results from the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">ReportNotFoundError</span></code> – if the report file was not found.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one represents a discovery.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Example of retrieved data after conversion (i.e. <cite>raw_report</cite>) using the module <a class="reference external" href="https://docs.python.org/2/library/ast.html#module-ast" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">ast</span></code></a>:</p>
+<div class="last highlight-js"><div class="highlight"><pre><span></span><span class="p">[{</span> <span class="s1">&#39;severity&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="mi">40402</span><span class="p">,</span> <span class="s1">&#39;samples&#39;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;http://demo.testfire.net/bank/login.aspx&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="o">:</span> <span class="s1">&#39;SQL syntax string&#39;</span><span class="p">,</span> <span class="s1">&#39;sid&#39;</span><span class="o">:</span> <span class="s1">&#39;21010&#39;</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="o">:</span> <span class="s1">&#39;_i2/0&#39;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;http://demo.testfire.net/bank/login.aspx&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="o">:</span> <span class="s1">&#39;SQL syntax string&#39;</span><span class="p">,</span> <span class="s1">&#39;sid&#39;</span><span class="o">:</span> <span class="s1">&#39;21010&#39;</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="o">:</span> <span class="s1">&#39;_i2/1&#39;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;http://demo.testfire.net/subscribe.aspx&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="o">:</span> <span class="s1">&#39;SQL syntax string&#39;</span><span class="p">,</span> <span class="s1">&#39;sid&#39;</span><span class="o">:</span> <span class="s1">&#39;21010&#39;</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="o">:</span> <span class="s1">&#39;_i2/2&#39;</span> <span class="p">}</span> <span class="p">]</span>
+<span class="p">},]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -64,7 +240,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Skipfish</a><ul>
-<li><a class="reference internal" href="#parser">Parser</a></li>
+<li><a class="reference internal" href="#module-ptp.tools.skipfish.parser">Parser</a></li>
 </ul>
 </li>
 </ul>
@@ -102,6 +278,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="w3af.html" title="W3AF"
              >next</a> |</li>

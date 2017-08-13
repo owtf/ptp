@@ -1,20 +1,17 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>ptp.ptp &#8212; ptp 0.4.0 documentation</title>
-    
+    <title>ptp.ptp &#8212; ptp 0.4.2 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.4.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -27,7 +24,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -37,7 +34,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">ptp 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">ptp 0.4.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -68,6 +65,7 @@
 <span class="kn">from</span> <span class="nn">.tools.owasp.cm008.parser</span> <span class="k">import</span> <span class="n">OWASPCM008Parser</span>
 <span class="kn">from</span> <span class="nn">.tools.robots.parser</span> <span class="k">import</span> <span class="n">RobotsParser</span>
 <span class="kn">from</span> <span class="nn">.tools.burpsuite.parser</span> <span class="k">import</span> <span class="n">BurpXMLParser</span>
+<span class="kn">from</span> <span class="nn">.tools.hoppy.parser</span> <span class="k">import</span> <span class="n">HoppyParser</span>
 
 
 <div class="viewcode-block" id="PTP"><a class="viewcode-back" href="../../ptp.html#ptp.PTP">[docs]</a><span class="k">class</span> <span class="nc">PTP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -92,7 +90,8 @@
         <span class="s1">&#39;nmap&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">NmapXMLParser</span><span class="p">],</span>
         <span class="s1">&#39;owasp-cm-008&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">OWASPCM008Parser</span><span class="p">],</span>
         <span class="s1">&#39;robots&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">RobotsParser</span><span class="p">],</span>
-        <span class="s1">&#39;burpsuite&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">BurpXMLParser</span><span class="p">]}</span>
+        <span class="s1">&#39;burpsuite&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">BurpXMLParser</span><span class="p">],</span>
+        <span class="s1">&#39;hoppy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">HoppyParser</span><span class="p">]}</span>
 
 <div class="viewcode-block" id="PTP.__init__"><a class="viewcode-back" href="../../ptp.html#ptp.PTP.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize :class:`PTP`.</span>
@@ -233,13 +232,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">ptp 0.4.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">ptp 0.4.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, Tao Sauvage.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

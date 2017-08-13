@@ -34,6 +34,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="metasploit.html" title="Metasploit"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -50,8 +53,115 @@
             
   <div class="section" id="hoppy">
 <h1>Hoppy<a class="headerlink" href="#hoppy" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="parser">
-<h2>Parser<a class="headerlink" href="#parser" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-ptp.tools.hoppy.parser">
+<span id="parser"></span><h2>Parser<a class="headerlink" href="#module-ptp.tools.hoppy.parser" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Specialized <a class="reference internal" href="../libptp/parser.html#ptp.libptp.parser.AbstractParser" title="ptp.libptp.parser.AbstractParser"><code class="xref py py-class docutils literal"><span class="pre">ptp.libptp.parser.AbstractParser</span></code></a> classes for the tool Hoppy.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="ptp.tools.hoppy.parser.HoppyParser">
+<em class="property">class </em><code class="descclassname">ptp.tools.hoppy.parser.</code><code class="descname">HoppyParser</code><span class="sig-paren">(</span><em>pathname</em>, <em>filename='*.spider'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/hoppy/parser.html#HoppyParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hoppy specialized parser.</p>
+<dl class="attribute">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.__tool__">
+<code class="descname">__tool__</code><em class="property"> = 'hoppy'</em><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.__tool__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.__format__">
+<code class="descname">__format__</code><em class="property"> = None</em><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.__format__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.__version__">
+<code class="descname">__version__</code><em class="property"> = '1\\.[0-9]+(\\.[0-9]+)?'</em><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.__version__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>pathname</em>, <em>filename='*.spider'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/hoppy/parser.html#HoppyParser.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize HoppyParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pathname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Regex matching the report file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.is_mine">
+<em class="property">classmethod </em><code class="descname">is_mine</code><span class="sig-paren">(</span><em>pathname</em>, <em>filename='*.summary'</em>, <em>light=False</em>, <em>first=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/hoppy/parser.html#HoppyParser.is_mine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.is_mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it can handle the report file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pathname</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Path to the report directory.</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Regex matching the report file.</li>
+<li><strong>light</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – <cite>True</cite> to only parse the ranking of the findings from the report.</li>
+<li><strong>first</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Only process first file (<code class="docutils literal"><span class="pre">True</span></code>) or each file that matched (<code class="docutils literal"><span class="pre">False</span></code>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>True</cite> if it supports the report, <cite>False</cite> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.parse_metadata">
+<code class="descname">parse_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/hoppy/parser.html#HoppyParser.parse_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the metadata of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">NotSupportedVersionError</span></code> – if it does not support the version of this report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The metadata of the report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ptp.tools.hoppy.parser.HoppyParser.parse_report">
+<code class="descname">parse_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ptp/tools/hoppy/parser.html#HoppyParser.parse_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ptp.tools.hoppy.parser.HoppyParser.parse_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the report.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dicts where each one has a request and response.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -64,7 +174,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Hoppy</a><ul>
-<li><a class="reference internal" href="#parser">Parser</a></li>
+<li><a class="reference internal" href="#module-ptp.tools.hoppy.parser">Parser</a></li>
 </ul>
 </li>
 </ul>
@@ -102,6 +212,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="metasploit.html" title="Metasploit"
              >next</a> |</li>
