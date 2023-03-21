@@ -24,7 +24,7 @@ class HoppyParser(FileParser):
     _re_request = re.compile(r"(\S+ /.*?)\n(?=Server)", re.S)
     _re_response = re.compile(r"(?<=Responded:\n\n)(.*)", re.S)
     _re_response_status_code = re.compile(r"(?<=HTTP/\w.\w )(.*)")
-    _re_response_parse = re.compile(r"(?P<headers>HTTP.*?)\n(?=\r\n)(?P<body>.*)", re.S)
+    _re_response_parse = re.compile(r"(?P<headers>HTTP.*?)(?=\n)(?P<body>.*)", re.S)
 
     def __init__(self, pathname, filename='*.spider', **kwargs):
         """Initialize HoppyParser.
@@ -93,9 +93,20 @@ class HoppyParser(FileParser):
         if not transactions:
             return None
         for count, transaction in enumerate(transactions):
-            response = self._re_response.search(transaction).group().strip() + '\n\n'
-            status_code = self._re_response_status_code.findall(response)
-            parsed_response = self._re_response_parse.findall(response)
+            try:
+                response = self._re_response.search(transaction).group().strip() + '\n\n'
+            except AttributeError:
+                response = "NOT FOUND"
+            if(response != "NOT FOUND"):
+                try:
+                    status_code = self._re_response_status_code.findall(response)
+                    parsed_response = self._re_response_parse.findall(response)
+                except Exception:
+                    status_code = ["NOT FOUND"]
+                    parsed_response = [["NOT FOUND", "NOT FOUND"]]
+            else:
+                status_code = ["NOT FOUND"]
+                parsed_response = [["NOT FOUND", "NOT FOUND"]]
             # Somehow follow naming conventions from http://docs.python-requests.org/en/master/
             data.append({
                 'request': self._re_request.findall(transaction)[0].strip() + '\n\n',
